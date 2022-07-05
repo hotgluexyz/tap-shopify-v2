@@ -9,14 +9,16 @@ from tap_shopify_beta.streams import (
     ProductsStream,
     VariantsStream,
     ShopStream,
-    OrdersStream
+    OrdersStream,
+    InventoryItemsStream
 )
 
 STREAM_TYPES = [
     ProductsStream,
     VariantsStream,
     ShopStream,
-    OrdersStream
+    OrdersStream,
+    InventoryItemsStream
 ]
 
 
