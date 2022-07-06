@@ -10,7 +10,8 @@ from tap_shopify_beta.streams import (
     VariantsStream,
     ShopStream,
     OrdersStream,
-    InventoryItemsStream
+    InventoryItemsStream,
+    CollectionsStream
 )
 
 STREAM_TYPES = [
@@ -18,7 +19,8 @@ STREAM_TYPES = [
     VariantsStream,
     ShopStream,
     OrdersStream,
-    InventoryItemsStream
+    InventoryItemsStream,
+    CollectionsStream
 ]
 
 

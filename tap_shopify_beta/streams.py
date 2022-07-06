@@ -521,7 +521,7 @@ class ShopStream(shopifyGqlStream):
     ).to_dict()
 
 class InventoryItemsStream(shopifyGqlStream):
-    """Define shop stream."""
+    """Define Intentory Items stream."""
 
     name = "inventory_items"
     primary_keys = ["id"]
@@ -598,3 +598,31 @@ class InventoryItemsStream(shopifyGqlStream):
             )
         )
     ).to_dict()
+
+class CollectionsStream(shopifyGqlStream):
+    """Define collections stream."""
+
+    name = "collections"
+    primary_keys = ["id"]
+    query_name = "collections"
+    replication_key = 'updatedAt'
+
+    schema = th.PropertiesList(
+        th.Property('id',th.StringType),
+        th.Property('description',th.StringType),
+        th.Property('descriptionHtml',th.StringType),
+        th.Property('handle',th.StringType),
+        th.Property('image',
+            th.ObjectType(
+            th.Property("id", th.StringType), th.Property("altText", th.StringType)
+            ),
+        ),
+        th.Property('legacyResourceId',th.StringType),
+        th.Property('productsCount',th.IntegerType),
+        th.Property('sortOrder',th.StringType),
+        th.Property('templateSuffix',th.StringType),
+        th.Property('title',th.StringType),
+        th.Property('updatedAt',th.DateTimeType),
+    ).to_dict()
+
+
