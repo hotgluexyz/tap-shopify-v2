@@ -519,3 +519,110 @@ class ShopStream(shopifyGqlStream):
         th.Property("url", th.StringType),
         th.Property("weightUnit", th.StringType),
     ).to_dict()
+
+class InventoryItemsStream(shopifyGqlStream):
+    """Define Intentory Items stream."""
+
+    name = "inventory_items"
+    primary_keys = ["id"]
+    query_name = "inventoryItems"
+    replication_key = 'updatedAt'
+
+    schema = th.PropertiesList(
+        th.Property('id',th.StringType),
+        th.Property('countryCodeOfOrigin',th.StringType),
+        th.Property('createdAt',th.DateTimeType),
+        th.Property('duplicateSkuCount',th.IntegerType),
+        th.Property('harmonizedSystemCode',th.StringType),
+        th.Property('inventoryHistoryUrl',th.StringType),
+        th.Property('legacyResourceId',th.StringType),
+        th.Property('locationsCount',th.IntegerType),
+        th.Property('provinceCodeOfOrigin',th.StringType),
+        th.Property('requiresShipping',th.BooleanType),
+        th.Property('sku',th.StringType),
+        th.Property('tracked',th.BooleanType),
+        th.Property('trackedEditable',th.ObjectType(
+            th.Property('locked',th.BooleanType),
+            th.Property('reason',th.StringType),
+            )
+        ),
+        th.Property('unitCost',th.ObjectType(
+            th.Property('amount',th.NumberType),
+            th.Property('currencyCode',th.StringType),
+            )
+        ),
+        th.Property('updatedAt',th.DateTimeType),
+        th.Property('variant',th.ObjectType(
+                th.Property('id',th.StringType),
+                th.Property('availableForSale',th.BooleanType),
+                th.Property('barcode',th.StringType),
+                th.Property('compareAtPrice',th.StringType),
+                th.Property('createdAt',th.DateTimeType),
+                th.Property('defaultCursor',th.StringType),
+                th.Property('displayName',th.StringType),
+                # th.Property('fulfilmentServiceEditable',th.ObjectType(
+                #         th.Property('locked',th.BooleanType),
+                #         th.Property('reason',th.StringType),
+                #     )
+                # ),
+                th.Property('inventoryPolicy',th.StringType),
+                th.Property('image',
+                    th.ObjectType(
+                    th.Property("id", th.StringType), th.Property("altText", th.StringType)
+                    ),
+                ),
+                th.Property('inventoryQuantity',th.IntegerType),
+                th.Property('legacyResourceId',th.StringType),
+                th.Property('position',th.IntegerType),
+                th.Property('price',th.StringType),
+                # th.Property('price',th.ObjectType(
+                #         th.Property('id',th.StringType)
+                #     )
+                # ),
+                th.Property(
+                    "selectedOptions",
+                    th.ArrayType(
+                        th.ObjectType(
+                            th.Property("name", th.StringType),
+                            th.Property("value", th.StringType),
+                        )
+                    ),
+                ),
+                th.Property('sku',th.StringType),
+                th.Property('taxCode',th.StringType),
+                th.Property('taxable',th.BooleanType),
+                th.Property('title',th.StringType),
+                th.Property('updatedAt',th.DateTimeType),
+                th.Property('weight',th.NumberType),
+                th.Property('weightUnit',th.StringType),
+            )
+        )
+    ).to_dict()
+
+class CollectionsStream(shopifyGqlStream):
+    """Define collections stream."""
+
+    name = "collections"
+    primary_keys = ["id"]
+    query_name = "collections"
+    replication_key = 'updatedAt'
+
+    schema = th.PropertiesList(
+        th.Property('id',th.StringType),
+        th.Property('description',th.StringType),
+        th.Property('descriptionHtml',th.StringType),
+        th.Property('handle',th.StringType),
+        th.Property('image',
+            th.ObjectType(
+            th.Property("id", th.StringType), th.Property("altText", th.StringType)
+            ),
+        ),
+        th.Property('legacyResourceId',th.StringType),
+        th.Property('productsCount',th.IntegerType),
+        th.Property('sortOrder',th.StringType),
+        th.Property('templateSuffix',th.StringType),
+        th.Property('title',th.StringType),
+        th.Property('updatedAt',th.DateTimeType),
+    ).to_dict()
+
+
