@@ -2,16 +2,17 @@
 
 from typing import List
 
-from singer_sdk import Tap, Stream
+from singer_sdk import Stream, Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 from tap_shopify_beta.streams import (
-    ProductsStream,
-    VariantsStream,
-    ShopStream,
-    OrdersStream,
+    CollectionsStream,
+    CustomersStream,
     InventoryItemsStream,
-    CollectionsStream
+    OrdersStream,
+    ProductsStream,
+    ShopStream,
+    VariantsStream,
 )
 
 STREAM_TYPES = [
@@ -20,12 +21,14 @@ STREAM_TYPES = [
     ShopStream,
     OrdersStream,
     InventoryItemsStream,
-    CollectionsStream
+    CollectionsStream,
+    CustomersStream,
 ]
 
 
 class TapshopifyBeta(Tap):
     """shopify-beta tap class."""
+
     name = "tap-shopify-beta"
 
     # TODO: Update this section with the actual config values you expect:
@@ -34,19 +37,16 @@ class TapshopifyBeta(Tap):
             "api_key",
             th.StringType,
             required=True,
-            description="The token to authenticate against the API service"
+            description="The token to authenticate against the API service",
         ),
         th.Property(
-            "shop",
-            th.StringType,
-            required=True,
-            description="Shopify string name"
+            "shop", th.StringType, required=True, description="Shopify string name"
         ),
         th.Property(
             "start_date",
             th.DateTimeType,
-            description="The earliest record date to sync"
-        )
+            description="The earliest record date to sync",
+        ),
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
@@ -54,5 +54,5 @@ class TapshopifyBeta(Tap):
         return [stream_class(tap=self) for stream_class in STREAM_TYPES]
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     TapshopifyBeta.cli()

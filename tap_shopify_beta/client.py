@@ -1,12 +1,12 @@
 """GraphQL client handling, including shopifyStream base class."""
 
-import requests
 from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
+from typing import Any, Dict, Iterable, List, Optional, Union
 
-from singer_sdk.streams import GraphQLStream
-from singer_sdk.helpers.jsonpath import extract_jsonpath
+import requests
 from backports.cached_property import cached_property
+from singer_sdk.helpers.jsonpath import extract_jsonpath
+from singer_sdk.streams import GraphQLStream
 
 
 class shopifyStream(GraphQLStream):
@@ -29,7 +29,7 @@ class shopifyStream(GraphQLStream):
         headers["X-Shopify-Access-Token"] = self.config.get("api_key")
         headers["Content-Type"] = "application/json"
         return headers
-    
+
     @cached_property
     def selected_properties(self):
         selected_properties = []
@@ -42,7 +42,7 @@ class shopifyStream(GraphQLStream):
     @property
     def gql_selected_fields(self):
         schema = self.schema["properties"]
-        catalog = {k:v for k, v in schema.items() if k in self.selected_properties}
+        catalog = {k: v for k, v in schema.items() if k in self.selected_properties}
 
         def denest_schema(schema):
             output = ""

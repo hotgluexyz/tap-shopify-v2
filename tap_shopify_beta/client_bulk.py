@@ -1,13 +1,13 @@
 """GraphQL client handling, including shopify-betaStream base class."""
 
-import requests
-from time import sleep
 from datetime import datetime
-from typing import Any, Dict, Optional, Union, List, Iterable, cast
+from time import sleep
+from typing import Any, Dict, Iterable, List, Optional, Union, cast
 
+import requests
 import simplejson
-from singer_sdk.helpers.jsonpath import extract_jsonpath
 from backports.cached_property import cached_property
+from singer_sdk.helpers.jsonpath import extract_jsonpath
 
 from tap_shopify_beta.client import shopifyStream
 
@@ -150,4 +150,3 @@ class shopifyBulkStream(shopifyStream):
 
         for line in output.iter_lines():
             yield simplejson.loads(line)
-

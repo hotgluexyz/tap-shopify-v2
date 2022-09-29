@@ -1,13 +1,15 @@
 """GraphQL client handling, including shopifyStream base class."""
 
-import requests
 from time import sleep
-from typing import Any, Dict, Optional, Union, List, Iterable
+from typing import Any, Dict, Iterable, List, Optional, Union
 
-from singer_sdk.streams import GraphQLStream
-from singer_sdk.helpers.jsonpath import extract_jsonpath
+import requests
 from backports.cached_property import cached_property
+from singer_sdk.helpers.jsonpath import extract_jsonpath
+from singer_sdk.streams import GraphQLStream
+
 from tap_shopify_beta.client import shopifyStream
+
 
 class shopifyGqlStream(shopifyStream):
     """shopify stream class."""
@@ -22,13 +24,13 @@ class shopifyGqlStream(shopifyStream):
     def page_size(self) -> int:
         if not self.available_points:
             return 1
-        pages = self.available_points/self.query_cost
-        if pages<5:
-            points_to_restore = self.max_points-self.available_points
-            sleep(points_to_restore//self.restore_rate-1)
-            pages = (self.max_points-self.restore_rate)/self.query_cost
-            pages = pages-1
-        pages = 250 if pages>250 else pages
+        pages = self.available_points / self.query_cost
+        if pages < 5:
+            points_to_restore = self.max_points - self.available_points
+            sleep(points_to_restore // self.restore_rate - 1)
+            pages = (self.max_points - self.restore_rate) / self.query_cost
+            pages = pages - 1
+        pages = 250 if pages > 250 else pages
         return int(pages)
 
     @cached_property
@@ -79,7 +81,7 @@ class shopifyGqlStream(shopifyStream):
             all_matches = extract_jsonpath(cursor_json_path, response_json)
             return next(all_matches, None)
         return None
-    
+
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
@@ -102,12 +104,12 @@ class shopifyGqlStream(shopifyStream):
         else:
             json_path = f"$.data.{self.query_name}"
         response = response.json()
-        
+
         cost = response["extensions"].get("cost")
         if not self.query_cost:
             self.query_cost = cost.get("requestedQueryCost")
         self.available_points = cost["throttleStatus"].get("currentlyAvailable")
         self.restore_rate = cost["throttleStatus"].get("restoreRate")
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
-        
+
         yield from extract_jsonpath(json_path, input=response)

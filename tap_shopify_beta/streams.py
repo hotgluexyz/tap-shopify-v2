@@ -1,14 +1,13 @@
 """Stream type classes for tap-shopify-beta."""
 
 from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
+from typing import Any, Dict, Iterable, List, Optional, Union
 
 from singer_sdk import typing as th
 
 from tap_shopify_beta.client import shopifyStream
 from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream
-
 
 MoneyBag = th.ObjectType(
     th.Property(
@@ -520,61 +519,70 @@ class ShopStream(shopifyGqlStream):
         th.Property("weightUnit", th.StringType),
     ).to_dict()
 
+
 class InventoryItemsStream(shopifyGqlStream):
     """Define Intentory Items stream."""
 
     name = "inventory_items"
     primary_keys = ["id"]
     query_name = "inventoryItems"
-    replication_key = 'updatedAt'
+    replication_key = "updatedAt"
 
     schema = th.PropertiesList(
-        th.Property('id',th.StringType),
-        th.Property('countryCodeOfOrigin',th.StringType),
-        th.Property('createdAt',th.DateTimeType),
-        th.Property('duplicateSkuCount',th.IntegerType),
-        th.Property('harmonizedSystemCode',th.StringType),
-        th.Property('inventoryHistoryUrl',th.StringType),
-        th.Property('legacyResourceId',th.StringType),
-        th.Property('locationsCount',th.IntegerType),
-        th.Property('provinceCodeOfOrigin',th.StringType),
-        th.Property('requiresShipping',th.BooleanType),
-        th.Property('sku',th.StringType),
-        th.Property('tracked',th.BooleanType),
-        th.Property('trackedEditable',th.ObjectType(
-            th.Property('locked',th.BooleanType),
-            th.Property('reason',th.StringType),
-            )
+        th.Property("id", th.StringType),
+        th.Property("countryCodeOfOrigin", th.StringType),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property("duplicateSkuCount", th.IntegerType),
+        th.Property("harmonizedSystemCode", th.StringType),
+        th.Property("inventoryHistoryUrl", th.StringType),
+        th.Property("legacyResourceId", th.StringType),
+        th.Property("locationsCount", th.IntegerType),
+        th.Property("provinceCodeOfOrigin", th.StringType),
+        th.Property("requiresShipping", th.BooleanType),
+        th.Property("sku", th.StringType),
+        th.Property("tracked", th.BooleanType),
+        th.Property(
+            "trackedEditable",
+            th.ObjectType(
+                th.Property("locked", th.BooleanType),
+                th.Property("reason", th.StringType),
+            ),
         ),
-        th.Property('unitCost',th.ObjectType(
-            th.Property('amount',th.NumberType),
-            th.Property('currencyCode',th.StringType),
-            )
+        th.Property(
+            "unitCost",
+            th.ObjectType(
+                th.Property("amount", th.NumberType),
+                th.Property("currencyCode", th.StringType),
+            ),
         ),
-        th.Property('updatedAt',th.DateTimeType),
-        th.Property('variant',th.ObjectType(
-                th.Property('id',th.StringType),
-                th.Property('availableForSale',th.BooleanType),
-                th.Property('barcode',th.StringType),
-                th.Property('compareAtPrice',th.StringType),
-                th.Property('createdAt',th.DateTimeType),
-                th.Property('defaultCursor',th.StringType),
-                th.Property('displayName',th.StringType),
+        th.Property("updatedAt", th.DateTimeType),
+        th.Property(
+            "variant",
+            th.ObjectType(
+                th.Property("id", th.StringType),
+                th.Property("availableForSale", th.BooleanType),
+                th.Property("barcode", th.StringType),
+                th.Property("compareAtPrice", th.StringType),
+                th.Property("createdAt", th.DateTimeType),
+                th.Property("defaultCursor", th.StringType),
+                th.Property("displayName", th.StringType),
                 # th.Property('fulfilmentServiceEditable',th.ObjectType(
                 #         th.Property('locked',th.BooleanType),
                 #         th.Property('reason',th.StringType),
                 #     )
                 # ),
-                th.Property('inventoryPolicy',th.StringType),
-                th.Property('image',
+                th.Property("inventoryPolicy", th.StringType),
+                th.Property(
+                    "image",
                     th.ObjectType(
-                    th.Property("id", th.StringType), th.Property("altText", th.StringType)
+                        th.Property("id", th.StringType),
+                        th.Property("altText", th.StringType),
                     ),
                 ),
-                th.Property('inventoryQuantity',th.IntegerType),
-                th.Property('legacyResourceId',th.StringType),
-                th.Property('position',th.IntegerType),
-                th.Property('price',th.StringType),
+                th.Property("inventoryQuantity", th.IntegerType),
+                th.Property("legacyResourceId", th.StringType),
+                th.Property("position", th.IntegerType),
+                th.Property("price", th.StringType),
                 # th.Property('price',th.ObjectType(
                 #         th.Property('id',th.StringType)
                 #     )
@@ -588,16 +596,17 @@ class InventoryItemsStream(shopifyGqlStream):
                         )
                     ),
                 ),
-                th.Property('sku',th.StringType),
-                th.Property('taxCode',th.StringType),
-                th.Property('taxable',th.BooleanType),
-                th.Property('title',th.StringType),
-                th.Property('updatedAt',th.DateTimeType),
-                th.Property('weight',th.NumberType),
-                th.Property('weightUnit',th.StringType),
-            )
-        )
+                th.Property("sku", th.StringType),
+                th.Property("taxCode", th.StringType),
+                th.Property("taxable", th.BooleanType),
+                th.Property("title", th.StringType),
+                th.Property("updatedAt", th.DateTimeType),
+                th.Property("weight", th.NumberType),
+                th.Property("weightUnit", th.StringType),
+            ),
+        ),
     ).to_dict()
+
 
 class CollectionsStream(shopifyGqlStream):
     """Define collections stream."""
@@ -605,24 +614,122 @@ class CollectionsStream(shopifyGqlStream):
     name = "collections"
     primary_keys = ["id"]
     query_name = "collections"
-    replication_key = 'updatedAt'
+    replication_key = "updatedAt"
 
     schema = th.PropertiesList(
-        th.Property('id',th.StringType),
-        th.Property('description',th.StringType),
-        th.Property('descriptionHtml',th.StringType),
-        th.Property('handle',th.StringType),
-        th.Property('image',
+        th.Property("id", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("descriptionHtml", th.StringType),
+        th.Property("handle", th.StringType),
+        th.Property(
+            "image",
             th.ObjectType(
-            th.Property("id", th.StringType), th.Property("altText", th.StringType)
+                th.Property("id", th.StringType), th.Property("altText", th.StringType)
             ),
         ),
-        th.Property('legacyResourceId',th.StringType),
-        th.Property('productsCount',th.IntegerType),
-        th.Property('sortOrder',th.StringType),
-        th.Property('templateSuffix',th.StringType),
-        th.Property('title',th.StringType),
-        th.Property('updatedAt',th.DateTimeType),
+        th.Property("legacyResourceId", th.StringType),
+        th.Property("productsCount", th.IntegerType),
+        th.Property("sortOrder", th.StringType),
+        th.Property("templateSuffix", th.StringType),
+        th.Property("title", th.StringType),
+        th.Property("updatedAt", th.DateTimeType),
     ).to_dict()
 
 
+class CustomersStream(shopifyGqlStream):
+    """Define collections stream."""
+
+    name = "customers"
+    primary_keys = ["id"]
+    query_name = "customers"
+    replication_key = "updatedAt"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("id", th.StringType),
+        th.Property("firstName", th.StringType),
+        th.Property("lastName", th.StringType),
+        th.Property("acceptsMarketing", th.BooleanType),
+        th.Property("email", th.StringType),
+        th.Property("phone", th.StringType),
+        th.Property("ordersCount", th.StringType),
+        th.Property(
+            "totalSpentV2",
+            th.ObjectType(
+                th.Property("amount", th.NumberType),
+                th.Property("currencyCode", th.StringType),
+            ),
+        ),
+        th.Property(
+            "averageOrderAmountV2",
+            th.ObjectType(
+                th.Property("amount", th.NumberType),
+                th.Property("currencyCode", th.StringType),
+            ),
+        ),
+        th.Property("note", th.StringType),
+        th.Property("verifiedEmail", th.BooleanType),
+        th.Property("validEmailAddress", th.BooleanType),
+        th.Property("tags", th.CustomType({"type": ["array", "string"]})),
+        th.Property("lifetimeDuration", th.StringType),
+        th.Property(
+            "defaultAddress",
+            th.ObjectType(
+                th.Property("address1", th.StringType),
+                th.Property("address2", th.StringType),
+                th.Property("city", th.StringType),
+                th.Property("company", th.StringType),
+                th.Property("country", th.StringType),
+                th.Property("countryCodeV2", th.StringType),
+                th.Property("firstName", th.StringType),
+                th.Property("formatted", th.StringType),
+                th.Property("formattedArea", th.StringType),
+                th.Property("id", th.StringType),
+                th.Property("lastName", th.StringType),
+                th.Property("name", th.StringType),
+                th.Property("phone", th.StringType),
+                th.Property("province", th.StringType),
+                th.Property("provinceCode", th.StringType),
+                th.Property("zip", th.StringType),
+                th.Property("latitude", th.NumberType),
+                th.Property("longitude", th.NumberType),
+            ),
+        ),
+        th.Property(
+            "addresses",
+            th.ArrayType(
+                th.ObjectType(
+                    th.Property("address1", th.StringType),
+                    th.Property("address2", th.StringType),
+                    th.Property("city", th.StringType),
+                    th.Property("company", th.StringType),
+                    th.Property("country", th.StringType),
+                    th.Property("countryCodeV2", th.StringType),
+                    th.Property("firstName", th.StringType),
+                    th.Property("formatted", th.StringType),
+                    th.Property("formattedArea", th.StringType),
+                    th.Property("id", th.StringType),
+                    th.Property("lastName", th.StringType),
+                    th.Property("name", th.StringType),
+                    th.Property("phone", th.StringType),
+                    th.Property("province", th.StringType),
+                    th.Property("provinceCode", th.StringType),
+                    th.Property("zip", th.StringType),
+                    th.Property("latitude", th.NumberType),
+                    th.Property("longitude", th.NumberType),
+                )
+            ),
+        ),
+        th.Property(
+            "image",
+            th.ObjectType(
+                th.Property("src", th.StringType),
+                th.Property("width", th.NumberType),
+                th.Property("height", th.NumberType),
+                th.Property("altText", th.StringType),
+            ),
+        ),
+        th.Property("canDelete", th.BooleanType),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property("updatedAt", th.DateTimeType),
+    ).to_dict()
