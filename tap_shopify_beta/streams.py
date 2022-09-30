@@ -656,14 +656,14 @@ class CustomersStream(shopifyGqlStream):
         th.Property(
             "totalSpentV2",
             th.ObjectType(
-                th.Property("amount", th.NumberType),
+                th.Property("amount", th.StringType),
                 th.Property("currencyCode", th.StringType),
             ),
         ),
         th.Property(
             "averageOrderAmountV2",
             th.ObjectType(
-                th.Property("amount", th.NumberType),
+                th.Property("amount", th.StringType),
                 th.Property("currencyCode", th.StringType),
             ),
         ),
