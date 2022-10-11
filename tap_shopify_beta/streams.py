@@ -253,12 +253,12 @@ class OrdersStream(shopifyGqlStream):
         th.Property("displayFinancialStatus", th.StringType),
         th.Property("displayFulfillmentStatus", th.StringType),
         th.Property(
-            "disputes",
+            "disputes",th.ArrayType(
             th.ObjectType(
                 th.Property("id", th.StringType),
                 th.Property("initiatedAs", th.StringType),
                 th.Property("status", th.StringType),
-            ),
+            ))
         ),
         th.Property("edited", th.BooleanType),
         th.Property("email", th.StringType),
@@ -282,12 +282,12 @@ class OrdersStream(shopifyGqlStream):
                     th.Property("status", th.StringType),
                     th.Property("totalQuantity", th.IntegerType),
                     th.Property(
-                        "trackingInfo",
+                        "trackingInfo",th.ArrayType(
                         th.ObjectType(
                             th.Property("company", th.StringType),
                             th.Property("number", th.StringType),
                             th.Property("url", th.StringType),
-                        ),
+                        ))
                     ),
                     th.Property("updatedAt", th.DateTimeType),
                 )
@@ -551,7 +551,7 @@ class InventoryItemsStream(shopifyGqlStream):
         th.Property(
             "unitCost",
             th.ObjectType(
-                th.Property("amount", th.NumberType),
+                th.Property("amount", th.StringType),
                 th.Property("currencyCode", th.StringType),
             ),
         ),
@@ -682,7 +682,7 @@ class CustomersStream(shopifyGqlStream):
                 th.Property("country", th.StringType),
                 th.Property("countryCodeV2", th.StringType),
                 th.Property("firstName", th.StringType),
-                th.Property("formatted", th.StringType),
+                th.Property("formatted", th.CustomType({"type": ["array", "string"]})),
                 th.Property("formattedArea", th.StringType),
                 th.Property("id", th.StringType),
                 th.Property("lastName", th.StringType),
@@ -706,7 +706,7 @@ class CustomersStream(shopifyGqlStream):
                     th.Property("country", th.StringType),
                     th.Property("countryCodeV2", th.StringType),
                     th.Property("firstName", th.StringType),
-                    th.Property("formatted", th.StringType),
+                    th.Property("formatted", th.CustomType({"type": ["array", "string"]})),
                     th.Property("formattedArea", th.StringType),
                     th.Property("id", th.StringType),
                     th.Property("lastName", th.StringType),
