@@ -7,6 +7,7 @@ import requests
 from backports.cached_property import cached_property
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import GraphQLStream
+import math
 
 from tap_shopify_beta.client import shopifyStream
 
@@ -19,6 +20,7 @@ class shopifyGqlStream(shopifyStream):
     available_points = None
     restore_rate = None
     max_points = None
+    single_object_params = None
 
     @property
     def page_size(self) -> int:
@@ -30,14 +32,18 @@ class shopifyGqlStream(shopifyStream):
             sleep(points_to_restore // self.restore_rate - 1)
             pages = (self.max_points - self.restore_rate) / self.query_cost
             pages = pages - 1
-        pages = 250 if pages > 250 else pages
+        elif self.query_cost and pages>5:
+            if self.query_cost * pages >= 1000:
+                pages = math.floor(1000/self.query_cost)
+            else:
+                pages = 250 if pages > 250 else pages
         return int(pages)
 
     @cached_property
     def query(self) -> str:
         """Set or return the GraphQL query string."""
 
-        if not self.replication_key:
+        if not self.replication_key and not self.single_object_params:
             base_query = """
                 query {
                     __query_name__ {
@@ -45,6 +51,14 @@ class shopifyGqlStream(shopifyStream):
                     }
                 }
                 """
+        elif self.single_object_params:
+            base_query = """
+                query tapShopify($id: ID!) {
+                    __query_name__(id: $id) {
+                        __selected_fields__
+                    }
+                }
+            """
         else:
             base_query = """
                 query tapShopify($first: Int, $after: String, $filter: String) {
@@ -95,6 +109,8 @@ class shopifyGqlStream(shopifyStream):
             if start_date:
                 date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
                 params["filter"] = f"updated_at:>{date}"
+        if self.single_object_params:
+            params = self.single_object_params
         return params
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
@@ -113,3 +129,4 @@ class shopifyGqlStream(shopifyStream):
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
 
         yield from extract_jsonpath(json_path, input=response)
+ 

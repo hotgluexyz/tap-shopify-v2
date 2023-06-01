@@ -4,9 +4,11 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Union
 
 import requests
+from singer_sdk.authenticators import APIKeyAuthenticator
 from backports.cached_property import cached_property
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import GraphQLStream
+from tap_shopify_beta.auth import ShopifyAuthenticator
 
 
 class shopifyStream(GraphQLStream):
@@ -19,16 +21,22 @@ class shopifyStream(GraphQLStream):
         """Return the API URL root, configurable via tap settings."""
         shop = self.config["shop"]
         return f"https://{shop}.myshopify.com/admin/api/2021-07/graphql.json"
-
+    
     @property
-    def http_headers(self) -> dict:
-        """Return the http headers needed."""
-        headers = {}
-        if "user_agent" in self.config:
-            headers["User-Agent"] = self.config.get("user_agent")
-        headers["X-Shopify-Access-Token"] = self.config.get("api_key")
-        headers["Content-Type"] = "application/json"
-        return headers
+    def authenticator(self) -> ShopifyAuthenticator:
+        """Return a new authenticator object."""
+        if self.config.get("client_id") and self.config.get("code"):
+            shop = self.config["shop"]
+            return ShopifyAuthenticator(
+                self, self._tap.config, f"https://{shop}.myshopify.com/admin/oauth/access_token"
+            )
+        else:
+            return APIKeyAuthenticator.create_for_stream(
+            self,
+            key="X-Shopify-Access-Token",
+            value=str(self.config.get("api_key")),
+            location="header",
+        )
 
     @cached_property
     def selected_properties(self):

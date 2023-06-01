@@ -26,38 +26,46 @@ class shopifyBulkStream(shopifyStream):
     @cached_property
     def query(self) -> str:
         """Set or return the GraphQL query string."""
-
-        base_query = '''
-            mutation {
-            bulkOperationRunQuery(
-                query:"""
-                    {
-                        __query_name____filters__ {
-                            edges {
-                                cursor
-                                node {
-                                    __selected_fields__
-                                }
-                            },
-                            pageInfo {
-                                hasNextPage
-                            }
-                        }
-                    }
-                """
-            ) 
-                {
-                    bulkOperation {
-                        id
-                        status
-                    }
-                    userErrors {
-                        field
-                        message
+        if self.name == "shop":
+            base_query = """
+                query {
+                    __query_name__ {
+                        __selected_fields__
                     }
                 }
-            }
-            '''
+                """
+        else:
+            base_query = '''
+                mutation {
+                bulkOperationRunQuery(
+                    query:"""
+                        {
+                            __query_name____filters__ {
+                                edges {
+                                    cursor
+                                    node {
+                                        __selected_fields__
+                                    }
+                                },
+                                pageInfo {
+                                    hasNextPage
+                                }
+                            }
+                        }
+                    """
+                ) 
+                    {
+                        bulkOperation {
+                            id
+                            status
+                        }
+                        userErrors {
+                            field
+                            message
+                        }
+                    }
+                }
+                '''
 
         query = base_query.replace("__query_name__", self.query_name)
         query = query.replace("__selected_fields__", self.gql_selected_fields)

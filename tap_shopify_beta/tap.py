@@ -13,6 +13,9 @@ from tap_shopify_beta.streams import (
     ProductsStream,
     ShopStream,
     VariantsStream,
+    LocationsStream,
+    InventoryLevelRestStream,
+    InventoryLevelGqlStream
 )
 
 STREAM_TYPES = [
@@ -23,6 +26,9 @@ STREAM_TYPES = [
     InventoryItemsStream,
     CollectionsStream,
     CustomersStream,
+    LocationsStream,
+    InventoryLevelRestStream,
+    InventoryLevelGqlStream
 ]
 
 
