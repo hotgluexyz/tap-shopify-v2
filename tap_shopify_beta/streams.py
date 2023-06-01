@@ -1,5 +1,7 @@
 """Stream type classes for tap-shopify-beta."""
-
+import json
+import requests
+import simplejson
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Union
 
@@ -8,6 +10,8 @@ from singer_sdk import typing as th
 from tap_shopify_beta.client import shopifyStream
 from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream
+from singer_sdk.helpers.jsonpath import extract_jsonpath
+from tap_shopify_beta.client_rest import shopifyRestStream
 
 MoneyBag = th.ObjectType(
     th.Property(
@@ -25,9 +29,15 @@ MoneyBag = th.ObjectType(
         ),
     ),
 )
+with open("config.json", "r") as jsonfile:
+    data = json.load(jsonfile)
 
+stream_condition = data["bulk"]
 
-class ProductsStream(shopifyBulkStream):
+class DynamicStream(shopifyBulkStream if stream_condition else shopifyGqlStream):
+    pass
+
+class ProductsStream(DynamicStream):
     """Define product stream."""
 
     name = "products"
@@ -107,7 +117,7 @@ class ProductsStream(shopifyBulkStream):
     ).to_dict()
 
 
-class VariantsStream(shopifyBulkStream):
+class VariantsStream(DynamicStream):
     """Define variant stream."""
 
     name = "variants"
@@ -186,7 +196,7 @@ class VariantsStream(shopifyBulkStream):
     ).to_dict()
 
 
-class OrdersStream(shopifyGqlStream):
+class OrdersStream(DynamicStream):
     """Define orders stream."""
 
     name = "orders"
@@ -520,7 +530,7 @@ class ShopStream(shopifyGqlStream):
     ).to_dict()
 
 
-class InventoryItemsStream(shopifyGqlStream):
+class InventoryItemsStream(DynamicStream):
     """Define Intentory Items stream."""
 
     name = "inventory_items"
@@ -608,7 +618,7 @@ class InventoryItemsStream(shopifyGqlStream):
     ).to_dict()
 
 
-class CollectionsStream(shopifyGqlStream):
+class CollectionsStream(DynamicStream):
     """Define collections stream."""
 
     name = "collections"
@@ -636,7 +646,7 @@ class CollectionsStream(shopifyGqlStream):
     ).to_dict()
 
 
-class CustomersStream(shopifyGqlStream):
+class CustomersStream(DynamicStream):
     """Define collections stream."""
 
     name = "customers"
@@ -732,4 +742,95 @@ class CustomersStream(shopifyGqlStream):
         th.Property("canDelete", th.BooleanType),
         th.Property("createdAt", th.DateTimeType),
         th.Property("updatedAt", th.DateTimeType),
+    ).to_dict()
+
+
+class LocationsStream(shopifyRestStream):
+    """Define collections stream."""
+
+    path = "locations.json"
+    name = "locations"
+    primary_keys = ["id"]
+    replication_key = None
+    records_jsonpath = "$.locations.[*]"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("name", th.StringType),
+        th.Property("address1", th.StringType),
+        th.Property("address2", th.StringType),
+        th.Property("city", th.StringType),
+        th.Property("zip", th.StringType),
+        th.Property("province", th.StringType),
+        th.Property("country", th.StringType),
+        th.Property("phone", th.StringType),
+        th.Property("created_at", th.DateTimeType),
+        th.Property("updated_at", th.DateTimeType),
+        th.Property("country_code", th.StringType),
+        th.Property("country_name", th.StringType),
+        th.Property("province_code", th.StringType),
+        th.Property("legacy", th.BooleanType),
+        th.Property("active", th.BooleanType),
+        th.Property("admin_graphql_api_id", th.StringType),
+        th.Property("localized_country_name", th.StringType),
+        th.Property("localized_province_name", th.StringType),
+    ).to_dict()
+
+    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+        """Return a context dictionary for child streams."""
+        return {
+            "location_id": record["id"],
+        }
+
+class InventoryLevelRestStream(shopifyRestStream):
+    """Define collections stream."""
+
+    path = "inventory_levels.json"
+    name = "inventory_level_rest"
+    primary_keys = ["id"]
+    records_jsonpath = "$.inventory_levels.[*]"
+
+    @property
+    def add_params(self):
+        location_id = self.tap_state.get("bookmarks").get("inventory_level_rest").get("partitions")[0]["context"]["location_id"]
+        return {"location_ids": location_id}
+
+    parent_stream_type = LocationsStream
+
+    schema = th.PropertiesList(
+        th.Property("admin_graphql_api_id", th.StringType),
+    ).to_dict()
+
+    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+        """Return a context dictionary for child streams."""
+        return {
+            "inventory_level_id": record["admin_graphql_api_id"],
+        }
+
+class InventoryLevelGqlStream(shopifyGqlStream):
+    """Define collections stream."""
+
+    name = "inventory_level_gql"
+    primary_keys = ["id"]
+    replication_key = None
+    parent_stream_type = InventoryLevelRestStream
+    query_name = "inventoryLevel"
+
+    @property
+    def single_object_params(self):
+        inventory_level_id = self.tap_state.get("bookmarks").get("inventory_level_gql").get("partitions")[0]["context"]["inventory_level_id"]
+        return {"id": inventory_level_id}
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("available", th.IntegerType),
+        th.Property("incoming", th.IntegerType),
+        th.Property("item", th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("sku", th.StringType),
+        )),
+        th.Property("location", th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("name", th.StringType),
+        )),
     ).to_dict()
