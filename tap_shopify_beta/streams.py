@@ -32,8 +32,7 @@ MoneyBag = th.ObjectType(
 with open("config.json", "r") as jsonfile:
     data = json.load(jsonfile)
 
-stream_condition = data["bulk"]
-
+stream_condition = data.get("bulk", True)
 class DynamicStream(shopifyBulkStream if stream_condition else shopifyGqlStream):
     pass
 
