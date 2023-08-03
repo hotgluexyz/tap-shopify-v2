@@ -303,9 +303,9 @@ class OrdersStream(DynamicStream):
             ),
         ),
         th.Property("fullyPaid", th.BooleanType),
-        th.Property("hasTimelineComment", th.BooleanType),
         th.Property("legacyResourceId", th.StringType),
-        th.Property("merchantEditable", th.ArrayType(th.StringType)),
+        th.Property("hasTimelineComment", th.BooleanType),
+        th.Property("merchantEditable", th.BooleanType),
         th.Property("name", th.StringType),
         th.Property("netPaymentSet", MoneyBag),
         th.Property("note", th.StringType),
@@ -319,21 +319,21 @@ class OrdersStream(DynamicStream):
         th.Property("refundDiscrepancySet", MoneyBag),
         th.Property(
             "refunds",
-            th.ObjectType(
+            th.ArrayType(th.ObjectType(
                 th.Property("id", th.StringType),
                 th.Property("createdAt", th.DateTimeType),
                 th.Property(
                     "duties",
-                    th.ObjectType(
+                    th.ArrayType(th.ObjectType(
                         th.Property("amountSet", MoneyBag),
-                    ),
+                    )),
                 ),
                 th.Property("legacyResourceId", th.StringType),
                 th.Property("note", th.StringType),
                 th.Property("totalRefundedSet", MoneyBag),
                 th.Property("updatedAt", th.DateTimeType),
             ),
-        ),
+        )),
         th.Property("requiresShipping", th.BooleanType),
         th.Property("restockable", th.BooleanType),
         th.Property("riskLevel", th.StringType),
@@ -353,7 +353,7 @@ class OrdersStream(DynamicStream):
             th.ObjectType(
                 th.Property("carrierIdentifier", th.StringType),
                 th.Property("code", th.StringType),
-                th.Property("custom", th.StringType),
+                th.Property("custom", th.BooleanType),
                 th.Property("deliveryCategory", th.StringType),
             ),
         ),
@@ -661,9 +661,9 @@ class CustomersStream(DynamicStream):
         th.Property("acceptsMarketing", th.BooleanType),
         th.Property("email", th.StringType),
         th.Property("phone", th.StringType),
-        th.Property("ordersCount", th.StringType),
+        th.Property("numberOfOrders", th.StringType),
         th.Property(
-            "totalSpentV2",
+            "amountSpent",
             th.ObjectType(
                 th.Property("amount", th.StringType),
                 th.Property("currencyCode", th.StringType),
