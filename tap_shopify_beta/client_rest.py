@@ -42,11 +42,10 @@ class shopifyRestStream(RESTStream):
     ) -> Optional[Any]:
         if response.headers.get("link"):
             link = response.headers.get("link")
-            result = re.search('<(.*); rel="next"', link)
-            result1 = result.group(1)
-            cursor = re.search('page_info=(.*)>', result1)
-            next_page_token = cursor.group(1)
-            return next_page_token
+            result = re.search(r'page_info=([^>;]+)>\; rel="next"', link)
+            if result:
+                next_page_token = result.group(1)
+                return next_page_token
         return None
     
     def get_starting_time(self, context):
@@ -63,10 +62,13 @@ class shopifyRestStream(RESTStream):
         params: dict = {}
         params["limit"] = self.limit
         start_date = self.get_starting_time(context)
+        rep_key_param = f"{self.replication_key}_min"
         if self.replication_key and start_date:
             start_date = start_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
-            params["updated_at_min"] = start_date
-        if not self.replication_key and next_page_token:
+            params[rep_key_param] = start_date
+        if next_page_token:
+            if params.get(rep_key_param):
+                del params[rep_key_param]
             params["page_info"] = next_page_token
         if self.add_params:
             params.update(self.add_params)

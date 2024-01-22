@@ -833,3 +833,93 @@ class InventoryLevelGqlStream(shopifyGqlStream):
             th.Property("name", th.StringType),
         )),
     ).to_dict()
+
+
+class PriceRulesStream(shopifyRestStream):
+    """Define collections stream."""
+
+    name = "price_rules"
+    primary_keys = ["id"]
+    replication_key = "updated_at"
+    records_jsonpath = "$.price_rules.[*]"
+    path = "price_rules.json"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.NumberType),
+        th.Property("value_type", th.StringType),
+        th.Property("value", th.StringType),
+        th.Property("customer_selection", th.StringType),
+        th.Property("target_type", th.StringType),
+        th.Property("target_selection", th.StringType),
+        th.Property("allocation_method", th.StringType),
+        th.Property("allocation_limit", th.StringType),
+        th.Property("once_per_customer", th.BooleanType),
+        th.Property("usage_limit", th.StringType),
+        th.Property("starts_at", th.DateTimeType),
+        th.Property("ends_at", th.DateTimeType),
+        th.Property("created_at", th.DateTimeType),
+        th.Property("updated_at", th.DateTimeType),
+        th.Property("entitled_product_ids", th.ArrayType(th.IntegerType)),
+        th.Property("entitled_variant_ids", th.ArrayType(th.IntegerType)),
+        th.Property("entitled_collection_ids", th.ArrayType(th.IntegerType)),
+        th.Property("entitled_country_ids", th.ArrayType(th.IntegerType)),
+        th.Property("prerequisite_product_ids", th.ArrayType(th.IntegerType)),
+        th.Property("prerequisite_variant_ids", th.ArrayType(th.IntegerType)),
+        th.Property("prerequisite_collection_ids", th.ArrayType(th.IntegerType)),
+        th.Property("prerequisite_saved_search_ids", th.ArrayType(th.IntegerType)),
+        th.Property("customer_segment_prerequisite_ids", th.ArrayType(th.IntegerType)),
+        th.Property("prerequisite_customer_ids", th.ArrayType(th.IntegerType)),
+        th.Property("prerequisite_subtotal_range", th.StringType),
+        th.Property("prerequisite_quantity_range", th.ObjectType(
+            th.Property("greater_than_or_equal_to", th.IntegerType)
+        )),
+        th.Property("prerequisite_shipping_price_range", th.ObjectType(
+            th.Property("less_than_or_equal_to", th.IntegerType)
+        )),
+        th.Property("prerequisite_to_entitlement_quantity_ratio", th.ObjectType(
+            th.Property("prerequisite_quantity", th.StringType),
+            th.Property("entitled_quantity", th.StringType),
+        )),
+        th.Property("prerequisite_to_entitlement_purchase", th.ObjectType(					
+            th.Property("prerequisite_amount", th.StringType),
+        )),
+        th.Property("prerequisite_subtotal_range", th.ObjectType(					
+            th.Property("greater_than_or_equal_to", th.StringType),
+        )),
+        th.Property("title", th.StringType),
+        th.Property("_sdc_shop_myshopify_domain", th.StringType),
+        th.Property("_sdc_shop_id", th.IntegerType),
+        th.Property("_sdc_shop_name", th.StringType),
+        th.Property("admin_graphql_api_id", th.StringType),
+    ).to_dict()
+
+
+class EventProductsStream(shopifyRestStream):
+    """Define collections stream."""
+
+    name = "event_products"
+    primary_keys = ["id"]
+    replication_key = "created_at"
+    records_jsonpath = "$.events.[*]"
+    path = "events.json"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.NumberType),
+        th.Property("subject_id", th.NumberType),
+        th.Property("created_at", th.DateTimeType),
+        th.Property("subject_type", th.StringType),
+        th.Property("verb", th.StringType),
+        th.Property("arguments", th.ArrayType(th.CustomType({"type": ["number", "string", "null", "object"]}))),
+        th.Property("body", th.StringType),
+        th.Property("message", th.StringType),
+        th.Property("author", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("path", th.StringType),
+    ).to_dict()
+
+
+class EventDestroyedProductsStream(EventProductsStream):
+    """Define collections stream."""
+
+    name = "event_destroyed_products"
+    add_params = {"verb": "destroy"}
