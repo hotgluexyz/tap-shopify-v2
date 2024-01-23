@@ -137,10 +137,10 @@ class shopifyBulkStream(shopifyStream):
                 raise InvalidOperation(
                     "The current job was not triggered by the process, check if other service is using the Bulk API"
                 )
-            if status["url"]:
-                return status["url"]
             if status["status"] == "FAILED":
                 raise InvalidOperation(f"Job failed: {status['errorCode']}")
+            if status["status"] == "COMPLETED":
+                return status["url"]
             sleep(sleep_time)
         raise OperationFailed("Job Timeout")
 
@@ -154,7 +154,8 @@ class shopifyBulkStream(shopifyStream):
 
         url = self.check_status(operation_id)
 
-        output = requests.get(url, stream=True)
+        if url:
+            output = requests.get(url, stream=True)
 
-        for line in output.iter_lines():
-            yield simplejson.loads(line)
+            for line in output.iter_lines():
+                yield simplejson.loads(line)
