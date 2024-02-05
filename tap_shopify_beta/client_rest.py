@@ -66,12 +66,15 @@ class shopifyRestStream(RESTStream):
         if self.replication_key and start_date:
             start_date = start_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
             params[rep_key_param] = start_date
-        if next_page_token:
-            if params.get(rep_key_param):
-                del params[rep_key_param]
-            params["page_info"] = next_page_token
         if self.add_params:
             params.update(self.add_params)
+        if next_page_token:
+            params["page_info"] = next_page_token
+            # it only accepts either pagination or filtering
+            if params.get(rep_key_param):
+                del params[rep_key_param]
+            if params.get("verb"):
+                del params["verb"]
         return params
 
     
