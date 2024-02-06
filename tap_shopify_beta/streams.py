@@ -791,7 +791,7 @@ class InventoryLevelRestStream(shopifyRestStream):
 
     @property
     def add_params(self):
-        location_id = self.tap_state.get("bookmarks").get("inventory_level_rest").get("partitions")[0]["context"]["location_id"]
+        location_id = self.tap_state.get("bookmarks").get("inventory_level_rest").get("partitions")[-1]["context"]["location_id"]
         return {"location_ids": location_id}
 
     parent_stream_type = LocationsStream
@@ -854,7 +854,7 @@ class PriceRulesStream(shopifyRestStream):
         th.Property("allocation_method", th.StringType),
         th.Property("allocation_limit", th.StringType),
         th.Property("once_per_customer", th.BooleanType),
-        th.Property("usage_limit", th.StringType),
+        th.Property("usage_limit", th.IntegerType),
         th.Property("starts_at", th.DateTimeType),
         th.Property("ends_at", th.DateTimeType),
         th.Property("created_at", th.DateTimeType),
@@ -878,7 +878,7 @@ class PriceRulesStream(shopifyRestStream):
         )),
         th.Property("prerequisite_to_entitlement_quantity_ratio", th.ObjectType(
             th.Property("prerequisite_quantity", th.StringType),
-            th.Property("entitled_quantity", th.StringType),
+            th.Property("entitled_quantity", th.IntegerType),
         )),
         th.Property("prerequisite_to_entitlement_purchase", th.ObjectType(					
             th.Property("prerequisite_amount", th.StringType),
