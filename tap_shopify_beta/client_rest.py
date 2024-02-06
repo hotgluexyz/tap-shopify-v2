@@ -69,12 +69,10 @@ class shopifyRestStream(RESTStream):
         if self.add_params:
             params.update(self.add_params)
         if next_page_token:
+            params = {}
+            # if there is page_info other filtering params are not allowed
+            params["limit"] = self.limit
             params["page_info"] = next_page_token
-            # it only accepts either pagination or filtering
-            if params.get(rep_key_param):
-                del params[rep_key_param]
-            if params.get("verb"):
-                del params["verb"]
         return params
 
     
