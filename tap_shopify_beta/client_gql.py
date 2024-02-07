@@ -115,6 +115,7 @@ class shopifyGqlStream(shopifyStream):
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result rows."""
+        self.logger.info(f"Parsing response for stream {self.name}")
         if self.replication_key:
             json_path = f"$.data.{self.query_name}.edges[*].node"
         else:
