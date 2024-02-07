@@ -123,7 +123,7 @@ class shopifyBulkStream(shopifyStream):
 
         return response
 
-    def check_status(self, operation_id, sleep_time=10, timeout=1800):
+    def check_status(self, operation_id, sleep_time=20, timeout=7200):
 
         status_jsonpath = "$.data.currentBulkOperation"
         start = datetime.now().timestamp()
