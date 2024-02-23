@@ -792,7 +792,13 @@ class InventoryLevelRestStream(shopifyRestStream):
     @property
     def add_params(self):
         location_id = self.tap_state.get("bookmarks").get("inventory_level_rest").get("partitions")[-1]["context"]["location_id"]
-        return {"location_ids": location_id}
+        params = {"location_ids": location_id}
+        if self.config.get("inventory_item_ids"):
+            item_ids = self.config.get("inventory_item_ids")
+            if isinstance(item_ids,list):
+                item_ids = ",".join(item_ids)
+            params.update({"inventory_item_ids":item_ids})
+        return params
 
     parent_stream_type = LocationsStream
 
