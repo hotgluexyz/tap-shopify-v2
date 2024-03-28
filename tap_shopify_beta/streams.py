@@ -354,7 +354,6 @@ class OrdersStream(DynamicStream):
                 th.Property("carrierIdentifier", th.StringType),
                 th.Property("code", th.StringType),
                 th.Property("custom", th.BooleanType),
-                th.Property("deliveryCategory", th.StringType),
             ),
         ),
         th.Property("subtotalLineItemsQuantity", th.IntegerType),
@@ -658,19 +657,11 @@ class CustomersStream(DynamicStream):
         th.Property("id", th.StringType),
         th.Property("firstName", th.StringType),
         th.Property("lastName", th.StringType),
-        th.Property("acceptsMarketing", th.BooleanType),
         th.Property("email", th.StringType),
         th.Property("phone", th.StringType),
         th.Property("numberOfOrders", th.StringType),
         th.Property(
             "amountSpent",
-            th.ObjectType(
-                th.Property("amount", th.StringType),
-                th.Property("currencyCode", th.StringType),
-            ),
-        ),
-        th.Property(
-            "averageOrderAmountV2",
             th.ObjectType(
                 th.Property("amount", th.StringType),
                 th.Property("currencyCode", th.StringType),
