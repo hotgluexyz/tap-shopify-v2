@@ -21,6 +21,7 @@ class shopifyGqlStream(shopifyStream):
     restore_rate = None
     max_points = None
     single_object_params = None
+    is_list = True
 
     @property
     def page_size(self) -> int:
@@ -43,18 +44,18 @@ class shopifyGqlStream(shopifyStream):
     def query(self) -> str:
         """Set or return the GraphQL query string."""
 
-        if not self.replication_key and not self.single_object_params:
-            base_query = """
-                query {
-                    __query_name__ {
-                        __selected_fields__
-                    }
-                }
-                """
-        elif self.single_object_params:
+        if self.single_object_params:
             base_query = """
                 query tapShopify($id: ID!) {
                     __query_name__(id: $id) {
+                        __selected_fields__
+                    }
+                }
+            """
+        elif not self.replication_key and not self.is_list:
+            base_query = """
+                query {
+                    __query_name__ {
                         __selected_fields__
                     }
                 }
