@@ -18,7 +18,8 @@ from tap_shopify_beta.streams import (
     InventoryLevelGqlStream,
     PriceRulesStream,
     EventProductsStream,
-    EventDestroyedProductsStream
+    EventDestroyedProductsStream,
+    MarketingEventsStream
 )
 
 STREAM_TYPES = [
@@ -34,7 +35,8 @@ STREAM_TYPES = [
     InventoryLevelGqlStream,
     PriceRulesStream,
     EventProductsStream,
-    EventDestroyedProductsStream
+    EventDestroyedProductsStream,
+    MarketingEventsStream
 ]
 
 

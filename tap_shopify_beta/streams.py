@@ -392,6 +392,10 @@ class OrdersStream(DynamicStream):
         ),
         th.Property("unpaid", th.BooleanType),
         th.Property("updatedAt", th.DateTimeType),
+        th.Property("sourceIdentifier", th.DateTimeType),
+        th.Property("app", th.ObjectType(
+            th.Property("name", th.NumberType),
+        ))
     ).to_dict()
 
 
@@ -402,6 +406,7 @@ class ShopStream(shopifyGqlStream):
     primary_keys = ["id"]
     query_name = "shop"
     replication_key = None
+    is_list = False
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -732,6 +737,17 @@ class CustomersStream(DynamicStream):
         th.Property("canDelete", th.BooleanType),
         th.Property("createdAt", th.DateTimeType),
         th.Property("updatedAt", th.DateTimeType),
+        th.Property("emailMarketingConsent", th.ObjectType(
+            th.Property("consentUpdatedAt", th.DateTimeType),
+            th.Property("marketingOptInLevel", th.StringType),
+            th.Property("marketingState", th.StringType),
+        )),
+        th.Property("smsMarketingConsent", th.ObjectType(
+            th.Property("consentCollectedFrom", th.StringType),
+            th.Property("consentUpdatedAt", th.DateTimeType),
+            th.Property("marketingOptInLevel", th.StringType),
+            th.Property("marketingState", th.StringType),
+        )),
     ).to_dict()
 
 
@@ -772,6 +788,7 @@ class LocationsStream(shopifyRestStream):
             "location_id": record["id"],
         }
 
+
 class InventoryLevelRestStream(shopifyRestStream):
     """Define collections stream."""
 
@@ -803,6 +820,7 @@ class InventoryLevelRestStream(shopifyRestStream):
             "inventory_level_id": record["admin_graphql_api_id"],
         }
 
+
 class InventoryLevelGqlStream(shopifyGqlStream):
     """Define collections stream."""
 
@@ -811,6 +829,7 @@ class InventoryLevelGqlStream(shopifyGqlStream):
     replication_key = None
     parent_stream_type = InventoryLevelRestStream
     query_name = "inventoryLevel"
+    is_list = False
 
     @property
     def single_object_params(self):
@@ -912,6 +931,62 @@ class EventProductsStream(shopifyRestStream):
         th.Property("author", th.StringType),
         th.Property("description", th.StringType),
         th.Property("path", th.StringType),
+    ).to_dict()
+
+
+class MarketingEventsStream(shopifyGqlStream):
+    """Define collections stream."""
+
+    name = "marketing_events"
+    primary_keys = ["id"]
+    query_name = "marketingEvents"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.NumberType),
+        th.Property("channelHandle", th.StringType),
+        th.Property("description", th.StringType),
+        th.Property("endedAt", th.DateTimeType),
+        th.Property("legacyResourceId", th.IntegerType),
+        th.Property("manageUrl", th.StringType),
+        th.Property("marketingChannelType", th.StringType),
+        th.Property("previewUrl", th.StringType),
+        th.Property("remoteId", th.StringType),
+        th.Property("scheduledToEndAt", th.DateTimeType),
+        th.Property("sourceAndMedium", th.StringType),
+        th.Property("startedAt", th.DateTimeType),
+        th.Property("type", th.StringType),
+        th.Property("utmCampaign", th.StringType),
+        th.Property("utmMedium", th.StringType),
+        th.Property("utmSource", th.StringType),
+        th.Property("app", th.ObjectType(
+            th.Property("apiKey", th.StringType),
+            th.Property("appStoreAppUrl", th.StringType),
+            th.Property("appStoreDeveloperUrl", th.StringType),
+            th.Property("availableAccessScopes", th.ArrayType(
+                th.ObjectType(
+                    th.Property("description", th.StringType),
+                    th.Property("handle", th.StringType),             
+                )
+            )),
+            th.Property("description", th.StringType),
+            th.Property("developerName", th.StringType),
+            th.Property("developerType", th.StringType),
+            th.Property("embedded", th.BooleanType), 
+            th.Property("failedRequirements", th.ArrayType(
+                th.ObjectType(
+                    th.Property("action", th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("title", th.StringType),
+                        th.Property("url", th.StringType),
+                    )),
+                    th.Property("message", th.StringType),
+                )
+            )),
+            th.Property("features", th.StringType),
+            th.Property("published", th.BooleanType), 
+            th.Property("shopifyDeveloped", th.BooleanType), 
+            th.Property("title", th.BooleanType), 
+        )),
     ).to_dict()
 
 
