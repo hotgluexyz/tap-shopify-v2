@@ -392,10 +392,7 @@ class OrdersStream(DynamicStream):
         ),
         th.Property("unpaid", th.BooleanType),
         th.Property("updatedAt", th.DateTimeType),
-        th.Property("sourceIdentifier", th.DateTimeType),
-        th.Property("app", th.ObjectType(
-            th.Property("name", th.NumberType),
-        ))
+        th.Property("sourceIdentifier", th.StringType),
     ).to_dict()
 
 
@@ -934,58 +931,41 @@ class EventProductsStream(shopifyRestStream):
     ).to_dict()
 
 
-class MarketingEventsStream(shopifyGqlStream):
+class MarketingEventsStream(shopifyRestStream):
     """Define collections stream."""
 
     name = "marketing_events"
     primary_keys = ["id"]
-    query_name = "marketingEvents"
+    path = "marketing_events.json"
+    records_jsonpath= "$.marketing_events.[*]"
 
     schema = th.PropertiesList(
         th.Property("id", th.NumberType),
-        th.Property("channelHandle", th.StringType),
+        th.Property("event_type", th.StringType),
+        th.Property("remote_id", th.StringType),
+        th.Property("started_at", th.DateTimeType),
+        th.Property("ended_at", th.DateTimeType),
+        th.Property("scheduled_to_end_at", th.DateTimeType),
+        th.Property("budget", th.NumberType),
+        th.Property("currency", th.StringType),
+        th.Property("manage_url", th.StringType),
+        th.Property("preview_url", th.StringType),
+        th.Property("utm_campaign", th.StringType),
+        th.Property("utm_source", th.StringType),
+        th.Property("utm_medium", th.StringType),
+        th.Property("budget_type", th.StringType),
         th.Property("description", th.StringType),
-        th.Property("endedAt", th.DateTimeType),
-        th.Property("legacyResourceId", th.IntegerType),
-        th.Property("manageUrl", th.StringType),
-        th.Property("marketingChannelType", th.StringType),
-        th.Property("previewUrl", th.StringType),
-        th.Property("remoteId", th.StringType),
-        th.Property("scheduledToEndAt", th.DateTimeType),
-        th.Property("sourceAndMedium", th.StringType),
-        th.Property("startedAt", th.DateTimeType),
-        th.Property("type", th.StringType),
-        th.Property("utmCampaign", th.StringType),
-        th.Property("utmMedium", th.StringType),
-        th.Property("utmSource", th.StringType),
-        th.Property("app", th.ObjectType(
-            th.Property("apiKey", th.StringType),
-            th.Property("appStoreAppUrl", th.StringType),
-            th.Property("appStoreDeveloperUrl", th.StringType),
-            th.Property("availableAccessScopes", th.ArrayType(
-                th.ObjectType(
-                    th.Property("description", th.StringType),
-                    th.Property("handle", th.StringType),             
-                )
-            )),
-            th.Property("description", th.StringType),
-            th.Property("developerName", th.StringType),
-            th.Property("developerType", th.StringType),
-            th.Property("embedded", th.BooleanType), 
-            th.Property("failedRequirements", th.ArrayType(
-                th.ObjectType(
-                    th.Property("action", th.ObjectType(
-                        th.Property("id", th.StringType),
-                        th.Property("title", th.StringType),
-                        th.Property("url", th.StringType),
-                    )),
-                    th.Property("message", th.StringType),
-                )
-            )),
-            th.Property("features", th.StringType),
-            th.Property("published", th.BooleanType), 
-            th.Property("shopifyDeveloped", th.BooleanType), 
-            th.Property("title", th.BooleanType), 
+        th.Property("marketing_channel", th.StringType),
+        th.Property("paid", th.BooleanType),
+        th.Property("referring_domain", th.StringType),
+        th.Property("breadcrumb_id", th.IntegerType),
+        th.Property("marketing_activity_id", th.IntegerType),
+        th.Property("admin_graphql_api_id", th.StringType),
+        th.Property("marketed_resources", th.ArrayType(
+            th.ObjectType(
+                th.Property("type", th.StringType),
+                th.Property("id", th.IntegerType), 
+            )
         )),
     ).to_dict()
 
