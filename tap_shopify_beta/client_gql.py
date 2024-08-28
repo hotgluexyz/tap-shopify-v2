@@ -22,6 +22,7 @@ class shopifyGqlStream(shopifyStream):
     max_points = None
     single_object_params = None
     is_list = True
+    json_path = None
 
     @property
     def page_size(self) -> int:
@@ -117,18 +118,23 @@ class shopifyGqlStream(shopifyStream):
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result rows."""
         self.logger.info(f"Parsing response for stream {self.name}")
-        if self.replication_key:
+        if self.json_path:
+            json_path = self.json_path
+        elif self.replication_key:
             json_path = f"$.data.{self.query_name}.edges[*].node"
         else:
             json_path = f"$.data.{self.query_name}"
-        response = response.json()
+        res_json = response.json()
 
-        cost = response["extensions"].get("cost")
+        cost = res_json["extensions"].get("cost")
         if not self.query_cost:
             self.query_cost = cost.get("requestedQueryCost")
         self.available_points = cost["throttleStatus"].get("currentlyAvailable")
         self.restore_rate = cost["throttleStatus"].get("restoreRate")
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
 
-        yield from extract_jsonpath(json_path, input=response)
- 
+        filtered_response = self.filter_response(res_json)
+        yield from extract_jsonpath(json_path, input=filtered_response)
+
+    def filter_response(self, response_json: dict) -> dict:
+        return response_json

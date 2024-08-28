@@ -1,17 +1,14 @@
 """Stream type classes for tap-shopify-beta."""
+import abc
 import json
-import requests
-import simplejson
-from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Union
+from typing import Optional
 
 from singer_sdk import typing as th
 
-from tap_shopify_beta.client import shopifyStream
 from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream
-from singer_sdk.helpers.jsonpath import extract_jsonpath
 from tap_shopify_beta.client_rest import shopifyRestStream
+from tap_shopify_beta.types.customer_visit import CustomerVisitType
 
 MoneyBag = th.ObjectType(
     th.Property(
@@ -334,6 +331,7 @@ class OrdersStream(DynamicStream):
                 th.Property("updatedAt", th.DateTimeType),
             ),
         )),
+        th.Property("registeredSourceUrl", th.StringType),
         th.Property("requiresShipping", th.BooleanType),
         th.Property("restockable", th.BooleanType),
         th.Property("riskLevel", th.StringType),
@@ -858,7 +856,7 @@ class PriceRulesStream(shopifyRestStream):
     path = "price_rules.json"
 
     schema = th.PropertiesList(
-        th.Property("id", th.NumberType),
+        th.Property("id", th.IntegerType),
         th.Property("value_type", th.StringType),
         th.Property("value", th.StringType),
         th.Property("customer_selection", th.StringType),
@@ -917,8 +915,8 @@ class EventProductsStream(shopifyRestStream):
     path = "events.json"
 
     schema = th.PropertiesList(
-        th.Property("id", th.NumberType),
-        th.Property("subject_id", th.NumberType),
+        th.Property("id", th.IntegerType),
+        th.Property("subject_id", th.IntegerType),
         th.Property("created_at", th.DateTimeType),
         th.Property("subject_type", th.StringType),
         th.Property("verb", th.StringType),
@@ -940,7 +938,7 @@ class MarketingEventsStream(shopifyRestStream):
     records_jsonpath= "$.marketing_events.[*]"
 
     schema = th.PropertiesList(
-        th.Property("id", th.NumberType),
+        th.Property("id", th.IntegerType),
         th.Property("event_type", th.StringType),
         th.Property("remote_id", th.StringType),
         th.Property("started_at", th.DateTimeType),
@@ -975,3 +973,75 @@ class EventDestroyedProductsStream(EventProductsStream):
 
     name = "event_destroyed_products"
     add_params = {"verb": "destroy"}
+
+
+class CustomerVisitStream(shopifyGqlStream, metaclass=abc.ABCMeta):
+    """Define base class for CustomerVisit stream"""
+
+    primary_keys = ["id", "updatedAt"]
+    query_name = "orders"
+    replication_key = "updatedAt"
+    page_size = 100
+    is_timestamp_replication_key = True
+    json_path = "$.edges[*].node"  # JSONPath to compile over the result of filter_response()
+
+    @property
+    def schema(self):
+        return th.PropertiesList(
+            th.Property("id", th.StringType),
+            th.Property("updatedAt", th.DateTimeType),
+            th.Property("customerJourneySummary", th.ObjectType(
+                th.Property(self.visit_type, CustomerVisitType())
+            ))
+        ).to_dict()
+    
+    def filter_response(self, response_json: dict) -> dict:
+        return {
+            'edges': [
+                e
+                for e in response_json['data']['orders']['edges'] 
+                if e.get('node',{}).get('customerJourneySummary',{}).get(self.visit_type)
+            ]
+        }
+
+class CustomerFirstVisitStream(CustomerVisitStream):
+    """Define Customer Visit stream"""
+
+    name = "customer_first_visit"
+    
+    @property
+    def visit_type(self) -> str:
+        return "firstVisit"
+
+class CustomerLastVisitsStream(CustomerVisitStream):
+    """Define Customer Visit stream"""
+
+    name = "customer_last_visit"
+    
+    @property
+    def visit_type(self) -> str:
+        return "lastVisit"
+
+
+class CustomerJourneySummaryStream(shopifyGqlStream):
+    """Define base class for CustomerVisit stream"""
+
+    name = "customer_journey_summary"
+    primary_keys = ["id", "updatedAt"]
+    query_name = "orders"
+    replication_key = "updatedAt"
+    page_size = 100
+    is_timestamp_replication_key = True
+
+    schema = th.PropertiesList(
+            th.Property("id", th.StringType),
+            th.Property("updatedAt", th.DateTimeType),
+            th.Property("customerJourneySummary", th.ObjectType(
+                th.Property("customerOrderIndex", th.IntegerType),
+                th.Property("daysToConversion", th.IntegerType),
+                th.Property("firstVisit", CustomerVisitType()),
+                th.Property("lastVisit", CustomerVisitType()),
+                th.Property("momentsCount", th.IntegerType),
+                th.Property("ready", th.BooleanType),
+            ))
+    ).to_dict()
