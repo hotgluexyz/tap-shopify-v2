@@ -76,5 +76,5 @@ class shopifyStream(GraphQLStream):
             "query": (" ".join([line.strip() for line in query.splitlines()])),
             "variables": params,
         }
-        self.logger.debug(f"Attempting query:\n{query}")
+        self.logger.info(f"Attempting request with variables {params} and query:\n{query}")
         return request_data
