@@ -535,6 +535,7 @@ class InventoryItemsStream(DynamicStream):
     primary_keys = ["id"]
     query_name = "inventoryItems"
     replication_key = "updatedAt"
+    is_sortable = False
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
