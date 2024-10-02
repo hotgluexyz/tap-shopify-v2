@@ -28,6 +28,8 @@ class shopifyGqlStream(shopifyStream):
     json_path = None
     start_date = None
     end_date = None
+    sort_key = None
+    sort_key_type = None
 
     @property
     def page_size(self) -> int:
@@ -66,10 +68,10 @@ class shopifyGqlStream(shopifyStream):
                     }
                 }
             """
-        elif getattr(self, "is_sortable", None) is False:
+        elif self.sort_key and self.sort_key_type:
             base_query = """
-                query tapShopify($first: Int, $after: String, $filter: String) {
-                    __query_name__(first: $first, after: $after, query: $filter) {
+                query tapShopify($first: Int, $after: String, $filter: String, $sortKey: __sort_key_type__) {
+                    __query_name__(first: $first, after: $after, query: $filter, sortKey: $sortKey) {
                         edges {
                             cursor
                             node {
@@ -82,10 +84,11 @@ class shopifyGqlStream(shopifyStream):
                     }
                 }
             """
+            base_query = base_query.replace("__sort_key_type__", self.sort_key_type)
         else:
             base_query = """
                 query tapShopify($first: Int, $after: String, $filter: String) {
-                    __query_name__(first: $first, after: $after, query: $filter, sortKey: UPDATED_AT) {
+                    __query_name__(first: $first, after: $after, query: $filter) {
                         edges {
                             cursor
                             node {
@@ -150,6 +153,8 @@ class shopifyGqlStream(shopifyStream):
                 params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params
+        if self.sort_key:
+            params["sortKey"] = self.sort_key
         return params
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
