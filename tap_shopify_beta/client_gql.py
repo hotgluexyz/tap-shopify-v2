@@ -66,6 +66,22 @@ class shopifyGqlStream(shopifyStream):
                     }
                 }
             """
+        elif getattr(self, "is_sortable", None) is False:
+            base_query = """
+                query tapShopify($first: Int, $after: String, $filter: String) {
+                    __query_name__(first: $first, after: $after, query: $filter) {
+                        edges {
+                            cursor
+                            node {
+                                __selected_fields__
+                            }
+                        },
+                        pageInfo {
+                            hasNextPage
+                        }
+                    }
+                }
+            """
         else:
             base_query = """
                 query tapShopify($first: Int, $after: String, $filter: String) {
@@ -146,6 +162,14 @@ class shopifyGqlStream(shopifyStream):
         else:
             json_path = f"$.data.{self.query_name}"
         res_json = response.json()
+
+        if "errors" in res_json:
+            for error in res_json["errors"]:
+                self.logger.error(f"Error message: {error['message']}")
+                self.logger.error(f"Error locations: {error['locations']}")
+                self.logger.error(f"Error path: {error['path']}")
+                self.logger.error(f"Error extensions: {error['extensions']}")
+            raise Exception(f"Error during parse_response. messages: {res_json['errors']}")
 
         cost = res_json["extensions"].get("cost")
         if not self.query_cost:
