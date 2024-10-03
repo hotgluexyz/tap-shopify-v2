@@ -1,12 +1,9 @@
 """GraphQL client handling, including shopifyStream base class."""
 
-from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Union
+from typing import Any, Optional
 
-import requests
 from singer_sdk.authenticators import APIKeyAuthenticator
 from backports.cached_property import cached_property
-from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import GraphQLStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
 
@@ -76,5 +73,5 @@ class shopifyStream(GraphQLStream):
             "query": (" ".join([line.strip() for line in query.splitlines()])),
             "variables": params,
         }
-        self.logger.info(f"Attempting request with variables {params} and query:\n{query}")
+        self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
         return request_data
