@@ -9,6 +9,8 @@ from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream
 from tap_shopify_beta.client_rest import shopifyRestStream
 from tap_shopify_beta.types.customer_visit import CustomerVisitType
+from tap_shopify_beta.types.line_item_node import LineItemNodeType
+
 
 MoneyBag = th.ObjectType(
     th.Property(
@@ -199,6 +201,8 @@ class OrdersStream(DynamicStream):
     primary_keys = ["id", "updatedAt"]
     query_name = "orders"
     replication_key = "updatedAt"
+    first_line_item = 10  # works as page_size for line_items 
+    _after_line_item = None
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -391,8 +395,81 @@ class OrdersStream(DynamicStream):
         th.Property("unpaid", th.BooleanType),
         th.Property("updatedAt", th.DateTimeType),
         th.Property("sourceIdentifier", th.StringType),
+        th.Property("lineItems", th.ObjectType(
+            th.Property("edges",th.ArrayType(th.ObjectType(
+                th.Property("cursor", th.StringType),
+                th.Property("node", LineItemNodeType()),
+            ))),
+            th.Property("pageInfo", th.ObjectType(
+                th.Property("hasNextPage", th.BooleanType)
+            )),
+        )),
     ).to_dict()
 
+    def has_next_page_line_items(self, record):
+        return record.get("lineItems", {}).get("pageInfo", {}).get("hasNextPage", False)
+        
+    def parse_response(self, response):
+        records = super().parse_response(response)
+        # iterate through lines pages
+        decorated_request = self.request_decorator(self._request)
+        for record in records:
+            context = {"order_id": record["id"].split("/")[-1]}
+            line_items_edges = record.get("lineItems", {}).get("edges", [])
+            has_next_page = self.has_next_page_line_items(record)
+            order_node = record
+            while has_next_page:
+                self.after_line_item = "\"" + order_node.get("lineItems", {}).get("edges", [])[-1].get("cursor") + "\""
+                prepared_request = self.prepare_request(
+                    context, next_page_token=None
+                )
+                resp = decorated_request(prepared_request, context)
+                orders = resp.json().get('data', {}).get('orders',{}).get('edges',[])
+                if len(orders) > 1:
+                    self.logger.warning(f"More than one order with same id. id={context['order_id']} and orders={orders}")
+                order_node = orders[0].get('node')
+                line_items_edges.extend(order_node.get("lineItems", {}).get("edges", []))
+                has_next_page = self.has_next_page_line_items(order_node)
+            record["lineItems"]["edges"] = line_items_edges
+            self.after_line_item = None
+            yield record
+
+    @property
+    def after_line_item(self):
+        return self._after_line_item
+
+    @after_line_item.setter
+    def after_line_item(self, value):
+        self._after_line_item = value
+        # Clear the cached query when after_line_item changes
+        self._clear_cache()
+
+    def _clear_cache(self):
+        # Clear the cache of the query
+        if 'query' in self.__dict__:
+            del self.__dict__['query']
+
+    def get_url_params_line_items(self, context, next_page_token):
+        """Return a dictionary of values to be used in URL parameterization."""
+        params = {
+            "first": 1,
+            "filter": f"id:{context['order_id']}",
+        }
+        return params
+    
+    def prepare_request_payload(self, context, next_page_token):
+        """Prepare the data payload for the GraphQL API request."""
+        if context and "order_id" in context:
+            params = self.get_url_params_line_items(context, next_page_token)
+        else:
+            params = self.get_url_params(context, next_page_token)
+        query = self.query.lstrip()
+        request_data = {
+            "query": (" ".join([line.strip() for line in query.splitlines()])),
+            "variables": params,
+        }
+        self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
+        return request_data
 
 class ShopStream(shopifyGqlStream):
     """Define shop stream."""
