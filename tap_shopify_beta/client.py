@@ -49,19 +49,25 @@ class shopifyStream(GraphQLStream):
         schema = self.schema["properties"]
         catalog = {k: v for k, v in schema.items() if k in self.selected_properties}
 
-        def denest_schema(schema):
+        def denest_schema(schema, stream):
             output = ""
             for key, value in schema.items():
-                if "items" in value.keys():
+                if "items" in value:
                     value = value["items"]
-                if "properties" in value.keys():
-                    denested = denest_schema(value["properties"])
+                if key == "lineItems" and "properties" in value and "edges" in value["properties"]:
+                    # this is to make `OrdersStream.parse_response` works
+                    if stream.after_line_item:
+                        key = f"{key}(first:{stream.first_line_item} after:{self.after_line_item})"
+                    else:
+                        key = f"{key}(first:{stream.first_line_item})"
+                if "properties" in value:
+                    denested = denest_schema(value["properties"], stream)
                     output = f"{output}\n{key}\n{{{denested}\n}}"
                 else:
                     output = f"{output}\n{key}"
             return output
 
-        return denest_schema(catalog)
+        return denest_schema(catalog, self)
 
     def prepare_request_payload(
         self, context: Optional[dict], next_page_token: Optional[Any]

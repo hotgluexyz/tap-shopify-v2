@@ -170,10 +170,7 @@ class shopifyGqlStream(shopifyStream):
 
         if "errors" in res_json:
             for error in res_json["errors"]:
-                self.logger.error(f"Error message: {error['message']}")
-                self.logger.error(f"Error locations: {error['locations']}")
-                self.logger.error(f"Error path: {error['path']}")
-                self.logger.error(f"Error extensions: {error['extensions']}")
+                self.logger.error(f"Error: {error}")
             raise Exception(f"Error during parse_response. messages: {res_json['errors']}")
 
         cost = res_json["extensions"].get("cost")
