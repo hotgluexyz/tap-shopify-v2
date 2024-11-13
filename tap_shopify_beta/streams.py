@@ -203,6 +203,7 @@ class OrdersStream(DynamicStream):
     replication_key = "updatedAt"
     first_line_item = 10  # works as page_size for line_items 
     _after_line_item = None
+    last_replication_key = None
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
@@ -365,7 +366,7 @@ class OrdersStream(DynamicStream):
             "taxLines",
             th.ArrayType(
                 th.ObjectType(
-                    th.Property("channelLiable", th.StringType),
+                    th.Property("channelLiable", th.BooleanType),
                     th.Property("priceSet", MoneyBag),
                     th.Property("rate", th.NumberType),
                     th.Property("ratePercentage", th.NumberType),
@@ -430,8 +431,16 @@ class OrdersStream(DynamicStream):
                 order_node = orders[0].get('node')
                 line_items_edges.extend(order_node.get("lineItems", {}).get("edges", []))
                 has_next_page = self.has_next_page_line_items(order_node)
+            if not record.get("lineItems"):
+                record["lineItems"] = {"edges": [], "pageInfo": {"hasNextPage": None}}
             record["lineItems"]["edges"] = line_items_edges
             self.after_line_item = None
+            if record.get(self.replication_key):
+                self.last_replication_key = max(self.last_replication_key, record.get(self.replication_key)) if self.last_replication_key else record.get(self.replication_key)
+            elif self.last_replication_key:
+                record[self.replication_key] = self.last_replication_key
+            else:
+                raise Exception(f"No replication key in this record and no replication key could be set for it. id={record['id']}. record={record}")
             yield record
 
     @property
