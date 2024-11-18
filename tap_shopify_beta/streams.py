@@ -201,7 +201,7 @@ class OrdersStream(DynamicStream):
     primary_keys = ["id", "updatedAt"]
     query_name = "orders"
     replication_key = "updatedAt"
-    first_line_item = 10  # works as page_size for line_items 
+    first_line_item = 250  # works as page_size for line_items 
     _after_line_item = None
     last_replication_key = None
 
