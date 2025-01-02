@@ -149,8 +149,11 @@ class shopifyBulkStream(shopifyStream):
         operation_id_jsonpath = "$.data.bulkOperationRunQuery.bulkOperation.id"
         request_response = response.json()
         operation_id = next(
-            extract_jsonpath(operation_id_jsonpath, input=request_response)
+            extract_jsonpath(operation_id_jsonpath, input=request_response), None
         )
+
+        if not operation_id:
+            raise Exception(response.json())
 
         url = self.check_status(operation_id)
 

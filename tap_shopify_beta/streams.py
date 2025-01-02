@@ -60,7 +60,10 @@ class ProductsStream(DynamicStream):
         th.Property("hasOutOfStockVariants", th.BooleanType),
         th.Property("isGiftCard", th.BooleanType),
         th.Property("legacyResourceId", th.StringType),
-        th.Property("mediaCount", th.IntegerType),
+        th.Property("mediaCount", th.ObjectType(
+            th.Property("count", th.IntegerType),
+            th.Property("precision", th.StringType),
+        )),
         th.Property("onlineStorePreviewUrl", th.StringType),
         th.Property("onlineStoreUrl", th.StringType),
         th.Property(
