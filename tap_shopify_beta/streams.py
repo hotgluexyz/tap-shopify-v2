@@ -10,6 +10,8 @@ from tap_shopify_beta.client_gql import shopifyGqlStream
 from tap_shopify_beta.client_rest import shopifyRestStream
 from tap_shopify_beta.types.customer_visit import CustomerVisitType
 from tap_shopify_beta.types.line_item_node import LineItemNodeType
+from tap_shopify_beta.types.count import CountType
+
 
 
 MoneyBag = th.ObjectType(
@@ -60,10 +62,7 @@ class ProductsStream(DynamicStream):
         th.Property("hasOutOfStockVariants", th.BooleanType),
         th.Property("isGiftCard", th.BooleanType),
         th.Property("legacyResourceId", th.StringType),
-        th.Property("mediaCount", th.ObjectType(
-            th.Property("count", th.IntegerType),
-            th.Property("precision", th.StringType),
-        )),
+        th.Property("mediaCount", CountType()),
         th.Property("onlineStorePreviewUrl", th.StringType),
         th.Property("onlineStoreUrl", th.StringType),
         th.Property(
@@ -633,7 +632,7 @@ class InventoryItemsStream(DynamicStream):
         th.Property("harmonizedSystemCode", th.StringType),
         th.Property("inventoryHistoryUrl", th.StringType),
         th.Property("legacyResourceId", th.StringType),
-        th.Property("locationsCount", th.IntegerType),
+        th.Property("locationsCount", CountType()),
         th.Property("provinceCodeOfOrigin", th.StringType),
         th.Property("requiresShipping", th.BooleanType),
         th.Property("sku", th.StringType),
@@ -725,7 +724,7 @@ class CollectionsStream(DynamicStream):
             ),
         ),
         th.Property("legacyResourceId", th.StringType),
-        th.Property("productsCount", th.IntegerType),
+        th.Property("productsCount", CountType()),
         th.Property("sortOrder", th.StringType),
         th.Property("templateSuffix", th.StringType),
         th.Property("title", th.StringType),
@@ -1132,7 +1131,7 @@ class CustomerJourneySummaryStream(shopifyGqlStream):
                 th.Property("daysToConversion", th.IntegerType),
                 th.Property("firstVisit", CustomerVisitType()),
                 th.Property("lastVisit", CustomerVisitType()),
-                th.Property("momentsCount", th.IntegerType),
+                th.Property("momentsCount", CountType()),
                 th.Property("ready", th.BooleanType),
             ))
     ).to_dict()
