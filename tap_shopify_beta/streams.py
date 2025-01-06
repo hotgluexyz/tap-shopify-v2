@@ -915,6 +915,10 @@ class InventoryLevelGqlStream(shopifyGqlStream):
     parent_stream_type = InventoryLevelRestStream
     query_name = "inventoryLevel"
     is_list = False
+    # change needed as incoming and available fields are deprecated in inventory_level
+    additional_arguments = {
+        "quantities": '(names: ["available", "incoming"])'
+    }
 
     @property
     def single_object_params(self):
@@ -923,8 +927,12 @@ class InventoryLevelGqlStream(shopifyGqlStream):
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
-        th.Property("available", th.IntegerType),
-        th.Property("incoming", th.IntegerType),
+        th.Property("quantities", th.ArrayType(
+            th.ObjectType(
+                th.Property("name", th.StringType),
+                th.Property("quantity", th.IntegerType),
+            )
+        )),
         th.Property("item", th.ObjectType(
             th.Property("id", th.StringType),
             th.Property("sku", th.StringType),
