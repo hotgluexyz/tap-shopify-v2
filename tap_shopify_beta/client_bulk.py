@@ -10,6 +10,7 @@ from backports.cached_property import cached_property
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 
 from tap_shopify_beta.client import shopifyStream
+import re
 
 
 class InvalidOperation(requests.RequestException, ValueError):
@@ -143,12 +144,17 @@ class shopifyBulkStream(shopifyStream):
                 return status["url"]
             sleep(sleep_time)
         raise OperationFailed("Job Timeout")
+    
+    def get_line_type(self, id):
+        match = re.search(r"gid://shopify/([^/]+)/", id)
+        if match:
+            return match.group(1)
 
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
         """Parse the response and return an iterator of result rows."""
         operation_id_jsonpath = "$.data.bulkOperationRunQuery.bulkOperation.id"
         request_response = response.json()
-        operation_id = next(
+        operation_id =  next(
             extract_jsonpath(operation_id_jsonpath, input=request_response), None
         )
 
@@ -160,5 +166,26 @@ class shopifyBulkStream(shopifyStream):
         if url:
             output = requests.get(url, stream=True)
 
+            parent_line = None
             for line in output.iter_lines():
-                yield simplejson.loads(line)
+                line = simplejson.loads(line)
+                if hasattr(self, "bulk_process_fields"):
+                    if parent_line and not line.get("__parentId"):
+                        yield parent_line
+                        parent_line = None
+                    if not parent_line and not line.get("__parentId"):
+                        parent_line = line
+                    if line.get("__parentId"):
+                        line_type = self.get_line_type(line["id"])
+                        if line_type in self.bulk_process_fields:
+                            line_field_name = self.bulk_process_fields[line_type]
+                            if not parent_line.get(line_field_name):
+                                parent_line[line_field_name] = {"edges": [{"node": line}]}
+                            else:
+                                parent_line[line_field_name]["edges"].append({"node": line}) 
+                            continue
+                else:
+                    yield line
+            # yield final record
+            if parent_line:
+                yield parent_line

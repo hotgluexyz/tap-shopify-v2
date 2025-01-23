@@ -207,6 +207,10 @@ class OrdersStream(DynamicStream):
     _after_line_item = None
     last_replication_key = None
 
+    bulk_process_fields = {
+        "LineItem": "lineItems"
+    }
+
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
         th.Property(
@@ -417,6 +421,11 @@ class OrdersStream(DynamicStream):
         # iterate through lines pages
         decorated_request = self.request_decorator(self._request)
         for record in records:
+            if self.config.get("bulk", True):
+                yield record
+                continue
+            
+            # paginate through lineItems for non bulk requests
             context = {"order_id": record["id"].split("/")[-1]}
             line_items_edges = record.get("lineItems", {}).get("edges", [])
             has_next_page = self.has_next_page_line_items(record)
