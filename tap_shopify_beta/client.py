@@ -48,26 +48,26 @@ class shopifyStream(GraphQLStream):
     def gql_selected_fields(self):
         schema = self.schema["properties"]
         catalog = {k: v for k, v in schema.items() if k in self.selected_properties}
-
-        def denest_schema(schema, stream):
-            output = ""
-            for key, value in schema.items():
-                if "items" in value:
-                    value = value["items"]
-                if key == "lineItems" and "properties" in value and "edges" in value["properties"]:
-                    # this is to make `OrdersStream.parse_response` works
-                    if stream.after_line_item:
-                        key = f"{key}(first:{stream.first_line_item} after:{self.after_line_item})"
-                    else:
-                        key = f"{key}(first:{stream.first_line_item})"
-                if "properties" in value:
-                    denested = denest_schema(value["properties"], stream)
-                    output = f"{output}\n{key}\n{{{denested}\n}}"
+        
+        output = []
+        for key, value in catalog.items():
+            if "items" in value:
+                value = value["items"]
+            if key == "lineItems":
+                # Handle lineItems pagination
+                if hasattr(self, 'first_line_item'):
+                    after_param = f" after:{self.after_line_item}" if hasattr(self, 'after_line_item') and self.after_line_item else ""
+                    query = self.get_field_query(key, value["properties"], is_paginated=True, page_size=self.first_line_item)
                 else:
-                    output = f"{output}\n{key}"
-            return output
-
-        return denest_schema(catalog, self)
+                    query = self.get_field_query(key, value["properties"])
+                output.append(query)
+            elif "properties" in value:
+                query = self.get_field_query(key, value["properties"])
+                output.append(query)
+            else:
+                output.append(key)
+        
+        return "\n".join(output)
 
     def prepare_request_payload(
         self, context: Optional[dict], next_page_token: Optional[Any]
@@ -81,3 +81,33 @@ class shopifyStream(GraphQLStream):
         }
         self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
         return request_data
+
+    def get_field_query(self, field_name: str, schema: dict, is_paginated: bool = False, page_size: int = None) -> str:
+        """Generate a GraphQL query string for a given field based on its schema."""
+        output = []
+        
+        if is_paginated:
+            pagination = f"(first: {page_size})" if page_size else ""
+            output.append(f"{field_name}{pagination} {{")
+            output.append("edges {")
+            output.append("cursor")
+            output.append("node {")
+        else:
+            output.append(f"{field_name} {{")
+
+        for key, value in schema.items():
+            if "items" in value:
+                value = value["items"]
+            if "properties" in value:
+                nested_query = self.get_field_query(key, value["properties"])
+                output.append(nested_query)
+            else:
+                output.append(key)
+
+        if is_paginated:
+            output.append("}")  # Close node
+            output.append("}")  # Close edges
+            output.append("pageInfo { hasNextPage }")
+        output.append("}")
+
+        return "\n".join(output)

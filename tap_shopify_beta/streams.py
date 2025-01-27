@@ -627,15 +627,7 @@ class OrdersStream(DynamicStream):
         th.Property("unpaid", th.BooleanType),
         th.Property("updatedAt", th.DateTimeType),
         th.Property("sourceIdentifier", th.StringType),
-        th.Property("lineItems", th.ObjectType(
-            th.Property("edges",th.ArrayType(th.ObjectType(
-                th.Property("cursor", th.StringType),
-                th.Property("node", LineItemNodeType()),
-            ))),
-            th.Property("pageInfo", th.ObjectType(
-                th.Property("hasNextPage", th.BooleanType)
-            )),
-        )),
+        th.Property("lineItems", th.ArrayType(LineItemNodeType())), # 
     ).to_dict()
 
     def has_next_page_line_items(self, record):
@@ -667,9 +659,7 @@ class OrdersStream(DynamicStream):
                 order_node = orders[0].get('node')
                 line_items_edges.extend(order_node.get("lineItems", {}).get("edges", []))
                 has_next_page = self.has_next_page_line_items(order_node)
-            if not record.get("lineItems"):
-                record["lineItems"] = {"edges": [], "pageInfo": {"hasNextPage": None}}
-            record["lineItems"]["edges"] = line_items_edges
+            record["lineItems"] = [edge.get("node") for edge in line_items_edges]
             self.after_line_item = None
             if record.get(self.replication_key):
                 self.last_replication_key = max(self.last_replication_key, record.get(self.replication_key)) if self.last_replication_key else record.get(self.replication_key)
