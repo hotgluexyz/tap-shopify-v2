@@ -8,32 +8,23 @@ from singer_sdk import typing as th
 from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream
 from tap_shopify_beta.client_rest import shopifyRestStream
+from tap_shopify_beta.types.app import AppType
+from tap_shopify_beta.types.customer import CustomerType
 from tap_shopify_beta.types.customer_visit import CustomerVisitType
+from tap_shopify_beta.types.image import ImageType
 from tap_shopify_beta.types.line_item_node import LineItemNodeType
 from tap_shopify_beta.types.count import CountType
-
-
-
-MoneyBag = th.ObjectType(
-    th.Property(
-        "presentmentMoney",
-        th.ObjectType(
-            th.Property("amount", th.StringType),
-            th.Property("currencyCode", th.StringType),
-        ),
-    ),
-    th.Property(
-        "shopMoney",
-        th.ObjectType(
-            th.Property("amount", th.StringType),
-            th.Property("currencyCode", th.StringType),
-        ),
-    ),
-)
+from tap_shopify_beta.types.location import LocationType
+from tap_shopify_beta.types.metafield_definition import MetafieldDefinitionType
+from tap_shopify_beta.types.money_bag import MoneyBagType
+from tap_shopify_beta.types.money_v2 import MoneyV2Type
+from tap_shopify_beta.types.mailing_address import MailingAddressType
+from tap_shopify_beta.types.company_contact import CompanyContactType
+from tap_shopify_beta.types.tax_line import TaxLineType
 with open("config.json", "r") as jsonfile:
     data = json.load(jsonfile)
 
-stream_condition = data.get("bulk", True)
+stream_condition = data.get("bulk", False)
 class DynamicStream(shopifyBulkStream if stream_condition else shopifyGqlStream):
     pass
 
@@ -140,9 +131,7 @@ class VariantsStream(DynamicStream):
                 th.Property("fulfillmentOrdersOptIn", th.BooleanType),
                 th.Property("handle", th.StringType),
                 th.Property("inventoryManagement", th.BooleanType),
-                th.Property(
-                    "location", th.ObjectType(th.Property("id", th.StringType))
-                ),
+                th.Property("location", LocationType()),
                 th.Property("productBased", th.BooleanType),
                 th.Property("serviceName", th.StringType),
                 th.Property(
@@ -152,8 +141,7 @@ class VariantsStream(DynamicStream):
                             th.Property("code", th.StringType),
                             th.Property("label", th.StringType),
                         )
-                    ),
-                    th.Property("type", th.StringType),
+                    )
                 ),
             ),
         ),
@@ -213,60 +201,252 @@ class OrdersStream(DynamicStream):
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
-        th.Property(
-            "billingAddress",
-            th.ObjectType(
-                th.Property("id", th.StringType),
-            ),
-        ),
+        th.Property("billingAddress",MailingAddressType()),
         th.Property("billingAddressMatchesShippingAddress", th.BooleanType),
         th.Property("cancelledAt", th.DateTimeType),
         th.Property("cancelReason", th.StringType),
         th.Property("canMarkAsPaid", th.BooleanType),
         th.Property("canNotifyCustomer", th.BooleanType),
         th.Property("capturable", th.BooleanType),
-        th.Property("cartDiscountAmountSet", MoneyBag),
+        th.Property("cartDiscountAmountSet", MoneyBagType()),
         th.Property("clientIp", th.StringType),
         th.Property("closed", th.BooleanType),
         th.Property("closedAt", th.DateTimeType),
         th.Property("confirmed", th.BooleanType),
         th.Property("createdAt", th.DateTimeType),
         th.Property("currencyCode", th.StringType),
-        th.Property("currentCartDiscountAmountSet", MoneyBag),
+        th.Property("currentCartDiscountAmountSet", MoneyBagType()),
         th.Property("currentSubtotalLineItemsQuantity", th.IntegerType),
-        th.Property("currentSubtotalPriceSet", MoneyBag),
+        th.Property("currentSubtotalPriceSet", MoneyBagType()),
         th.Property(
             "currentTaxLines",
             th.ArrayType(
                 th.ObjectType(
                     th.Property("channelLiable", th.StringType),
-                    th.Property("priceSet", MoneyBag),
+                    th.Property("priceSet", MoneyBagType()),
                     th.Property("rate", th.NumberType),
                     th.Property("ratePercentage", th.NumberType),
                     th.Property("title", th.StringType),
                 )
             ),
         ),
-        th.Property("currentTotalDiscountsSet", MoneyBag),
-        th.Property("currentTotalDutiesSet", MoneyBag),
-        th.Property("currentTotalPriceSet", MoneyBag),
-        th.Property("currentTotalTaxSet", MoneyBag),
+        th.Property("currentTotalDiscountsSet", MoneyBagType()),
+        th.Property("currentTotalDutiesSet", MoneyBagType()),
+        th.Property("currentTotalPriceSet", MoneyBagType()),
+        th.Property("currentTotalTaxSet", MoneyBagType()),
         th.Property("currentTotalWeight", th.StringType),
         th.Property(
             "customer",
             th.ObjectType(
                 th.Property("id", th.StringType),
+                th.Property("addresses", th.ArrayType(MailingAddressType())),
+                th.Property("amountSpent", MoneyV2Type()),
+                th.Property("canDelete", th.BooleanType),
+                th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())),
+                th.Property("createdAt", th.DateTimeType),
+                th.Property("defaultAddress", MailingAddressType()),
+                th.Property("displayName", th.StringType),
+                th.Property("email", th.StringType),
+                th.Property("emailMarketingConsent", th.ObjectType(
+                    th.Property("consentUpdatedAt", th.DateTimeType),
+                    th.Property("marketingOptInLevel", th.StringType),
+                    th.Property("marketingState", th.StringType),
+                )),
+                th.Property("firstName", th.StringType),
+                th.Property("image", th.ObjectType(
+                    th.Property("id", th.StringType),
+                    th.Property("altText", th.StringType),
+                    th.Property("height", th.IntegerType),
+                    th.Property("width", th.IntegerType),
+                    th.Property("url", th.StringType),
+                )),
+                th.Property("lastName", th.StringType),
+                th.Property("lastOrder", th.ObjectType(
+                    th.Property("additionalFees", th.ArrayType(th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("name", th.StringType),
+                        th.Property("price", MoneyBagType()),
+                        th.Property("taxLines", th.ArrayType(TaxLineType())),
+                    ))),
+                    th.Property("alerts", th.ArrayType(th.ObjectType(
+                        th.Property("actions", th.ArrayType(th.ObjectType(
+                            th.Property("primary", th.BooleanType),
+                            th.Property("show", th.StringType),
+                            th.Property("title", th.StringType),
+                            th.Property("url", th.StringType),
+                        ))),
+                        th.Property("content", th.StringType),
+                        th.Property("dismissibleHandle", th.StringType),
+                        th.Property("severity", th.StringType),
+                        th.Property("title", th.StringType),
+                    ))),
+                    th.Property("app", th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("name", th.StringType),
+                    )),
+                    th.Property("billingAddress", MailingAddressType()),
+                    th.Property("billingAddressMatchesShippingAddress", th.BooleanType),
+                    th.Property("cancellation", th.ObjectType(
+                        th.Property("staffNote", th.StringType),
+                    )),
+                    th.Property("cancelledAt", th.DateTimeType),
+                    th.Property("canMarkAsPaid", th.BooleanType),
+                    th.Property("canNotifyCustomer", th.BooleanType),
+                    th.Property("capturable", th.BooleanType),
+                    th.Property("cartDiscountAmountSet", MoneyBagType()),
+                    th.Property("channelInformation", th.ObjectType(
+                        th.Property("app", AppType()),
+                        th.Property("channelDefinition", th.ObjectType(
+                            th.Property("id", th.StringType),
+                            th.Property("channelName", th.StringType),
+                            th.Property("handle", th.StringType), 
+                            th.Property("isMarketplace", th.BooleanType),
+                            th.Property("subChannelName", th.StringType),
+                            th.Property("svgIcon", th.StringType),
+                        )),
+                        th.Property("channelId", th.StringType),
+                        th.Property("id", th.StringType),
+                    )),
+                    th.Property("clientIp", th.StringType),
+                    th.Property("closed", th.BooleanType),
+                    th.Property("closedAt", th.DateTimeType),
+                    th.Property("confirmationNumber", th.StringType),
+                    th.Property("confirmed", th.BooleanType),
+                    th.Property("createdAt", th.DateTimeType),
+                    th.Property("currencyCode", th.StringType),
+                    th.Property("currentCartDiscountAmountSet", MoneyBagType()),
+                    th.Property("currentSubtotalLineItemsQuantity", th.IntegerType),
+                    th.Property("currentSubtotalPriceSet", MoneyBagType()),
+                    th.Property("currentTaxLines", th.ArrayType(TaxLineType())),
+                    th.Property("currentTotalAdditionalFeesSet", MoneyBagType()),
+                    th.Property("currentTotalDiscountsSet", MoneyBagType()),
+                    th.Property("currentTotalDutiesSet", MoneyBagType()),
+                    th.Property("currentTotalPriceSet", MoneyBagType()),
+                    th.Property("currentTotalTaxSet", MoneyBagType()),
+                    th.Property("currentTotalWeight", th.StringType),
+                    th.Property("customAttributes", th.ArrayType(th.ObjectType(
+                        th.Property("key", th.StringType),
+                        th.Property("value", th.StringType),
+                    ))),
+                    th.Property("customer", CustomerType()),
+                    th.Property("customerAcceptsMarketing", th.BooleanType),
+                    th.Property("customerJourneySummary", th.ObjectType(
+                        th.Property("customerOrderIndex", th.IntegerType),
+                        th.Property("daysToConversion", th.IntegerType),
+                        th.Property("firstVisit", CustomerVisitType()),
+                        th.Property("lastVisit", CustomerVisitType()),
+                        th.Property("momentsCount", CountType()),
+                        th.Property("ready", th.BooleanType),
+                    )),
+                    th.Property("customerLocale", th.StringType),
+                    th.Property("discountCode", th.StringType),
+                    th.Property("discountCodes", th.ArrayType(th.StringType)),
+                    th.Property("displayAddress", MailingAddressType()),
+                    th.Property("displayFinancialStatus", th.StringType),
+                    th.Property("displayFulfillmentStatus", th.StringType),
+                    th.Property("disputes", th.ArrayType(th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("initiatedAs", th.StringType),
+                        th.Property("status", th.StringType),
+                    ))),
+                    th.Property("edited", th.BooleanType),
+                    th.Property("email", th.StringType),
+                    th.Property("estimatedTaxes", th.BooleanType),
+                    th.Property("fulfillable", th.BooleanType),
+                    th.Property("fulfillments", th.ArrayType(th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("createdAt", th.DateTimeType),
+                        th.Property("deliveredAt", th.DateTimeType),
+                        th.Property("displayStatus", th.StringType),
+                        th.Property("estimatedDeliveryAt", th.DateTimeType),
+                        th.Property("inTransitAt", th.DateTimeType),
+                        th.Property("legacyResourceId", th.StringType),
+                        th.Property("location", LocationType()),
+                        th.Property("name", th.StringType),
+                        th.Property("order", th.ObjectType(
+                            th.Property("id", th.StringType)
+                        )),
+                        th.Property("originAddress", th.ObjectType(
+                            th.Property("address1", th.StringType),
+                            th.Property("address2", th.StringType), 
+                            th.Property("city", th.StringType),
+                            th.Property("countryCode", th.StringType),
+                            th.Property("provinceCode", th.StringType),
+                            th.Property("zip", th.StringType)
+                        )),
+                        th.Property("requiresShipping", th.BooleanType),
+                        th.Property("service", th.ObjectType(
+                            th.Property("id", th.StringType)
+                        )),
+                        th.Property("status", th.StringType),
+                        th.Property("totalQuantity", th.IntegerType),
+                        th.Property("trackingInfo", th.ArrayType(th.ObjectType(
+                            th.Property("company", th.StringType),
+                            th.Property("number", th.StringType),
+                            th.Property("url", th.StringType),
+                        ))),
+                        th.Property("updatedAt", th.DateTimeType),
+                    ))),
+                    th.Property("fullyPaid", th.BooleanType),
+                    th.Property("hasTimelineComment", th.BooleanType),
+                    th.Property("legacyResourceId", th.StringType),
+                    th.Property("merchantOfRecordApp", th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("name", th.StringType),
+                    )),
+                    th.Property("name", th.StringType),
+                    th.Property("netPaymentSet", MoneyBagType()),
+                    th.Property("note", th.StringType),
+                    th.Property("originalTotalAdditionalFeesSet", MoneyBagType()),
+                    th.Property("originalTotalDutiesSet", MoneyBagType()),
+                    th.Property("originalTotalPriceSet", MoneyBagType()),
+                    th.Property("paymentCollectionDetails", th.ObjectType(
+                        th.Property("additionalPaymentCollectionUrl", th.StringType),
+                        # th.Property("vaultedPaymentMethods", th.ArrayType( <<-- Requires read_payment_mandate access scope
+                        #     th.ObjectType(
+                        #         th.Property("id", th.StringType)
+                        #     )
+                        # )),
+                    )),
+                    th.Property("paymentGatewayNames", th.ArrayType(th.StringType)),
+                    th.Property("phone", th.StringType),
+                    th.Property("poNumber", th.StringType),
+                    th.Property("presentmentCurrencyCode", th.StringType),
+                    th.Property("processedAt", th.DateTimeType),
+                    th.Property("refundable", th.BooleanType),
+                    th.Property("requiresShipping", th.BooleanType),
+                    th.Property("restockable", th.BooleanType),
+                    th.Property("returnStatus", th.StringType),
+                    th.Property("sourceIdentifier", th.StringType),
+                    th.Property("subtotalLineItemsQuantity", th.IntegerType),
+                    th.Property("tags", th.ArrayType(th.StringType)),
+                    th.Property("taxesIncluded", th.BooleanType),
+                    th.Property("taxExempt", th.BooleanType),
+                    th.Property("test", th.BooleanType),
+                    th.Property("totalWeight", th.StringType),
+                    th.Property("unpaid", th.BooleanType),
+                )),
+                th.Property("numberOfOrders", th.StringType),
+                th.Property("note", th.StringType),
+                th.Property("verifiedEmail", th.BooleanType),
+                th.Property("validEmailAddress", th.BooleanType),
+                th.Property("tags", th.CustomType({"type": ["array", "string"]})),
+                th.Property("lifetimeDuration", th.StringType),
+                th.Property("locale", th.StringType),
+                th.Property("taxExempt", th.BooleanType),
+                th.Property("updatedAt", th.DateTimeType),
+                th.Property("smsMarketingConsent", th.ObjectType(
+                    th.Property("consentCollectedFrom", th.StringType),
+                    th.Property("consentUpdatedAt", th.DateTimeType),
+                    th.Property("marketingOptInLevel", th.StringType),
+                    th.Property("marketingState", th.StringType),
+                )),
             ),
         ),
         th.Property("customerAcceptsMarketing", th.BooleanType),
         th.Property("customerLocale", th.StringType),
         th.Property("discountCode", th.StringType),
-        th.Property(
-            "displayAddress",
-            th.ObjectType(
-                th.Property("id", th.StringType),
-            ),
-        ),
+        th.Property("displayAddress", MailingAddressType()),
         th.Property("displayFinancialStatus", th.StringType),
         th.Property("displayFulfillmentStatus", th.StringType),
         th.Property(
@@ -289,7 +469,7 @@ class OrdersStream(DynamicStream):
                     th.Property("inTransitAt", th.StringType),
                     th.Property("legacyResourceId", th.StringType),
                     th.Property(
-                        "location", th.ObjectType(th.Property("id", th.StringType))
+                        "location", LocationType()
                     ),
                     th.Property("name", th.StringType),
                     th.Property("requiresShipping", th.BooleanType),
@@ -315,16 +495,16 @@ class OrdersStream(DynamicStream):
         th.Property("hasTimelineComment", th.BooleanType),
         th.Property("merchantEditable", th.BooleanType),
         th.Property("name", th.StringType),
-        th.Property("netPaymentSet", MoneyBag),
+        th.Property("netPaymentSet", MoneyBagType()),
         th.Property("note", th.StringType),
-        th.Property("originalTotalDutiesSet", MoneyBag),
-        th.Property("originalTotalPriceSet", MoneyBag),
+        th.Property("originalTotalDutiesSet", MoneyBagType()),
+        th.Property("originalTotalPriceSet", MoneyBagType()),
         th.Property("paymentGatewayNames", th.ArrayType(th.StringType)),
         th.Property("phone", th.StringType),
         th.Property("presentmentCurrencyCode", th.StringType),
         th.Property("processedAt", th.DateTimeType),
         th.Property("refundable", th.BooleanType),
-        th.Property("refundDiscrepancySet", MoneyBag),
+        th.Property("refundDiscrepancySet", MoneyBagType()),
         th.Property(
             "refunds",
             th.ArrayType(th.ObjectType(
@@ -333,12 +513,12 @@ class OrdersStream(DynamicStream):
                 th.Property(
                     "duties",
                     th.ArrayType(th.ObjectType(
-                        th.Property("amountSet", MoneyBag),
+                        th.Property("amountSet", MoneyBagType()),
                     )),
                 ),
                 th.Property("legacyResourceId", th.StringType),
                 th.Property("note", th.StringType),
-                th.Property("totalRefundedSet", MoneyBag),
+                th.Property("totalRefundedSet", MoneyBagType()),
                 th.Property("updatedAt", th.DateTimeType),
             ),
         )),
@@ -356,7 +536,7 @@ class OrdersStream(DynamicStream):
                 )
             ),
         ),
-        th.Property("shippingAddress", th.ObjectType(th.Property("id", th.StringType))),
+        th.Property("shippingAddress", MailingAddressType()),
         th.Property(
             "shippingLine",
             th.ObjectType(
@@ -366,36 +546,81 @@ class OrdersStream(DynamicStream):
             ),
         ),
         th.Property("subtotalLineItemsQuantity", th.IntegerType),
-        th.Property("subtotalPriceSet", MoneyBag),
+        th.Property("subtotalPriceSet", MoneyBagType()),
         th.Property("taxesIncluded", th.BooleanType),
         th.Property(
             "taxLines",
             th.ArrayType(
                 th.ObjectType(
                     th.Property("channelLiable", th.BooleanType),
-                    th.Property("priceSet", MoneyBag),
+                    th.Property("priceSet", MoneyBagType()),
                     th.Property("rate", th.NumberType),
                     th.Property("ratePercentage", th.NumberType),
                     th.Property("title", th.StringType),
                 )
             ),
         ),
-        th.Property("totalCapturableSet", MoneyBag),
-        th.Property("totalDiscountsSet", MoneyBag),
-        th.Property("totalOutstandingSet", MoneyBag),
-        th.Property("totalPriceSet", MoneyBag),
-        th.Property("totalReceivedSet", MoneyBag),
-        th.Property("totalRefundedSet", MoneyBag),
-        th.Property("totalRefundedShippingSet", MoneyBag),
-        th.Property("totalShippingPriceSet", MoneyBag),
-        th.Property("totalTaxSet", MoneyBag),
-        th.Property("totalTipReceivedSet", MoneyBag),
+        th.Property("totalCapturableSet", MoneyBagType()),
+        th.Property("totalDiscountsSet", MoneyBagType()),
+        th.Property("totalOutstandingSet", MoneyBagType()),
+        th.Property("totalPriceSet", MoneyBagType()),
+        th.Property("totalReceivedSet", MoneyBagType()),
+        th.Property("totalRefundedSet", MoneyBagType()),
+        th.Property("totalRefundedShippingSet", MoneyBagType()),
+        th.Property("totalShippingPriceSet", MoneyBagType()),
+        th.Property("totalTaxSet", MoneyBagType()),
+        th.Property("totalTipReceivedSet", MoneyBagType()),
         th.Property("totalWeight", th.StringType),
         th.Property(
             "transactions",
             th.ArrayType(
                 th.ObjectType(
                     th.Property("id", th.StringType),
+                    th.Property("accountNumber", th.StringType),
+                    th.Property("amountSet", MoneyBagType()),
+                    th.Property("authorizationCode", th.StringType),
+                    th.Property("authorizationExpiresAt", th.DateTimeType),
+                    th.Property("createdAt", th.DateTimeType),
+                    th.Property("errorCode", th.StringType),
+                    th.Property(
+                        "fees",
+                        th.ArrayType(
+                            th.ObjectType(
+                                th.Property("amount", MoneyV2Type()),
+                                th.Property("flatFee", MoneyV2Type()),
+                                th.Property("flatFeeName", th.StringType),
+                                th.Property("id", th.StringType),
+                                th.Property("rate", th.NumberType),
+                                th.Property("rateName", th.StringType),
+                                th.Property("taxAmount", MoneyV2Type()),
+                                th.Property("type", th.StringType),
+                            )
+                        ),
+                    ),
+                    th.Property("formattedGateway", th.StringType),
+                    th.Property("gateway", th.StringType),
+                    th.Property("kind", th.StringType),
+                    th.Property("manuallyCapturable", th.BooleanType),
+                    th.Property("maximumRefundableV2", MoneyV2Type()),
+                    th.Property("multiCapturable", th.BooleanType),
+                    th.Property("order", th.ObjectType(
+                        th.Property("id", th.StringType)
+                    )),
+                    th.Property("parentTransaction", th.ObjectType(
+                        th.Property("id", th.StringType)
+                    )),
+                    th.Property("paymentIcon", ImageType()),
+                    th.Property("paymentId", th.StringType),
+                    th.Property("processedAt", th.DateTimeType),
+                    th.Property("receiptJson", th.StringType),
+                    th.Property("settlementCurrency", th.StringType),
+                    th.Property("settlementCurrencyRate", th.NumberType),
+                    th.Property("status", th.StringType),
+                    th.Property("test", th.BooleanType),
+                    th.Property("totalUnsettledSet", MoneyBagType()),
+                    # th.Property("user", th.ObjectType( ->> Needs read_users access scope
+                    #     th.Property("id", th.StringType)
+                    # )),
                 )
             ),
         ),
@@ -421,7 +646,7 @@ class OrdersStream(DynamicStream):
         # iterate through lines pages
         decorated_request = self.request_decorator(self._request)
         for record in records:
-            if self.config.get("bulk", True):
+            if self.config.get("bulk", False):
                 yield record
                 continue
             
@@ -561,12 +786,7 @@ class ShopStream(shopifyGqlStream):
                     th.Property("fulfillmentOrdersOptIn", th.BooleanType),
                     th.Property("handle", th.StringType),
                     th.Property("inventoryManagement", th.BooleanType),
-                    th.Property(
-                        "location",
-                        th.ObjectType(
-                            th.Property("id", th.StringType),
-                        ),
-                    ),
+                    th.Property("location", LocationType()),
                     th.Property("productBased", th.BooleanType),
                     th.Property("serviceName", th.StringType),
                     th.Property("type", th.StringType),
@@ -671,11 +891,6 @@ class InventoryItemsStream(DynamicStream):
                 th.Property("createdAt", th.DateTimeType),
                 th.Property("defaultCursor", th.StringType),
                 th.Property("displayName", th.StringType),
-                # th.Property('fulfilmentServiceEditable',th.ObjectType(
-                #         th.Property('locked',th.BooleanType),
-                #         th.Property('reason',th.StringType),
-                #     )
-                # ),
                 th.Property("inventoryPolicy", th.StringType),
                 th.Property(
                     "image",
@@ -688,10 +903,6 @@ class InventoryItemsStream(DynamicStream):
                 th.Property("legacyResourceId", th.StringType),
                 th.Property("position", th.IntegerType),
                 th.Property("price", th.StringType),
-                # th.Property('price',th.ObjectType(
-                #         th.Property('id',th.StringType)
-                #     )
-                # ),
                 th.Property(
                     "selectedOptions",
                     th.ArrayType(
@@ -729,7 +940,8 @@ class CollectionsStream(DynamicStream):
         th.Property(
             "image",
             th.ObjectType(
-                th.Property("id", th.StringType), th.Property("altText", th.StringType)
+                th.Property("id", th.StringType), 
+                th.Property("altText", th.StringType)
             ),
         ),
         th.Property("legacyResourceId", th.StringType),
@@ -794,31 +1006,7 @@ class CustomersStream(DynamicStream):
                 th.Property("longitude", th.NumberType),
             ),
         ),
-        th.Property(
-            "addresses",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("address1", th.StringType),
-                    th.Property("address2", th.StringType),
-                    th.Property("city", th.StringType),
-                    th.Property("company", th.StringType),
-                    th.Property("country", th.StringType),
-                    th.Property("countryCodeV2", th.StringType),
-                    th.Property("firstName", th.StringType),
-                    th.Property("formatted", th.CustomType({"type": ["array", "string"]})),
-                    th.Property("formattedArea", th.StringType),
-                    th.Property("id", th.StringType),
-                    th.Property("lastName", th.StringType),
-                    th.Property("name", th.StringType),
-                    th.Property("phone", th.StringType),
-                    th.Property("province", th.StringType),
-                    th.Property("provinceCode", th.StringType),
-                    th.Property("zip", th.StringType),
-                    th.Property("latitude", th.NumberType),
-                    th.Property("longitude", th.NumberType),
-                )
-            ),
-        ),
+        th.Property("addresses", th.ArrayType(MailingAddressType())),
         th.Property(
             "image",
             th.ObjectType(

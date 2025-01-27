@@ -12,7 +12,7 @@ class GenericMetafieldType(th.ObjectType):
             th.Property("id", th.StringType),
             th.Property("jsonValue", th.StringType), # TODO: is this type right?
             th.Property("key", th.StringType),
-            th.Property("legacyResourceid", th.IntegerType),
+            th.Property("legacyResourceid", th.StringType),
             th.Property("namespace", th.StringType),
             th.Property("type", th.StringType),
             th.Property("updatedAt", th.DateTimeType),
