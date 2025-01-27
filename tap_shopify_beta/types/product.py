@@ -31,7 +31,7 @@ class ProductType(th.ObjectType):
             th.Property("id", th.StringType),
             # th.Property("inCollection", th.BooleanType),
             th.Property("isGiftCard", th.BooleanType),
-            th.Property("legacyResourceId", th.IntegerType),
+            th.Property("legacyResourceId", th.StringType),
             # th.Property("mediaCount", CountType()),
             th.Property("onlineStorePreviewUrl", th.StringType),
             th.Property("onlineStoreUrl", th.StringType),

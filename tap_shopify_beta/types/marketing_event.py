@@ -10,7 +10,7 @@ class MarketingEventType(th.ObjectType):
             th.Property("description", th.StringType),
             th.Property("endedAt", th.DateTimeType),
             th.Property("id", th.StringType),
-            # th.Property("legacyResourceid", th.IntegerType),
+            # th.Property("legacyResourceid", th.StringType),
             th.Property("manageUrl", th.StringType),
             th.Property("marketingChannelType", th.StringType),
             th.Property("previewUrl", th.StringType),

@@ -15,7 +15,6 @@ class CustomerType(th.ObjectType):
             th.Property("canDelete", th.BooleanType),
             th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())),
             th.Property("createdAt", th.DateTimeType),
-            # th.Property("dataSaleOptOut", th.BooleanType),
             th.Property("displayName", th.StringType),
             th.Property("email", th.StringType),
             th.Property("emailMarketingConsent", th.ObjectType(
@@ -27,10 +26,10 @@ class CustomerType(th.ObjectType):
             th.Property("id", th.StringType),
             th.Property("image", ImageType()),
             th.Property("lastName", th.StringType),
-            th.Property("legacyResourceId", th.IntegerType),
+            th.Property("legacyResourceId", th.StringType),
             th.Property("lifetimeDuration", th.StringType),
             th.Property("locale", th.StringType),
-            th.Property("market", MarketType()),
+            # th.Property("market", MarketType()), <<- Requires read_markets access scope
             th.Property("mergeable", th.ObjectType(
                 th.Property("errorFields", th.ArrayType(th.StringType)),
                 th.Property("isMergeable", th.BooleanType),
@@ -38,16 +37,16 @@ class CustomerType(th.ObjectType):
                     th.Property("customerMergeErrors", th.ArrayType(th.ObjectType(
                         th.Property("errorFields", th.ArrayType(th.StringType)),
                         th.Property("message", th.StringType),
-                    )),
+                    ))),
                     th.Property("jobId", th.StringType),
                     th.Property("resultingCustomerId", th.StringType),
                     th.Property("status", th.StringType),
-                ))),
+                )),
                 th.Property("reason", th.StringType),
             )),
             th.Property("multipassIdentifier", th.StringType),
             th.Property("note", th.StringType),
-            th.Property("numberOfOrders", th.IntegerType),
+            th.Property("numberOfOrders", th.StringType),
             th.Property("phone", th.StringType),
             th.Property("productSubscriberStatus", th.StringType),
             th.Property("smsMarketingConsent", th.ObjectType(
@@ -66,4 +65,7 @@ class CustomerType(th.ObjectType):
             th.Property("unsubscribeUrl", th.StringType),
             th.Property("updatedAt", th.DateTimeType),
             th.Property("validEmailAddress", th.BooleanType),
+            th.Property("lastOrder", th.ObjectType(
+                th.Property("displayAddress", MailingAddressType()),
+            )),
         )
