@@ -1,6 +1,6 @@
 """GraphQL client handling, including shopify-betaStream base class."""
 
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from time import sleep
 from typing import Any, Dict, Iterable, List, Optional, Union, cast
 
@@ -24,7 +24,10 @@ class OperationFailed(requests.RequestException, ValueError):
 class shopifyBulkStream(shopifyStream):
     """shopify stream class."""
 
-    @cached_property
+    start_date = None
+    end_date = None
+
+    @property
     def query(self) -> str:
         """Set or return the GraphQL query string."""
         if self.name == "shop":
@@ -78,10 +81,12 @@ class shopifyBulkStream(shopifyStream):
     def filters(self):
         """Return a dictionary of values to be used in URL parameterization."""
         if self.replication_key:
-            start_date = self.get_starting_timestamp({})
-            if start_date:
-                date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
-                return f'(query: "updated_at:>{date}")'
+            self.start_date = self.start_date or self.get_starting_timestamp({})
+            if self.start_date:
+                date = self.start_date.strftime("%Y-%m-%dT%H:%M:%S")
+                self.end_date = self.start_date + timedelta(days=1)
+                query = f'(query: "updated_at:>{date} AND updated_at:<={self.end_date.strftime("%Y-%m-%dT%H:%M:%S")}")'
+            return query
         return ""
 
     def get_operation_status(self):
@@ -189,3 +194,9 @@ class shopifyBulkStream(shopifyStream):
             # yield final record
             if parent_line:
                 yield parent_line
+
+    def get_next_page_token(self, response, previous_token) -> Any:
+        if self.end_date <= datetime.now(timezone.utc):
+            self.start_date = self.end_date
+            return self.start_date
+
