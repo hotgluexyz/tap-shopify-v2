@@ -171,10 +171,7 @@ class shopifyGqlStream(shopifyStream):
             json_path = f"$.data.{self.query_name}"
         res_json = response.json()
 
-        if "errors" in res_json:
-            for error in res_json["errors"]:
-                self.logger.error(f"Error: {error}")
-            raise Exception(f"Error during parse_response. messages: {res_json['errors']}")
+        errors = res_json.get("errors")
 
         cost = res_json["extensions"].get("cost")
         if not self.query_cost:
@@ -184,7 +181,12 @@ class shopifyGqlStream(shopifyStream):
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
 
         filtered_response = self.filter_response(res_json)
-        yield from extract_jsonpath(json_path, input=filtered_response)
+        records = list(extract_jsonpath(json_path, input=filtered_response))
+        if errors and not records:
+            raise Exception(errors)
+        if errors:
+            self.logger.warn(f"Error while fetching {self.name}, response: {errors}")
+        yield from records
 
     def filter_response(self, response_json: dict) -> dict:
         return response_json
