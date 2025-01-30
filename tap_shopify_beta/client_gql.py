@@ -185,7 +185,7 @@ class shopifyGqlStream(shopifyStream):
         if errors and not records:
             raise Exception(errors)
         if errors:
-            self.logger.warn(f"Error while fetching {self.name}, response: {errors}")
+            self.logger.info(f"Issue found while fetching {self.name}, response: {errors}")
         yield from records
 
     def filter_response(self, response_json: dict) -> dict:
