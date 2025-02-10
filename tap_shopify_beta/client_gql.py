@@ -14,6 +14,12 @@ from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import pytz
 import copy
+from singer_sdk.exceptions import RetriableAPIError
+import backoff
+
+class GraphQLInternalServerError(RetriableAPIError):
+    """Error raised when Shopify returns an internal server error in the GraphQL response."""
+    pass
 
 class shopifyGqlStream(shopifyStream):
     """shopify stream class."""
@@ -190,7 +196,7 @@ class shopifyGqlStream(shopifyStream):
 
     def filter_response(self, response_json: dict) -> dict:
         return response_json
-    
+
     def prepare_request(
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> requests.PreparedRequest:
@@ -219,10 +225,34 @@ class shopifyGqlStream(shopifyStream):
         )
         return request
 
+    def validate_response(self, response: requests.Response) -> None:
+        """Validate GraphQL response. Will raise RetriableAPIError if internal server error is found."""
+        super().validate_response(response)
+
+        try:
+            resp_json = response.json()
+            errors = resp_json.get("errors", [])
+            for error in errors:
+                extensions = error.get("extensions", {})
+                if extensions.get("code") == "INTERNAL_SERVER_ERROR":
+                    raise GraphQLInternalServerError(
+                        f"Shopify GraphQL Internal Server Error: {error.get('message')}",
+                        response
+                    )
+        except ValueError:
+            # If response is not JSON, let the parent validator handle it
+            pass
+
     def request_records(self, context: Optional[dict]) -> Iterable[dict]:
         next_page_token: Any = None
         finished = False
-        decorated_request = self.request_decorator(self._request)
+        # Add GraphQLInternalServerError to the decorator
+        decorated_request = backoff.on_exception(
+            self.backoff_wait_generator,
+            (RetriableAPIError, requests.exceptions.ReadTimeout, GraphQLInternalServerError),
+            max_tries=self.backoff_max_tries,
+            on_backoff=self.backoff_handler,
+        )(self._request)
 
         while not finished:
             prepared_request = self.prepare_request(

@@ -1,6 +1,7 @@
 """Stream type classes for tap-shopify-beta."""
 import abc
 import json
+import sys
 from typing import Optional
 
 from singer_sdk import typing as th
@@ -21,7 +22,15 @@ from tap_shopify_beta.types.money_v2 import MoneyV2Type
 from tap_shopify_beta.types.mailing_address import MailingAddressType
 from tap_shopify_beta.types.company_contact import CompanyContactType
 from tap_shopify_beta.types.tax_line import TaxLineType
-with open("config.json", "r") as jsonfile:
+
+config_path = "config.json"
+for i, arg in enumerate(sys.argv):
+    if arg == "--config":
+        if i + 1 < len(sys.argv):
+            config_path = sys.argv[i + 1]
+        break
+
+with open(config_path, "r") as jsonfile:
     data = json.load(jsonfile)
 
 stream_condition = data.get("bulk", False)
@@ -191,7 +200,7 @@ class OrdersStream(DynamicStream):
     primary_keys = ["id", "updatedAt"]
     query_name = "orders"
     replication_key = "updatedAt"
-    first_line_item = 250  # works as page_size for line_items 
+    first_line_item = 250  # works as page_size for line_items
     _after_line_item = None
     last_replication_key = None
 
@@ -299,7 +308,7 @@ class OrdersStream(DynamicStream):
                         th.Property("channelDefinition", th.ObjectType(
                             th.Property("id", th.StringType),
                             th.Property("channelName", th.StringType),
-                            th.Property("handle", th.StringType), 
+                            th.Property("handle", th.StringType),
                             th.Property("isMarketplace", th.BooleanType),
                             th.Property("subChannelName", th.StringType),
                             th.Property("svgIcon", th.StringType),
@@ -368,7 +377,7 @@ class OrdersStream(DynamicStream):
                         )),
                         th.Property("originAddress", th.ObjectType(
                             th.Property("address1", th.StringType),
-                            th.Property("address2", th.StringType), 
+                            th.Property("address2", th.StringType),
                             th.Property("city", th.StringType),
                             th.Property("countryCode", th.StringType),
                             th.Property("provinceCode", th.StringType),
@@ -627,12 +636,12 @@ class OrdersStream(DynamicStream):
         th.Property("unpaid", th.BooleanType),
         th.Property("updatedAt", th.DateTimeType),
         th.Property("sourceIdentifier", th.StringType),
-        th.Property("lineItems", th.ArrayType(LineItemNodeType())), # 
+        th.Property("lineItems", th.ArrayType(LineItemNodeType())), #
     ).to_dict()
 
     def has_next_page_line_items(self, record):
         return record.get("lineItems", {}).get("pageInfo", {}).get("hasNextPage", False)
-        
+
     def parse_response(self, response):
         records = super().parse_response(response)
         # iterate through lines pages
@@ -641,7 +650,7 @@ class OrdersStream(DynamicStream):
             if self.config.get("bulk", False):
                 yield record
                 continue
-            
+
             # paginate through lineItems for non bulk requests
             context = {"order_id": record["id"].split("/")[-1]}
             line_items_edges = record.get("lineItems", {}).get("edges", [])
@@ -691,7 +700,7 @@ class OrdersStream(DynamicStream):
             "filter": f"id:{context['order_id']}",
         }
         return params
-    
+
     def prepare_request_payload(self, context, next_page_token):
         """Prepare the data payload for the GraphQL API request."""
         if context and "order_id" in context:
@@ -930,7 +939,7 @@ class CollectionsStream(DynamicStream):
         th.Property(
             "image",
             th.ObjectType(
-                th.Property("id", th.StringType), 
+                th.Property("id", th.StringType),
                 th.Property("altText", th.StringType)
             ),
         ),
@@ -1176,10 +1185,10 @@ class PriceRulesStream(shopifyRestStream):
             th.Property("prerequisite_quantity", th.StringType),
             th.Property("entitled_quantity", th.IntegerType),
         )),
-        th.Property("prerequisite_to_entitlement_purchase", th.ObjectType(					
+        th.Property("prerequisite_to_entitlement_purchase", th.ObjectType(
             th.Property("prerequisite_amount", th.StringType),
         )),
-        th.Property("prerequisite_subtotal_range", th.ObjectType(					
+        th.Property("prerequisite_subtotal_range", th.ObjectType(
             th.Property("greater_than_or_equal_to", th.StringType),
         )),
         th.Property("title", th.StringType),
@@ -1247,7 +1256,7 @@ class MarketingEventsStream(shopifyRestStream):
         th.Property("marketed_resources", th.ArrayType(
             th.ObjectType(
                 th.Property("type", th.StringType),
-                th.Property("id", th.IntegerType), 
+                th.Property("id", th.IntegerType),
             )
         )),
     ).to_dict()
@@ -1279,12 +1288,12 @@ class CustomerVisitStream(shopifyGqlStream, metaclass=abc.ABCMeta):
                 th.Property(self.visit_type, CustomerVisitType())
             ))
         ).to_dict()
-    
+
     def filter_response(self, response_json: dict) -> dict:
         return {
             'edges': [
                 e
-                for e in response_json['data']['orders']['edges'] 
+                for e in response_json['data']['orders']['edges']
                 if e.get('node',{}).get('customerJourneySummary',{}).get(self.visit_type)
             ]
         }
@@ -1293,7 +1302,7 @@ class CustomerFirstVisitStream(CustomerVisitStream):
     """Define Customer Visit stream"""
 
     name = "customer_first_visit"
-    
+
     @property
     def visit_type(self) -> str:
         return "firstVisit"
@@ -1302,7 +1311,7 @@ class CustomerLastVisitsStream(CustomerVisitStream):
     """Define Customer Visit stream"""
 
     name = "customer_last_visit"
-    
+
     @property
     def visit_type(self) -> str:
         return "lastVisit"
