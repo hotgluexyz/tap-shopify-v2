@@ -3,6 +3,7 @@
 import json
 from datetime import datetime
 from typing import Optional
+import sys
 
 import requests
 from singer_sdk.authenticators import APIAuthenticatorBase
@@ -88,8 +89,14 @@ class ShopifyAuthenticator(APIAuthenticatorBase):
             )
         token_json = token_response.json()
         access_token = token_json["access_token"]
-        with open("config.json") as file:
+        config_path = "config.json"
+        for i, arg in enumerate(sys.argv):
+            if arg == "--config":
+                if i + 1 < len(sys.argv):
+                    config_path = sys.argv[i + 1]
+                break
+        with open(config_path) as file:
             config = json.load(file)
         config["access_token"] = access_token
-        with open("config.json", "w") as file:
+        with open(config_path, "w") as file:
             json.dump(config, file, indent=2)
