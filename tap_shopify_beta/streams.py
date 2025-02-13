@@ -258,7 +258,7 @@ class OrdersStream(DynamicStream):
                 th.Property("addresses", th.ArrayType(MailingAddressType())),
                 th.Property("amountSpent", MoneyV2Type()),
                 th.Property("canDelete", th.BooleanType),
-                th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())),
+                # th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())),
                 th.Property("createdAt", th.DateTimeType),
                 th.Property("defaultAddress", MailingAddressType()),
                 th.Property("displayName", th.StringType),
@@ -267,7 +267,7 @@ class OrdersStream(DynamicStream):
                 th.Property("firstName", th.StringType),
                 th.Property("image", ImageType()),
                 th.Property("lastName", th.StringType),
-                th.Property("lastOrder", LastOrderType()),
+                # th.Property("lastOrder", LastOrderType()),
                 th.Property("numberOfOrders", th.StringType),
                 th.Property("note", th.StringType),
                 th.Property("verifiedEmail", th.BooleanType),
@@ -790,7 +790,7 @@ class CustomersStream(DynamicStream):
         th.Property("phone", th.StringType),
         th.Property("numberOfOrders", th.StringType),
         th.Property("amountSpent", MoneyV2Type()),
-        th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())), # -> For some clients, we see "NO ACCESS" error,added complete error above.
+        # th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())), # -> For some clients, we see "NO ACCESS" error,added complete error above.
         th.Property("multipassIdentifier", th.StringType),
         th.Property("note", th.StringType),
         th.Property("verifiedEmail", th.BooleanType),

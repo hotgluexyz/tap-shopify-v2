@@ -13,7 +13,7 @@ class CustomerType(th.ObjectType):
             th.Property("addresses", th.ArrayType(MailingAddressType())),
             th.Property("amountSpent", MoneyV2Type()),
             th.Property("canDelete", th.BooleanType),
-            th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())),
+            # th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())),
             th.Property("createdAt", th.DateTimeType),
             th.Property("displayName", th.StringType),
             th.Property("email", th.StringType),
@@ -65,7 +65,7 @@ class CustomerType(th.ObjectType):
             th.Property("unsubscribeUrl", th.StringType),
             th.Property("updatedAt", th.DateTimeType),
             th.Property("validEmailAddress", th.BooleanType),
-            th.Property("lastOrder", th.ObjectType(
-                th.Property("displayAddress", MailingAddressType()),
-            )),
+            # th.Property("lastOrder", th.ObjectType(
+            #     th.Property("displayAddress", MailingAddressType()),
+            # )),
         )
