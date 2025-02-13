@@ -11,16 +11,23 @@ from tap_shopify_beta.client_gql import shopifyGqlStream
 from tap_shopify_beta.client_rest import shopifyRestStream
 from tap_shopify_beta.types.app import AppType
 from tap_shopify_beta.types.customer import CustomerType
+from tap_shopify_beta.types.customer_email_marketing_consent_state import CustomerEmailMarketingConsentStateType
+from tap_shopify_beta.types.customer_journey_summary import CustomerJourneySummaryType
 from tap_shopify_beta.types.customer_visit import CustomerVisitType
+from tap_shopify_beta.types.dispute import DisputeType
+from tap_shopify_beta.types.fulfillment import FulfillmentType
 from tap_shopify_beta.types.image import ImageType
+from tap_shopify_beta.types.last_order import LastOrderType
 from tap_shopify_beta.types.line_item_node import LineItemNodeType
 from tap_shopify_beta.types.count import CountType
 from tap_shopify_beta.types.location import LocationType
+from tap_shopify_beta.types.mergeable import MergeableType
 from tap_shopify_beta.types.metafield_definition import MetafieldDefinitionType
 from tap_shopify_beta.types.money_bag import MoneyBagType
 from tap_shopify_beta.types.money_v2 import MoneyV2Type
 from tap_shopify_beta.types.mailing_address import MailingAddressType
 from tap_shopify_beta.types.company_contact import CompanyContactType
+from tap_shopify_beta.types.sms_marketing_consent import SmsMarketingConsentType
 from tap_shopify_beta.types.tax_line import TaxLineType
 
 config_path = "config.json"
@@ -256,185 +263,11 @@ class OrdersStream(DynamicStream):
                 th.Property("defaultAddress", MailingAddressType()),
                 th.Property("displayName", th.StringType),
                 th.Property("email", th.StringType),
-                th.Property("emailMarketingConsent", th.ObjectType(
-                    th.Property("consentUpdatedAt", th.DateTimeType),
-                    th.Property("marketingOptInLevel", th.StringType),
-                    th.Property("marketingState", th.StringType),
-                )),
+                th.Property("emailMarketingConsent", CustomerEmailMarketingConsentStateType()),
                 th.Property("firstName", th.StringType),
-                th.Property("image", th.ObjectType(
-                    th.Property("id", th.StringType),
-                    th.Property("altText", th.StringType),
-                    th.Property("height", th.IntegerType),
-                    th.Property("width", th.IntegerType),
-                    th.Property("url", th.StringType),
-                )),
+                th.Property("image", ImageType()),
                 th.Property("lastName", th.StringType),
-                th.Property("lastOrder", th.ObjectType(
-                    th.Property("additionalFees", th.ArrayType(th.ObjectType(
-                        th.Property("id", th.StringType),
-                        th.Property("name", th.StringType),
-                        th.Property("price", MoneyBagType()),
-                        th.Property("taxLines", th.ArrayType(TaxLineType())),
-                    ))),
-                    th.Property("alerts", th.ArrayType(th.ObjectType(
-                        th.Property("actions", th.ArrayType(th.ObjectType(
-                            th.Property("primary", th.BooleanType),
-                            th.Property("show", th.StringType),
-                            th.Property("title", th.StringType),
-                            th.Property("url", th.StringType),
-                        ))),
-                        th.Property("content", th.StringType),
-                        th.Property("dismissibleHandle", th.StringType),
-                        th.Property("severity", th.StringType),
-                        th.Property("title", th.StringType),
-                    ))),
-                    th.Property("app", th.ObjectType(
-                        th.Property("id", th.StringType),
-                        th.Property("name", th.StringType),
-                    )),
-                    th.Property("billingAddress", MailingAddressType()),
-                    th.Property("billingAddressMatchesShippingAddress", th.BooleanType),
-                    th.Property("cancellation", th.ObjectType(
-                        th.Property("staffNote", th.StringType),
-                    )),
-                    th.Property("cancelledAt", th.DateTimeType),
-                    th.Property("canMarkAsPaid", th.BooleanType),
-                    th.Property("canNotifyCustomer", th.BooleanType),
-                    th.Property("capturable", th.BooleanType),
-                    th.Property("cartDiscountAmountSet", MoneyBagType()),
-                    th.Property("channelInformation", th.ObjectType(
-                        th.Property("app", AppType()),
-                        th.Property("channelDefinition", th.ObjectType(
-                            th.Property("id", th.StringType),
-                            th.Property("channelName", th.StringType),
-                            th.Property("handle", th.StringType),
-                            th.Property("isMarketplace", th.BooleanType),
-                            th.Property("subChannelName", th.StringType),
-                            th.Property("svgIcon", th.StringType),
-                        )),
-                        th.Property("channelId", th.StringType),
-                        th.Property("id", th.StringType),
-                    )),
-                    th.Property("clientIp", th.StringType),
-                    th.Property("closed", th.BooleanType),
-                    th.Property("closedAt", th.DateTimeType),
-                    th.Property("confirmationNumber", th.StringType),
-                    th.Property("confirmed", th.BooleanType),
-                    th.Property("createdAt", th.DateTimeType),
-                    th.Property("currencyCode", th.StringType),
-                    th.Property("currentCartDiscountAmountSet", MoneyBagType()),
-                    th.Property("currentSubtotalLineItemsQuantity", th.IntegerType),
-                    th.Property("currentSubtotalPriceSet", MoneyBagType()),
-                    th.Property("currentTaxLines", th.ArrayType(TaxLineType())),
-                    th.Property("currentTotalAdditionalFeesSet", MoneyBagType()),
-                    th.Property("currentTotalDiscountsSet", MoneyBagType()),
-                    th.Property("currentTotalDutiesSet", MoneyBagType()),
-                    th.Property("currentTotalPriceSet", MoneyBagType()),
-                    th.Property("currentTotalTaxSet", MoneyBagType()),
-                    th.Property("currentTotalWeight", th.StringType),
-                    th.Property("customAttributes", th.ArrayType(th.ObjectType(
-                        th.Property("key", th.StringType),
-                        th.Property("value", th.StringType),
-                    ))),
-                    th.Property("customer", CustomerType()),
-                    th.Property("customerAcceptsMarketing", th.BooleanType),
-                    th.Property("customerJourneySummary", th.ObjectType(
-                        th.Property("customerOrderIndex", th.IntegerType),
-                        th.Property("daysToConversion", th.IntegerType),
-                        th.Property("firstVisit", CustomerVisitType()),
-                        th.Property("lastVisit", CustomerVisitType()),
-                        th.Property("momentsCount", CountType()),
-                        th.Property("ready", th.BooleanType),
-                    )),
-                    th.Property("customerLocale", th.StringType),
-                    th.Property("discountCode", th.StringType),
-                    th.Property("discountCodes", th.ArrayType(th.StringType)),
-                    th.Property("displayAddress", MailingAddressType()),
-                    th.Property("displayFinancialStatus", th.StringType),
-                    th.Property("displayFulfillmentStatus", th.StringType),
-                    th.Property("disputes", th.ArrayType(th.ObjectType(
-                        th.Property("id", th.StringType),
-                        th.Property("initiatedAs", th.StringType),
-                        th.Property("status", th.StringType),
-                    ))),
-                    th.Property("edited", th.BooleanType),
-                    th.Property("email", th.StringType),
-                    th.Property("estimatedTaxes", th.BooleanType),
-                    th.Property("fulfillable", th.BooleanType),
-                    th.Property("fulfillments", th.ArrayType(th.ObjectType(
-                        th.Property("id", th.StringType),
-                        th.Property("createdAt", th.DateTimeType),
-                        th.Property("deliveredAt", th.DateTimeType),
-                        th.Property("displayStatus", th.StringType),
-                        th.Property("estimatedDeliveryAt", th.DateTimeType),
-                        th.Property("inTransitAt", th.DateTimeType),
-                        th.Property("legacyResourceId", th.StringType),
-                        th.Property("location", LocationType()),
-                        th.Property("name", th.StringType),
-                        th.Property("order", th.ObjectType(
-                            th.Property("id", th.StringType)
-                        )),
-                        th.Property("originAddress", th.ObjectType(
-                            th.Property("address1", th.StringType),
-                            th.Property("address2", th.StringType),
-                            th.Property("city", th.StringType),
-                            th.Property("countryCode", th.StringType),
-                            th.Property("provinceCode", th.StringType),
-                            th.Property("zip", th.StringType)
-                        )),
-                        th.Property("requiresShipping", th.BooleanType),
-                        th.Property("service", th.ObjectType(
-                            th.Property("id", th.StringType)
-                        )),
-                        th.Property("status", th.StringType),
-                        th.Property("totalQuantity", th.IntegerType),
-                        th.Property("trackingInfo", th.ArrayType(th.ObjectType(
-                            th.Property("company", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("url", th.StringType),
-                        ))),
-                        th.Property("updatedAt", th.DateTimeType),
-                    ))),
-                    th.Property("fullyPaid", th.BooleanType),
-                    th.Property("hasTimelineComment", th.BooleanType),
-                    th.Property("legacyResourceId", th.StringType),
-                    th.Property("merchantOfRecordApp", th.ObjectType(
-                        th.Property("id", th.StringType),
-                        th.Property("name", th.StringType),
-                    )),
-                    th.Property("name", th.StringType),
-                    th.Property("netPaymentSet", MoneyBagType()),
-                    th.Property("note", th.StringType),
-                    th.Property("originalTotalAdditionalFeesSet", MoneyBagType()),
-                    th.Property("originalTotalDutiesSet", MoneyBagType()),
-                    th.Property("originalTotalPriceSet", MoneyBagType()),
-                    th.Property("paymentCollectionDetails", th.ObjectType(
-                        th.Property("additionalPaymentCollectionUrl", th.StringType),
-                        # th.Property("vaultedPaymentMethods", th.ArrayType( <<-- Requires read_payment_mandate access scope
-                        #     th.ObjectType(
-                        #         th.Property("id", th.StringType)
-                        #     )
-                        # )),
-                    )),
-                    th.Property("paymentGatewayNames", th.ArrayType(th.StringType)),
-                    th.Property("phone", th.StringType),
-                    th.Property("poNumber", th.StringType),
-                    th.Property("presentmentCurrencyCode", th.StringType),
-                    th.Property("processedAt", th.DateTimeType),
-                    th.Property("refundable", th.BooleanType),
-                    th.Property("requiresShipping", th.BooleanType),
-                    th.Property("restockable", th.BooleanType),
-                    th.Property("returnStatus", th.StringType),
-                    th.Property("sourceIdentifier", th.StringType),
-                    th.Property("subtotalLineItemsQuantity", th.IntegerType),
-                    th.Property("tags", th.ArrayType(th.StringType)),
-                    th.Property("taxesIncluded", th.BooleanType),
-                    th.Property("taxExempt", th.BooleanType),
-                    th.Property("test", th.BooleanType),
-                    th.Property("totalWeight", th.StringType),
-                    th.Property("unpaid", th.BooleanType),
-                )),
+                th.Property("lastOrder", LastOrderType()),
                 th.Property("numberOfOrders", th.StringType),
                 th.Property("note", th.StringType),
                 th.Property("verifiedEmail", th.BooleanType),
@@ -444,12 +277,7 @@ class OrdersStream(DynamicStream):
                 th.Property("locale", th.StringType),
                 th.Property("taxExempt", th.BooleanType),
                 th.Property("updatedAt", th.DateTimeType),
-                th.Property("smsMarketingConsent", th.ObjectType(
-                    th.Property("consentCollectedFrom", th.StringType),
-                    th.Property("consentUpdatedAt", th.DateTimeType),
-                    th.Property("marketingOptInLevel", th.StringType),
-                    th.Property("marketingState", th.StringType),
-                )),
+                th.Property("smsMarketingConsent", SmsMarketingConsentType()),
             ),
         ),
         th.Property("customerAcceptsMarketing", th.BooleanType),
@@ -458,46 +286,33 @@ class OrdersStream(DynamicStream):
         th.Property("displayAddress", MailingAddressType()),
         th.Property("displayFinancialStatus", th.StringType),
         th.Property("displayFulfillmentStatus", th.StringType),
-        th.Property(
-            "disputes",th.ArrayType(
-            th.ObjectType(
-                th.Property("id", th.StringType),
-                th.Property("initiatedAs", th.StringType),
-                th.Property("status", th.StringType),
-            ))
-        ),
+        th.Property("disputes",th.ArrayType(DisputeType())),
         th.Property("edited", th.BooleanType),
         th.Property("email", th.StringType),
         th.Property("estimatedTaxes", th.BooleanType),
         th.Property("fulfillable", th.BooleanType),
-        th.Property(
-            "fulfillments",
-            th.ArrayType(
-                th.ObjectType(
-                    th.Property("id", th.StringType),
-                    th.Property("inTransitAt", th.StringType),
-                    th.Property("legacyResourceId", th.StringType),
-                    th.Property(
-                        "location", LocationType()
-                    ),
-                    th.Property("name", th.StringType),
-                    th.Property("requiresShipping", th.BooleanType),
-                    th.Property(
-                        "service", th.ObjectType(th.Property("id", th.StringType))
-                    ),
-                    th.Property("status", th.StringType),
-                    th.Property("totalQuantity", th.IntegerType),
-                    th.Property(
-                        "trackingInfo",th.ArrayType(
-                        th.ObjectType(
-                            th.Property("company", th.StringType),
-                            th.Property("number", th.StringType),
-                            th.Property("url", th.StringType),
-                        ))
-                    ),
-                    th.Property("updatedAt", th.DateTimeType),
-                )
-            ),
+        th.Property("fulfillments", th.ArrayType(
+            th.ObjectType(
+                th.Property("id", th.StringType),
+                th.Property("inTransitAt", th.StringType),
+                th.Property("legacyResourceId", th.StringType),
+                th.Property("location", LocationType()),
+                th.Property("name", th.StringType),
+                th.Property("requiresShipping", th.BooleanType),
+                th.Property("service", th.ObjectType(
+                    th.Property("id", th.StringType)
+                )),
+                th.Property("status", th.StringType),
+                th.Property("totalQuantity", th.IntegerType),
+                th.Property("trackingInfo", th.ArrayType(
+                    th.ObjectType(
+                        th.Property("company", th.StringType),
+                        th.Property("number", th.StringType),
+                        th.Property("url", th.StringType),
+                    ))
+                ),
+                th.Property("updatedAt", th.DateTimeType),
+            )),
         ),
         th.Property("fullyPaid", th.BooleanType),
         th.Property("legacyResourceId", th.StringType),
@@ -962,73 +777,38 @@ class CustomersStream(DynamicStream):
     sort_key = "UPDATED_AT"
     sort_key_type = "CustomerSortKeys"
 
+    """
+        Access denied for companyContactProfiles field.
+        Required access: `read_customers` access scope or `read_companies` access scope.
+        Also: The API client must be installed on a Shopify Plus store.
+    """
     schema = th.PropertiesList(
-        th.Property("id", th.StringType),
         th.Property("id", th.StringType),
         th.Property("firstName", th.StringType),
         th.Property("lastName", th.StringType),
         th.Property("email", th.StringType),
         th.Property("phone", th.StringType),
         th.Property("numberOfOrders", th.StringType),
-        th.Property(
-            "amountSpent",
-            th.ObjectType(
-                th.Property("amount", th.StringType),
-                th.Property("currencyCode", th.StringType),
-            ),
-        ),
+        th.Property("amountSpent", MoneyV2Type()),
+        th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())), # -> For some clients, we see "NO ACCESS" error,added complete error above.
+        th.Property("multipassIdentifier", th.StringType),
         th.Property("note", th.StringType),
         th.Property("verifiedEmail", th.BooleanType),
         th.Property("validEmailAddress", th.BooleanType),
         th.Property("tags", th.CustomType({"type": ["array", "string"]})),
         th.Property("lifetimeDuration", th.StringType),
-        th.Property(
-            "defaultAddress",
-            th.ObjectType(
-                th.Property("address1", th.StringType),
-                th.Property("address2", th.StringType),
-                th.Property("city", th.StringType),
-                th.Property("company", th.StringType),
-                th.Property("country", th.StringType),
-                th.Property("countryCodeV2", th.StringType),
-                th.Property("firstName", th.StringType),
-                th.Property("formatted", th.CustomType({"type": ["array", "string"]})),
-                th.Property("formattedArea", th.StringType),
-                th.Property("id", th.StringType),
-                th.Property("lastName", th.StringType),
-                th.Property("name", th.StringType),
-                th.Property("phone", th.StringType),
-                th.Property("province", th.StringType),
-                th.Property("provinceCode", th.StringType),
-                th.Property("zip", th.StringType),
-                th.Property("latitude", th.NumberType),
-                th.Property("longitude", th.NumberType),
-            ),
-        ),
+        th.Property("legacyResourceId", th.StringType),
+        th.Property("taxExempt", th.StringType),
+        th.Property("defaultAddress", MailingAddressType()),
+        th.Property("lastOrder", LastOrderType()),
         th.Property("addresses", th.ArrayType(MailingAddressType())),
-        th.Property(
-            "image",
-            th.ObjectType(
-                th.Property("src", th.StringType),
-                th.Property("width", th.NumberType),
-                th.Property("height", th.NumberType),
-                th.Property("altText", th.StringType),
-            ),
-        ),
+        th.Property("image", ImageType()),
         th.Property("canDelete", th.BooleanType),
         th.Property("createdAt", th.DateTimeType),
         th.Property("updatedAt", th.DateTimeType),
-        th.Property("emailMarketingConsent", th.ObjectType(
-            th.Property("consentUpdatedAt", th.DateTimeType),
-            th.Property("marketingOptInLevel", th.StringType),
-            th.Property("marketingState", th.StringType),
-        )),
-        th.Property("smsMarketingConsent", th.ObjectType(
-            th.Property("consentCollectedFrom", th.StringType),
-            th.Property("consentUpdatedAt", th.DateTimeType),
-            th.Property("marketingOptInLevel", th.StringType),
-            th.Property("marketingState", th.StringType),
-        )),
+        th.Property("emailMarketingConsent", CustomerEmailMarketingConsentStateType()),
+        th.Property("smsMarketingConsent", SmsMarketingConsentType()),
+        th.Property("mergeable", MergeableType()),
     ).to_dict()
 
 
