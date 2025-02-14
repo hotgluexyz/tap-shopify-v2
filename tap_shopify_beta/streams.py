@@ -280,6 +280,7 @@ class OrdersStream(DynamicStream):
                 th.Property("smsMarketingConsent", SmsMarketingConsentType()),
             ),
         ),
+        th.Property("customerId", th.StringType),
         th.Property("customerAcceptsMarketing", th.BooleanType),
         th.Property("customerLocale", th.StringType),
         th.Property("discountCode", th.StringType),
@@ -484,6 +485,12 @@ class OrdersStream(DynamicStream):
                 line_items_edges.extend(order_node.get("lineItems", {}).get("edges", []))
                 has_next_page = self.has_next_page_line_items(order_node)
             record["lineItems"] = [edge.get("node") for edge in line_items_edges]
+
+            is_customer_id_selected = 'customerId' in self.selected_properties
+            customer = record.get('customer')
+            if is_customer_id_selected and isinstance(customer, dict):
+                record['customerId'] = customer.get('id')
+
             self.after_line_item = None
             if record.get(self.replication_key):
                 self.last_replication_key = max(self.last_replication_key, record.get(self.replication_key)) if self.last_replication_key else record.get(self.replication_key)
@@ -523,6 +530,13 @@ class OrdersStream(DynamicStream):
         else:
             params = self.get_url_params(context, next_page_token)
         query = self.query.lstrip()
+
+        if 'customerId' in query:        
+            if 'customer {' in query:
+                query = query.replace("customerId", "")
+            else:
+                query = query.replace("customerId", "customer { id }")
+
         request_data = {
             "query": (" ".join([line.strip() for line in query.splitlines()])),
             "variables": params,
