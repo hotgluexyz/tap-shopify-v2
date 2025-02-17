@@ -5,6 +5,7 @@ from tap_shopify_beta.types import app_installation
 from tap_shopify_beta.types import app_metafield
 from tap_shopify_beta.types import app_subscription
 from tap_shopify_beta.types import catalog
+from tap_shopify_beta.types import channel_information
 from tap_shopify_beta.types import company
 from tap_shopify_beta.types import company_contact
 from tap_shopify_beta.types import contract

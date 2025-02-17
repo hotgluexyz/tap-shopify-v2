@@ -1,9 +1,6 @@
 from singer_sdk import typing as th
 
-from tap_shopify_beta.types.app_feedback import AppFeedbackType
 from tap_shopify_beta.types.access_scope import AccessScopeType
-from tap_shopify_beta.types.app_installation import AppInstallationType
-from tap_shopify_beta.types.failed_requirement import FailedRequirementType
 from tap_shopify_beta.types.image import ImageType
 
 class AppType(th.ObjectType):
@@ -13,19 +10,15 @@ class AppType(th.ObjectType):
             th.Property("apiKey", th.StringType),
             th.Property("appStoreAppUrl", th.StringType),
             th.Property("appStoreDeveloperUrl", th.StringType),
-            th.Property("availableAccessScopes", th.ArrayType(AccessScopeType())),
             th.Property("banner", ImageType()),
             th.Property("description", th.StringType),
             th.Property("developerName", th.StringType),
             th.Property("developerType", th.StringType),
             th.Property("embedded", th.BooleanType),
-            th.Property("failedRequirements", th.ArrayType(FailedRequirementType())),
             th.Property("features", th.ArrayType(th.StringType)),
-            th.Property("feedback", AppFeedbackType()),
             th.Property("icon", ImageType()),
             th.Property("id", th.StringType),
             th.Property("installUrl", th.StringType),
-            th.Property("installation", AppInstallationType()),
             th.Property("isPostPurchaseAppInUse", th.BooleanType),
             th.Property("previouslyInstalled", th.BooleanType),
             th.Property("pricingDetails", th.StringType),
@@ -34,7 +27,6 @@ class AppType(th.ObjectType):
             th.Property("publicCategory", th.StringType),
             th.Property("published", th.BooleanType),
             th.Property("requestedAccessScopes", th.ArrayType(AccessScopeType())),
-            th.Property("screenshots", th.ArrayType(ImageType())),
             th.Property("shopifyDeveloped", th.BooleanType),
             th.Property("title", th.StringType),
             th.Property("uninstallMessage", th.StringType),

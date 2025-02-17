@@ -10,6 +10,5 @@ class ImageType(th.ObjectType):
             th.Property("id", th.StringType),
             # th.Property("metafield", ImageMetafieldType()),
             th.Property("url", th.StringType),
-            th.Property("width", th.IntegerType),
-            th.Property("originalSrc", th.StringType)
+            th.Property("width", th.IntegerType)
         )
