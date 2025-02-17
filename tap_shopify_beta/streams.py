@@ -9,7 +9,8 @@ from singer_sdk import typing as th
 from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream
 from tap_shopify_beta.client_rest import shopifyRestStream
-from tap_shopify_beta.types.app import AppType
+from tap_shopify_beta.types.order_app import OrderAppType
+from tap_shopify_beta.types.channel_information import ChannelInformationType
 from tap_shopify_beta.types.customer import CustomerType
 from tap_shopify_beta.types.customer_email_marketing_consent_state import CustomerEmailMarketingConsentStateType
 from tap_shopify_beta.types.customer_journey_summary import CustomerJourneySummaryType
@@ -217,6 +218,8 @@ class OrdersStream(DynamicStream):
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
+        th.Property("app", OrderAppType()),
+        th.Property("channelInformation", ChannelInformationType()),
         th.Property("billingAddress",MailingAddressType()),
         th.Property("billingAddressMatchesShippingAddress", th.BooleanType),
         th.Property("cancelledAt", th.DateTimeType),
