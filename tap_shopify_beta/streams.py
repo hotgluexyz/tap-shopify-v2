@@ -815,7 +815,7 @@ class CustomersStream(DynamicStream):
         th.Property("tags", th.CustomType({"type": ["array", "string"]})),
         th.Property("lifetimeDuration", th.StringType),
         th.Property("legacyResourceId", th.StringType),
-        th.Property("taxExempt", th.StringType),
+        th.Property("taxExempt", th.BooleanType),
         th.Property("defaultAddress", MailingAddressType()),
         th.Property("lastOrder", LastOrderType()),
         th.Property("addresses", th.ArrayType(MailingAddressType())),
