@@ -254,35 +254,6 @@ class OrdersStream(DynamicStream):
         th.Property("currentTotalPriceSet", MoneyBagType()),
         th.Property("currentTotalTaxSet", MoneyBagType()),
         th.Property("currentTotalWeight", th.StringType),
-        th.Property(
-            "customer",
-            th.ObjectType(
-                th.Property("id", th.StringType),
-                th.Property("addresses", th.ArrayType(MailingAddressType())),
-                th.Property("amountSpent", MoneyV2Type()),
-                th.Property("canDelete", th.BooleanType),
-                # th.Property("companyContactProfiles", th.ArrayType(CompanyContactType())),
-                th.Property("createdAt", th.DateTimeType),
-                th.Property("defaultAddress", MailingAddressType()),
-                th.Property("displayName", th.StringType),
-                th.Property("email", th.StringType),
-                th.Property("emailMarketingConsent", CustomerEmailMarketingConsentStateType()),
-                th.Property("firstName", th.StringType),
-                th.Property("image", ImageType()),
-                th.Property("lastName", th.StringType),
-                # th.Property("lastOrder", LastOrderType()),
-                th.Property("numberOfOrders", th.StringType),
-                th.Property("note", th.StringType),
-                th.Property("verifiedEmail", th.BooleanType),
-                th.Property("validEmailAddress", th.BooleanType),
-                th.Property("tags", th.CustomType({"type": ["array", "string"]})),
-                th.Property("lifetimeDuration", th.StringType),
-                th.Property("locale", th.StringType),
-                th.Property("taxExempt", th.BooleanType),
-                th.Property("updatedAt", th.DateTimeType),
-                th.Property("smsMarketingConsent", SmsMarketingConsentType()),
-            ),
-        ),
         th.Property("customerId", th.StringType),
         th.Property("customerAcceptsMarketing", th.BooleanType),
         th.Property("customerLocale", th.StringType),
@@ -535,10 +506,7 @@ class OrdersStream(DynamicStream):
         query = self.query.lstrip()
 
         if 'customerId' in query:        
-            if 'customer {' in query:
-                query = query.replace("customerId", "")
-            else:
-                query = query.replace("customerId", "customer { id }")
+            query = query.replace("customerId", "customer { id }")
 
         request_data = {
             "query": (" ".join([line.strip() for line in query.splitlines()])),

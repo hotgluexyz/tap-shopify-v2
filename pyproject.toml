@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tap-shopify-beta"
-version = "0.0.2"
+version = "0.1.0"
 description = "`tap-shopify-beta` is a Singer tap for shopify-beta, built with the Meltano SDK for Singer Taps."
 authors = ["Hotglue"]
 keywords = [
