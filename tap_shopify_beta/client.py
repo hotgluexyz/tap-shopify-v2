@@ -1,12 +1,15 @@
 """GraphQL client handling, including shopifyStream base class."""
 
-from typing import Any, Optional
+import backoff
+import requests
+import urllib3
 
+from typing import Any, Optional, Callable
 from singer_sdk.authenticators import APIKeyAuthenticator
 from backports.cached_property import cached_property
 from singer_sdk.streams import GraphQLStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
-
+from singer_sdk.exceptions import RetriableAPIError
 
 class shopifyStream(GraphQLStream):
     """shopify stream class."""
@@ -18,7 +21,7 @@ class shopifyStream(GraphQLStream):
         """Return the API URL root, configurable via tap settings."""
         shop = self.config["shop"]
         return f"https://{shop}.myshopify.com/admin/api/2024-04/graphql.json"
-    
+
     @property
     def authenticator(self) -> ShopifyAuthenticator:
         """Return a new authenticator object."""
@@ -48,7 +51,7 @@ class shopifyStream(GraphQLStream):
     def gql_selected_fields(self):
         schema = self.schema["properties"]
         catalog = {k: v for k, v in schema.items() if k in self.selected_properties}
-        
+
         output = []
         for key, value in catalog.items():
             if "items" in value:
@@ -66,7 +69,7 @@ class shopifyStream(GraphQLStream):
                 output.append(query)
             else:
                 output.append(key)
-        
+
         return "\n".join(output)
 
     def prepare_request_payload(
@@ -85,7 +88,7 @@ class shopifyStream(GraphQLStream):
     def get_field_query(self, field_name: str, schema: dict, is_paginated: bool = False, page_size: int = None) -> str:
         """Generate a GraphQL query string for a given field based on its schema."""
         output = []
-        
+
         if is_paginated:
             pagination = f"(first: {page_size})" if page_size else ""
             output.append(f"{field_name}{pagination} {{")
@@ -111,3 +114,16 @@ class shopifyStream(GraphQLStream):
         output.append("}")
 
         return "\n".join(output)
+
+    def request_decorator(self, func: Callable) -> Callable:
+        decorator: Callable = backoff.on_exception(
+            self.backoff_wait_generator,
+            (
+                RetriableAPIError,
+                requests.exceptions.RequestException,
+                urllib3.exceptions.HTTPError
+            ),
+            max_tries=self.backoff_max_tries,
+            on_backoff=self.backoff_handler,
+        )(func)
+        return decorator
