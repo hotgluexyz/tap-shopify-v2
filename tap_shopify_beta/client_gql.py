@@ -1,7 +1,7 @@
 """GraphQL client handling, including shopifyStream base class."""
 
 from time import sleep
-from typing import Any, Dict, Iterable, List, Optional, Union, cast
+from typing import Any, Callable, Dict, Generator, Iterable, List, Optional, Union, cast
 
 import requests
 from backports.cached_property import cached_property
@@ -242,6 +242,9 @@ class shopifyGqlStream(shopifyStream):
         except ValueError:
             # If response is not JSON, let the parent validator handle it
             pass
+
+    def backoff_wait_generator(self) -> Callable[..., Generator[int, Any, None]]:
+        return backoff.expo(factor=4)
 
     def request_records(self, context: Optional[dict]) -> Iterable[dict]:
         next_page_token: Any = None
