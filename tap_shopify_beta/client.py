@@ -93,7 +93,10 @@ class shopifyStream(GraphQLStream):
             output.append("cursor")
             output.append("node {")
         else:
-            output.append(f"{field_name} {{")
+            if field_name == "addresses":
+                output.append(f"{field_name}(first: 100) {{")
+            else:
+                output.append(f"{field_name} {{")
 
         for key, value in schema.items():
             if "items" in value:
