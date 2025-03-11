@@ -243,6 +243,19 @@ class shopifyGqlStream(shopifyStream):
             # If response is not JSON, let the parent validator handle it
             pass
 
+    def backoff_handler(self, details: dict) -> None:
+        super().backoff_handler(details)
+
+        # resets available_points so that the next retry requests less data        
+        self.available_points = None
+
+    def prepare_and_request(self, context: Optional[dict], next_page_token: Optional[Any]) -> requests.Response:
+        prepared_request = self.prepare_request(
+                context, next_page_token=next_page_token
+            )
+        resp = self._request(prepared_request, context)
+        return resp
+
     def request_records(self, context: Optional[dict]) -> Iterable[dict]:
         next_page_token: Any = None
         finished = False
@@ -252,13 +265,10 @@ class shopifyGqlStream(shopifyStream):
             (RetriableAPIError, requests.exceptions.ReadTimeout, GraphQLInternalServerError),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler,
-        )(self._request)
+        )(self.prepare_and_request)
 
         while not finished:
-            prepared_request = self.prepare_request(
-                context, next_page_token=next_page_token
-            )
-            resp = decorated_request(prepared_request, context)
+            resp = decorated_request(context, next_page_token)
             yield from self.parse_response(resp)
             previous_token = copy.deepcopy(next_page_token)
             next_page_token = self.get_next_page_token(
