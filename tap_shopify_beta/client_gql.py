@@ -262,7 +262,8 @@ class shopifyGqlStream(shopifyStream):
         # Add GraphQLInternalServerError to the decorator
         decorated_request = backoff.on_exception(
             self.backoff_wait_generator,
-            (RetriableAPIError, requests.exceptions.ReadTimeout, GraphQLInternalServerError),
+            (RetriableAPIError, requests.exceptions.ReadTimeout, GraphQLInternalServerError,
+             requests.exceptions.ConnectionError),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler,
         )(self.prepare_and_request)
