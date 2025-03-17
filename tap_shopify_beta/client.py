@@ -79,7 +79,7 @@ class shopifyStream(GraphQLStream):
             "query": (" ".join([line.strip() for line in query.splitlines()])),
             "variables": params,
         }
-        self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
+        # self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
         return request_data
 
     def get_field_query(self, field_name: str, schema: dict, is_paginated: bool = False, page_size: int = None) -> str:
