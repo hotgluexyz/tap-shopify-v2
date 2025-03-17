@@ -4,6 +4,7 @@ from time import sleep
 from typing import Any, Dict, Iterable, List, Optional, Union, cast
 
 import requests
+import urllib3
 from backports.cached_property import cached_property
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import GraphQLStream
@@ -249,7 +250,8 @@ class shopifyGqlStream(shopifyStream):
         # Add GraphQLInternalServerError to the decorator
         decorated_request = backoff.on_exception(
             self.backoff_wait_generator,
-            (RetriableAPIError, requests.exceptions.ReadTimeout, GraphQLInternalServerError),
+            (RetriableAPIError, GraphQLInternalServerError,
+             requests.exceptions.RequestException, urllib3.exceptions.HTTPError),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler,
         )(self._request)
