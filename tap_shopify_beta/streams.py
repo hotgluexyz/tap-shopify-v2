@@ -141,35 +141,6 @@ class VariantsStream(DynamicStream):
         th.Property("createdAt", th.DateTimeType),
         th.Property("displayName", th.StringType),
         th.Property(
-            "fulfillmentService",
-            th.ObjectType(
-                th.Property("id", th.StringType),
-                th.Property("callbackUrl", th.StringType),
-                th.Property("fulfillmentOrdersOptIn", th.BooleanType),
-                th.Property("handle", th.StringType),
-                th.Property("inventoryManagement", th.BooleanType),
-                th.Property("location", LocationType()),
-                th.Property("productBased", th.BooleanType),
-                th.Property("serviceName", th.StringType),
-                th.Property(
-                    "shippingMethods",
-                    th.ArrayType(
-                        th.ObjectType(
-                            th.Property("code", th.StringType),
-                            th.Property("label", th.StringType),
-                        )
-                    )
-                ),
-            ),
-        ),
-        th.Property(
-            "fulfillmentServiceEditable",
-            th.ObjectType(
-                th.Property("locked", th.BooleanType),
-                th.Property("reason", th.StringType),
-            ),
-        ),
-        th.Property(
             "image",
             th.ObjectType(
                 th.Property("id", th.StringType), th.Property("altText", th.StringType)
@@ -195,9 +166,7 @@ class VariantsStream(DynamicStream):
         th.Property("sku", th.StringType),
         th.Property("taxable", th.BooleanType),
         th.Property("title", th.StringType),
-        th.Property("updatedAt", th.DateTimeType),
-        th.Property("weight", th.NumberType),
-        th.Property("weightUnit", th.StringType),
+        th.Property("updatedAt", th.DateTimeType)
     ).to_dict()
 
 
@@ -426,7 +395,7 @@ class OrdersStream(DynamicStream):
         th.Property("unpaid", th.BooleanType),
         th.Property("updatedAt", th.DateTimeType),
         th.Property("sourceIdentifier", th.StringType),
-        th.Property("lineItems", th.ArrayType(LineItemNodeType())), #
+        th.Property("lineItems", th.ArrayType(LineItemNodeType())),
     ).to_dict()
 
     def has_next_page_line_items(self, record):
@@ -505,7 +474,7 @@ class OrdersStream(DynamicStream):
             params = self.get_url_params(context, next_page_token)
         query = self.query.lstrip()
 
-        if 'customerId' in query:        
+        if 'customerId' in query:
             query = query.replace("customerId", "customer { id }")
 
         request_data = {
