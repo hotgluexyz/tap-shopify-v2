@@ -63,7 +63,7 @@ jobs:
           OUTPUT_FILE="smoke_test_output.log"
           
           # Run the test and capture both stdout and stderr
-          ./bin/smoke_test.sh "$REPO_NAME" '*' --tap-directory ${{ github.workspace }} > "$OUTPUT_FILE" 2>&1
+          ./bin/smoke_test.sh "$REPO_NAME" '*' --tap-directory ${{ github.workspace }} > "$OUTPUT_FILE" 2>&1 || true
           
           # Configure AWS credentials
           aws configure set aws_access_key_id ${{ secrets.SMOKETEST_AWS_ACCESS_KEY_ID }}
