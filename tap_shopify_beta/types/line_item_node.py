@@ -17,7 +17,7 @@ class LineItemNodeType(th.ObjectType):
         super().__init__(
             # th.Property("contract", ContractType()),
             th.Property("contract", th.ObjectType(
-               th.Property("id", th.StringType) 
+                th.Property("id", th.StringType)
             )),
             th.Property("currentQuantity", th.IntegerType),
             th.Property("customAttributes", th.ArrayType(CustomAttributesType())),
