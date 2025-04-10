@@ -40,20 +40,36 @@ class shopifyGqlStream(shopifyStream):
 
     @property
     def page_size(self) -> int:
-        if not self.available_points:
+        if self.available_points is None:
             return 1
-        pages = self.available_points / self.query_cost
-        if pages < 5:
-            points_to_restore = self.max_points - self.available_points
-            sleep(points_to_restore // self.restore_rate - 1)
-            pages = (self.max_points - self.restore_rate) / self.query_cost
-            pages = pages - 1
-        elif self.query_cost and pages>5:
-            if self.query_cost * pages >= 1000:
-                pages = math.floor(1000/self.query_cost)
-            else:
-                pages = 250 if pages > 250 else pages
-        return int(pages)
+            
+        # If we don't have enough points for even one query, wait
+        if self.available_points < self.query_cost:
+            points_needed = self.query_cost - self.available_points
+            seconds_to_wait = math.ceil(points_needed / self.restore_rate)
+            self.logger.info(f"Waiting {seconds_to_wait} seconds for {points_needed} more points to become available")
+            sleep(seconds_to_wait)
+            # Update available points after waiting
+            self.available_points = min(
+                self.available_points + (self.restore_rate * seconds_to_wait),
+                self.max_points
+            )
+            
+        # Calculate how many points we'll restore during the next query
+        # Assuming average query takes 2 seconds to execute
+        points_restored_during_query = self.restore_rate * 2
+        # Calculate base pages from available points
+        pages = (self.available_points + points_restored_during_query) / self.query_cost
+        
+        # Calculate maximum pages we can use without exceeding 1000 points
+        max_pages = math.floor(1000 / self.query_cost)
+            
+        # Use a more aggressive page size, but ensure we don't exceed max_pages
+        target_pages = min(max_pages, pages)
+        
+        self.logger.info(f"Using {target_pages * self.query_cost} points, Available points: {self.available_points}")
+        # For smaller page counts, still use them but be more conservative
+        return int(target_pages)
 
     @cached_property
     def query(self) -> str:
@@ -182,7 +198,7 @@ class shopifyGqlStream(shopifyStream):
 
         cost = res_json["extensions"].get("cost")
         if not self.query_cost:
-            self.query_cost = cost.get("requestedQueryCost")
+            self.query_cost = cost.get("actualQueryCost")
         self.available_points = cost["throttleStatus"].get("currentlyAvailable")
         self.restore_rate = cost["throttleStatus"].get("restoreRate")
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
