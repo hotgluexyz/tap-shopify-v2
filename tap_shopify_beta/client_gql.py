@@ -43,8 +43,8 @@ class shopifyGqlStream(shopifyStream):
         if self.available_points is None:
             return 1
             
-        # If we don't have enough points for even one query, wait
-        if self.available_points < self.query_cost:
+        # If we don't have enough points for at least 2 queries, wait
+        if self.available_points < self.query_cost * 2:
             points_needed = self.query_cost - self.available_points
             seconds_to_wait = math.ceil(points_needed / self.restore_rate)
             self.logger.info(f"Waiting {seconds_to_wait} seconds for {points_needed} more points to become available")
@@ -254,6 +254,11 @@ class shopifyGqlStream(shopifyStream):
                 if extensions.get("code") == "INTERNAL_SERVER_ERROR":
                     raise GraphQLInternalServerError(
                         f"Shopify GraphQL Internal Server Error: {error.get('message')}",
+                        response
+                    )
+                if extensions.get("code") == "THROTTLED":
+                    raise RetriableAPIError(
+                        f"Shopify GraphQL Throttled Error: {error.get('message')}",
                         response
                     )
         except ValueError:

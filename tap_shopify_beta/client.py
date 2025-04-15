@@ -125,5 +125,6 @@ class shopifyStream(GraphQLStream):
             ),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler,
+            base=3,
         )(func)
         return decorator
