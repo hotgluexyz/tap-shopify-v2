@@ -16,6 +16,10 @@ class LineItemNodeType(th.ObjectType):
     def __init__(self):
         super().__init__(
             # th.Property("contract", ContractType()),
+            th.Property("contract", th.ObjectType(
+                th.Property("id", th.StringType)
+            )),
+            th.Property("currentQuantity", th.IntegerType),
             th.Property("customAttributes", th.ArrayType(CustomAttributesType())),
             th.Property("discountAllocations", th.ArrayType(DiscountAllocationsType())),
             th.Property("discountedTotalSet", MoneyBagType()),
@@ -31,6 +35,9 @@ class LineItemNodeType(th.ObjectType):
             th.Property("nonFulfillableQuantity", th.IntegerType),
             th.Property("originalTotalSet", MoneyBagType()),
             th.Property("originalUnitPriceSet", MoneyBagType()),
+            th.Property("product", th.ObjectType(
+                th.Property("id", th.StringType)
+            )),
             # th.Property("product", ProductType()),
             th.Property("quantity", th.IntegerType),
             th.Property("refundableQuantity", th.IntegerType),
@@ -49,6 +56,9 @@ class LineItemNodeType(th.ObjectType):
             th.Property("unfulfilledDiscountedTotalSet", MoneyBagType()),
             th.Property("unfulfilledOriginalTotalSet", MoneyBagType()),
             th.Property("unfulfilledQuantity", th.IntegerType),
+            th.Property("variant", th.ObjectType(
+                th.Property("id", th.StringType)
+            )),
             th.Property("variantTitle", th.StringType),
             th.Property("vendor", th.StringType),
         )
