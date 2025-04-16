@@ -1,7 +1,7 @@
 """GraphQL client handling, including shopifyStream base class."""
 
 from time import sleep
-from typing import Any, Dict, Iterable, List, Optional, Union, cast
+from typing import Any, Dict, Iterable, List, Optional, Union, cast, Callable
 
 import requests
 import urllib3
@@ -17,7 +17,9 @@ import pytz
 import copy
 from singer_sdk.exceptions import RetriableAPIError
 import backoff
-
+import concurrent.futures
+import queue
+import threading
 class GraphQLInternalServerError(RetriableAPIError):
     """Error raised when Shopify returns an internal server error in the GraphQL response."""
     pass
@@ -45,7 +47,7 @@ class shopifyGqlStream(shopifyStream):
             
         # If we don't have enough points for at least 2 queries, wait
         if self.available_points < self.query_cost * 2:
-            points_needed = self.query_cost - self.available_points
+            points_needed = self.query_cost*2 - self.available_points
             seconds_to_wait = math.ceil(points_needed / self.restore_rate)
             self.logger.info(f"Waiting {seconds_to_wait} seconds for {points_needed} more points to become available")
             sleep(seconds_to_wait)
@@ -67,7 +69,7 @@ class shopifyGqlStream(shopifyStream):
         # Use a more aggressive page size, but ensure we don't exceed max_pages
         target_pages = min(max_pages, pages)
         
-        self.logger.info(f"Using {target_pages * self.query_cost} points, Available points: {self.available_points}")
+        self.logger.info(f"Thread: {threading.current_thread().name} Using {target_pages * self.query_cost} points, Available points: {self.available_points}")
         # For smaller page counts, still use them but be more conservative
         return int(target_pages)
 
@@ -166,17 +168,24 @@ class shopifyGqlStream(shopifyStream):
         if next_page_token:
             params["after"] = next_page_token
         if self.replication_key:
-            start_date = self.start_date or self.get_starting_timestamp(context)
-            if start_date:
-                date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
-                date_filter = f"updated_at:>{date}"
-                # fetch data in monthly chunks
-                if self.config.get(f"sync_{self.name}_monthly"):
-                    self.start_date = start_date
-                    self.end_date = start_date + relativedelta(months=1)
-                    end_date = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
-                    date_filter = f"{date_filter} AND updated_at:<={end_date}"
+            # TODO: make this work for both concurrent and per month sync
+            if context and context.get("date_range"):
+                date_filter = f"updated_at:>{context['date_range']['start_date']}"
+                if context['date_range'].get('end_date'):
+                    date_filter = f"{date_filter} AND updated_at:<={context['date_range']['end_date']}"
                 params["filter"] = date_filter
+            else:
+                start_date = self.start_date or self.get_starting_timestamp(context)
+                if start_date:
+                    date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
+                    date_filter = f"updated_at:>{date}"
+                    # fetch data in monthly chunks
+                    if self.config.get(f"sync_{self.name}_monthly"):
+                        self.start_date = start_date
+                        self.end_date = start_date + relativedelta(months=1)
+                        end_date = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
+                        date_filter = f"{date_filter} AND updated_at:<={end_date}"
+                    params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params
         if self.sort_key:
@@ -198,7 +207,7 @@ class shopifyGqlStream(shopifyStream):
 
         cost = res_json["extensions"].get("cost")
         if not self.query_cost:
-            self.query_cost = cost.get("actualQueryCost")
+            self.query_cost = (cost.get("actualQueryCost") + cost.get("requestedQueryCost")) / 2
         self.available_points = cost["throttleStatus"].get("currentlyAvailable")
         self.restore_rate = cost["throttleStatus"].get("restoreRate")
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
@@ -249,48 +258,185 @@ class shopifyGqlStream(shopifyStream):
         try:
             resp_json = response.json()
             errors = resp_json.get("errors", [])
-            for error in errors:
-                extensions = error.get("extensions", {})
-                if extensions.get("code") == "INTERNAL_SERVER_ERROR":
-                    raise GraphQLInternalServerError(
-                        f"Shopify GraphQL Internal Server Error: {error.get('message')}",
-                        response
-                    )
-                if extensions.get("code") == "THROTTLED":
-                    raise RetriableAPIError(
-                        f"Shopify GraphQL Throttled Error: {error.get('message')}",
-                        response
-                    )
+            if not resp_json.get("data"):
+                for error in errors:
+                    extensions = error.get("extensions", {})
+                    if extensions.get("code") == "INTERNAL_SERVER_ERROR":
+                        raise GraphQLInternalServerError(
+                            f"Shopify GraphQL Internal Server Error: {error.get('message')}",
+                            response
+                        )
+                    if extensions.get("code") == "THROTTLED":
+                        import time
+                        time.sleep(5)
+                        raise RetriableAPIError(
+                            f"Shopify GraphQL Throttled Error: {error.get('message')}",
+                            response
+                        )
         except ValueError:
             # If response is not JSON, let the parent validator handle it
             pass
 
-    def request_records(self, context: Optional[dict]) -> Iterable[dict]:
-        next_page_token: Any = None
-        finished = False
-        # Add GraphQLInternalServerError to the decorator
-        decorated_request = backoff.on_exception(
+    def request_decorator(self, func: Callable) -> Callable:
+        decorator: Callable = backoff.on_exception(
             self.backoff_wait_generator,
-            (RetriableAPIError, GraphQLInternalServerError,
-             requests.exceptions.RequestException, urllib3.exceptions.HTTPError),
+            (
+                RetriableAPIError,
+                GraphQLInternalServerError,
+                urllib3.exceptions.HTTPError,
+                requests.exceptions.ReadTimeout,
+                requests.exceptions.ConnectionError,
+                requests.exceptions.RequestException,
+                ConnectionError,
+            ),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler,
-        )(self._request)
+        )(func)
+        return decorator
 
-        while not finished:
-            prepared_request = self.prepare_request(
-                context, next_page_token=next_page_token
-            )
-            resp = decorated_request(prepared_request, context)
-            yield from self.parse_response(resp)
-            previous_token = copy.deepcopy(next_page_token)
-            next_page_token = self.get_next_page_token(
-                response=resp, previous_token=previous_token
-            )
-            if next_page_token and next_page_token == previous_token:
-                raise RuntimeError(
-                    f"Loop detected in pagination. "
-                    f"Pagination token {next_page_token} is identical to prior token."
-                )
-            # Cycle until get_next_page_token() no longer returns a value
-            finished = next_page_token is None
+    def get_concurrent_params(self, context):
+        """Generate list of date range parameters for concurrent requests.
+        
+        Args:
+            context: Stream context
+            max_requests: Maximum number of concurrent requests
+            
+        Returns:
+            List of parameter dicts with start_date and end_date for each partition
+        """            
+        start_date = self.start_date or self.get_starting_timestamp(context)
+            
+        # Get current time in UTC
+        now = datetime.now(pytz.UTC)
+        
+        # Calculate time range between start_date and now
+        total_time_range = now - start_date
+        
+        # Calculate time interval for each partition
+        interval = total_time_range / self.max_requests
+        
+        params = []
+        for i in range(self.max_requests):
+            context = copy.deepcopy(context) or {}
+            date_range = {}
+            date_range["start_date"] = start_date + (interval * i)
+            # don't set end_date for the last partition
+            if not i == self.max_requests - 1:
+                date_range["end_date"] = start_date + (interval * (i + 1))
+           
+            context["date_range"] = date_range
+            params.append(context)
+            
+        return params
+
+    @cached_property
+    def max_requests(self):
+        # check how many points are available
+        query = """
+            query {
+                shop {
+                    name
+                }
+            }
+        """
+        request_data = {
+            "query": (" ".join([line.strip() for line in query.splitlines()])),
+            "variables": {}
+        }
+        headers = self.http_headers
+        headers.update(self.authenticator.auth_headers or {})
+        request = cast(
+            requests.PreparedRequest,
+            self.requests_session.prepare_request(
+                requests.Request(
+                    method="POST",
+                    url=self.url_base,
+                    params=None,
+                    headers=self.http_headers,
+                    json=request_data,
+                ),
+            ),
+        )
+        resp = self._request(request, None)
+        resp_json = resp.json()
+        max_available = resp_json.get("extensions", {}).get("cost", {}).get("throttleStatus", {}).get("maximumAvailable", 2000)
+
+        # Calculate number of partitions based on available points
+        return math.floor(max_available / 1000)
+    
+    def safe_put(self, q: queue.Queue, record: dict):
+        while True:
+            try:
+                q.put(record, timeout=1)
+                break
+            except queue.Full:
+                continue
+    
+    def concurrent_request(self, context: dict, record_queue: queue.Queue):
+        try:
+            next_page_token = None
+            finished = False
+            decorated_request = self.request_decorator(self._request)
+
+            while not finished:
+                self.logger.info(f"[{threading.current_thread().name}] Fetching next page...")
+                prepared = self.prepare_request(context, next_page_token=next_page_token)
+                resp = decorated_request(prepared, context)
+
+                for record in self.parse_response(resp):
+                    self.safe_put(record_queue, record)
+
+                previous_token = copy.deepcopy(next_page_token)
+                next_page_token = self.get_next_page_token(resp, previous_token)
+
+                if next_page_token and next_page_token == previous_token:
+                    raise RuntimeError("Pagination loop detected")
+
+                finished = not next_page_token
+
+        except Exception as e:
+            self.logger.exception(e)
+            record_queue.put(("ERROR", str(e)))
+        finally:
+            record_queue.put(None)
+
+    def get_records(self, context: Optional[dict]) -> Iterable[dict]:
+        if self.max_requests < 2 or not self.replication_key:
+            yield from super().get_records(context)
+            return
+
+        concurrent_params = self.get_concurrent_params(context)
+        record_queue = queue.Queue()
+        finished_threads = 0
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=self.max_requests) as executor:
+            futures = []
+            for param in concurrent_params:
+                future = executor.submit(self.concurrent_request, param, record_queue)
+                futures.append(future)
+
+            while finished_threads < len(concurrent_params):
+                for future in futures:
+                    if future.done():
+                        try:
+                            future.result()  # Raise errors from within threads
+                        except Exception as e:
+                            self.logger.exception(f"Error in worker thread: {str(e)}")
+                            raise Exception(f"Worker thread error: {str(e)}")
+
+                try:
+                    record = record_queue.get(timeout=1)
+                    if record is None:
+                        finished_threads += 1
+                        self.logger.info(f"[{threading.current_thread().name}] Worker finished")
+                    elif isinstance(record, tuple) and record[0] == "ERROR":
+                        self.logger.exception(f"Error from thread: {record[1]}")
+                        raise Exception(f"Thread error: {record[1]}")
+                    else:
+                        self.logger.debug(f"Yielding record: {record}")
+                        transformed = self.post_process(record, context)
+                        if transformed:
+                            yield transformed
+                except queue.Empty:
+                    self.logger.debug("Queue is empty, still waiting...")
+                    continue
