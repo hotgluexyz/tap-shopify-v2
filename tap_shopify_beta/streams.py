@@ -187,9 +187,387 @@ class OrdersStream(DynamicStream):
         "LineItem": "lineItems"
     }
 
+    querykhkhjkj = """
+    query Orders($first: Int, $after: String, $filter: String) {
+        orders(first: $first, after: $after, query: $filter, sortKey: UPDATED_AT) {
+            edges{
+                cursor
+                node {
+                    id
+                    updatedAt
+                    presentmentCurrencyCode
+                    subtotalPriceSet {
+                        shopMoney {
+                        amount
+                        currencyCode
+                        }
+                    }
+                    totalDiscountsSet {
+                        shopMoney {
+                        amount
+                        currencyCode
+                        }
+                    }
+                    totalPriceSet {
+                        shopMoney {
+                        amount
+                        currencyCode
+                        }
+                    }
+                    totalShippingPriceSet {
+                        shopMoney {
+                        amount
+                        currencyCode
+                        }
+                    }
+                    totalTaxSet {
+                        shopMoney {
+                        amount
+                        currencyCode
+                        }
+                    }
+                    test
+                    app {
+                        id
+                    }
+                    billingAddress {
+                        address1
+                        address2
+                        city
+                        company
+                        coordinatesValidated
+                        country
+                        countryCode
+                        countryCodeV2
+                        firstName
+                        formatted
+                        formattedArea
+                        id
+                        lastName
+                        latitude
+                        longitude
+                        name
+                        phone
+                        province
+                        provinceCode
+                        timeZone
+                        zip
+                    }
+                    cancelReason
+                    cancelledAt
+                    clientIp
+                    closedAt
+                    confirmed
+                    createdAt
+                    currencyCode
+                    customAttributes {
+                        key
+                        value
+                    }
+                    customer {
+                        canDelete
+                        createdAt
+                        displayName
+                        email
+                        firstName
+                        hasTimelineComment
+                        id
+                        lastName
+                        legacyResourceId
+                        lifetimeDuration
+                        locale
+                        multipassIdentifier
+                        note
+                        numberOfOrders
+                        phone
+                        productSubscriberStatus
+                        state
+                        tags
+                        taxExempt
+                        taxExemptions
+                        unsubscribeUrl
+                        updatedAt
+                        validEmailAddress
+                        verifiedEmail
+                    }
+                    customerAcceptsMarketing
+                    customerLocale
+                    discountCodes
+                    displayFinancialStatus
+                    displayFulfillmentStatus
+                    email
+                    landingPageUrl
+                    name
+                    note
+                    paymentGatewayNames
+                    phone
+                    processedAt
+                    referrerUrl
+                    registeredSourceUrl
+                    shippingAddress {
+                        address1
+                        address2
+                        city
+                        company
+                        coordinatesValidated
+                        country
+                        countryCode
+                        countryCodeV2
+                        firstName
+                        formatted
+                        formattedArea
+                        id
+                        lastName
+                        latitude
+                        longitude
+                        name
+                        phone
+                        province
+                        provinceCode
+                        timeZone
+                        zip
+                    }
+                    sourceIdentifier
+                    tags
+                    totalWeight
+                    totalTipReceivedSet {
+                        shopMoney {
+                        amount
+                        currencyCode
+                        }
+                    }
+                    taxLines {
+                        channelLiable
+                        price
+                        rate
+                        title
+                    }
+                    refunds(first: 25) {
+                        createdAt
+                        id
+                        legacyResourceId
+                        note
+                        updatedAt
+                        refundLineItems(first: 25) {
+                        nodes {
+                            price
+                            quantity
+                            restockType
+                            restocked
+                            subtotal
+                            totalTax
+                            lineItem {
+                            canRestock
+                            currentQuantity
+                            discountedTotal
+                            discountedUnitPrice
+                            fulfillableQuantity
+                            fulfillmentStatus
+                            id
+                            merchantEditable
+                            name
+                            nonFulfillableQuantity
+                            originalTotal
+                            originalUnitPrice
+                            quantity
+                            refundableQuantity
+                            requiresShipping
+                            restockable
+                            sku
+                            taxable
+                            title
+                            totalDiscount
+                            unfulfilledDiscountedTotal
+                            unfulfilledOriginalTotal
+                            unfulfilledQuantity
+                            variantTitle
+                            vendor
+                            }
+                        }
+                        }
+                    }
+                    discountApplications(first: 25) {
+                        nodes {
+                        allocationMethod
+                        index
+                        targetSelection
+                        targetType
+                        value {
+                            ... on MoneyV2 {
+                            amount
+                            currencyCode
+                            }
+                        }
+                        }
+                    }
+                    fulfillments {
+                        createdAt
+                        deliveredAt
+                        displayStatus
+                        estimatedDeliveryAt
+                        id
+                        inTransitAt
+                        legacyResourceId
+                        name
+                        requiresShipping
+                        status
+                        totalQuantity
+                        updatedAt
+                    }
+                    shippingLines(first: 25) {
+                        nodes {
+                        carrierIdentifier
+                        code
+                        custom
+                        deliveryCategory
+                        id
+                        phone
+                        price
+                        shippingRateHandle
+                        source
+                        title
+                        }
+                    }
+                    lineItems(first: 25) {
+                        nodes {
+                        canRestock
+                        currentQuantity
+                        discountedTotal
+                        discountedUnitPrice
+                        fulfillableQuantity
+                        fulfillmentStatus
+                        id
+                        merchantEditable
+                        name
+                        nonFulfillableQuantity
+                        originalTotal
+                        originalUnitPrice
+                        quantity
+                        refundableQuantity
+                        requiresShipping
+                        restockable
+                        sku
+                        taxable
+                        title
+                        totalDiscount
+                        unfulfilledDiscountedTotal
+                        unfulfilledOriginalTotal
+                        unfulfilledQuantity
+                        variantTitle
+                        vendor
+                        }
+                    }
+                    customerJourneySummary {
+                        customerOrderIndex
+                        daysToConversion
+                        ready
+                        firstVisit {
+                        id
+                        landingPage
+                        landingPageHtml
+                        occurredAt
+                        referralCode
+                        referralInfoHtml
+                        referrerUrl
+                        source
+                        sourceDescription
+                        sourceType
+                        marketingEvent {
+                            channel
+                            channelHandle
+                            description
+                            endedAt
+                            id
+                            legacyResourceId
+                            manageUrl
+                            marketingChannelType
+                            previewUrl
+                            remoteId
+                            scheduledToEndAt
+                            sourceAndMedium
+                            startedAt
+                            targetTypeDisplayText
+                            type
+                            utmCampaign
+                            utmMedium
+                            utmSource
+                            app {
+                            handle
+                            title
+                            }
+                        }
+                        utmParameters {
+                            campaign
+                            content
+                            medium
+                            source
+                            term
+                        }
+                        }
+                        lastVisit {
+                        id
+                        landingPage
+                        landingPageHtml
+                        occurredAt
+                        referralCode
+                        referralInfoHtml
+                        referrerUrl
+                        source
+                        sourceDescription
+                        sourceType
+                        marketingEvent {
+                            channel
+                            channelHandle
+                            description
+                            endedAt
+                            id
+                            legacyResourceId
+                            manageUrl
+                            marketingChannelType
+                            previewUrl
+                            remoteId
+                            scheduledToEndAt
+                            sourceAndMedium
+                            startedAt
+                            targetTypeDisplayText
+                            type
+                            utmCampaign
+                            utmMedium
+                            utmSource
+                            app {
+                            handle
+                            title
+                            }
+                        }
+                        utmParameters {
+                            campaign
+                            content
+                            medium
+                            source
+                            term
+                        }
+                        }
+                        momentsCount {
+                        count
+                        precision
+                        }
+                    }
+                }
+            }
+            pageInfo {
+                endCursor
+                hasNextPage
+                hasPreviousPage
+                startCursor
+            }
+        }
+    }
+    """
+
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
         th.Property("app", OrderAppType()),
+        # move to
         th.Property("channelInformation", ChannelInformationType()),
         th.Property("billingAddress",MailingAddressType()),
         th.Property("billingAddressMatchesShippingAddress", th.BooleanType),
@@ -237,6 +615,7 @@ class OrdersStream(DynamicStream):
         th.Property("email", th.StringType),
         th.Property("estimatedTaxes", th.BooleanType),
         th.Property("fulfillable", th.BooleanType),
+        # remove
         th.Property("fulfillments", th.ArrayType(
             th.ObjectType(
                 th.Property("id", th.StringType),
@@ -275,6 +654,7 @@ class OrdersStream(DynamicStream):
         th.Property("processedAt", th.DateTimeType),
         th.Property("refundable", th.BooleanType),
         th.Property("refundDiscrepancySet", MoneyBagType()),
+        # move to a new stream incrementally 
         th.Property(
             "refunds",
             th.ArrayType(th.ObjectType(
@@ -341,6 +721,7 @@ class OrdersStream(DynamicStream):
         th.Property("totalTaxSet", MoneyBagType()),
         th.Property("totalTipReceivedSet", MoneyBagType()),
         th.Property("totalWeight", th.StringType),
+        # move to a new stream
         th.Property(
             "transactions",
             th.ArrayType(
