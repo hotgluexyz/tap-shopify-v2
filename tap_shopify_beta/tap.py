@@ -22,7 +22,9 @@ from tap_shopify_beta.streams import (
     PriceRulesStream,
     EventProductsStream,
     EventDestroyedProductsStream,
-    MarketingEventsStream
+    MarketingEventsStream,
+    FulfillmentsStream,
+    RefundsStream
 )
 
 STREAM_TYPES = [
@@ -42,7 +44,9 @@ STREAM_TYPES = [
     PriceRulesStream,
     EventProductsStream,
     EventDestroyedProductsStream,
-    MarketingEventsStream
+    MarketingEventsStream,
+    FulfillmentsStream,
+    RefundsStream
 ]
 
 
