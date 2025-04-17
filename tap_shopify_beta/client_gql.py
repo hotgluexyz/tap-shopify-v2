@@ -328,6 +328,9 @@ class shopifyGqlStream(shopifyStream):
 
     @cached_property
     def max_requests(self):
+        # flag for testing, so new request doesn't break previous tests
+        if not self.config.get("apply_concurrency", True):
+            return 1
         # check how many points are available
         query = """
             query {
