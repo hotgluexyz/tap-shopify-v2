@@ -469,7 +469,7 @@ class OrdersStream(DynamicStream):
         return request_data
     
     def get_child_context(self, record, context) -> dict:
-        refunds = [r["id"] for r in record.get("refund", [])]
+        refunds = [r["id"] for r in record.get("refunds", [])]
         fulfillments = [f["id"] for f in record.get("fulfillments", [])]
         return {"refunds": refunds, "fulfillments": fulfillments}
     
