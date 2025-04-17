@@ -168,24 +168,21 @@ class shopifyGqlStream(shopifyStream):
         if next_page_token:
             params["after"] = next_page_token
         if self.replication_key:
-            # TODO: make this work for both concurrent and per month sync
-            if context and context.get("date_range"):
+            # fetch data in monthly chunks
+            if self.config.get(f"sync_{self.name}_monthly"):
+                start_date = self.start_date or self.get_starting_timestamp(context)
+                date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
+                date_filter = f"updated_at:>{date}"
+                self.start_date = start_date
+                self.end_date = start_date + relativedelta(months=1)
+                end_date = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
+                date_filter = f"{date_filter} AND updated_at:<={end_date}"
+                params["filter"] = date_filter
+            elif context and context.get("date_range"):
                 date_filter = f"updated_at:>{context['date_range']['start_date']}"
                 if context['date_range'].get('end_date'):
                     date_filter = f"{date_filter} AND updated_at:<={context['date_range']['end_date']}"
                 params["filter"] = date_filter
-            else:
-                start_date = self.start_date or self.get_starting_timestamp(context)
-                if start_date:
-                    date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
-                    date_filter = f"updated_at:>{date}"
-                    # fetch data in monthly chunks
-                    if self.config.get(f"sync_{self.name}_monthly"):
-                        self.start_date = start_date
-                        self.end_date = start_date + relativedelta(months=1)
-                        end_date = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
-                        date_filter = f"{date_filter} AND updated_at:<={end_date}"
-                    params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params
         if self.sort_key:
@@ -401,7 +398,7 @@ class shopifyGqlStream(shopifyStream):
             record_queue.put(None)
 
     def get_records(self, context: Optional[dict]) -> Iterable[dict]:
-        if self.max_requests < 2 or not self.replication_key:
+        if self.config.get(f"sync_{self.name}_monthly") or self.max_requests < 2 or not self.replication_key:
             yield from super().get_records(context)
             return
 
@@ -440,3 +437,47 @@ class shopifyGqlStream(shopifyStream):
                 except queue.Empty:
                     self.logger.debug("Queue is empty, still waiting...")
                     continue
+
+class GqlChildStream(shopifyGqlStream):
+
+    json_path = "$.[*]"
+
+    def filter_response(self, response_json: dict) -> dict:
+        return list(response_json.get("data", []).values())
+
+    def query(self, context: dict, context_key: str):
+        # Build ID parameters based on page_size
+        query_len = len(context.get(context_key, []))
+        id_params = ", ".join([f"$id{i}: ID!" for i in range(1, query_len + 1)])
+
+        query_blocks = "".join([
+            f"""
+                q{i}: __query_name__(id: $id{i}) {{
+                    __selected_fields__
+                }}
+            """
+            for i in range(1, query_len + 1)
+        ])
+
+        base_query = """query tapShopify(__id_params__) {
+            __query_blocks__
+        }"""
+
+        query = base_query.replace("__id_params__", id_params)
+        query = query.replace("__query_blocks__", query_blocks)
+        query = query.replace("__query_name__", self.query_name)
+        query = query.replace("__selected_fields__", self.gql_selected_fields)
+        return query
+    
+    def prepare_request_payload(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Optional[dict]:
+        """Prepare the data payload for the GraphQL API request."""
+        ids = {f"id{i}": id_val for i, id_val in enumerate(context.get(self.context_key, []), start=1)}
+        query = self.query(context, self.context_key).lstrip()
+        request_data = {
+            "query": (" ".join([line.strip() for line in query.splitlines()])),
+            "variables": ids,
+        }
+        # self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
+        return request_data

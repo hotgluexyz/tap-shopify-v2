@@ -2,12 +2,12 @@
 import abc
 import json
 import sys
-from typing import Optional
+from typing import Optional, List, Any
 
 from singer_sdk import typing as th
 
 from tap_shopify_beta.client_bulk import shopifyBulkStream
-from tap_shopify_beta.client_gql import shopifyGqlStream
+from tap_shopify_beta.client_gql import shopifyGqlStream, GqlChildStream
 from tap_shopify_beta.client_rest import shopifyRestStream
 from tap_shopify_beta.types.order_app import OrderAppType
 from tap_shopify_beta.types.channel_information import ChannelInformationType
@@ -30,6 +30,13 @@ from tap_shopify_beta.types.mailing_address import MailingAddressType
 from tap_shopify_beta.types.company_contact import CompanyContactType
 from tap_shopify_beta.types.sms_marketing_consent import SmsMarketingConsentType
 from tap_shopify_beta.types.tax_line import TaxLineType
+import copy
+from singer_sdk.helpers._state import (
+    finalize_state_progress_markers,
+    log_sort_error,
+)
+from singer_sdk.exceptions import InvalidStreamSortException
+import requests
 
 config_path = "config.json"
 for i, arg in enumerate(sys.argv):
@@ -182,15 +189,17 @@ class OrdersStream(DynamicStream):
     last_replication_key = None
     sort_key = "UPDATED_AT"
     sort_key_type = "OrderSortKeys"
+    child_context_keys = ["fulfillments", "refunds"]
 
     bulk_process_fields = {
         "LineItem": "lineItems"
     }
 
+    child_size = 140 # value based on the estimated query cost of child stream and the max allowed by the API (1000 per request)
+
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
         th.Property("app", OrderAppType()),
-        # move to
         th.Property("channelInformation", ChannelInformationType()),
         th.Property("billingAddress",MailingAddressType()),
         th.Property("billingAddressMatchesShippingAddress", th.BooleanType),
@@ -238,28 +247,9 @@ class OrdersStream(DynamicStream):
         th.Property("email", th.StringType),
         th.Property("estimatedTaxes", th.BooleanType),
         th.Property("fulfillable", th.BooleanType),
-        # remove
         th.Property("fulfillments", th.ArrayType(
             th.ObjectType(
-                th.Property("id", th.StringType),
-                th.Property("inTransitAt", th.StringType),
-                th.Property("legacyResourceId", th.StringType),
-                th.Property("location", LocationType()),
-                th.Property("name", th.StringType),
-                th.Property("requiresShipping", th.BooleanType),
-                th.Property("service", th.ObjectType(
-                    th.Property("id", th.StringType)
-                )),
-                th.Property("status", th.StringType),
-                th.Property("totalQuantity", th.IntegerType),
-                th.Property("trackingInfo", th.ArrayType(
-                    th.ObjectType(
-                        th.Property("company", th.StringType),
-                        th.Property("number", th.StringType),
-                        th.Property("url", th.StringType),
-                    ))
-                ),
-                th.Property("updatedAt", th.DateTimeType),
+                th.Property("id", th.StringType)
             )),
         ),
         th.Property("fullyPaid", th.BooleanType),
@@ -282,17 +272,6 @@ class OrdersStream(DynamicStream):
             "refunds",
             th.ArrayType(th.ObjectType(
                 th.Property("id", th.StringType),
-                th.Property("createdAt", th.DateTimeType),
-                th.Property(
-                    "duties",
-                    th.ArrayType(th.ObjectType(
-                        th.Property("amountSet", MoneyBagType()),
-                    )),
-                ),
-                th.Property("legacyResourceId", th.StringType),
-                th.Property("note", th.StringType),
-                th.Property("totalRefundedSet", MoneyBagType()),
-                th.Property("updatedAt", th.DateTimeType),
             ),
         )),
         th.Property("registeredSourceUrl", th.StringType),
@@ -344,7 +323,6 @@ class OrdersStream(DynamicStream):
         th.Property("totalTaxSet", MoneyBagType()),
         th.Property("totalTipReceivedSet", MoneyBagType()),
         th.Property("totalWeight", th.StringType),
-        # move to a new stream
         th.Property(
             "transactions",
             th.ArrayType(
@@ -489,6 +467,160 @@ class OrdersStream(DynamicStream):
         }
         self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
         return request_data
+    
+    def get_child_context(self, record, context) -> dict:
+        refunds = [r["id"] for r in record.get("refund", [])]
+        fulfillments = [f["id"] for f in record.get("fulfillments", [])]
+        return {"refunds": refunds, "fulfillments": fulfillments}
+    
+    def _sync_records(  # noqa C901  # too complex
+        self, context: Optional[dict] = None
+    ) -> None:
+        record_count = 0
+        current_context: Optional[dict]
+        context_list: Optional[List[dict]]
+        context_list = [context] if context is not None else self.partitions
+        selected = self.selected
+
+        for current_context in context_list or [{}]:
+            partition_record_count = 0
+            current_context = current_context or None
+            state = self.get_context_state(current_context)
+            state_partition_context = self._get_state_partition_context(current_context)
+            self._write_starting_replication_value(current_context)
+            child_context: Optional[dict] = (
+                None if current_context is None else copy.copy(current_context)
+            )
+            child_context_bulk = {key: [] for key in self.child_context_keys}
+            for record_result in self.get_records(current_context):
+                if isinstance(record_result, tuple):
+                    # Tuple items should be the record and the child context
+                    record, child_context = record_result
+                else:
+                    record = record_result
+                child_context = copy.copy(
+                    self.get_child_context(record=record, context=child_context)
+                )
+                for key, val in (state_partition_context or {}).items():
+                    # Add state context to records if not already present
+                    if key not in record:
+                        record[key] = val
+
+                # Sync children, except when primary mapper filters out the record
+                if self.stream_maps[0].get_filter_result(record):
+                    # add id to child_context_bulk ids
+                    for key, value in child_context.items():                        
+                        child_context_bulk[key].extend(child_context[key]) if value else None
+                
+                if any(len(v) >= self.child_size for v in child_context_bulk.values()):
+                    self._sync_children(child_context_bulk)
+                    child_context_bulk = {key: [] for key in self.child_context_keys}
+
+                self._check_max_record_limit(record_count)
+                if selected:
+                    if (record_count - 1) % self.STATE_MSG_FREQUENCY == 0:
+                        self._write_state_message()
+                    self._write_record_message(record)
+                    try:
+                        self._increment_stream_state(record, context=current_context)
+                    except InvalidStreamSortException as ex:
+                        log_sort_error(
+                            log_fn=self.logger.error,
+                            ex=ex,
+                            record_count=record_count + 1,
+                            partition_record_count=partition_record_count + 1,
+                            current_context=current_context,
+                            state_partition_context=state_partition_context,
+                            stream_name=self.name,
+                        )
+                        raise ex
+
+                record_count += 1
+                partition_record_count += 1
+            # process remaining child context if len < 1000
+            if any(v != [] for v in child_context_bulk.values()):
+                self._sync_children(child_context_bulk)
+            #----
+            if current_context == state_partition_context:
+                # Finalize per-partition state only if 1:1 with context
+                finalize_state_progress_markers(state)
+        if not context:
+            # Finalize total stream only if we have the full full context.
+            # Otherwise will be finalized by tap at end of sync.
+            finalize_state_progress_markers(self.stream_state)
+        self._write_record_count_log(record_count=record_count, context=context)
+        # Reset interim bookmarks before emitting final STATE message:
+        self._write_state_message()
+    
+    def _sync_children(self, child_context: dict) -> None:
+        for child_stream in self.child_streams:
+            # sync child stream if it is selected and has ids to fetch in child_context
+            if (child_stream.selected or child_stream.has_selected_descendents) and child_context.get(child_stream.context_key):
+                child_stream.sync(context=child_context)
+
+
+class FulfillmentsStream(GqlChildStream):
+    """Define orders stream."""
+
+    name = "orders_fulfillments"
+    primary_keys = ["id"]
+    query_name = "fulfillment"
+    parent_stream_type = OrdersStream
+    context_key = "fulfillments"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("order", th.ObjectType(
+            th.Property("id", th.StringType)
+        )),
+        th.Property("inTransitAt", th.StringType),
+        th.Property("legacyResourceId", th.StringType),
+        th.Property("location", LocationType()),
+        th.Property("name", th.StringType),
+        th.Property("requiresShipping", th.BooleanType),
+        th.Property("service", th.ObjectType(
+            th.Property("id", th.StringType)
+        )),
+        th.Property("status", th.StringType),
+        th.Property("totalQuantity", th.IntegerType),
+        th.Property("trackingInfo", th.ArrayType(
+            th.ObjectType(
+                th.Property("company", th.StringType),
+                th.Property("number", th.StringType),
+                th.Property("url", th.StringType),
+            ))
+        ),
+        th.Property("updatedAt", th.DateTimeType),
+    ).to_dict()
+    
+
+class RefundsStream(GqlChildStream):
+    """Define orders stream."""
+
+    name = "orders_refunds"
+    primary_keys = ["id"]
+    query_name = "refund"
+    parent_stream_type = OrdersStream
+    context_key = "refunds"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("order", th.ObjectType(
+            th.Property("id", th.StringType)
+        )),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property(
+            "duties",
+            th.ArrayType(th.ObjectType(
+                th.Property("amountSet", MoneyBagType()),
+            )),
+        ),
+        th.Property("legacyResourceId", th.StringType),
+        th.Property("note", th.StringType),
+        th.Property("totalRefundedSet", MoneyBagType()),
+        th.Property("updatedAt", th.DateTimeType),
+    ).to_dict()
+    
 
 class ShopStream(shopifyGqlStream):
     """Define shop stream."""
