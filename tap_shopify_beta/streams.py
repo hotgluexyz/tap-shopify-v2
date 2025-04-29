@@ -1027,8 +1027,8 @@ class CustomerVisitStream(shopifyGqlStream, metaclass=abc.ABCMeta):
         return {
             'edges': [
                 e
-                for e in response_json['data']['orders']['edges']
-                if e.get('node',{}).get('customerJourneySummary',{}).get(self.visit_type)
+                for e in ((response_json.get('data') or {}).get('orders') or {}).get('edges', [])
+                if e.get('node', {}).get('customerJourneySummary', {}).get(self.visit_type)
             ]
         }
 
