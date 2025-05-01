@@ -20,6 +20,9 @@ import backoff
 import concurrent.futures
 import queue
 import threading
+from pendulum import parse
+
+
 class GraphQLInternalServerError(RetriableAPIError):
     """Error raised when Shopify returns an internal server error in the GraphQL response."""
     pass
@@ -290,6 +293,45 @@ class shopifyGqlStream(shopifyStream):
             on_backoff=self.backoff_handler,
         )(func)
         return decorator
+    
+    def get_earliest_replication_key(self, context: dict) -> Optional[datetime]:
+            base_query = """
+                query tapShopify($sortKey: __sort_key_type__) {
+                    __query_name__(first: 1, sortKey: $sortKey) {
+                        edges {
+                            node {
+                                __replication_key__
+                            }
+                        }
+                    }
+                }
+            """
+            query = base_query.replace("__sort_key_type__", self.sort_key_type)
+            query = query.replace("__query_name__", self.query_name)
+            query = query.replace("__replication_key__", self.replication_key)
+
+            request_data = {
+                "query": (" ".join([line.strip() for line in query.splitlines()])),
+                "variables": {"sortKey": self.sort_key}
+            }
+            headers = self.http_headers
+            headers.update(self.authenticator.auth_headers or {})
+            request = cast(
+                requests.PreparedRequest,
+                self.requests_session.prepare_request(
+                    requests.Request(
+                        method="POST",
+                        url=self.url_base,
+                        params=None,
+                        headers=self.http_headers,
+                        json=request_data,
+                    ),
+                ),
+            )
+            resp = self._request(request, None)
+            resp_json = resp.json()
+            earliest_rep_key = resp_json.get("data", {}).get(self.query_name, {}).get("edges", [{}])[0].get("node", {}).get(self.replication_key)
+            return parse(earliest_rep_key)
 
     def get_concurrent_params(self, context):
         """Generate list of date range parameters for concurrent requests.
@@ -302,6 +344,12 @@ class shopifyGqlStream(shopifyStream):
             List of parameter dicts with start_date and end_date for each partition
         """            
         start_date = self.start_date or self.get_starting_timestamp(context)
+
+        # make a request to get the earliest rep key value
+        if self.replication_key and self.sort_key:
+            earliest_rep_key = self.get_earliest_replication_key(context)
+            if earliest_rep_key > start_date:
+                start_date = earliest_rep_key
             
         # Get current time in UTC
         now = datetime.now(pytz.UTC)
