@@ -49,8 +49,8 @@ class shopifyGqlStream(shopifyStream):
             return 1
             
         # If we don't have enough points for at least 2 queries, wait
-        if self.available_points < self.query_cost * 2:
-            points_needed = self.query_cost*2 - self.available_points
+        if self.available_points < self.query_cost * 5:
+            points_needed = self.query_cost * 5 - self.available_points
             seconds_to_wait = math.ceil(points_needed / self.restore_rate)
             self.logger.info(f"Waiting {seconds_to_wait} seconds for {points_needed} more points to become available")
             sleep(seconds_to_wait)
@@ -276,6 +276,12 @@ class shopifyGqlStream(shopifyStream):
         except ValueError:
             # If response is not JSON, let the parent validator handle it
             pass
+    
+    def backoff_wait_generator(self):
+        # Use exponential backoff between min_wait and 30 seconds
+        min_wait = 1000 / self.restore_rate if self.restore_rate else 10
+        return backoff.expo(base=2, factor=min_wait, max_value=30)
+    
 
     def request_decorator(self, func: Callable) -> Callable:
         decorator: Callable = backoff.on_exception(
@@ -289,7 +295,7 @@ class shopifyGqlStream(shopifyStream):
                 requests.exceptions.RequestException,
                 ConnectionError,
             ),
-            max_tries=self.backoff_max_tries,
+            max_tries=10,
             on_backoff=self.backoff_handler,
         )(func)
         return decorator
