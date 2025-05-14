@@ -73,8 +73,9 @@ class shopifyGqlStream(shopifyStream):
         target_pages = min(max_pages, pages)
         
         self.logger.info(f"Thread: {threading.current_thread().name} Using {target_pages * self.query_cost} points, Available points: {self.available_points}")
+
         # For smaller page counts, still use them but be more conservative
-        return int(target_pages)
+        return min(int(target_pages), 250)
 
     @cached_property
     def query(self) -> str:
@@ -136,6 +137,7 @@ class shopifyGqlStream(shopifyStream):
         if hasattr(self, "additional_arguments"):
             for key, value in self.additional_arguments.items():
                 query = query.replace(key, f"{key} {value}")
+
         return query
 
     def get_next_page_token(
@@ -170,6 +172,7 @@ class shopifyGqlStream(shopifyStream):
         params["first"] = self.page_size
         if next_page_token:
             params["after"] = next_page_token
+
         if self.replication_key:
             # fetch data in monthly chunks
             if self.config.get(f"sync_{self.name}_monthly"):
@@ -205,17 +208,20 @@ class shopifyGqlStream(shopifyStream):
 
         errors = res_json.get("errors")
 
-        cost = res_json["extensions"].get("cost")
+        filtered_response = self.filter_response(res_json)
+        records = list(extract_jsonpath(json_path, input=filtered_response))
+        if errors and not records:
+            raise Exception(errors)
+
+        cost = res_json.get("extensions", dict()).get("cost")
+        if not cost:
+            self.logger.warning(f"No cost found for stream {self.name}, response: {res_json}")
         if not self.query_cost:
             self.query_cost = (cost.get("actualQueryCost") + cost.get("requestedQueryCost")) / 2
         self.available_points = cost["throttleStatus"].get("currentlyAvailable")
         self.restore_rate = cost["throttleStatus"].get("restoreRate")
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
 
-        filtered_response = self.filter_response(res_json)
-        records = list(extract_jsonpath(json_path, input=filtered_response))
-        if errors and not records:
-            raise Exception(errors)
         if errors:
             self.logger.info(f"Issue found while fetching {self.name}, response: {errors}")
         yield from records
