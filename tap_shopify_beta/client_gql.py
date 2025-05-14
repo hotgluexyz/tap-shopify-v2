@@ -73,6 +73,11 @@ class shopifyGqlStream(shopifyStream):
         target_pages = min(max_pages, pages)
         
         self.logger.info(f"Thread: {threading.current_thread().name} Using {target_pages * self.query_cost} points, Available points: {self.available_points}")
+
+        # NOTE: this was somehow broken for non-orders streams
+        if self.name != "orders":
+            return min(int(target_pages), 250)
+
         # For smaller page counts, still use them but be more conservative
         return int(target_pages)
 
