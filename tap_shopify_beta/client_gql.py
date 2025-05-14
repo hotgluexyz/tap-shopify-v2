@@ -74,12 +74,8 @@ class shopifyGqlStream(shopifyStream):
         
         self.logger.info(f"Thread: {threading.current_thread().name} Using {target_pages * self.query_cost} points, Available points: {self.available_points}")
 
-        # NOTE: this was somehow broken for non-orders streams
-        if self.name != "orders":
-            return min(int(target_pages), 250)
-
         # For smaller page counts, still use them but be more conservative
-        return int(target_pages)
+        return min(int(target_pages), 250)
 
     @cached_property
     def query(self) -> str:
@@ -212,6 +208,11 @@ class shopifyGqlStream(shopifyStream):
 
         errors = res_json.get("errors")
 
+        filtered_response = self.filter_response(res_json)
+        records = list(extract_jsonpath(json_path, input=filtered_response))
+        if errors and not records:
+            raise Exception(errors)
+
         cost = res_json.get("extensions", dict()).get("cost")
         if not cost:
             self.logger.warning(f"No cost found for stream {self.name}, response: {res_json}")
@@ -221,10 +222,6 @@ class shopifyGqlStream(shopifyStream):
         self.restore_rate = cost["throttleStatus"].get("restoreRate")
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
 
-        filtered_response = self.filter_response(res_json)
-        records = list(extract_jsonpath(json_path, input=filtered_response))
-        if errors and not records:
-            raise Exception(errors)
         if errors:
             self.logger.info(f"Issue found while fetching {self.name}, response: {errors}")
         yield from records
