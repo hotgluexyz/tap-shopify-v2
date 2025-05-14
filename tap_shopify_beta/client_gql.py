@@ -212,7 +212,7 @@ class shopifyGqlStream(shopifyStream):
 
         errors = res_json.get("errors")
 
-        cost = res_json["extensions"].get("cost")
+        cost = res_json.get("extensions", dict()).get("cost")
         if not self.query_cost:
             self.query_cost = (cost.get("actualQueryCost") + cost.get("requestedQueryCost")) / 2
         self.available_points = cost["throttleStatus"].get("currentlyAvailable")
