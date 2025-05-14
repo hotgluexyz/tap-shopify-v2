@@ -142,7 +142,6 @@ class shopifyGqlStream(shopifyStream):
             for key, value in self.additional_arguments.items():
                 query = query.replace(key, f"{key} {value}")
 
-        self.logger.info(f"Query: {query}")
         return query
 
     def get_next_page_token(
@@ -178,7 +177,6 @@ class shopifyGqlStream(shopifyStream):
         if next_page_token:
             params["after"] = next_page_token
 
-        self.logger.info(f"URL Params: {params}")
         if self.replication_key:
             # fetch data in monthly chunks
             if self.config.get(f"sync_{self.name}_monthly"):
@@ -262,7 +260,6 @@ class shopifyGqlStream(shopifyStream):
 
     def validate_response(self, response: requests.Response) -> None:
         """Validate GraphQL response. Will raise RetriableAPIError if internal server error is found."""
-        self.logger.info(f"Validating response for stream {self.name}. request: {response.request.body}")
         super().validate_response(response)
 
         try:
