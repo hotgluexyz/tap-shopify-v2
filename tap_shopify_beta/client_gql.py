@@ -517,6 +517,7 @@ class shopifyGqlStream(shopifyStream):
         if self.replication_key:
             if parse(row[self.replication_key]) > start_date:
                 return row
+        return row
 
 class GqlChildStream(shopifyGqlStream):
 
