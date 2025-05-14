@@ -42,6 +42,7 @@ class shopifyGqlStream(shopifyStream):
     end_date = None
     sort_key = None
     sort_key_type = None
+    date_rep_key_streams = ["collections"]
 
     @property
     def page_size(self) -> int:
@@ -185,9 +186,18 @@ class shopifyGqlStream(shopifyStream):
                 date_filter = f"{date_filter} AND updated_at:<={end_date}"
                 params["filter"] = date_filter
             elif context and context.get("date_range"):
-                date_filter = f"updated_at:>{context['date_range']['start_date']}"
+                start_date = context['date_range']['start_date']
+                # for date_rep_key_streams, we need to use the start_date as a date, not a datetime or range filter doesn't return any results
+                if self.name in self.date_rep_key_streams:
+                    start_date = start_date.strftime("%Y-%m-%d")
+                date_filter = f"updated_at:>{start_date}"
+                
+                end_date = context['date_range'].get('end_date')
                 if context['date_range'].get('end_date'):
-                    date_filter = f"{date_filter} AND updated_at:<={context['date_range']['end_date']}"
+                    if self.name in self.date_rep_key_streams:
+                        end_date = end_date.strftime("%Y-%m-%d")
+                    date_filter = f"{date_filter} AND updated_at:<={end_date}"
+                    
                 params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params
@@ -371,6 +381,12 @@ class shopifyGqlStream(shopifyStream):
         
         # Calculate time interval for each partition
         interval = total_time_range / self.max_requests
+
+        if self.name in self.date_rep_key_streams:
+            # For date_rep_key_streams, ensure interval is at least one full day
+            # Convert interval to days and round up
+            interval_days = math.ceil(interval.total_seconds() / (24 * 3600))
+            interval = relativedelta(days=interval_days)
         
         params = []
         for i in range(self.max_requests):
@@ -378,11 +394,13 @@ class shopifyGqlStream(shopifyStream):
             date_range = {}
             date_range["start_date"] = start_date + (interval * i)
             # don't set end_date for the last partition
-            if not i == self.max_requests - 1:
-                date_range["end_date"] = start_date + (interval * (i + 1))
-           
+            end_date = start_date + (interval * (i + 1))
+            if end_date < now or i == self.max_requests - 1:
+                date_range["end_date"] = end_date           
             context["date_range"] = date_range
             params.append(context)
+            if end_date > now:
+                break
             
         return params
 
