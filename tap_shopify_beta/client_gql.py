@@ -30,6 +30,10 @@ class GraphQLInternalServerError(RetriableAPIError):
 class shopifyGqlStream(shopifyStream):
     """shopify stream class."""
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.ids = set()
+
     page_size = 1
     query_cost = None
     available_points = None
@@ -185,9 +189,14 @@ class shopifyGqlStream(shopifyStream):
                 date_filter = f"{date_filter} AND updated_at:<={end_date}"
                 params["filter"] = date_filter
             elif context and context.get("date_range"):
-                date_filter = f"updated_at:>{context['date_range']['start_date']}"
+                start_date = context['date_range']['start_date'].strftime("%Y-%m-%d")
+                date_filter = f"updated_at:>{start_date}"
+                
+                end_date = context['date_range'].get('end_date')
                 if context['date_range'].get('end_date'):
-                    date_filter = f"{date_filter} AND updated_at:<={context['date_range']['end_date']}"
+                    end_date = end_date.strftime("%Y-%m-%d")
+                    date_filter = f"{date_filter} AND updated_at:<{end_date}"
+                    
                 params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params
@@ -371,6 +380,10 @@ class shopifyGqlStream(shopifyStream):
         
         # Calculate time interval for each partition
         interval = total_time_range / self.max_requests
+
+        # ensure interval is at least one full day
+        interval_days = math.ceil(interval.total_seconds() / (24 * 3600))
+        interval = relativedelta(days=interval_days)
         
         params = []
         for i in range(self.max_requests):
@@ -378,11 +391,13 @@ class shopifyGqlStream(shopifyStream):
             date_range = {}
             date_range["start_date"] = start_date + (interval * i)
             # don't set end_date for the last partition
-            if not i == self.max_requests - 1:
-                date_range["end_date"] = start_date + (interval * (i + 1))
-           
+            end_date = start_date + (interval * (i + 1))
+            if end_date < now or i == self.max_requests - 1:
+                date_range["end_date"] = end_date           
             context["date_range"] = date_range
             params.append(context)
+            if end_date > now:
+                break
             
         return params
 
@@ -500,6 +515,15 @@ class shopifyGqlStream(shopifyStream):
                 except queue.Empty:
                     self.logger.debug("Queue is empty, still waiting...")
                     continue
+
+    def post_process(self, row: dict, context: Optional[dict] = None):
+        start_date = self.get_starting_timestamp(context)
+        if self.replication_key:
+            if parse(row[self.replication_key]) > start_date and row["id"] not in self.ids:
+                self.ids.add(row["id"])
+                return row
+        else:
+            return row
 
 class GqlChildStream(shopifyGqlStream):
 
