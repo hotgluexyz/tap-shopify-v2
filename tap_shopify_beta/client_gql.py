@@ -30,6 +30,10 @@ class GraphQLInternalServerError(RetriableAPIError):
 class shopifyGqlStream(shopifyStream):
     """shopify stream class."""
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.ids = set()
+
     page_size = 1
     query_cost = None
     available_points = None
@@ -191,7 +195,7 @@ class shopifyGqlStream(shopifyStream):
                 end_date = context['date_range'].get('end_date')
                 if context['date_range'].get('end_date'):
                     end_date = end_date.strftime("%Y-%m-%d")
-                    date_filter = f"{date_filter} AND updated_at:<={end_date}"
+                    date_filter = f"{date_filter} AND updated_at:<{end_date}"
                     
                 params["filter"] = date_filter
         if self.single_object_params:
@@ -515,9 +519,11 @@ class shopifyGqlStream(shopifyStream):
     def post_process(self, row: dict, context: Optional[dict] = None):
         start_date = self.get_starting_timestamp(context)
         if self.replication_key:
-            if parse(row[self.replication_key]) > start_date:
+            if parse(row[self.replication_key]) > start_date and row["id"] not in self.ids:
+                self.ids.add(row["id"])
                 return row
-        return row
+        else:
+            return row
 
 class GqlChildStream(shopifyGqlStream):
 
