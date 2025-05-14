@@ -42,7 +42,6 @@ class shopifyGqlStream(shopifyStream):
     end_date = None
     sort_key = None
     sort_key_type = None
-    date_rep_key_streams = ["collections"]
 
     @property
     def page_size(self) -> int:
@@ -186,16 +185,12 @@ class shopifyGqlStream(shopifyStream):
                 date_filter = f"{date_filter} AND updated_at:<={end_date}"
                 params["filter"] = date_filter
             elif context and context.get("date_range"):
-                start_date = context['date_range']['start_date']
-                # for date_rep_key_streams, we need to use the start_date as a date, not a datetime or range filter doesn't return any results
-                if self.name in self.date_rep_key_streams:
-                    start_date = start_date.strftime("%Y-%m-%d")
+                start_date = context['date_range']['start_date'].strftime("%Y-%m-%d")
                 date_filter = f"updated_at:>{start_date}"
                 
                 end_date = context['date_range'].get('end_date')
                 if context['date_range'].get('end_date'):
-                    if self.name in self.date_rep_key_streams:
-                        end_date = end_date.strftime("%Y-%m-%d")
+                    end_date = end_date.strftime("%Y-%m-%d")
                     date_filter = f"{date_filter} AND updated_at:<={end_date}"
                     
                 params["filter"] = date_filter
@@ -382,11 +377,9 @@ class shopifyGqlStream(shopifyStream):
         # Calculate time interval for each partition
         interval = total_time_range / self.max_requests
 
-        if self.name in self.date_rep_key_streams:
-            # For date_rep_key_streams, ensure interval is at least one full day
-            # Convert interval to days and round up
-            interval_days = math.ceil(interval.total_seconds() / (24 * 3600))
-            interval = relativedelta(days=interval_days)
+        # ensure interval is at least one full day
+        interval_days = math.ceil(interval.total_seconds() / (24 * 3600))
+        interval = relativedelta(days=interval_days)
         
         params = []
         for i in range(self.max_requests):
@@ -518,6 +511,12 @@ class shopifyGqlStream(shopifyStream):
                 except queue.Empty:
                     self.logger.debug("Queue is empty, still waiting...")
                     continue
+
+    def post_process(self, row: dict, context: Optional[dict] = None):
+        start_date = self.get_starting_timestamp(context)
+        if self.replication_key:
+            if parse(row[self.replication_key]) > start_date:
+                return row
 
 class GqlChildStream(shopifyGqlStream):
 
