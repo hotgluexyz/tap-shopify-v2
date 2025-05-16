@@ -1220,6 +1220,7 @@ class PayoutsStream(shopifyGqlStream):
     replication_key = "issuedAt"
     page_size = 100
     json_path = "$.data.shopifyPaymentsAccount.payouts.edges[*].node"
+    max_requests = 1
 
     schema = th.PropertiesList(
             th.Property("id", th.StringType),
