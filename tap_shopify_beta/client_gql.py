@@ -143,6 +143,13 @@ class shopifyGqlStream(shopifyStream):
                 query = query.replace(key, f"{key} {value}")
 
         return query
+    
+    def get_starting_time(self, context):
+        start_date = self.config.get("start_date")
+        if start_date:
+            start_date = parse(self.config.get("start_date"))
+        rep_key = self.get_starting_timestamp(context)
+        return rep_key or start_date
 
     def get_next_page_token(
         self, response: requests.Response, previous_token: Optional[Any]

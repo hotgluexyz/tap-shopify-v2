@@ -1,8 +1,10 @@
 """Stream type classes for tap-shopify-beta."""
 import abc
+from backports.cached_property import cached_property
 import json
 import sys
-from typing import Optional, List, Any
+from typing import Dict, Iterable, Optional, List, Any
+from singer_sdk.helpers.jsonpath import extract_jsonpath
 
 from singer_sdk import typing as th
 
@@ -1208,3 +1210,124 @@ class CustomerJourneySummaryStream(shopifyGqlStream):
                 th.Property("ready", th.BooleanType),
             ))
     ).to_dict()
+    
+class PayoutsStream(shopifyGqlStream):
+    """Define base class for CustomerVisit stream"""
+
+    name = "payouts"
+    primary_keys = ["id", "issuedAt"]
+    query_name = "payouts"
+    replication_key = "issuedAt"
+    page_size = 100
+    json_path = "$.data.shopifyPaymentsAccount.payouts.edges[*].node"
+    max_requests = 1
+
+    schema = th.PropertiesList(
+            th.Property("id", th.StringType),
+            th.Property("issuedAt", th.DateTimeType),
+            th.Property("legacyResourceId", th.StringType),
+            th.Property("net", MoneyV2Type()),
+            th.Property("status", th.StringType),
+            th.Property("summary", th.ObjectType(
+                th.Property("adjustmentsFee", MoneyV2Type()),
+                th.Property("adjustmentsGross", MoneyV2Type()),
+                th.Property("chargesFee", MoneyV2Type()),
+                th.Property("chargesGross", MoneyV2Type()),
+
+                # TODO: specified in the docs but doesn't work
+                # th.Property("advanceFees", MoneyV2Type()),
+                # th.Property("advanceGross", MoneyV2Type()),
+                # th.Property("refundsFee", MoneyV2Type()),
+                # th.Property("refundsGross", MoneyV2Type()),
+                th.Property("reservedFundsFee", MoneyV2Type()),
+                th.Property("reservedFundsGross", MoneyV2Type()),
+                th.Property("retriedPayoutsFee", MoneyV2Type()),
+                th.Property("retriedPayoutsGross", MoneyV2Type()),
+            )),
+            th.Property("transactionType", th.StringType),
+            
+            # TODO: specified in the docs but doesn't work
+            # th.Property("businessEntity", th.ObjectType(
+            #     th.Property("id", th.StringType ),
+            #     th.Property("companyName", th.StringType),
+            #     th.Property("displayName", th.StringType),
+            #     th.Property("primary", th.BooleanType),
+            #     th.Property("address", MailingAddressType()),
+            #     th.Property("shopifyPaymentsAccount", th.ObjectType(
+            #         th.Property("id", th.StringType),
+            #         th.Property("accountOpenerName", th.StringType),
+            #         th.Property("activated", th.BooleanType),
+            #         th.Property("balance", MoneyV2Type()),
+            #         th.Property("defaultCurrency", th.StringType),
+            #         th.Property("onboardable", th.BooleanType),
+                    
+            #     )),
+            # )),
+            th.Property("shopifyPaymentsAccountId", th.StringType),
+    ).to_dict()
+    
+    @cached_property
+    def query(self) -> str:
+        """Set or return the GraphQL query string."""
+        base_query = """
+                query tapShopify($first: Int, $after: String, $filter: String) {
+                    shopifyPaymentsAccount {
+                        id
+                        payouts(first: $first, after: $after, query: $filter) {
+                            edges {
+                                cursor
+                                node {
+                                    __selected_fields__
+                                }
+                            },
+                            pageInfo {
+                                hasNextPage
+                            }
+                        }
+                    }
+                }
+            """
+        gql_selected_fields = self.gql_selected_fields.replace("\nshopifyPaymentsAccountId", "")
+        query = base_query.replace("__selected_fields__", gql_selected_fields)
+        return query
+    
+    def get_next_page_token(
+        self, response: requests.Response, previous_token: Optional[Any]
+    ) -> Any:
+        """Return token identifying next page or None if all records have been read."""
+        response_json = response.json()
+        has_next_json_path = f"$.data.shopifyPaymentsAccount.{self.query_name}.pageInfo.hasNextPage"
+        has_next = next(extract_jsonpath(has_next_json_path, response_json))
+        if has_next:
+            cursor_json_path = f"$.data.shopifyPaymentsAccount.{self.query_name}.edges[-1].cursor"
+            all_matches = extract_jsonpath(cursor_json_path, response_json)
+            return next(all_matches, None)
+        
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
+        params = dict()
+        params["first"] = self.page_size
+        if next_page_token:
+            params["after"] = next_page_token
+            
+        if self.replication_key:
+            start_date = self.start_date or self.get_starting_timestamp(context)
+            
+            if start_date:
+                start_date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
+                params["filter"] = f"issued_at:>'{start_date}'"
+
+        if self.sort_key:
+            params["sortKey"] = self.sort_key
+        return params
+    
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        """Parse the response and return a list of records."""
+        response_json = response.json()
+        
+        account_id = response_json.get("data").get("shopifyPaymentsAccount").get("id")
+        for record in extract_jsonpath(self.json_path, response_json):
+            record["shopifyPaymentsAccountId"] = account_id
+            yield record
