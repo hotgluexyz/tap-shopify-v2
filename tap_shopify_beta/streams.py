@@ -1220,7 +1220,6 @@ class PayoutsStream(shopifyGqlStream):
     replication_key = "issuedAt"
     page_size = 100
     json_path = "$.data.shopifyPaymentsAccount.payouts.edges[*].node"
-    max_requests = 1
 
     schema = th.PropertiesList(
             th.Property("id", th.StringType),
@@ -1319,8 +1318,6 @@ class PayoutsStream(shopifyGqlStream):
                 start_date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
                 params["filter"] = f"issued_at:>'{start_date}'"
 
-        if self.sort_key:
-            params["sortKey"] = self.sort_key
         return params
     
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
