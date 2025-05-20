@@ -1075,6 +1075,8 @@ class CustomerVisitStream(shopifyGqlStream, metaclass=abc.ABCMeta):
     page_size = 100
     is_timestamp_replication_key = True
     json_path = "$.edges[*].node"  # JSONPath to compile over the result of filter_response()
+    sort_key = "UPDATED_AT"
+    sort_key_type = "OrderSortKeys"
 
     @property
     def schema(self):
