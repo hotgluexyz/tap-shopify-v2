@@ -1125,6 +1125,8 @@ class CustomerJourneySummaryStream(shopifyGqlStream):
     replication_key = "updatedAt"
     page_size = 100
     is_timestamp_replication_key = True
+    sort_key = "UPDATED_AT"
+    sort_key_type = "OrderSortKeys"
 
     schema = th.PropertiesList(
             th.Property("id", th.StringType),
