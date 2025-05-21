@@ -211,6 +211,8 @@ class OrdersStream(DynamicStream):
     first_line_item = 250  # works as page_size for line_items
     _after_line_item = None
     last_replication_key = None
+    sort_key = "UPDATED_AT"
+    sort_key_type = "OrderSortKeys"
 
     bulk_process_fields = {
         "LineItem": "lineItems"
