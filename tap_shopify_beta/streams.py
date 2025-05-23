@@ -1325,6 +1325,10 @@ class PayoutsStream(shopifyGqlStream):
         """Parse the response and return a list of records."""
         response_json = response.json()
         
+        errors = response_json.get("errors")
+        if errors is not None:
+            raise Exception(errors)
+
         account_id = response_json.get("data").get("shopifyPaymentsAccount").get("id")
         for record in extract_jsonpath(self.json_path, response_json):
             record["shopifyPaymentsAccountId"] = account_id
