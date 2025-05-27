@@ -51,6 +51,10 @@ class shopifyGqlStream(shopifyStream):
     def page_size(self) -> int:
         if self.available_points is None:
             return 1
+        
+        # if restore rate and max points are high, wait to always be able to use max points
+        if self.restore_rate >= 500:
+            sleep(math.ceil(1000/self.restore_rate))
             
         # If we don't have enough points for at least 2 queries, wait
         if self.available_points < self.query_cost * 5:
@@ -437,7 +441,11 @@ class shopifyGqlStream(shopifyStream):
         max_available = resp_json.get("extensions", {}).get("cost", {}).get("throttleStatus", {}).get("maximumAvailable", 2000)
 
         # Calculate number of partitions based on available points
-        return math.floor(max_available / 1000)
+        max_requests = math.floor(max_available / 1000)
+        # if max_requests is greater than 10, set max_concurrent_threads to 80% of restore rate to avoid throttling
+        if max_requests >= 10:
+            max_requests = int(max_requests * 0.8)
+        return max_requests
     
     def safe_put(self, q: queue.Queue, record: dict):
         while True:
