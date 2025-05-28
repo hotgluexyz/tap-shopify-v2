@@ -403,7 +403,7 @@ class shopifyGqlStream(shopifyStream):
             params.append(context)
             if end_date > now:
                 break
-            
+        self.logger.info(f"Concurrent params: {params}")
         return params
 
     @cached_property
@@ -446,6 +446,7 @@ class shopifyGqlStream(shopifyStream):
         # if max_requests is greater than 10, set max_concurrent_threads to 80% of restore rate to avoid throttling
         if max_requests >= 10:
             max_requests = int(max_requests * 0.8)
+        self.logger.info(f"Max requests: {max_requests}")
         return max_requests
     
     def safe_put(self, q: queue.Queue, record: dict):
@@ -520,7 +521,7 @@ class shopifyGqlStream(shopifyStream):
                     record = record_queue.get(timeout=1)
                     if record is None:
                         finished_threads += 1
-                        self.logger.info(f"[{threading.current_thread().name}] Worker finished. Current memory: {process.memory_info().rss / 1024 / 1024:.2f} MB")
+                        self.log_memory_usage(f"[{threading.current_thread().name}] Worker finished")
                     elif isinstance(record, tuple) and record[0] == "ERROR":
                         # If an error is encountered, cancel all pending futures and drain the queue
                         self.logger.exception(f"Error from thread: {record[1]}")
