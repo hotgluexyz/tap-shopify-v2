@@ -499,7 +499,7 @@ class shopifyGqlStream(shopifyStream):
         self.log_memory_usage("Starting concurrent processing")
 
         concurrent_params = self.get_concurrent_params(context)
-        record_queue = queue.Queue(maxsize=10_000)
+        record_queue = queue.Queue(maxsize=5_000)
         finished_threads = 0
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=self.max_requests) as executor:
