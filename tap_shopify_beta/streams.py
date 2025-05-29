@@ -467,7 +467,7 @@ class OrdersStream(DynamicStream):
             "query": (" ".join([line.strip() for line in query.splitlines()])),
             "variables": params,
         }
-        self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
+        #self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
         return request_data
     
     def get_child_context(self, record, context) -> dict:

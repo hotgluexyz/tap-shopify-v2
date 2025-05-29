@@ -10,6 +10,8 @@ from backports.cached_property import cached_property
 from singer_sdk.streams import GraphQLStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
 from singer_sdk.exceptions import RetriableAPIError
+import psutil
+import os
 
 class shopifyStream(GraphQLStream):
     """shopify stream class."""
@@ -128,3 +130,8 @@ class shopifyStream(GraphQLStream):
             base=3,
         )(func)
         return decorator
+    
+    def log_memory_usage(self, tag=""):
+        process = psutil.Process(os.getpid())
+        mem = process.memory_info().rss / (1024 * 1024)  # In MB
+        self.logger.info(f"[MEMORY] {tag}: {mem:.2f} MB")

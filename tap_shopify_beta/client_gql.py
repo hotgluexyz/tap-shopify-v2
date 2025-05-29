@@ -236,7 +236,8 @@ class shopifyGqlStream(shopifyStream):
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
 
         if errors:
-            self.logger.info(f"Issue found while fetching {self.name}, response: {errors}")
+            #self.logger.info(f"Issue found while fetching {self.name}, response: {errors}")
+            pass
         yield from records
 
     def filter_response(self, response_json: dict) -> dict:
@@ -402,7 +403,7 @@ class shopifyGqlStream(shopifyStream):
             params.append(context)
             if end_date > now:
                 break
-            
+        self.logger.info(f"Concurrent params: {params}")
         return params
 
     @cached_property
@@ -445,6 +446,7 @@ class shopifyGqlStream(shopifyStream):
         # if max_requests is greater than 10, set max_concurrent_threads to 80% of restore rate to avoid throttling
         if max_requests >= 10:
             max_requests = int(max_requests * 0.8)
+        self.logger.info(f"Max requests: {max_requests}")
         return max_requests
     
     def safe_put(self, q: queue.Queue, record: dict):
@@ -466,8 +468,14 @@ class shopifyGqlStream(shopifyStream):
                 prepared = self.prepare_request(context, next_page_token=next_page_token)
                 resp = decorated_request(prepared, context)
 
+                # Log memory before processing response
+                self.log_memory_usage(f"[{threading.current_thread().name}] Memory before processing")
+
                 for record in self.parse_response(resp):
                     self.safe_put(record_queue, record)
+
+                # Log memory after processing response
+                self.log_memory_usage(f"[{threading.current_thread().name}] Memory after processing")
 
                 previous_token = copy.deepcopy(next_page_token)
                 next_page_token = self.get_next_page_token(resp, previous_token)
@@ -488,8 +496,10 @@ class shopifyGqlStream(shopifyStream):
             yield from super().get_records(context)
             return
 
+        self.log_memory_usage("Starting concurrent processing")
+
         concurrent_params = self.get_concurrent_params(context)
-        record_queue = queue.Queue()
+        record_queue = queue.Queue(maxsize=5_000)
         finished_threads = 0
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=self.max_requests) as executor:
@@ -511,9 +521,17 @@ class shopifyGqlStream(shopifyStream):
                     record = record_queue.get(timeout=1)
                     if record is None:
                         finished_threads += 1
-                        self.logger.info(f"[{threading.current_thread().name}] Worker finished")
+                        self.log_memory_usage(f"[{threading.current_thread().name}] Worker finished")
                     elif isinstance(record, tuple) and record[0] == "ERROR":
+                        # If an error is encountered, cancel all pending futures and drain the queue
                         self.logger.exception(f"Error from thread: {record[1]}")
+                        for f in futures:
+                            f.cancel()
+                        while not record_queue.empty():
+                            try:
+                                record_queue.get_nowait()
+                            except queue.Empty:
+                                break
                         raise Exception(f"Thread error: {record[1]}")
                     else:
                         self.logger.debug(f"Yielding record: {record}")
@@ -523,6 +541,8 @@ class shopifyGqlStream(shopifyStream):
                 except queue.Empty:
                     self.logger.debug("Queue is empty, still waiting...")
                     continue
+
+        self.log_memory_usage("Finished concurrent processing")
 
     def post_process(self, row: dict, context: Optional[dict] = None):
         start_date = self.get_starting_timestamp(context)
