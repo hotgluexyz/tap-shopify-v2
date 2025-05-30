@@ -10,9 +10,7 @@ import urllib3
 import backoff
 from tap_shopify_beta.auth import ShopifyAuthenticator
 from singer_sdk.exceptions import RetriableAPIError
-from http.client import RemoteDisconnected
-from requests.exceptions import ConnectionError
-from urllib3.exceptions import ProtocolError, InvalidChunkLength
+import http.client
 
 
 
@@ -88,13 +86,11 @@ class shopifyRestStream(RESTStream):
             self.backoff_wait_generator,
             (
                 RetriableAPIError,
-                requests.exceptions.RequestException,
                 urllib3.exceptions.HTTPError,
-                RemoteDisconnected,
+                http.client.HTTPException,
+                requests.exceptions.RequestException,
                 ConnectionError,
-                ProtocolError,
-                InvalidChunkLength,
-                ConnectionResetError,
+                TimeoutError,
             ),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler
