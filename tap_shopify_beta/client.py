@@ -13,7 +13,6 @@ from singer_sdk.exceptions import RetriableAPIError
 import psutil
 import os
 import http.client
-from requests.exceptions import ConnectionError
 
 class shopifyStream(GraphQLStream):
     """shopify stream class."""
