@@ -89,8 +89,6 @@ class shopifyRestStream(RESTStream):
                 urllib3.exceptions.HTTPError,
                 http.client.HTTPException,
                 requests.exceptions.RequestException,
-                ConnectionError,
-                TimeoutError,
             ),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler
