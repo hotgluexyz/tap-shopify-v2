@@ -12,6 +12,9 @@ from tap_shopify_beta.auth import ShopifyAuthenticator
 from singer_sdk.exceptions import RetriableAPIError
 import psutil
 import os
+from http.client import RemoteDisconnected
+from requests.exceptions import ConnectionError
+from urllib3.exceptions import ProtocolError, InvalidChunkLength
 
 class shopifyStream(GraphQLStream):
     """shopify stream class."""
@@ -123,7 +126,12 @@ class shopifyStream(GraphQLStream):
             (
                 RetriableAPIError,
                 requests.exceptions.RequestException,
-                urllib3.exceptions.HTTPError
+                urllib3.exceptions.HTTPError,
+                RemoteDisconnected,
+                ConnectionError,
+                ProtocolError,
+                InvalidChunkLength,
+                ConnectionResetError,
             ),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler,
