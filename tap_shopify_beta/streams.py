@@ -1078,6 +1078,7 @@ class EventProductsStream(shopifyRestStream):
     replication_key = "created_at"
     records_jsonpath = "$.events.[*]"
     path = "events.json"
+    limit = 100
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
