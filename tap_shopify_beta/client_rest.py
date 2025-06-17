@@ -3,9 +3,13 @@ from singer_sdk.streams.rest import RESTStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
 from singer_sdk.authenticators import APIKeyAuthenticator
 import requests
-from typing import Any, Dict, Optional, Union, List, Iterable
+from typing import Any, Dict, Optional, Union, List, Iterable, Callable
 from pendulum import parse
 import re
+import backoff
+from singer_sdk.exceptions import RetriableAPIError
+import urllib3
+import http.client
 
 
 
@@ -75,4 +79,16 @@ class shopifyRestStream(RESTStream):
             params["page_info"] = next_page_token
         return params
 
-    
+    def request_decorator(self, func: Callable) -> Callable:
+        decorator: Callable = backoff.on_exception(
+            self.backoff_wait_generator,
+            (
+                RetriableAPIError,
+                urllib3.exceptions.HTTPError,
+                http.client.HTTPException,
+                requests.exceptions.RequestException,
+            ),
+            max_tries=self.backoff_max_tries,
+            on_backoff=self.backoff_handler
+        )(func)
+        return decorator
