@@ -1,11 +1,17 @@
 """GraphQL client handling, including shopifyStream base class."""
 
-from typing import Any, Optional
+from typing import Any, Optional, Callable
 
 from singer_sdk.authenticators import APIKeyAuthenticator
 from backports.cached_property import cached_property
 from singer_sdk.streams import GraphQLStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
+
+import backoff
+from singer_sdk.exceptions import RetriableAPIError
+import urllib3
+import http.client
+import requests
 
 
 class shopifyStream(GraphQLStream):
@@ -114,3 +120,18 @@ class shopifyStream(GraphQLStream):
         output.append("}")
 
         return "\n".join(output)
+    
+    def request_decorator(self, func: Callable) -> Callable:
+        decorator: Callable = backoff.on_exception(
+            self.backoff_wait_generator,
+            (
+                RetriableAPIError,
+                urllib3.exceptions.HTTPError,       
+                http.client.HTTPException,
+                requests.exceptions.RequestException,
+            ),
+            max_tries=self.backoff_max_tries,
+            on_backoff=self.backoff_handler,
+            base=3,
+        )(func)
+        return decorator
