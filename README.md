@@ -1,8 +1,9 @@
 # tap-shopify-beta
 
-`tap-shopify-beta` is a Singer tap for shopify-beta.
+**tap-shopify-beta** is a Singer Tap capable of syncing data from Shopify. 
+**tap-shopify-beta** can be run on [hotglue](https://hotglue.com), an embedded integration platform for running Singer Taps and Targets.
 
-Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+The tap is built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
 ## Installation
 
