@@ -24,7 +24,7 @@ class shopifyRestStream(RESTStream):
     @property
     def authenticator(self) -> ShopifyAuthenticator:
         """Return a new authenticator object."""
-        if self.config.get("client_id") and self.config.get("code"):
+        if self.config.get("client_id") and not self.config.get("api_key"):
             shop = self.config["shop"]
             return ShopifyAuthenticator(
                 self, self._tap.config, f"https://{shop}.myshopify.com/admin/oauth/access_token"
