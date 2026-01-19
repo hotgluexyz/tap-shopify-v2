@@ -56,7 +56,7 @@ class TapshopifyBeta(Tap):
         th.Property(
             "api_key",
             th.StringType,
-            required=True,
+            required=False,
             description="The token to authenticate against the API service",
         ),
         th.Property(
