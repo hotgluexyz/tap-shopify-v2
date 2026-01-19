@@ -56,11 +56,18 @@ class ShopifyAuthenticator(APIAuthenticatorBase):
     @property
     def oauth_request_body(self) -> dict:
         """Define the OAuth request body for the hubspot API."""
-        return {
-            "client_id": self._tap._config["client_id"],
-            "client_secret": self._tap._config["client_secret"],
-            "code": self._tap._config["code"]
-        }
+        if self._tap._config.get("code"):
+            return {
+                "client_id": self._tap._config["client_id"],
+                "client_secret": self._tap._config["client_secret"],
+                "code": self._tap._config["code"]
+            }
+        else:
+            return {
+                "client_id": self._tap._config["client_id"],
+                "client_secret": self._tap._config["client_secret"],
+                "grant_type": "client_credentials"
+            }
 
     @property
     def oauth_request_payload(self) -> dict:
@@ -89,14 +96,18 @@ class ShopifyAuthenticator(APIAuthenticatorBase):
             )
         token_json = token_response.json()
         access_token = token_json["access_token"]
-        config_path = "config.json"
-        for i, arg in enumerate(sys.argv):
-            if arg == "--config":
-                if i + 1 < len(sys.argv):
-                    config_path = sys.argv[i + 1]
-                break
-        with open(config_path) as file:
-            config = json.load(file)
-        config["access_token"] = access_token
-        with open(config_path, "w") as file:
-            json.dump(config, file, indent=2)
+        self._tap._config["access_token"] = access_token
+
+        # Save the access token to the config file if we're using a code-exchange
+        if self._tap._config.get("code"):
+            config_path = "config.json"
+            for i, arg in enumerate(sys.argv):
+                if arg == "--config":
+                    if i + 1 < len(sys.argv):
+                        config_path = sys.argv[i + 1]
+                    break
+            with open(config_path) as file:
+                config = json.load(file)
+            config["access_token"] = access_token
+            with open(config_path, "w") as file:
+                json.dump(config, file, indent=2)
