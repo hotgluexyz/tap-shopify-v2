@@ -141,35 +141,6 @@ class VariantsStream(DynamicStream):
         th.Property("createdAt", th.DateTimeType),
         th.Property("displayName", th.StringType),
         th.Property(
-            "fulfillmentService",
-            th.ObjectType(
-                th.Property("id", th.StringType),
-                th.Property("callbackUrl", th.StringType),
-                th.Property("fulfillmentOrdersOptIn", th.BooleanType),
-                th.Property("handle", th.StringType),
-                th.Property("inventoryManagement", th.BooleanType),
-                th.Property("location", LocationType()),
-                th.Property("productBased", th.BooleanType),
-                th.Property("serviceName", th.StringType),
-                th.Property(
-                    "shippingMethods",
-                    th.ArrayType(
-                        th.ObjectType(
-                            th.Property("code", th.StringType),
-                            th.Property("label", th.StringType),
-                        )
-                    )
-                ),
-            ),
-        ),
-        th.Property(
-            "fulfillmentServiceEditable",
-            th.ObjectType(
-                th.Property("locked", th.BooleanType),
-                th.Property("reason", th.StringType),
-            ),
-        ),
-        th.Property(
             "image",
             th.ObjectType(
                 th.Property("id", th.StringType), th.Property("altText", th.StringType)
@@ -196,8 +167,6 @@ class VariantsStream(DynamicStream):
         th.Property("taxable", th.BooleanType),
         th.Property("title", th.StringType),
         th.Property("updatedAt", th.DateTimeType),
-        th.Property("weight", th.NumberType),
-        th.Property("weightUnit", th.StringType),
     ).to_dict()
 
 
@@ -620,7 +589,6 @@ class ShopStream(shopifyGqlStream):
                     th.Property("handle", th.StringType),
                     th.Property("inventoryManagement", th.BooleanType),
                     th.Property("location", LocationType()),
-                    th.Property("productBased", th.BooleanType),
                     th.Property("serviceName", th.StringType),
                     th.Property("type", th.StringType),
                 )
@@ -750,8 +718,6 @@ class InventoryItemsStream(DynamicStream):
                 th.Property("taxable", th.BooleanType),
                 th.Property("title", th.StringType),
                 th.Property("updatedAt", th.DateTimeType),
-                th.Property("weight", th.NumberType),
-                th.Property("weightUnit", th.StringType),
             ),
         ),
     ).to_dict()

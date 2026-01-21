@@ -178,7 +178,12 @@ class shopifyGqlStream(shopifyStream):
             json_path = f"$.data.{self.query_name}"
         res_json = response.json()
 
+        filtered_response = self.filter_response(res_json)
+        records = list(extract_jsonpath(json_path, input=filtered_response))
+
         errors = res_json.get("errors")
+        if errors and not records:
+            raise Exception(errors)
 
         cost = res_json["extensions"].get("cost")
         if not self.query_cost:
@@ -187,10 +192,6 @@ class shopifyGqlStream(shopifyStream):
         self.restore_rate = cost["throttleStatus"].get("restoreRate")
         self.max_points = cost["throttleStatus"].get("maximumAvailable")
 
-        filtered_response = self.filter_response(res_json)
-        records = list(extract_jsonpath(json_path, input=filtered_response))
-        if errors and not records:
-            raise Exception(errors)
         if errors:
             self.logger.info(f"Issue found while fetching {self.name}, response: {errors}")
         yield from records
