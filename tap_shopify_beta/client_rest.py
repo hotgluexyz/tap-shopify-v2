@@ -3,7 +3,7 @@ from singer_sdk.streams.rest import RESTStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
 from singer_sdk.authenticators import APIKeyAuthenticator
 import requests
-from typing import Any, Dict, Optional, Union, List, Iterable, Callable
+from typing import Any, Dict, Optional, Callable, Generator
 from pendulum import parse
 import re
 import backoff
@@ -40,7 +40,7 @@ class shopifyRestStream(RESTStream):
             value=str(self.config.get("api_key")),
             location="header",
         )
-    
+
     def get_next_page_token(
         self, response: requests.Response, previous_token: Optional[Any]
     ) -> Optional[Any]:
@@ -92,3 +92,19 @@ class shopifyRestStream(RESTStream):
             on_backoff=self.backoff_handler
         )(func)
         return decorator
+
+    def backoff_wait_generator(self) -> Callable[..., Generator[int, Any, None]]:
+        """
+        Example:
+            - 1st retry: 10 seconds
+            - 2nd retry: 20 seconds
+            - 3rd retry: 40 seconds
+            - 4th retry: 80 seconds
+            - 5th retry: 160 seconds
+            - 6th retry: 320 seconds (capped at 5 minutes)
+        """
+        return backoff.expo(base=2, factor=10, max_value=300)
+
+    def backoff_max_tries(self) -> int:
+        return 7
+    
