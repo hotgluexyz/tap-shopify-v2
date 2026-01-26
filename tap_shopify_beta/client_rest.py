@@ -10,6 +10,7 @@ import backoff
 from singer_sdk.exceptions import RetriableAPIError
 import urllib3
 import http.client
+import random
 
 
 
@@ -89,9 +90,13 @@ class shopifyRestStream(RESTStream):
                 requests.exceptions.RequestException,
             ),
             max_tries=self.backoff_max_tries,
-            on_backoff=self.backoff_handler
+            on_backoff=self.backoff_handler,
+            jitter=self.half_jitter,
         )(func)
         return decorator
+
+    def half_jitter(self, wait_time: float) -> float:
+        return wait_time / 2 + random.uniform(0, wait_time / 2)
 
     def backoff_wait_generator(self) -> Callable[..., Generator[int, Any, None]]:
         """
@@ -106,5 +111,5 @@ class shopifyRestStream(RESTStream):
         return backoff.expo(base=2, factor=10, max_value=300)
 
     def backoff_max_tries(self) -> int:
-        return 7
+        return 8
     
