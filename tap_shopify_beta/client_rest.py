@@ -111,5 +111,5 @@ class shopifyRestStream(RESTStream):
         return backoff.expo(base=2, factor=10, max_value=300)
 
     def backoff_max_tries(self) -> int:
-        return 8
+        return 10
     
