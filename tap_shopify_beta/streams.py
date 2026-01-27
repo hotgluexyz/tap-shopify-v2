@@ -1014,20 +1014,30 @@ class EventProductsStream(shopifyRestStream):
         
         return params
 
-    def custom_request_records(self, context: Optional[dict], use_backoff: bool = True) -> Iterable[dict]:
-        """Same as the RESTStream's request_records, but with option to use backoff or not."""
+    class FirstRequestFailedError(Exception):
+        """Exception raised when the first request fails."""
+        pass
+
+    def custom_request_records(self, context: Optional[dict]) -> Iterable[dict]:
+        """Same as the RESTStream's request_records, but raises FirstRequestFailedError if the first request fails."""
         next_page_token: Any = None
         finished = False
-        if use_backoff:
-            decorated_request = self.request_decorator(self._request)
-        else:
-            decorated_request = self._request
+        first_request = True
+        decorated_request = self.request_decorator(self._request)
 
         while not finished:
             prepared_request = self.prepare_request(
                 context, next_page_token=next_page_token
             )
-            resp = decorated_request(prepared_request, context)
+            if first_request:
+                try:
+                    resp = self._request(prepared_request, context)
+                except (RetriableAPIError, requests.exceptions.RequestException, 
+                        urllib3.exceptions.HTTPError, http.client.HTTPException) as e:
+                    raise self.FirstRequestFailedError(f"First request failed: {e}") from e
+                first_request = False
+            else:
+                resp = decorated_request(prepared_request, context)
             yield from self.parse_response(resp)
             previous_token = copy.deepcopy(next_page_token)
             next_page_token = self.get_next_page_token(
@@ -1050,36 +1060,33 @@ class EventProductsStream(shopifyRestStream):
         """
         # First, try the normal request without backoff
         try:
-            yield from self.custom_request_records(context, use_backoff=False)
-            return
-        except (RetriableAPIError, requests.exceptions.RequestException, 
-                urllib3.exceptions.HTTPError, http.client.HTTPException) as e:
-            self.logger.info(f"Received error: {e}, falling back to chunked date range processing")
-        
-        # Fallback: Split into monthly chunks
-        start_date = self.get_starting_time(context)
-        if not start_date:
-            raise e  # Re-raise the original exception if we can't chunk
-        
-        current_date = now()
-        
-        # Split into monthly chunks
-        chunk_start = start_date
-        while chunk_start < current_date:
-            # Calculate chunk end (1 month from start)
-            chunk_end = chunk_start + relativedelta(months=1)
-            self.logger.info(f"Processing chunk from {chunk_start} to {chunk_end}")
-
-            self._current_date_range = {
-                "start": chunk_start,
-                "end": chunk_end
-            }
-
-            # Process this chunk using custom_request_records
             yield from self.custom_request_records(context)
+            return
+        except self.FirstRequestFailedError as e:
+            self.logger.info("First request failed, falling back to chunked 'event_products' processing")
+        
+            # Fallback: Split into monthly chunks
+            start_date = self.get_starting_time(context)
+            if not start_date:
+                raise e  # Re-raise the original exception if we can't chunk
             
-            # Move to next month
-            chunk_start = chunk_end
+            current_date = now()
+
+            chunk_start = start_date
+            while chunk_start < current_date:
+                # Calculate chunk end (1 month from start)
+                chunk_end = chunk_start + relativedelta(months=1)
+                self.logger.info(f"Processing chunk from {chunk_start} to {chunk_end}")
+
+                self._current_date_range = {
+                    "start": chunk_start,
+                    "end": chunk_end
+                }
+
+                yield from self.custom_request_records(context)
+                
+                # Move to next month
+                chunk_start = chunk_end
 
 
 class MarketingEventsStream(shopifyRestStream):
