@@ -1067,9 +1067,9 @@ class EventProductsStream(shopifyRestStream):
             
             current_date = now()
 
+            # Request records in monthly chunks
             chunk_start = start_date
             while chunk_start < current_date:
-                # Calculate chunk end (1 month from start)
                 chunk_end = chunk_start + relativedelta(months=1)
                 self.logger.info(f"Processing chunk from {chunk_start} to {chunk_end}")
 
@@ -1079,6 +1079,8 @@ class EventProductsStream(shopifyRestStream):
                 }
 
                 yield from self.custom_request_records(context)
+
+                self._current_date_range = None
                 
                 # Move to next month
                 chunk_start = chunk_end
