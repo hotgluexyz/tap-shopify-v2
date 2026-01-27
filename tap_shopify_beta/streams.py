@@ -1052,13 +1052,8 @@ class EventProductsStream(shopifyRestStream):
             finished = not next_page_token
 
     def request_records(self, context: Optional[dict]) -> Iterable[dict]:
-        """Request records from REST endpoint(s), using chunking as fallback if normal request fails.
-        
-        This method first tries the normal request without backoff. If it fails with HTTP/network errors
-        (RetriableAPIError, RequestException, etc.), it falls back to splitting the date range into 
-        1-month intervals and processing each separately with backoff enabled.
-        """
-        # First, try the normal request without backoff
+        """Request records from REST endpoint(s), using chunking as fallback if normal request fails."""
+        # First, try the normal request
         try:
             yield from self.custom_request_records(context)
             return
