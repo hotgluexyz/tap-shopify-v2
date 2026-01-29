@@ -1,10 +1,17 @@
 """Stream type classes for tap-shopify-beta."""
 import abc
+import copy
 import json
 import sys
-from typing import Optional
+from typing import Optional, Dict, Any, Iterable
 
 from singer_sdk import typing as th
+from singer_sdk.exceptions import RetriableAPIError
+from dateutil.relativedelta import relativedelta
+from pendulum import now
+import requests
+import urllib3
+import http.client
 
 from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream
@@ -972,6 +979,7 @@ class EventProductsStream(shopifyRestStream):
     replication_key = "created_at"
     records_jsonpath = "$.events.[*]"
     path = "events.json"
+    _current_date_range: Optional[Dict[str, Any]] = None
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -986,6 +994,96 @@ class EventProductsStream(shopifyRestStream):
         th.Property("description", th.StringType),
         th.Property("path", th.StringType),
     ).to_dict()
+
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
+        
+        # Get base params from parent
+        params = super().get_url_params(context, next_page_token)
+        
+        # If there's no next_page_token, and a date range set (from monthly chunking), override date params
+        if not next_page_token and self._current_date_range:
+            start_date = self._current_date_range["start"]
+            end_date = self._current_date_range["end"]
+            rep_key_param_min = f"{self.replication_key}_min"
+            rep_key_param_max = f"{self.replication_key}_max"
+            params[rep_key_param_min] = start_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
+            params[rep_key_param_max] = end_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        
+        return params
+
+    class FirstRequestFailedError(Exception):
+        """Exception raised when the first request fails."""
+        pass
+
+    def custom_request_records(self, context: Optional[dict]) -> Iterable[dict]:
+        """Same as the RESTStream's request_records, but raises FirstRequestFailedError if the first request fails."""
+        next_page_token: Any = None
+        finished = False
+        first_request = True
+        decorated_request = self.request_decorator(self._request)
+
+        while not finished:
+            prepared_request = self.prepare_request(
+                context, next_page_token=next_page_token
+            )
+            if first_request:
+                try:
+                    resp = self._request(prepared_request, context)
+                except (RetriableAPIError, requests.exceptions.RequestException, 
+                        urllib3.exceptions.HTTPError, http.client.HTTPException) as e:
+                    raise self.FirstRequestFailedError(f"First request failed: {e}") from e
+                first_request = False
+            else:
+                resp = decorated_request(prepared_request, context)
+            yield from self.parse_response(resp)
+            previous_token = copy.deepcopy(next_page_token)
+            next_page_token = self.get_next_page_token(
+                response=resp, previous_token=previous_token
+            )
+            if next_page_token and next_page_token == previous_token:
+                raise RuntimeError(
+                    f"Loop detected in pagination. "
+                    f"Pagination token {next_page_token} is identical to prior token."
+                )
+            # Cycle until get_next_page_token() no longer returns a value
+            finished = not next_page_token
+
+    def request_records(self, context: Optional[dict]) -> Iterable[dict]:
+        """Request records from REST endpoint(s), using chunking as fallback if normal request fails."""
+        # First, try the normal request
+        try:
+            yield from self.custom_request_records(context)
+            return
+        except self.FirstRequestFailedError as e:
+            self.logger.info("First request failed, falling back to chunked 'event_products' processing")
+        
+            # Fallback: Split into monthly chunks
+            start_date = self.get_starting_time(context)
+            if not start_date:
+                raise e  # Re-raise the original exception if we can't chunk
+            
+            current_date = now()
+
+            # Request records in monthly chunks
+            chunk_start = start_date
+            while chunk_start < current_date:
+                chunk_end = chunk_start + relativedelta(months=1)
+                self.logger.info(f"Processing chunk from {chunk_start} to {chunk_end}")
+
+                self._current_date_range = {
+                    "start": chunk_start,
+                    "end": chunk_end
+                }
+
+                yield from self.custom_request_records(context)
+
+                self._current_date_range = None
+                
+                # Move to next month
+                chunk_start = chunk_end
 
 
 class MarketingEventsStream(shopifyRestStream):
