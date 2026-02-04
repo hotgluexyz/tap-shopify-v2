@@ -1,6 +1,6 @@
 """GraphQL client handling, including shopifyStream base class."""
 
-from typing import Any, Optional, Callable
+from typing import Any, Optional, Callable, Generator
 
 from singer_sdk.authenticators import APIKeyAuthenticator
 from backports.cached_property import cached_property
@@ -40,6 +40,21 @@ class shopifyStream(GraphQLStream):
             value=str(self.config.get("api_key")),
             location="header",
         )
+    
+    def backoff_wait_generator(self) -> Callable[..., Generator[int, Any, None]]:
+        """
+        Example:
+            - 1st retry: 10 seconds
+            - 2nd retry: 20 seconds
+            - 3rd retry: 40 seconds
+            - 4th retry: 80 seconds
+            - 5th retry: 160 seconds
+            - 6th retry: 320 seconds (capped at 5 minutes)
+        """
+        return backoff.expo(base=2, factor=10, max_value=300)
+
+    def backoff_max_tries(self) -> int:
+        return 7
 
     @cached_property
     def selected_properties(self):
