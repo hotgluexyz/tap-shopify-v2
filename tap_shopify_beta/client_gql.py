@@ -160,6 +160,9 @@ class shopifyGqlStream(shopifyStream):
                     self.end_date = start_date + relativedelta(months=1)
                     end_date = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
                     date_filter = f"{date_filter} AND updated_at:<={end_date}"
+                elif self.config.get("end_date"):
+                    end_date = self.config.get("end_date")
+                    date_filter = f"{date_filter} AND updated_at:<={end_date}"
                 params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params
