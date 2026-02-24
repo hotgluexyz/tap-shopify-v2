@@ -13,23 +13,31 @@ from singer_sdk.exceptions import RetriableAPIError
 import psutil
 import os
 import http.client
+import re
 
 class shopifyStream(GraphQLStream):
     """shopify stream class."""
 
     query_name = None
 
+    def get_shop_name(self) -> str:
+        """Return the shop name, configurable via tap settings."""
+        shop_no_https = self.config["shop"].replace("https://", "")
+        shop_no_extra_slashes = re.sub('/.*', '', shop_no_https)
+        shop = shop_no_extra_slashes[:-len(".myshopify.com")] if shop_no_extra_slashes.endswith(".myshopify.com") else shop_no_extra_slashes
+        return shop
+
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
-        shop = self.config["shop"]
+        shop = self.get_shop_name()
         return f"https://{shop}.myshopify.com/admin/api/2024-07/graphql.json"
 
     @property
     def authenticator(self) -> ShopifyAuthenticator:
         """Return a new authenticator object."""
         if self.config.get("client_id"):
-            shop = self.config["shop"]
+            shop = self.get_shop_name()
             return ShopifyAuthenticator(
                 self, self._tap.config, f"https://{shop}.myshopify.com/admin/oauth/access_token"
             )
