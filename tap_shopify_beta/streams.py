@@ -1028,7 +1028,7 @@ class PriceRulesStream(shopifyRestStream):
         th.Property("target_type", th.StringType),
         th.Property("target_selection", th.StringType),
         th.Property("allocation_method", th.StringType),
-        th.Property("allocation_limit", th.CustomType({"type": ["number", "string", "null"]})),
+        th.Property("allocation_limit", th.IntegerType),
         th.Property("once_per_customer", th.BooleanType),
         th.Property("usage_limit", th.IntegerType),
         th.Property("starts_at", th.DateTimeType),
