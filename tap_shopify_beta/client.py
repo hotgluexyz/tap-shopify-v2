@@ -22,14 +22,14 @@ class shopifyStream(GraphQLStream):
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
-        shop = self.config["shop"]
+        shop = self.config["shop"][:-len(".myshopify.com")] if self.config["shop"].endswith(".myshopify.com") else self.config["shop"]
         return f"https://{shop}.myshopify.com/admin/api/2024-07/graphql.json"
 
     @property
     def authenticator(self) -> ShopifyAuthenticator:
         """Return a new authenticator object."""
         if self.config.get("client_id"):
-            shop = self.config["shop"]
+            shop = self.config["shop"][:-len(".myshopify.com")] if self.config["shop"].endswith(".myshopify.com") else self.config["shop"]
             return ShopifyAuthenticator(
                 self, self._tap.config, f"https://{shop}.myshopify.com/admin/oauth/access_token"
             )
