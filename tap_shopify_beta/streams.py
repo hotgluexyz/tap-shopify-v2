@@ -946,22 +946,21 @@ class PriceRulesStream(shopifyRestStream):
         th.Property("prerequisite_saved_search_ids", th.ArrayType(th.IntegerType)),
         th.Property("customer_segment_prerequisite_ids", th.ArrayType(th.IntegerType)),
         th.Property("prerequisite_customer_ids", th.ArrayType(th.IntegerType)),
-        th.Property("prerequisite_subtotal_range", th.StringType),
+        th.Property("prerequisite_subtotal_range", th.ObjectType(
+            th.Property("greater_than_or_equal_to", th.StringType)
+        )),
         th.Property("prerequisite_quantity_range", th.ObjectType(
             th.Property("greater_than_or_equal_to", th.IntegerType)
         )),
         th.Property("prerequisite_shipping_price_range", th.ObjectType(
-            th.Property("less_than_or_equal_to", th.IntegerType)
+            th.Property("less_than_or_equal_to", th.StringType)
         )),
         th.Property("prerequisite_to_entitlement_quantity_ratio", th.ObjectType(
-            th.Property("prerequisite_quantity", th.StringType),
+            th.Property("prerequisite_quantity", th.IntegerType),
             th.Property("entitled_quantity", th.IntegerType),
         )),
         th.Property("prerequisite_to_entitlement_purchase", th.ObjectType(
             th.Property("prerequisite_amount", th.StringType),
-        )),
-        th.Property("prerequisite_subtotal_range", th.ObjectType(
-            th.Property("greater_than_or_equal_to", th.StringType),
         )),
         th.Property("title", th.StringType),
         th.Property("_sdc_shop_myshopify_domain", th.StringType),
