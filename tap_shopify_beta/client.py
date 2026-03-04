@@ -70,7 +70,6 @@ class shopifyStream(GraphQLStream):
             if key == "lineItems":
                 # Handle lineItems pagination
                 if hasattr(self, 'first_line_item'):
-                    after_param = f" after:{self.after_line_item}" if hasattr(self, 'after_line_item') and self.after_line_item else ""
                     query = self.get_field_query(key, value["properties"], is_paginated=True, page_size=self.first_line_item)
                 else:
                     query = self.get_field_query(key, value["properties"])
