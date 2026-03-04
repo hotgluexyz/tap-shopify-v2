@@ -1,7 +1,5 @@
 from singer_sdk import typing as th
 
-from tap_shopify_beta.types.money_v2 import MoneyV2Type
-from tap_shopify_beta.types.mailing_address import MailingAddressType
 from tap_shopify_beta.types.company import CompanyType
 
 class CompanyContactType(th.ObjectType):

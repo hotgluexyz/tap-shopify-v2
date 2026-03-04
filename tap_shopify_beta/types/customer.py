@@ -3,8 +3,6 @@ from singer_sdk import typing as th
 from tap_shopify_beta.types.image import ImageType
 from tap_shopify_beta.types.money_v2 import MoneyV2Type
 from tap_shopify_beta.types.mailing_address import MailingAddressType
-from tap_shopify_beta.types.company_contact import CompanyContactType
-from tap_shopify_beta.types.market import MarketType
 
 
 class CustomerType(th.ObjectType):

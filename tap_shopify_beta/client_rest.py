@@ -1,14 +1,12 @@
-from tap_shopify_beta.client import shopifyStream
 from singer_sdk.streams.rest import RESTStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
 from singer_sdk.authenticators import APIKeyAuthenticator
 import requests
-from typing import Any, Dict, Optional, Union, List, Iterable, Callable
+from typing import Any, Dict, Optional, Callable
 from pendulum import parse
 import re
 import urllib3
 import backoff
-from tap_shopify_beta.auth import ShopifyAuthenticator
 from singer_sdk.exceptions import RetriableAPIError
 import http.client
 

@@ -1,10 +1,7 @@
 from singer_sdk import typing as th
 from tap_shopify_beta.types.app_feedback import AppFeedbackType
-from tap_shopify_beta.types.count import CountType
 from tap_shopify_beta.types.money_v2 import MoneyV2Type
-from tap_shopify_beta.types.taxonomy_category import TaxonomyCategoryType
 from tap_shopify_beta.types.product_option import ProductOptionType
-from tap_shopify_beta.types.translation import TranslationType
 
 class ProductType(th.ObjectType):
     def __init__(self):

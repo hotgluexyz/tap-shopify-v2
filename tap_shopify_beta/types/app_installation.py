@@ -1,7 +1,6 @@
 from singer_sdk import typing as th
 
 from tap_shopify_beta.types.access_scope import AccessScopeType
-from tap_shopify_beta.types.app_metafield import AppMetafieldType
 from tap_shopify_beta.types.app_subscription import AppSubscriptionType
 from tap_shopify_beta.types.publication import PublicationType
 

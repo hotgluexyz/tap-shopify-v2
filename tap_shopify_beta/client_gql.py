@@ -1,13 +1,12 @@
 """GraphQL client handling, including shopifyStream base class."""
 
 from time import sleep
-from typing import Any, Dict, Iterable, List, Optional, Union, cast, Callable
+from typing import Any, Dict, Iterable, Optional, cast, Callable
 
 import requests
 import urllib3
 from backports.cached_property import cached_property
 from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.streams import GraphQLStream
 import math
 
 from tap_shopify_beta.client import shopifyStream

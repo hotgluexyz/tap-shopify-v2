@@ -1,8 +1,6 @@
 from singer_sdk import typing as th
 
-from tap_shopify_beta.types.count import CountType
 from tap_shopify_beta.types.market_currency_settings import MarketCurrencySettingsType
-from tap_shopify_beta.types.market_metafield import MarketMetafieldType
 from tap_shopify_beta.types.market_web_presence import MarketWebPresenceType
 
 class MarketType(th.ObjectType):

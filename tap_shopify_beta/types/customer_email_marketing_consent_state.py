@@ -1,6 +1,5 @@
 from singer_sdk import typing as th
 
-from tap_shopify_beta.types.customer import CustomerType
 
 class CustomerEmailMarketingConsentStateType(th.ObjectType):
     def __init__(self):
