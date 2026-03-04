@@ -13,25 +13,19 @@ from tap_shopify_beta.client_gql import shopifyGqlStream, GqlChildStream
 from tap_shopify_beta.client_rest import shopifyRestStream
 from tap_shopify_beta.types.order_app import OrderAppType
 from tap_shopify_beta.types.channel_information import ChannelInformationType
-from tap_shopify_beta.types.customer import CustomerType
 from tap_shopify_beta.types.customer_email_marketing_consent_state import CustomerEmailMarketingConsentStateType
-from tap_shopify_beta.types.customer_journey_summary import CustomerJourneySummaryType
 from tap_shopify_beta.types.customer_visit import CustomerVisitType
 from tap_shopify_beta.types.dispute import DisputeType
-from tap_shopify_beta.types.fulfillment import FulfillmentType
 from tap_shopify_beta.types.image import ImageType
 from tap_shopify_beta.types.last_order import LastOrderType
 from tap_shopify_beta.types.line_item_node import LineItemNodeType
 from tap_shopify_beta.types.count import CountType
 from tap_shopify_beta.types.location import LocationType
 from tap_shopify_beta.types.mergeable import MergeableType
-from tap_shopify_beta.types.metafield_definition import MetafieldDefinitionType
 from tap_shopify_beta.types.money_bag import MoneyBagType
 from tap_shopify_beta.types.money_v2 import MoneyV2Type
 from tap_shopify_beta.types.mailing_address import MailingAddressType
-from tap_shopify_beta.types.company_contact import CompanyContactType
 from tap_shopify_beta.types.sms_marketing_consent import SmsMarketingConsentType
-from tap_shopify_beta.types.tax_line import TaxLineType
 import copy
 from singer_sdk.helpers._state import (
     finalize_state_progress_markers,

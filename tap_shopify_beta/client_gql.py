@@ -1,13 +1,12 @@
 """GraphQL client handling, including shopifyStream base class."""
 
 from time import sleep
-from typing import Any, Dict, Iterable, List, Optional, Union, cast, Callable
+from typing import Any, Dict, Iterable, Optional, cast, Callable
 
 import requests
 import urllib3
 from backports.cached_property import cached_property
 from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.streams import GraphQLStream
 import math
 
 from tap_shopify_beta.client import shopifyStream
@@ -34,7 +33,6 @@ class shopifyGqlStream(shopifyStream):
         super().__init__(*args, **kwargs)
         self.ids = set()
 
-    page_size = 1
     query_cost = None
     available_points = None
     restore_rate = None
@@ -491,6 +489,24 @@ class shopifyGqlStream(shopifyStream):
         finally:
             record_queue.put(None)
 
+    def _check_futures_for_errors(self, futures):
+        for future in futures:
+            if future.done():
+                try:
+                    future.result()
+                except Exception as e:
+                    self.logger.exception(f"Error in worker thread: {str(e)}")
+                    raise Exception(f"Worker thread error: {str(e)}")
+
+    def _cancel_and_drain(self, futures, record_queue):
+        for f in futures:
+            f.cancel()
+        while not record_queue.empty():
+            try:
+                record_queue.get_nowait()
+            except queue.Empty:
+                break
+
     def get_records(self, context: Optional[dict]) -> Iterable[dict]:
         if self.config.get(f"sync_{self.name}_monthly") or self.max_requests < 2 or not self.replication_key:
             yield from super().get_records(context)
@@ -503,35 +519,18 @@ class shopifyGqlStream(shopifyStream):
         finished_threads = 0
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=self.max_requests) as executor:
-            futures = []
-            for param in concurrent_params:
-                future = executor.submit(self.concurrent_request, param, record_queue)
-                futures.append(future)
+            futures = [executor.submit(self.concurrent_request, param, record_queue) for param in concurrent_params]
 
             while finished_threads < len(concurrent_params):
-                for future in futures:
-                    if future.done():
-                        try:
-                            future.result()  # Raise errors from within threads
-                        except Exception as e:
-                            self.logger.exception(f"Error in worker thread: {str(e)}")
-                            raise Exception(f"Worker thread error: {str(e)}")
-
+                self._check_futures_for_errors(futures)
                 try:
                     record = record_queue.get(timeout=1)
                     if record is None:
                         finished_threads += 1
                         self.log_memory_usage(f"[{threading.current_thread().name}] Worker finished")
                     elif isinstance(record, tuple) and record[0] == "ERROR":
-                        # If an error is encountered, cancel all pending futures and drain the queue
                         self.logger.exception(f"Error from thread: {record[1]}")
-                        for f in futures:
-                            f.cancel()
-                        while not record_queue.empty():
-                            try:
-                                record_queue.get_nowait()
-                            except queue.Empty:
-                                break
+                        self._cancel_and_drain(futures, record_queue)
                         raise Exception(f"Thread error: {record[1]}")
                     else:
                         self.logger.debug(f"Yielding record: {record}")

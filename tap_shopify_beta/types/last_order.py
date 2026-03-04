@@ -1,6 +1,5 @@
 from singer_sdk import typing as th
 
-from tap_shopify_beta.types.app import AppType
 from tap_shopify_beta.types.channel_information import ChannelInformationType
 from tap_shopify_beta.types.customer import CustomerType
 from tap_shopify_beta.types.customer_journey_summary import CustomerJourneySummaryType

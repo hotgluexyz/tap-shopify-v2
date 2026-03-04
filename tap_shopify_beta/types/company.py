@@ -1,7 +1,6 @@
 from singer_sdk import typing as th
 
 
-from tap_shopify_beta.types.count import CountType
 from tap_shopify_beta.types.money_v2 import MoneyV2Type
 
 class CompanyType(th.ObjectType):

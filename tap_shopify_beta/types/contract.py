@@ -1,7 +1,6 @@
 from singer_sdk import typing as th
 
 from tap_shopify_beta.types.app import AppType
-from tap_shopify_beta.types.count import CountType
 from tap_shopify_beta.types.custom_attributes import CustomAttributesType
 from tap_shopify_beta.types.customer import CustomerType
 from tap_shopify_beta.types.customer_payment_method import CustomerPaymentMethodType

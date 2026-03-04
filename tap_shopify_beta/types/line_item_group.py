@@ -1,6 +1,5 @@
 from singer_sdk import typing as th
 
-from tap_shopify_beta.types.custom_attributes import CustomAttributesType
 
 
 class LineItemGroupType(th.ObjectType):

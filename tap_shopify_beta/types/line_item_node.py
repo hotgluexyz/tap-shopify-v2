@@ -1,14 +1,8 @@
 from singer_sdk import typing as th
 
-from tap_shopify_beta.types.contract import ContractType
-from tap_shopify_beta.types.duty import DutyType
-from tap_shopify_beta.types.custom_attributes import CustomAttributesType
-from tap_shopify_beta.types.discount_allocations import DiscountAllocationsType
 from tap_shopify_beta.types.image import ImageType
 from tap_shopify_beta.types.money_bag import MoneyBagType
 from tap_shopify_beta.types.line_item_group import LineItemGroupType
-from tap_shopify_beta.types.product import ProductType
-from tap_shopify_beta.types.staff_member import StaffMemberType
 from tap_shopify_beta.types.tax_line import TaxLineType
 
 

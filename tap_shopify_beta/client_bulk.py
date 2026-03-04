@@ -2,11 +2,10 @@
 
 from datetime import datetime, timedelta, timezone
 from time import sleep
-from typing import Any, Dict, Iterable, List, Optional, Union, cast
+from typing import Any, Iterable, cast
 
 import requests
 import simplejson
-from backports.cached_property import cached_property
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 
 from tap_shopify_beta.client import shopifyStream

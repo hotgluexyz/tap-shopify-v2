@@ -1,7 +1,6 @@
 """Unbounce Authentication."""
 
 import json
-from datetime import datetime
 from typing import Optional
 import sys
 

@@ -1,7 +1,6 @@
 from singer_sdk import typing as th
 
 from tap_shopify_beta.types.market_web_presence_root_url import MarketWebPresenceRootUrlType
-from tap_shopify_beta.types.shop_locale import ShopLocaleType
 
 class MarketWebPresenceType(th.ObjectType):
     def __init__(self):
