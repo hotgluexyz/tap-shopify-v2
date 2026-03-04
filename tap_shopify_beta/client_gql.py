@@ -167,6 +167,16 @@ class shopifyGqlStream(shopifyStream):
                         end_date = isoparse(end_date)
                     end_date = end_date.strftime("%Y-%m-%dT%H:%M:%S")
                     date_filter = f"{date_filter} AND updated_at:<={end_date}"
+                else:
+                    # Capture sync started at timestamp at the beginning of sync to prevent duplicates
+                    # when records are updated during pagination
+                    if not hasattr(self, '_sync_started_at'):
+                        self._sync_started_at = datetime.now(pytz.UTC).strftime("%Y-%m-%dT%H:%M:%S")
+                        self.logger.info(f"Sync started at timestamp for {self.name} sync: {self._sync_started_at}")
+
+                    # Use sync started at timestamp as upper bound to prevent duplicates
+                    date_filter = f"{date_filter} AND updated_at:<={self._sync_started_at}"
+                
                 params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params
