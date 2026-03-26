@@ -70,7 +70,14 @@ class shopifyStream(GraphQLStream):
             if key == "lineItems":
                 # Handle lineItems pagination
                 if hasattr(self, 'first_line_item'):
-                    query = self.get_field_query(key, value["properties"], is_paginated=True, page_size=self.first_line_item)
+                    after = self.after_line_item if hasattr(self, "after_line_item") else None
+                    query = self.get_field_query(
+                        key,
+                        value["properties"],
+                        is_paginated=True,
+                        page_size=self.first_line_item,
+                        after=after,
+                    )
                 else:
                     query = self.get_field_query(key, value["properties"])
                 output.append(query)
@@ -95,12 +102,21 @@ class shopifyStream(GraphQLStream):
         # self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
         return request_data
 
-    def get_field_query(self, field_name: str, schema: dict, is_paginated: bool = False, page_size: int = None) -> str:
+    def get_field_query(
+        self,
+        field_name: str,
+        schema: dict,
+        is_paginated: bool = False,
+        page_size: int = None,
+        after: Optional[str] = None,
+    ) -> str:
         """Generate a GraphQL query string for a given field based on its schema."""
         output = []
 
         if is_paginated:
             pagination = f"(first: {page_size})" if page_size else ""
+            if after:
+                pagination = f"{pagination[:-1]}, after: {after})" if pagination else f"(after: {after})"
             output.append(f"{field_name}{pagination} {{")
             output.append("edges {")
             output.append("cursor")

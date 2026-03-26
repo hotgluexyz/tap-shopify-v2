@@ -396,6 +396,7 @@ class OrdersStream(DynamicStream):
             has_next_page = self.has_next_page_line_items(record)
             order_node = record
             while has_next_page:
+                self.logger.info(f"Fetching additional line items for order {context['order_id']}")
                 self.after_line_item = "\"" + order_node.get("lineItems", {}).get("edges", [])[-1].get("cursor") + "\""
                 prepared_request = self.prepare_request(
                     context, next_page_token=None
@@ -442,7 +443,7 @@ class OrdersStream(DynamicStream):
         """Return a dictionary of values to be used in URL parameterization."""
         params = {
             "first": 1,
-            "filter": f"id:{context['order_id']}",
+            "filter": f"id:{context['order_id']}"
         }
         return params
 
