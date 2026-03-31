@@ -376,6 +376,7 @@ class OrdersStream(DynamicStream):
         th.Property("updatedAt", th.DateTimeType),
         th.Property("sourceIdentifier", th.StringType),
         th.Property("lineItems", th.ArrayType(LineItemNodeType())),
+        th.Property("tags", th.StringType),
     ).to_dict()
 
     def has_next_page_line_items(self, record):
