@@ -1,4 +1,4 @@
-from singer_sdk import typing as th
+from hotglue_singer_sdk import typing as th
 
 from tap_shopify_beta.types.metafield_definition_type import MetafieldDefinitionTypeType
 from tap_shopify_beta.types.metafield_definition_validation import MetafieldDefinitionValidationType

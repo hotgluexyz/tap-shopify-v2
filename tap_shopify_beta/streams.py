@@ -4,9 +4,9 @@ from backports.cached_property import cached_property
 import json
 import sys
 from typing import Dict, Iterable, Optional, List, Any
-from singer_sdk.helpers.jsonpath import extract_jsonpath
+from hotglue_singer_sdk.helpers.jsonpath import extract_jsonpath
 
-from singer_sdk import typing as th
+from hotglue_singer_sdk import typing as th
 
 from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream, GqlChildStream
@@ -27,11 +27,11 @@ from tap_shopify_beta.types.money_v2 import MoneyV2Type
 from tap_shopify_beta.types.mailing_address import MailingAddressType
 from tap_shopify_beta.types.sms_marketing_consent import SmsMarketingConsentType
 import copy
-from singer_sdk.helpers._state import (
+from hotglue_singer_sdk.helpers._state import (
     finalize_state_progress_markers,
     log_sort_error,
 )
-from singer_sdk.exceptions import InvalidStreamSortException
+from hotglue_singer_sdk.exceptions import InvalidStreamSortException
 import requests
 
 config_path = "config.json"

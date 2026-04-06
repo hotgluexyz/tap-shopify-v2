@@ -6,7 +6,7 @@ from typing import Any, Iterable, cast
 
 import requests
 import simplejson
-from singer_sdk.helpers.jsonpath import extract_jsonpath
+from hotglue_singer_sdk.helpers.jsonpath import extract_jsonpath
 
 from tap_shopify_beta.client import shopifyStream
 import re

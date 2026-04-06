@@ -1,4 +1,4 @@
-from singer_sdk import typing as th
+from hotglue_singer_sdk import typing as th
 from tap_shopify_beta.types.app_feedback import AppFeedbackType
 from tap_shopify_beta.types.money_v2 import MoneyV2Type
 from tap_shopify_beta.types.product_option import ProductOptionType

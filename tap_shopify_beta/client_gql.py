@@ -6,7 +6,7 @@ from typing import Any, Dict, Iterable, Optional, cast, Callable
 import requests
 import urllib3
 from backports.cached_property import cached_property
-from singer_sdk.helpers.jsonpath import extract_jsonpath
+from hotglue_singer_sdk.helpers.jsonpath import extract_jsonpath
 import math
 
 from tap_shopify_beta.client import shopifyStream
@@ -14,7 +14,7 @@ from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import pytz
 import copy
-from singer_sdk.exceptions import RetriableAPIError
+from hotglue_singer_sdk.exceptions import RetriableAPIError
 import backoff
 import concurrent.futures
 import queue

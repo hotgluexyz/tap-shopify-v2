@@ -1,4 +1,4 @@
-from singer_sdk import typing as th
+from hotglue_singer_sdk import typing as th
 
 from tap_shopify_beta.types.marketing_event import MarketingEventType
 from tap_shopify_beta.types.utm_parameter import UtmParameterType

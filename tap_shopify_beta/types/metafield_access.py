@@ -1,4 +1,4 @@
-from singer_sdk import typing as th
+from hotglue_singer_sdk import typing as th
 from .metafield_access_grants import MetafieldAccessGrantType
 
 class MetafieldAccessType(th.ObjectType):

@@ -5,11 +5,11 @@ import requests
 import urllib3
 
 from typing import Any, Optional, Callable
-from singer_sdk.authenticators import APIKeyAuthenticator
+from hotglue_singer_sdk.authenticators import APIKeyAuthenticator
 from backports.cached_property import cached_property
-from singer_sdk.streams import GraphQLStream
+from hotglue_singer_sdk.streams import GraphQLStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
-from singer_sdk.exceptions import RetriableAPIError
+from hotglue_singer_sdk.exceptions import RetriableAPIError
 import psutil
 import os
 import http.client

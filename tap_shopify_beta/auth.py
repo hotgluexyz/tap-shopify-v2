@@ -5,8 +5,8 @@ from typing import Optional
 import sys
 
 import requests
-from singer_sdk.authenticators import APIAuthenticatorBase
-from singer_sdk.streams import Stream as RESTStreamBase
+from hotglue_singer_sdk.authenticators import APIAuthenticatorBase
+from hotglue_singer_sdk.streams import Stream as RESTStreamBase
 
 
 class ShopifyAuthenticator(APIAuthenticatorBase):
