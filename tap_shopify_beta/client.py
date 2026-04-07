@@ -82,7 +82,6 @@ class shopifyStream(GraphQLStream):
                     query = self.get_field_query(key, value["properties"])
                 output.append(query)
             elif key == "metafields":
-                # Metafields are a paginated connection; fetch up to 50 per record
                 query = self.get_field_query(
                     key,
                     value["properties"],
