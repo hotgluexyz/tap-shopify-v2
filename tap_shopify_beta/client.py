@@ -163,11 +163,54 @@ class shopifyStream(GraphQLStream):
         )(func)
         return decorator
     
-    def post_process(self, row, context=None):
-        """Unwrap any paginated connection fields (e.g. metafields) from edges/node format."""
-        if isinstance(row.get("metafields"), dict):
-            row["metafields"] = [edge["node"] for edge in row["metafields"].get("edges", [])]
-        return row
+    def _fetch_all_metafields(self, record: dict) -> list:
+        """Fetch all metafields for a record, paginating through additional pages via the node interface."""
+        resource_gid = record["id"]
+        resource_type = resource_gid.split("/")[-2]  # e.g. "Product", "Order", "ProductVariant"
+
+        all_edges = list(record.get("metafields", {}).get("edges", []))
+        has_next = record.get("metafields", {}).get("pageInfo", {}).get("hasNextPage", False)
+
+        if not has_next:
+            return [e["node"] for e in all_edges]
+
+        self.logger.info(f"Fetching additional metafields pages for {resource_gid}")
+        decorated_request = self.request_decorator(self._request)
+
+        metafields_schema = (
+            self.schema.get("properties", {})
+            .get("metafields", {})
+            .get("items", {})
+            .get("properties", {})
+        )
+        metafield_fields = " ".join(metafields_schema.keys()) if metafields_schema else "id key namespace value type"
+
+        while has_next:
+            after_cursor = all_edges[-1]["cursor"]
+            query = (
+                f'query {{ node(id: "{resource_gid}") {{'
+                f' ... on {resource_type} {{'
+                f' metafields(first: 250, after: "{after_cursor}") {{'
+                f' edges {{ cursor node {{ {metafield_fields} }} }}'
+                f' pageInfo {{ hasNextPage }}'
+                f' }} }} }} }}'
+            )
+            headers = {**self.http_headers, **(self.authenticator.auth_headers or {})}
+            prepared = self.requests_session.prepare_request(
+                requests.Request(
+                    method="POST",
+                    url=self.url_base,
+                    headers=headers,
+                    json={"query": query},
+                )
+            )
+            resp = decorated_request(prepared, {})
+            node_data = resp.json().get("data", {}).get("node", {})
+            metafields_page = node_data.get("metafields", {})
+            all_edges.extend(metafields_page.get("edges", []))
+            has_next = metafields_page.get("pageInfo", {}).get("hasNextPage", False)
+
+        return [e["node"] for e in all_edges]
 
     def log_memory_usage(self, tag=""):
         process = psutil.Process(os.getpid())

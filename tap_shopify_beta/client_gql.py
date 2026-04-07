@@ -236,7 +236,10 @@ class shopifyGqlStream(shopifyStream):
         if errors:
             #self.logger.info(f"Issue found while fetching {self.name}, response: {errors}")
             pass
-        yield from records
+        for record in records:
+            if isinstance(record.get("metafields"), dict):
+                record["metafields"] = self._fetch_all_metafields(record)
+            yield record
 
     def filter_response(self, response_json: dict) -> dict:
         return response_json
@@ -544,7 +547,6 @@ class shopifyGqlStream(shopifyStream):
         self.log_memory_usage("Finished concurrent processing")
 
     def post_process(self, row: dict, context: Optional[dict] = None):
-        row = super().post_process(row, context)
         start_date = self.get_starting_timestamp(context)
         if self.replication_key:
             if parse(row[self.replication_key]) > start_date and row["id"] not in self.ids:
