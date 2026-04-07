@@ -544,6 +544,7 @@ class shopifyGqlStream(shopifyStream):
         self.log_memory_usage("Finished concurrent processing")
 
     def post_process(self, row: dict, context: Optional[dict] = None):
+        row = super().post_process(row, context)
         start_date = self.get_starting_timestamp(context)
         if self.replication_key:
             if parse(row[self.replication_key]) > start_date and row["id"] not in self.ids:

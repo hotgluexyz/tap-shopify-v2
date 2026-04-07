@@ -125,7 +125,16 @@ class ProductsStream(DynamicStream):
         th.Property("tracksInventory", th.BooleanType),
         th.Property("updatedAt", th.DateTimeType),
         th.Property("vendor", th.StringType),
+        th.Property("metafields", th.ArrayType(th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("key", th.StringType),
+            th.Property("namespace", th.StringType),
+            th.Property("value", th.StringType),
+            th.Property("type", th.StringType),
+        ))),
     ).to_dict()
+
+    bulk_process_fields = {"Metafield": "metafields"}
 
 
 class VariantsStream(DynamicStream):
@@ -169,8 +178,17 @@ class VariantsStream(DynamicStream):
         th.Property("sku", th.StringType),
         th.Property("taxable", th.BooleanType),
         th.Property("title", th.StringType),
-        th.Property("updatedAt", th.DateTimeType)
+        th.Property("updatedAt", th.DateTimeType),
+        th.Property("metafields", th.ArrayType(th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("key", th.StringType),
+            th.Property("namespace", th.StringType),
+            th.Property("value", th.StringType),
+            th.Property("type", th.StringType),
+        ))),
     ).to_dict()
+
+    bulk_process_fields = {"Metafield": "metafields"}
 
 
 class OrdersStream(DynamicStream):
@@ -186,10 +204,6 @@ class OrdersStream(DynamicStream):
     sort_key = "UPDATED_AT"
     sort_key_type = "OrderSortKeys"
     child_context_keys = ["fulfillments", "refunds"]
-
-    bulk_process_fields = {
-        "LineItem": "lineItems"
-    }
 
     child_size = 140 # value based on the estimated query cost of child stream and the max allowed by the API (1000 per request)
 
@@ -376,7 +390,16 @@ class OrdersStream(DynamicStream):
         th.Property("updatedAt", th.DateTimeType),
         th.Property("sourceIdentifier", th.StringType),
         th.Property("lineItems", th.ArrayType(LineItemNodeType())),
+        th.Property("metafields", th.ArrayType(th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("key", th.StringType),
+            th.Property("namespace", th.StringType),
+            th.Property("value", th.StringType),
+            th.Property("type", th.StringType),
+        ))),
     ).to_dict()
+
+    bulk_process_fields = {"LineItem": "lineItems", "Metafield": "metafields"}
 
     def has_next_page_line_items(self, record):
         return record.get("lineItems", {}).get("pageInfo", {}).get("hasNextPage", False)

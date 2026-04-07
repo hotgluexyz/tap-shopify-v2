@@ -81,6 +81,15 @@ class shopifyStream(GraphQLStream):
                 else:
                     query = self.get_field_query(key, value["properties"])
                 output.append(query)
+            elif key == "metafields":
+                # Metafields are a paginated connection; fetch up to 50 per record
+                query = self.get_field_query(
+                    key,
+                    value["properties"],
+                    is_paginated=True,
+                    page_size=50,
+                )
+                output.append(query)
             elif "properties" in value:
                 query = self.get_field_query(key, value["properties"])
                 output.append(query)
@@ -152,10 +161,15 @@ class shopifyStream(GraphQLStream):
             ),
             max_tries=self.backoff_max_tries,
             on_backoff=self.backoff_handler,
-            base=3,
         )(func)
         return decorator
     
+    def post_process(self, row, context=None):
+        """Unwrap any paginated connection fields (e.g. metafields) from edges/node format."""
+        if isinstance(row.get("metafields"), dict):
+            row["metafields"] = [edge["node"] for edge in row["metafields"].get("edges", [])]
+        return row
+
     def log_memory_usage(self, tag=""):
         process = psutil.Process(os.getpid())
         mem = process.memory_info().rss / (1024 * 1024)  # In MB
