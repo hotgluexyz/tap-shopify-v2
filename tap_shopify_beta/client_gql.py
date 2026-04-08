@@ -236,7 +236,10 @@ class shopifyGqlStream(shopifyStream):
         if errors:
             #self.logger.info(f"Issue found while fetching {self.name}, response: {errors}")
             pass
-        yield from records
+        for record in records:
+            if isinstance(record.get("metafields"), dict):
+                record["metafields"] = self._fetch_all_metafields(record)
+            yield record
 
     def filter_response(self, response_json: dict) -> dict:
         return response_json
