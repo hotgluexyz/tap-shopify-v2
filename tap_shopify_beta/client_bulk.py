@@ -1,6 +1,7 @@
 """GraphQL client handling, including shopify-betaStream base class."""
 
 from datetime import datetime, timedelta, timezone
+from pendulum import parse
 from time import sleep
 from typing import Any, Iterable, cast
 
@@ -84,7 +85,11 @@ class shopifyBulkStream(shopifyStream):
             if self.start_date:
                 date = self.start_date.strftime("%Y-%m-%dT%H:%M:%S")
                 self.end_date = self.start_date + timedelta(days=1)
-                query = f'(query: "updated_at:>{date} AND updated_at:<={self.end_date.strftime("%Y-%m-%dT%H:%M:%S")}")'
+                config_end_date = self.config.get("end_date")
+                if config_end_date and self.end_date > parse(config_end_date):
+                    self.end_date = parse(config_end_date)
+                end_str = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
+                query = f'(query: "updated_at:>\'{date}\' AND updated_at:<=\'{end_str}\'")'
             return query
         return ""
 
@@ -195,7 +200,10 @@ class shopifyBulkStream(shopifyStream):
                 yield parent_line
 
     def get_next_page_token(self, response, previous_token) -> Any:
-        if self.end_date <= datetime.now(timezone.utc):
+        now = datetime.now(timezone.utc)
+        config_end_date = self.config.get("end_date")
+        upper_bound = min(now, parse(config_end_date)) if config_end_date else now
+        if self.end_date < upper_bound:
             self.start_date = self.end_date
             return self.start_date
 

@@ -73,10 +73,11 @@ class shopifyRestStream(RESTStream):
         params: dict = {}
         params["limit"] = self.limit
         start_date = self.get_starting_time(context)
-        rep_key_param = f"{self.replication_key}_min"
         if self.replication_key and start_date:
-            start_date = start_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
-            params[rep_key_param] = start_date
+            params[f"{self.replication_key}_min"] = start_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        end_date = self.config.get("end_date")
+        if self.replication_key and end_date:
+            params[f"{self.replication_key}_max"] = parse(end_date).strftime('%Y-%m-%dT%H:%M:%S.%f')
         if self.add_params:
             params.update(self.add_params)
         if next_page_token:
