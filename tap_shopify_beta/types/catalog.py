@@ -1,4 +1,4 @@
-from singer_sdk import typing as th
+from hotglue_singer_sdk import typing as th
 
 from tap_shopify_beta.types.operation import OperationType
 from tap_shopify_beta.types.price_list import PriceListType

@@ -1,4 +1,4 @@
-from singer_sdk import typing as th
+from hotglue_singer_sdk import typing as th
 
 from tap_shopify_beta.types.market_currency_settings import MarketCurrencySettingsType
 from tap_shopify_beta.types.market_web_presence import MarketWebPresenceType

@@ -1,4 +1,4 @@
-from singer_sdk import typing as th
+from hotglue_singer_sdk import typing as th
 
 from tap_shopify_beta.types.count import CountType
 from tap_shopify_beta.types.customer_visit import CustomerVisitType
