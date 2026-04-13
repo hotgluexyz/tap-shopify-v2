@@ -161,7 +161,9 @@ class shopifyGqlStream(shopifyStream):
             return next(all_matches, None)
         elif self.config.get(f"sync_{self.name}_monthly") and not has_next:
             today = datetime.now().replace(tzinfo=pytz.UTC)
-            if self.end_date < today:
+            config_end_date = self.config.get("end_date")
+            upper_bound = min(today, parse(config_end_date)) if config_end_date else today
+            if self.end_date < upper_bound:
                 self.start_date = self.start_date + relativedelta(months=1)
                 self.logger.info(f"Reached end of data for current month. Moving start date to {self.start_date}")
                 # make self.available_points None so page_size calculation is accurate
@@ -184,22 +186,33 @@ class shopifyGqlStream(shopifyStream):
             if self.config.get(f"sync_{self.name}_monthly"):
                 start_date = self.start_date or self.get_starting_timestamp(context)
                 date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
-                date_filter = f"updated_at:>{date}"
+                date_filter = f"updated_at:>'{date}'"
                 self.start_date = start_date
                 self.end_date = start_date + relativedelta(months=1)
+                config_end_date = self.config.get("end_date")
+                if config_end_date and self.end_date > parse(config_end_date):
+                    self.end_date = parse(config_end_date)
                 end_date = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
-                date_filter = f"{date_filter} AND updated_at:<={end_date}"
+                date_filter = f"{date_filter} AND updated_at:<='{end_date}'"
                 params["filter"] = date_filter
+
             elif context and context.get("date_range"):
-                start_date = context['date_range']['start_date'].strftime("%Y-%m-%d")
-                date_filter = f"updated_at:>{start_date}"
-                
+                start_date = context['date_range']['start_date'].strftime("%Y-%m-%dT%H:%M:%S")
+                date_filter = f"updated_at:>'{start_date}'"
                 end_date = context['date_range'].get('end_date')
-                if context['date_range'].get('end_date'):
-                    end_date = end_date.strftime("%Y-%m-%d")
-                    date_filter = f"{date_filter} AND updated_at:<{end_date}"
-                    
+                if end_date:
+                    end_date = end_date.strftime("%Y-%m-%dT%H:%M:%S")
+                    date_filter = f"{date_filter} AND updated_at:<='{end_date}'"
                 params["filter"] = date_filter
+
+            else:
+                start_date = self.start_date or self.get_starting_timestamp(context)
+                if start_date:
+                    date_filter = f"updated_at:>'{start_date.strftime('%Y-%m-%dT%H:%M:%S')}'"
+                    config_end_date = self.config.get("end_date")
+                    if config_end_date:
+                        date_filter = f"{date_filter} AND updated_at:<='{parse(config_end_date).strftime('%Y-%m-%dT%H:%M:%S')}'"
+                    params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params
         if self.sort_key:
@@ -380,29 +393,29 @@ class shopifyGqlStream(shopifyStream):
             
         # Get current time in UTC
         now = datetime.now(pytz.UTC)
-        
-        # Calculate time range between start_date and now
-        total_time_range = now - start_date
-        
+        config_end_date = self.config.get("end_date")
+        upper_bound = min(now, parse(config_end_date)) if config_end_date else now
+
+        # Calculate time range between start_date and upper_bound
+        total_time_range = upper_bound - start_date
+
         # Calculate time interval for each partition
         interval = total_time_range / self.max_requests
 
         # ensure interval is at least one full day
         interval_days = math.ceil(interval.total_seconds() / (24 * 3600))
         interval = relativedelta(days=interval_days)
-        
+
         params = []
         for i in range(self.max_requests):
             context = copy.deepcopy(context) or {}
             date_range = {}
             date_range["start_date"] = start_date + (interval * i)
-            # don't set end_date for the last partition
-            end_date = start_date + (interval * (i + 1))
-            if end_date < now or i == self.max_requests - 1:
-                date_range["end_date"] = end_date           
+            end_date = min(start_date + (interval * (i + 1)), upper_bound)
+            date_range["end_date"] = end_date
             context["date_range"] = date_range
             params.append(context)
-            if end_date > now:
+            if end_date >= upper_bound:
                 break
         self.logger.info(f"Concurrent params: {params}")
         return params
