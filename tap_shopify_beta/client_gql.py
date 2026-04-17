@@ -370,7 +370,12 @@ class shopifyGqlStream(shopifyStream):
             )
             resp = self._request(request, None)
             resp_json = resp.json()
-            earliest_rep_key = resp_json.get("data", {}).get(self.query_name, {}).get("edges", [{}])[0].get("node", {}).get(self.replication_key)
+            edges = resp_json.get("data", {}).get(self.query_name, {}).get("edges", []) or []
+            if not edges:
+                return None
+            earliest_rep_key = edges[0].get("node", {}).get(self.replication_key)
+            if not earliest_rep_key:
+                return None
             return parse(earliest_rep_key)
 
     def get_concurrent_params(self, context):
@@ -388,7 +393,7 @@ class shopifyGqlStream(shopifyStream):
         # make a request to get the earliest rep key value
         if self.replication_key and self.sort_key:
             earliest_rep_key = self.get_earliest_replication_key(context)
-            if earliest_rep_key > start_date:
+            if earliest_rep_key and earliest_rep_key > start_date:
                 start_date = earliest_rep_key
             
         # Get current time in UTC
