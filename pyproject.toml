@@ -39,3 +39,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 # CLI declaration
 tap-shopify-v2 = 'tap_shopify_beta.tap:TapshopifyBeta.cli'
+tap-shopify = 'tap_shopify_beta.tap:TapshopifyBeta.cli'
