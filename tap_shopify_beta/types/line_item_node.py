@@ -55,4 +55,8 @@ class LineItemNodeType(th.ObjectType):
             )),
             th.Property("variantTitle", th.StringType),
             th.Property("vendor", th.StringType),
+            th.Property("customAttributes", th.ArrayType(th.ObjectType(
+                th.Property("key", th.StringType),
+                th.Property("value", th.StringType),
+            ))),
         )

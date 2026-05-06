@@ -132,6 +132,7 @@ class ProductsStream(DynamicStream):
             th.Property("value", th.StringType),
             th.Property("type", th.StringType),
         ))),
+        th.Property("tags", th.ArrayType(th.StringType))
     ).to_dict()
 
     bulk_process_fields = {"Metafield": "metafields"}
@@ -397,6 +398,7 @@ class OrdersStream(DynamicStream):
             th.Property("value", th.StringType),
             th.Property("type", th.StringType),
         ))),
+        th.Property("tags", th.ArrayType(th.StringType))
     ).to_dict()
 
     bulk_process_fields = {"LineItem": "lineItems", "Metafield": "metafields"}
