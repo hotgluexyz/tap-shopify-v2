@@ -53,7 +53,7 @@ class shopifyStream(GraphQLStream):
     def selected_properties(self):
         selected_properties = []
         for key, value in self.metadata.items():
-            if isinstance(key, tuple) and len(key) == 2 and value.selected:
+            if isinstance(key, tuple) and len(key) == 2 and (value.selected or value.inclusion == "automatic"):
                 field_name = key[-1]
                 selected_properties.append(field_name)
         return selected_properties
