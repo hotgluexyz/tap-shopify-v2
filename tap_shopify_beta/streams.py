@@ -26,6 +26,7 @@ from tap_shopify_beta.types.money_bag import MoneyBagType
 from tap_shopify_beta.types.money_v2 import MoneyV2Type
 from tap_shopify_beta.types.mailing_address import MailingAddressType
 from tap_shopify_beta.types.sms_marketing_consent import SmsMarketingConsentType
+from tap_shopify_beta.types.discount_allocations import DiscountAllocationsType
 import copy
 from hotglue_singer_sdk.helpers._state import (
     finalize_state_progress_markers,
@@ -306,6 +307,7 @@ class OrdersStream(DynamicStream):
                 th.Property("carrierIdentifier", th.StringType),
                 th.Property("code", th.StringType),
                 th.Property("custom", th.BooleanType),
+                th.Property("discountAllocations", th.ArrayType(DiscountAllocationsType())),
             ),
         ),
         th.Property("subtotalLineItemsQuantity", th.IntegerType),
