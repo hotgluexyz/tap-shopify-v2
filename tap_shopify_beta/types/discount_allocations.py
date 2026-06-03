@@ -1,6 +1,5 @@
 from hotglue_singer_sdk import typing as th
 
-from tap_shopify_beta.types.money_v2 import MoneyV2Type
 from tap_shopify_beta.types.money_bag import MoneyBagType
 from tap_shopify_beta.types.pricing_value import PricingValueType
 
