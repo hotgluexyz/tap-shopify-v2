@@ -4,6 +4,7 @@ from tap_shopify_beta.types.image import ImageType
 from tap_shopify_beta.types.money_bag import MoneyBagType
 from tap_shopify_beta.types.line_item_group import LineItemGroupType
 from tap_shopify_beta.types.tax_line import TaxLineType
+from tap_shopify_beta.types.discount_allocations import DiscountAllocationsType
 
 
 class LineItemNodeType(th.ObjectType):
@@ -15,7 +16,7 @@ class LineItemNodeType(th.ObjectType):
             )),
             th.Property("currentQuantity", th.IntegerType),
             # th.Property("customAttributes", th.ArrayType(CustomAttributesType())),
-            # th.Property("discountAllocations", th.ArrayType(DiscountAllocationsType())),
+            th.Property("discountAllocations", th.ArrayType(DiscountAllocationsType())),
             th.Property("discountedTotalSet", MoneyBagType()),
             # th.Property("discountedUnitPriceAfterAllDiscountsSet", MoneyBagType()),
             th.Property("discountedUnitPriceSet", MoneyBagType()),
