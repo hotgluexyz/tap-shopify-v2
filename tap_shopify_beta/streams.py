@@ -1011,7 +1011,7 @@ class InventoryLevelGqlStream(shopifyGqlStream):
 
     @property
     def single_object_params(self):
-        inventory_level_id = self.tap_state.get("bookmarks").get("inventory_level_gql").get("partitions")[0]["context"]["inventory_level_id"]
+        inventory_level_id = self.tap_state.get("bookmarks").get("inventory_level_gql").get("partitions")[-1]["context"]["inventory_level_id"]
         return {"id": inventory_level_id}
 
     schema = th.PropertiesList(
