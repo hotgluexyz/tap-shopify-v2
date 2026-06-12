@@ -971,10 +971,11 @@ class InventoryLevelRestStream(shopifyRestStream):
     primary_keys = ["id"]
     records_jsonpath = "$.inventory_levels.[*]"
 
-    @property
-    def add_params(self):
-        location_id = self.tap_state.get("bookmarks").get("inventory_level_rest").get("partitions")[-1]["context"]["location_id"]
-        params = {"location_ids": location_id}
+    def get_url_params(self, context, next_page_token):
+        params = super().get_url_params(context, next_page_token)
+        if next_page_token:
+            return params  # Shopify REST: page_info replaces other filters
+        params["location_ids"] = context["location_id"]
         if self.config.get("inventory_item_ids"):
             item_ids = self.config.get("inventory_item_ids")
             if isinstance(item_ids,list):
@@ -1009,10 +1010,9 @@ class InventoryLevelGqlStream(shopifyGqlStream):
         "quantities": '(names: ["available", "incoming"])'
     }
 
-    @property
-    def single_object_params(self):
-        inventory_level_id = self.tap_state.get("bookmarks").get("inventory_level_gql").get("partitions")[0]["context"]["inventory_level_id"]
-        return {"id": inventory_level_id}
+
+    def single_object_params(self, context=None):
+        return {"id": context["inventory_level_id"]}
 
     schema = th.PropertiesList(
         th.Property("id", th.StringType),

@@ -214,7 +214,7 @@ class shopifyGqlStream(shopifyStream):
                         date_filter = f"{date_filter} AND updated_at:<='{parse(config_end_date).strftime('%Y-%m-%dT%H:%M:%S')}'"
                     params["filter"] = date_filter
         if self.single_object_params:
-            params = self.single_object_params
+            params = self.single_object_params(context)
         if self.sort_key:
             params["sortKey"] = self.sort_key
         return params
