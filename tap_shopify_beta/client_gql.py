@@ -602,11 +602,6 @@ class GqlChildStream(shopifyGqlStream):
         query = query.replace("__query_blocks__", query_blocks)
         query = query.replace("__query_name__", self.query_name)
         query = query.replace("__selected_fields__", self.gql_selected_fields)
-
-        if hasattr(self, "additional_arguments"):
-            for key, value in self.additional_arguments.items():
-                query = query.replace(key, f"{key} {value}")
-
         return query
     
     def prepare_request_payload(

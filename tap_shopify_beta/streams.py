@@ -1035,6 +1035,10 @@ class InventoryLevelGqlStream(GqlChildStream):
         )),
     ).to_dict()
 
+    def query(self, context: dict, context_key: str):
+        query = super().query(context, context_key)
+        return query.replace("quantities", 'quantities(names: ["available", "incoming"])')
+
     def _write_starting_replication_value(self, context: Optional[dict]) -> None:
         return None
 
