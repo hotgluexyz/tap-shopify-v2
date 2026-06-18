@@ -1012,7 +1012,6 @@ class InventoryLevelGqlStream(GqlChildStream):
     parent_stream_type = InventoryLevelRestStream
     query_name = "inventoryLevel"
     context_key = "inventory_level_ids"
-    state_partitioning_keys = ["inventory_level_id"]
     # change needed as incoming and available fields are deprecated in inventory_level
     additional_arguments = {
         "quantities": '(names: ["available", "incoming"])'
@@ -1042,6 +1041,10 @@ class InventoryLevelGqlStream(GqlChildStream):
 
     def _write_starting_replication_value(self, context: Optional[dict]) -> None:
         return None
+    
+    def _write_state_message(self) -> None:
+        self.tap_state.setdefault("bookmarks", {})[self.name] = {}
+        super()._write_state_message()
 
 
 class PriceRulesStream(shopifyRestStream):
