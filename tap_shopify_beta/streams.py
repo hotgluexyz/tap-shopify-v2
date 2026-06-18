@@ -1002,6 +1002,7 @@ class InventoryLevelRestStream(BatchedChildContextMixin, shopifyRestStream):
             "inventory_level_ids": [record["admin_graphql_api_id"]],
         }
 
+
 class InventoryLevelGqlStream(GqlChildStream):
     """Define collections stream."""
 
@@ -1041,7 +1042,6 @@ class InventoryLevelGqlStream(GqlChildStream):
 
     def _write_starting_replication_value(self, context: Optional[dict]) -> None:
         return None
-
 
 
 class PriceRulesStream(shopifyRestStream):
