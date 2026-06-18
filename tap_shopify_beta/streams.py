@@ -976,7 +976,7 @@ class InventoryLevelRestStream(BatchedChildContextMixin, shopifyRestStream):
     primary_keys = ["id"]
     records_jsonpath = "$.inventory_levels.[*]"
     child_context_keys = ["inventory_level_ids"]
-    child_size = 140
+    child_size = 10
 
     def get_url_params(self, context, next_page_token):
         params = super().get_url_params(context, next_page_token)
