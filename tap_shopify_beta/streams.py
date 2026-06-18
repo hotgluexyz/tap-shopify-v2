@@ -1042,10 +1042,6 @@ class InventoryLevelGqlStream(GqlChildStream):
     def _write_starting_replication_value(self, context: Optional[dict]) -> None:
         return None
 
-    def get_records(self, context: Optional[dict]) -> Iterable[dict]:
-        for record in super().get_records(context):
-            self.get_context_state({"inventory_level_id": record["id"]})
-            yield record
 
 
 class PriceRulesStream(shopifyRestStream):
