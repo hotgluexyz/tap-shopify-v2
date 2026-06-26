@@ -951,6 +951,7 @@ class LocationsStream(shopifyRestStream):
     """Define collections stream."""
 
     path = "locations.json"
+    count_path = "locations/count.json"
     name = "locations"
     primary_keys = ["id"]
     replication_key = None
@@ -1063,6 +1064,7 @@ class PriceRulesStream(shopifyRestStream):
     replication_key = "updated_at"
     records_jsonpath = "$.price_rules.[*]"
     path = "price_rules.json"
+    count_path = "price_rules/count.json"
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -1122,6 +1124,7 @@ class EventProductsStream(shopifyRestStream):
     replication_key = "created_at"
     records_jsonpath = "$.events.[*]"
     path = "events.json"
+    count_path = "events/count.json"
     limit = 100
 
     schema = th.PropertiesList(
@@ -1145,6 +1148,7 @@ class MarketingEventsStream(shopifyRestStream):
     name = "marketing_events"
     primary_keys = ["id"]
     path = "marketing_events.json"
+    count_path = "marketing_events/count.json"
     records_jsonpath= "$.marketing_events.[*]"
 
     schema = th.PropertiesList(
