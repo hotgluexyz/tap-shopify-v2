@@ -1,6 +1,7 @@
 from hotglue_singer_sdk.streams.rest import RESTStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
 from hotglue_singer_sdk.authenticators import APIKeyAuthenticator
+from hotglue_singer_sdk.streams.core import REPLICATION_FULL_TABLE
 import requests
 from typing import Any, Dict, Optional, Callable
 from pendulum import parse
@@ -16,6 +17,7 @@ class shopifyRestStream(RESTStream):
     """shopify stream class."""
 
     add_params = None
+    count_path = None
     limit = 250
     backoff_max_tries = 10
 
@@ -86,6 +88,25 @@ class shopifyRestStream(RESTStream):
             params["limit"] = self.limit
             params["page_info"] = next_page_token
         return params
+
+    def get_estimated_record_count(self) -> Optional[int]:
+        if not self.count_path or self.name in ["price_rules"]:
+            return None
+        try:
+            params = self.get_url_params(context=None, next_page_token=None)
+            params.pop("limit", None)
+            prepared_request = self.build_prepared_request(
+                method=self.rest_method,
+                url=f"{self.url_base}{self.count_path}",
+                params=params,
+                headers=self.http_headers,
+                json=self.prepare_request_payload(context=None, next_page_token=None),
+            )
+            response = self.request_decorator(self._request)(prepared_request, None)
+            return int(response.json()["count"])
+        except Exception as e:
+            self.logger.warning(f"Error getting estimated record count for stream {self.name}: {e}")
+            return None
 
     def request_decorator(self, func: Callable) -> Callable:
         decorator: Callable = backoff.on_exception(
