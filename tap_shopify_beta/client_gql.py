@@ -20,15 +20,7 @@ import concurrent.futures
 import queue
 import threading
 from pendulum import parse
-
-
-def to_shopify_utc(dt):
-    """Render a datetime as an explicit UTC RFC3339 bound for Shopify search."""
-    if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=pytz.UTC)
-    else:
-        dt = dt.astimezone(pytz.UTC)
-    return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+from tap_shopify_beta.shopify_dates import to_shopify_utc
 
 
 class GraphQLInternalServerError(RetriableAPIError):

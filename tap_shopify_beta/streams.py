@@ -11,6 +11,7 @@ from hotglue_singer_sdk import typing as th
 from tap_shopify_beta.client_bulk import shopifyBulkStream
 from tap_shopify_beta.client_gql import shopifyGqlStream, GqlChildStream
 from tap_shopify_beta.client_rest import shopifyRestStream
+from tap_shopify_beta.shopify_dates import to_shopify_utc
 from tap_shopify_beta.types.order_app import OrderAppType
 from tap_shopify_beta.types.channel_information import ChannelInformationType
 from tap_shopify_beta.types.customer_email_marketing_consent_state import CustomerEmailMarketingConsentStateType
@@ -1339,7 +1340,7 @@ class PayoutsStream(shopifyGqlStream):
             start_date = self.start_date or self.get_starting_timestamp(context)
             
             if start_date:
-                start_date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
+                start_date = to_shopify_utc(start_date)
                 params["filter"] = f"issued_at:>'{start_date}'"
 
         return params
