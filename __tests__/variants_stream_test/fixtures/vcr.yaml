@@ -1,0 +1,282 @@
+interactions:
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String)
+      { productVariants(first: $first, after: $after, query: $filter) { edges { cursor
+      node { id availableForSale barcode compareAtPrice createdAt displayName image
+      { id altText } inventoryItem { id } inventoryPolicy inventoryQuantity legacyResourceId
+      position price product { id } selectedOptions { name value } sellingPlanGroupCount
+      sku taxable title updatedAt } }, pageInfo { hasNextPage } } } ", "variables":
+      {"first": 1, "filter": "updated_at:>''2015-01-01T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '541'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-tx-test-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"data":{"productVariants":{"edges":[{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTA4NjI5OCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5MDg2Mjk4In0=","node":{"id":"gid://shopify/ProductVariant/49214969086298","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:56Z","displayName":"The
+        Minimal Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260305754"},"inventoryPolicy":"DENY","inventoryQuantity":50,"legacyResourceId":"49214969086298","position":1,"price":"885.95","product":{"id":"gid://shopify/Product/9687691952474"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:56Z"}}],"pageInfo":{"hasNextPage":true}}},"extensions":{"cost":{"requestedQueryCost":7,"actualQueryCost":7,"throttleStatus":{"maximumAvailable":2000.0,"currentlyAvailable":1993,"restoreRate":100.0}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a170b761089f228d-GRU
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '950'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 Jul 2026 18:36:40 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=9meByNpYgGJV0bfXzmZ8tsgPbUUnNDtiLxVTUTJuhVxis3zBEOCoRksld1OwBRZ1joUd2hrZZn3%2FI0HGFQHCEA9WlgO7fYUyyG00yMi5pss%2F%2BaIbNeDFn72UtHsAvWBBAI9wbS%2Flv9JnAE3U%2F7bPPuDshyxgHcdst5jBnKw%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '950'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=9ddd9cc7-0d51-4823-bee2-55370ca91003-1783363000;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=9ddd9cc7-0d51-4823-bee2-55370ca91003-1783363000"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=74, verdict_flag_enabled;desc="count=17";dur=0.774, graphql;desc="admin/query/other",
+        _y;desc="9eab2590-60b3-43f2-9c00-382476ade215", _s;desc="5d8020ec-4bd6-4346-817b-2604bca52f41"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-europe-west4,gcp-europe-west4
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 9ddd9cc7-0d51-4823-bee2-55370ca91003-1783363000
+      x-shopify-api-deprecated-reason:
+      - ProductVariant.image, ProductVariant.sellingPlanGroupCount
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-07
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '50209226753'
+      x-stats-apipermissionid:
+      - '897748468058'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String)
+      { productVariants(first: $first, after: $after, query: $filter) { edges { cursor
+      node { id availableForSale barcode compareAtPrice createdAt displayName image
+      { id altText } inventoryItem { id } inventoryPolicy inventoryQuantity legacyResourceId
+      position price product { id } selectedOptions { name value } sellingPlanGroupCount
+      sku taxable title updatedAt } }, pageInfo { hasNextPage } } } ", "variables":
+      {"first": 142, "after": "eyJsYXN0X2lkIjo0OTIxNDk2OTA4NjI5OCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5MDg2Mjk4In0=",
+      "filter": "updated_at:>''2015-01-01T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '632'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-tx-test-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"data":{"productVariants":{"edges":[{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTExOTA2NiwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5MTE5MDY2In0=","node":{"id":"gid://shopify/ProductVariant/49214969119066","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:56Z","displayName":"The
+        Videographer Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260338522"},"inventoryPolicy":"DENY","inventoryQuantity":50,"legacyResourceId":"49214969119066","position":1,"price":"885.95","product":{"id":"gid://shopify/Product/9687691985242"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:56Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTI1MDEzOCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5MjUwMTM4In0=","node":{"id":"gid://shopify/ProductVariant/49214969250138","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:57Z","displayName":"The
+        Collection Snowboard: Hydrogen - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260469594"},"inventoryPolicy":"DENY","inventoryQuantity":50,"legacyResourceId":"49214969250138","position":1,"price":"600.00","product":{"id":"gid://shopify/Product/9687692083546"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:57Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTMxNTY3NCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5MzE1Njc0In0=","node":{"id":"gid://shopify/ProductVariant/49214969315674","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Complete Snowboard - Ice","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260567898"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214969315674","position":1,"price":"699.95","product":{"id":"gid://shopify/Product/9687692116314"},"selectedOptions":[{"name":"Color","value":"Ice"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Ice","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTM0ODQ0MiwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5MzQ4NDQyIn0=","node":{"id":"gid://shopify/ProductVariant/49214969348442","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Complete Snowboard - Dawn","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260600666"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214969348442","position":2,"price":"699.95","product":{"id":"gid://shopify/Product/9687692116314"},"selectedOptions":[{"name":"Color","value":"Dawn"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Dawn","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTM4MTIxMCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5MzgxMjEwIn0=","node":{"id":"gid://shopify/ProductVariant/49214969381210","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Complete Snowboard - Powder","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260633434"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214969381210","position":3,"price":"699.95","product":{"id":"gid://shopify/Product/9687692116314"},"selectedOptions":[{"name":"Color","value":"Powder"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Powder","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTQxMzk3OCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5NDEzOTc4In0=","node":{"id":"gid://shopify/ProductVariant/49214969413978","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Complete Snowboard - Electric","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260666202"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214969413978","position":4,"price":"699.95","product":{"id":"gid://shopify/Product/9687692116314"},"selectedOptions":[{"name":"Color","value":"Electric"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Electric","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTQ0Njc0NiwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5NDQ2NzQ2In0=","node":{"id":"gid://shopify/ProductVariant/49214969446746","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Draft Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260535130"},"inventoryPolicy":"DENY","inventoryQuantity":20,"legacyResourceId":"49214969446746","position":1,"price":"2629.95","product":{"id":"gid://shopify/Product/9687692149082"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTQ3OTUxNCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5NDc5NTE0In0=","node":{"id":"gid://shopify/ProductVariant/49214969479514","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Complete Snowboard - Sunset","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260698970"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214969479514","position":5,"price":"699.95","product":{"id":"gid://shopify/Product/9687692116314"},"selectedOptions":[{"name":"Color","value":"Sunset"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Sunset","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTU3NzgxOCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5NTc3ODE4In0=","node":{"id":"gid://shopify/ProductVariant/49214969577818","availableForSale":true,"barcode":null,"compareAtPrice":"885.95","createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Compare at Price Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260797274"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214969577818","position":1,"price":"785.95","product":{"id":"gid://shopify/Product/9687692181850"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTYxMDU4NiwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5NjEwNTg2In0=","node":{"id":"gid://shopify/ProductVariant/49214969610586","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Archived Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260830042"},"inventoryPolicy":"DENY","inventoryQuantity":50,"legacyResourceId":"49214969610586","position":1,"price":"629.95","product":{"id":"gid://shopify/Product/9687692214618"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTY0MzM1NCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5NjQzMzU0In0=","node":{"id":"gid://shopify/ProductVariant/49214969643354","availableForSale":false,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"The
+        Out of Stock Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260862810"},"inventoryPolicy":"DENY","inventoryQuantity":0,"legacyResourceId":"49214969643354","position":1,"price":"885.95","product":{"id":"gid://shopify/Product/9687692247386"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTY3NjEyMiwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5Njc2MTIyIn0=","node":{"id":"gid://shopify/ProductVariant/49214969676122","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"Gift
+        Card - $10","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260895578"},"inventoryPolicy":"DENY","inventoryQuantity":0,"legacyResourceId":"49214969676122","position":1,"price":"10.00","product":{"id":"gid://shopify/Product/9687692280154"},"selectedOptions":[{"name":"Denominations","value":"$10"}],"sellingPlanGroupCount":0,"sku":"","taxable":false,"title":"$10","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTcwODg5MCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5NzA4ODkwIn0=","node":{"id":"gid://shopify/ProductVariant/49214969708890","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"Gift
+        Card - $25","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260928346"},"inventoryPolicy":"DENY","inventoryQuantity":0,"legacyResourceId":"49214969708890","position":2,"price":"25.00","product":{"id":"gid://shopify/Product/9687692280154"},"selectedOptions":[{"name":"Denominations","value":"$25"}],"sellingPlanGroupCount":0,"sku":"","taxable":false,"title":"$25","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTc0MTY1OCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5NzQxNjU4In0=","node":{"id":"gid://shopify/ProductVariant/49214969741658","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"Gift
+        Card - $50","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260961114"},"inventoryPolicy":"DENY","inventoryQuantity":0,"legacyResourceId":"49214969741658","position":3,"price":"50.00","product":{"id":"gid://shopify/Product/9687692280154"},"selectedOptions":[{"name":"Denominations","value":"$50"}],"sellingPlanGroupCount":0,"sku":"","taxable":false,"title":"$50","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTc3NDQyNiwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5Nzc0NDI2In0=","node":{"id":"gid://shopify/ProductVariant/49214969774426","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:58Z","displayName":"Gift
+        Card - $100","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259260993882"},"inventoryPolicy":"DENY","inventoryQuantity":0,"legacyResourceId":"49214969774426","position":4,"price":"100.00","product":{"id":"gid://shopify/Product/9687692280154"},"selectedOptions":[{"name":"Denominations","value":"$100"}],"sellingPlanGroupCount":0,"sku":"","taxable":false,"title":"$100","updatedAt":"2024-07-29T17:32:58Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTgwNzE5NCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5ODA3MTk0In0=","node":{"id":"gid://shopify/ProductVariant/49214969807194","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:59Z","displayName":"The
+        Multi-managed Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259261026650"},"inventoryPolicy":"DENY","inventoryQuantity":100,"legacyResourceId":"49214969807194","position":1,"price":"629.95","product":{"id":"gid://shopify/Product/9687692312922"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"sku-managed-1","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:33:01Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTgzOTk2MiwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5ODM5OTYyIn0=","node":{"id":"gid://shopify/ProductVariant/49214969839962","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:59Z","displayName":"The
+        Inventory Not Tracked Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259261059418"},"inventoryPolicy":"DENY","inventoryQuantity":0,"legacyResourceId":"49214969839962","position":1,"price":"949.95","product":{"id":"gid://shopify/Product/9687692378458"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"sku-untracked-1","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:59Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTg3MjczMCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5ODcyNzMwIn0=","node":{"id":"gid://shopify/ProductVariant/49214969872730","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:59Z","displayName":"The
+        Multi-location Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259261092186"},"inventoryPolicy":"DENY","inventoryQuantity":100,"legacyResourceId":"49214969872730","position":1,"price":"729.95","product":{"id":"gid://shopify/Product/9687692345690"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:59Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTkwNTQ5OCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5OTA1NDk4In0=","node":{"id":"gid://shopify/ProductVariant/49214969905498","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:59Z","displayName":"The
+        3p Fulfilled Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259261124954"},"inventoryPolicy":"DENY","inventoryQuantity":20,"legacyResourceId":"49214969905498","position":1,"price":"2629.95","product":{"id":"gid://shopify/Product/9687692411226"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"sku-hosted-1","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:33:00Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTkzODI2NiwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5OTM4MjY2In0=","node":{"id":"gid://shopify/ProductVariant/49214969938266","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:32:59Z","displayName":"The
+        Hidden Snowboard - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259261157722"},"inventoryPolicy":"DENY","inventoryQuantity":50,"legacyResourceId":"49214969938266","position":1,"price":"749.95","product":{"id":"gid://shopify/Product/9687692443994"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:32:59Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk2OTk3MTAzNCwibGFzdF92YWx1ZSI6IjQ5MjE0OTY5OTcxMDM0In0=","node":{"id":"gid://shopify/ProductVariant/49214969971034","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:33:00Z","displayName":"The
+        Collection Snowboard: Oxygen - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259261190490"},"inventoryPolicy":"DENY","inventoryQuantity":50,"legacyResourceId":"49214969971034","position":1,"price":"1025.00","product":{"id":"gid://shopify/Product/9687692476762"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:33:00Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk3MTcwNzczOCwibGFzdF92YWx1ZSI6IjQ5MjE0OTcxNzA3NzM4In0=","node":{"id":"gid://shopify/ProductVariant/49214971707738","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:33:04Z","displayName":"The
+        Collection Snowboard: Liquid - Default Title","image":null,"inventoryItem":{"id":"gid://shopify/InventoryItem/51259262927194"},"inventoryPolicy":"DENY","inventoryQuantity":50,"legacyResourceId":"49214971707738","position":1,"price":"749.95","product":{"id":"gid://shopify/Product/9687692607834"},"selectedOptions":[{"name":"Title","value":"Default
+        Title"}],"sellingPlanGroupCount":0,"sku":"","taxable":true,"title":"Default
+        Title","updatedAt":"2024-07-29T17:33:04Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk3MTc3MzI3NCwibGFzdF92YWx1ZSI6IjQ5MjE0OTcxNzczMjc0In0=","node":{"id":"gid://shopify/ProductVariant/49214971773274","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:33:04Z","displayName":"Selling
+        Plans Ski Wax - Selling Plans Ski Wax","image":{"id":"gid://shopify/ProductImage/56005171708250","altText":"A
+        bar of golden yellow wax"},"inventoryItem":{"id":"gid://shopify/InventoryItem/51259262992730"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214971773274","position":1,"price":"24.95","product":{"id":"gid://shopify/Product/9687692673370"},"selectedOptions":[{"name":"Title","value":"Selling
+        Plans Ski Wax"}],"sellingPlanGroupCount":2,"sku":"","taxable":true,"title":"Selling
+        Plans Ski Wax","updatedAt":"2024-07-29T17:33:04Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk3MTgwNjA0MiwibGFzdF92YWx1ZSI6IjQ5MjE0OTcxODA2MDQyIn0=","node":{"id":"gid://shopify/ProductVariant/49214971806042","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:33:04Z","displayName":"Selling
+        Plans Ski Wax - Special Selling Plans Ski Wax","image":{"id":"gid://shopify/ProductImage/56005171741018","altText":"A
+        bar of purple wax"},"inventoryItem":{"id":"gid://shopify/InventoryItem/51259263025498"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214971806042","position":2,"price":"49.95","product":{"id":"gid://shopify/Product/9687692673370"},"selectedOptions":[{"name":"Title","value":"Special
+        Selling Plans Ski Wax"}],"sellingPlanGroupCount":1,"sku":"","taxable":true,"title":"Special
+        Selling Plans Ski Wax","updatedAt":"2024-07-29T17:33:04Z"}},{"cursor":"eyJsYXN0X2lkIjo0OTIxNDk3MTgzODgxMCwibGFzdF92YWx1ZSI6IjQ5MjE0OTcxODM4ODEwIn0=","node":{"id":"gid://shopify/ProductVariant/49214971838810","availableForSale":true,"barcode":null,"compareAtPrice":null,"createdAt":"2024-07-29T17:33:04Z","displayName":"Selling
+        Plans Ski Wax - Sample Selling Plans Ski Wax","image":{"id":"gid://shopify/ProductImage/56005171773786","altText":"a
+        small cube of wax"},"inventoryItem":{"id":"gid://shopify/InventoryItem/51259263058266"},"inventoryPolicy":"DENY","inventoryQuantity":10,"legacyResourceId":"49214971838810","position":3,"price":"9.95","product":{"id":"gid://shopify/Product/9687692673370"},"selectedOptions":[{"name":"Title","value":"Sample
+        Selling Plans Ski Wax"}],"sellingPlanGroupCount":1,"sku":"","taxable":true,"title":"Sample
+        Selling Plans Ski Wax","updatedAt":"2024-07-29T17:33:04Z"}}],"pageInfo":{"hasNextPage":false}}},"extensions":{"cost":{"requestedQueryCost":47,"actualQueryCost":10,"throttleStatus":{"maximumAvailable":2000.0,"currentlyAvailable":1990,"restoreRate":100.0}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a170b763d9026282-GRU
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '18474'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 Jul 2026 18:36:41 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=LOFBcOmtzlpZtw6K6DVr847nZkNCVz3IZ7R7w0hSXGpI9clddf%2BJpq%2F18NClTxOLFoU2pHI9bwig9y6vMxzHz5bRcUl1UFLLiC71F1Y1if55C1Ok4%2ByXjGguJ96CO4OJ9d2tTbQ9iY1nMpqQ5H3LiTPT0qvY8LSAg5auz9s%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '18474'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=4b62bec2-dc62-49bb-a577-eb083fa61a4b-1783363000;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=4b62bec2-dc62-49bb-a577-eb083fa61a4b-1783363000"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=95, verdict_flag_enabled;desc="count=18";dur=1.085, graphql;desc="admin/query/other",
+        _y;desc="01d8efa9-720b-4c91-acdf-2bfff59ee385", _s;desc="ee9c93ce-dbfd-4297-b1ce-dddd7a2dc3d4"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-europe-west4,gcp-europe-west4
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 4b62bec2-dc62-49bb-a577-eb083fa61a4b-1783363000
+      x-shopify-api-deprecated-reason:
+      - ProductVariant.image, ProductVariant.sellingPlanGroupCount
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-07
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '50209226753'
+      x-stats-apipermissionid:
+      - '897748468058'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -21,14 +21,6 @@ jobs:
           python-version: '3.10'
 
 
-      - name: Checkout test-framework repository
-        uses: actions/checkout@v4
-        with:
-          repository: hotgluexyz/test-framework
-          path: test-framework
-          token: ${{ secrets.TEST_GITHUB_ACCESS_TOKEN }}
-
-
       - name: Set REPO_ROOT environment variable
         run: |
           echo "REPO_ROOT=$(pwd)" >> $GITHUB_ENV
@@ -39,23 +31,14 @@ jobs:
           python -m venv .venv
           source .venv/bin/activate
           pip install .
+          pip install "hotglue-smoke-test @ git+https://github.com/hotgluexyz/hotglue-smoke-test.git@feature/hgi-10668"
           deactivate
 
 
       - name: Setup and run tests
         run: |
-          cd test-framework
-          # Try to switch to the same branch as the current PR
-          BRANCH_NAME=${{ github.head_ref }}
-          if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then
-            git checkout $BRANCH_NAME
-          else
-            git checkout main
-          fi
-          
-          python -m venv .venv
           source .venv/bin/activate
-          pip install -r requirements.txt
+          BRANCH_NAME=${{ github.head_ref }}
           REPO_NAME=$(echo "${{ github.event.repository.name }}" | sed -e 's/^tap-//' -e 's/^target-//')
           
           # Create timestamp and output file
@@ -66,7 +49,7 @@ jobs:
           TEST_FAILED=0
           
           # Run the test and capture both stdout and stderr
-          ./bin/smoke_test.sh "$REPO_NAME" '*' --tap-directory ${{ github.workspace }} > "$OUTPUT_FILE" 2>&1 || TEST_FAILED=1
+          hotglue-smoke-test run "$REPO_NAME" '*' --tap-directory . > "$OUTPUT_FILE" 2>&1 || TEST_FAILED=1
           
           # Configure AWS credentials
           aws configure set aws_access_key_id ${{ secrets.SMOKETEST_AWS_ACCESS_KEY_ID }}
