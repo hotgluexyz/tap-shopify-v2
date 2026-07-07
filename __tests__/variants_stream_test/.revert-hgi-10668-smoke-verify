@@ -1,7 +1,0 @@
-TEMPORARY — delete this file when reverting smoke-test verification change.
-
-Changed: expected_output/data.singer line 2
-  record gid://shopify/ProductVariant/49214969086298
-  price: "885.95" -> "999.99" (intentional mismatch to verify CI smoke test fails)
-
-Revert: restore price to "885.95"
