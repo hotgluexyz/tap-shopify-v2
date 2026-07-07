@@ -1,0 +1,529 @@
+interactions:
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
+      $sortKey: OrderSortKeys) { orders(first: $first, after: $after, query: $filter,
+      sortKey: $sortKey) { edges { cursor node { id app { id name icon { altText height
+      id url width } } channelInformation { app { id apiKey appStoreAppUrl appStoreDeveloperUrl
+      banner { altText height id url width } description developerName developerType
+      embedded features icon { altText height id url width } installUrl isPostPurchaseAppInUse
+      previouslyInstalled pricingDetails pricingDetailsSummary privacyPolicyUrl publicCategory
+      published requestedAccessScopes { description handle } shopifyDeveloped title
+      uninstallMessage webhookApiVersion } channelDefinition { id channelName handle
+      isMarketplace subChannelName svgIcon } channelId id } billingAddress { address1
+      address2 city company coordinatesValidated country countryCodeV2 firstName formatted
+      formattedArea lastName latitude longitude name phone province provinceCode timeZone
+      zip } billingAddressMatchesShippingAddress cancelledAt cancelReason canMarkAsPaid
+      canNotifyCustomer capturable cartDiscountAmountSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } clientIp closed closedAt
+      confirmed createdAt currencyCode currentCartDiscountAmountSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } currentSubtotalLineItemsQuantity
+      currentSubtotalPriceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } currentTaxLines { channelLiable priceSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } rate ratePercentage
+      title } currentTotalDiscountsSet { presentmentMoney { amount currencyCode }
+      shopMoney { amount currencyCode } } currentTotalDutiesSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } currentTotalPriceSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } currentTotalTaxSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } currentTotalWeight customer { id } customerAcceptsMarketing
+      customerLocale discountCode displayAddress { address1 address2 city company
+      coordinatesValidated country countryCodeV2 firstName formatted formattedArea
+      lastName latitude longitude name phone province provinceCode timeZone zip }
+      displayFinancialStatus displayFulfillmentStatus disputes { id initiatedAs status
+      } edited email estimatedTaxes fulfillable fulfillments { id } fullyPaid legacyResourceId
+      hasTimelineComment merchantEditable name netPaymentSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } note originalTotalDutiesSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } originalTotalPriceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } paymentGatewayNames phone presentmentCurrencyCode
+      processedAt refundable refundDiscrepancySet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } refunds { id } registeredSourceUrl requiresShipping
+      restockable riskLevel risks { display level message } shippingAddress { address1
+      address2 city company coordinatesValidated country countryCodeV2 firstName formatted
+      formattedArea lastName latitude longitude name phone province provinceCode timeZone
+      zip } shippingLine { carrierIdentifier code custom discountAllocations { allocatedAmountSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } discountApplication { allocationMethod targetSelection targetType value {
+      ... on MoneyV2 { amount currencyCode } ... on PricingPercentageValue { percentage
+      } } index } } } subtotalLineItemsQuantity subtotalPriceSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } taxesIncluded taxLines
+      { channelLiable priceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } rate ratePercentage title } totalCapturableSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } totalDiscountsSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } totalOutstandingSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } totalPriceSet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } totalReceivedSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } totalRefundedSet {
+      presentmentMoney { amount currencyCode } shopMoney { amount currencyCode } }
+      totalRefundedShippingSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } totalShippingPriceSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } totalTaxSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } totalTipReceivedSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } totalWeight transactions { id accountNumber amountSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } authorizationCode
+      authorizationExpiresAt createdAt errorCode fees { amount { amount currencyCode
+      } flatFee { amount currencyCode } flatFeeName id rate rateName taxAmount { amount
+      currencyCode } type } formattedGateway gateway kind manuallyCapturable maximumRefundableV2
+      { amount currencyCode } multiCapturable order { id } parentTransaction { id
+      } paymentIcon { altText height id url width } paymentId processedAt receiptJson
+      settlementCurrency settlementCurrencyRate status test totalUnsettledSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } } unpaid updatedAt
+      sourceIdentifier lineItems(first: 25) { edges { cursor node { contract { id
+      } currentQuantity discountAllocations { allocatedAmountSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } discountApplication
+      { allocationMethod targetSelection targetType value { ... on MoneyV2 { amount
+      currencyCode } ... on PricingPercentageValue { percentage } } index } } discountedTotalSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } discountedUnitPriceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } id image { altText height id url width } lineItemGroup
+      { id quantity title variantId variantSku } merchantEditable name nonFulfillableQuantity
+      originalTotalSet { presentmentMoney { amount currencyCode } shopMoney { amount
+      currencyCode } } originalUnitPriceSet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } product { id } quantity refundableQuantity
+      requiresShipping restockable sellingPlan { name sellingPlanId } sku taxable
+      taxLines { channelLiable priceSet { presentmentMoney { amount currencyCode }
+      shopMoney { amount currencyCode } } rate ratePercentage title } title totalDiscountSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } unfulfilledDiscountedTotalSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } unfulfilledOriginalTotalSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } unfulfilledQuantity variant
+      { id } variantTitle vendor customAttributes { key value } } } pageInfo { hasNextPage
+      } } } }, pageInfo { hasNextPage } } } ", "variables": {"first": 1, "filter":
+      "updated_at:>''2026-05-30T00:00:00''", "sortKey": "UPDATED_AT"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '7406'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: "{\"errors\":[{\"message\":\"Access denied for customer field. Required
+        access: `read_customers` access scope.\",\"locations\":[{\"line\":1,\"column\":2063}],\"extensions\":{\"code\":\"ACCESS_DENIED\",\"documentation\":\"https://shopify.dev/api/usage/access-scopes\",\"requiredAccess\":\"`read_customers`
+        access scope.\"},\"path\":[\"orders\",\"edges\",0,\"node\",\"customer\"]},{\"message\":\"Access
+        denied for contract field. Required access: the `read_own_subscription_contracts`
+        or `write_own_subscription_contracts` scope.\",\"locations\":[{\"line\":1,\"column\":5705}],\"extensions\":{\"code\":\"ACCESS_DENIED\",\"documentation\":\"https://shopify.dev/api/usage/access-scopes\",\"requiredAccess\":\"the
+        `read_own_subscription_contracts` or `write_own_subscription_contracts` scope.\"},\"path\":[\"orders\",\"edges\",0,\"node\",\"lineItems\",\"edges\",0,\"node\",\"contract\"]}],\"data\":{\"orders\":{\"edges\":[{\"cursor\":\"eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyNS4wNDU3MDQifQ==\",\"node\":{\"id\":\"gid://shopify/Order/7185087365340\",\"app\":{\"id\":\"gid://shopify/App/5284869\",\"name\":\"Loop
+        Subscriptions\",\"icon\":{\"altText\":null,\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/s/files/applications/afedc08b31165df4c41d3d60cc6051dc_512x512.png?v=1677586327\",\"width\":null}},\"channelInformation\":null,\"billingAddress\":{\"address1\":\"Av
+        La Marina 478\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 478\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rosa\",\"latitude\":-12.083423,\"longitude\":-77.0657189,\"name\":\"Rosa\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"billingAddressMatchesShippingAddress\":true,\"cancelledAt\":null,\"cancelReason\":null,\"canMarkAsPaid\":false,\"canNotifyCustomer\":true,\"capturable\":false,\"cartDiscountAmountSet\":null,\"clientIp\":\"127.0.0.1\",\"closed\":false,\"closedAt\":null,\"confirmed\":true,\"createdAt\":\"2026-06-30T16:30:19Z\",\"currencyCode\":\"USD\",\"currentCartDiscountAmountSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentSubtotalLineItemsQuantity\":1,\"currentSubtotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"currentTaxLines\":[],\"currentTotalDiscountsSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTotalDutiesSet\":null,\"currentTotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"currentTotalTaxSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTotalWeight\":\"0\",\"customer\":null,\"customerAcceptsMarketing\":false,\"customerLocale\":\"en-PE\",\"discountCode\":null,\"displayAddress\":{\"address1\":\"Av
+        La Marina 478\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 478\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rosa\",\"latitude\":-12.083423,\"longitude\":-77.0657189,\"name\":\"Rosa\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"displayFinancialStatus\":\"PAID\",\"displayFulfillmentStatus\":\"UNFULFILLED\",\"disputes\":[],\"edited\":false,\"email\":\"rosa@hotglue.io\",\"estimatedTaxes\":false,\"fulfillable\":true,\"fulfillments\":[],\"fullyPaid\":true,\"legacyResourceId\":\"7185087365340\",\"hasTimelineComment\":false,\"merchantEditable\":true,\"name\":\"#1280\",\"netPaymentSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"note\":null,\"originalTotalDutiesSet\":null,\"originalTotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"paymentGatewayNames\":[\"bogus\"],\"phone\":null,\"presentmentCurrencyCode\":\"USD\",\"processedAt\":\"2026-06-30T16:30:17Z\",\"refundable\":true,\"refundDiscrepancySet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"refunds\":[],\"registeredSourceUrl\":null,\"requiresShipping\":true,\"restockable\":true,\"riskLevel\":\"LOW\",\"risks\":[{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Card
+        Verification Value (CVV) isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Billing
+        address or credit card's address wasn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Billing
+        address ZIP or postal code isn't available to match with credit card's registered
+        address\"},{\"display\":true,\"level\":\"LOW\",\"message\":\"There was 1 payment
+        attempt\"},{\"display\":true,\"level\":\"LOW\",\"message\":\"Payment was made
+        with 1 credit card\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Location
+        of IP address used to place the order isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Distance
+        between shipping address and location of IP address isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"The
+        billing country or the country of the IP used to place the order isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Can't
+        determine if a high risk internet connection was used because the IP address
+        isn't available\"}],\"shippingAddress\":{\"address1\":\"Av La Marina 478\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 478\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rosa\",\"latitude\":-12.083423,\"longitude\":-77.0657189,\"name\":\"Rosa\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"shippingLine\":{\"carrierIdentifier\":null,\"code\":\"FirstClassPackageInternationalService\",\"custom\":false,\"discountAllocations\":[]},\"subtotalLineItemsQuantity\":1,\"subtotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"taxesIncluded\":false,\"taxLines\":[],\"totalCapturableSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalDiscountsSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalOutstandingSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"totalReceivedSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"totalRefundedSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalRefundedShippingSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalShippingPriceSet\":{\"presentmentMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"}},\"totalTaxSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalTipReceivedSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalWeight\":\"0\",\"transactions\":[{\"id\":\"gid://shopify/OrderTransaction/8554553147612\",\"accountNumber\":\"\u2022\u2022\u2022\u2022
+        \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 1\",\"amountSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"authorizationCode\":\"53433\",\"authorizationExpiresAt\":null,\"createdAt\":\"2026-06-30T16:30:18Z\",\"errorCode\":null,\"fees\":[],\"formattedGateway\":\"(For
+        Testing) Bogus Gateway\",\"gateway\":\"bogus\",\"kind\":\"SALE\",\"manuallyCapturable\":false,\"maximumRefundableV2\":null,\"multiCapturable\":true,\"order\":{\"id\":\"gid://shopify/Order/7185087365340\"},\"parentTransaction\":null,\"paymentIcon\":{\"altText\":\"Bogus\",\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/bogus-13c83bc142b1d1b69905f99e38a897f75581e477a1233254ce01e64b3e3ae2b8.svg.png\",\"width\":null},\"paymentId\":\"r3D9XUujPq3RxAMOqDmqrOSxt\",\"processedAt\":\"2026-06-30T16:30:18Z\",\"receiptJson\":\"{\\\"paid_amount\\\":\\\"28.39\\\"}\",\"settlementCurrency\":null,\"settlementCurrencyRate\":null,\"status\":\"SUCCESS\",\"test\":true,\"totalUnsettledSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}}}],\"unpaid\":false,\"updatedAt\":\"2026-06-30T16:30:25Z\",\"sourceIdentifier\":null,\"lineItems\":{\"edges\":[{\"cursor\":\"eyJsYXN0X2lkIjoxNjkyNTAxMzYzOTM4OCwibGFzdF92YWx1ZSI6MTY5MjUwMTM2MzkzODh9\",\"node\":{\"contract\":null,\"currentQuantity\":1,\"discountAllocations\":[],\"discountedTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"discountedUnitPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"id\":\"gid://shopify/LineItem/16925013639388\",\"image\":null,\"lineItemGroup\":null,\"merchantEditable\":true,\"name\":\"autumn
+        field - Black / Medium\",\"nonFulfillableQuantity\":0,\"originalTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"originalUnitPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"product\":{\"id\":\"gid://shopify/Product/7510223519964\"},\"quantity\":1,\"refundableQuantity\":1,\"requiresShipping\":true,\"restockable\":true,\"sellingPlan\":{\"name\":\"Deliver
+        every month\",\"sellingPlanId\":\"gid://shopify/SellingPlan/33305133276\"},\"sku\":\"\",\"taxable\":true,\"taxLines\":[],\"title\":\"autumn
+        field\",\"totalDiscountSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"unfulfilledDiscountedTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"unfulfilledOriginalTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"unfulfilledQuantity\":1,\"variant\":{\"id\":\"gid://shopify/ProductVariant/43697951965404\"},\"variantTitle\":\"Black
+        / Medium\",\"vendor\":\"hotglue testing 1\",\"customAttributes\":[]}}],\"pageInfo\":{\"hasNextPage\":false}}}}],\"pageInfo\":{\"hasNextPage\":true}}},\"extensions\":{\"cost\":{\"requestedQueryCost\":97,\"actualQueryCost\":29,\"throttleStatus\":{\"maximumAvailable\":2000.0,\"currentlyAvailable\":1971,\"restoreRate\":100.0}}}}"
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a177f0ff8bfea426-GRU
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '10637'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 07 Jul 2026 15:39:21 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=e0gifS0GTCQnm7Ne6qFoEnJKl4eevUeLiuKK4Mola5sfZGflAkJcnjDsClmVkftg4QKJdiVWWAY%2BwHGcH63KKsksLLCBqOnUN0sSbIOBrrz8hmJm1pMlR24QxEbuLkeTrm4ybdgsp%2Fs3ZEtAK3vwUiraoKP2OanOmbJFihQ%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '10637'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=0eebb234-7cc1-417f-9138-87c0240fa6db-1783438760;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=0eebb234-7cc1-417f-9138-87c0240fa6db-1783438760"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=355, verdict_flag_enabled;desc="count=60";dur=2.313, graphql;desc="admin/query/other",
+        _y;desc="c139c013-d192-4104-afa7-ee1a43cbb8d9", _s;desc="3fce6305-c024-40b8-8066-91b0f4412a6e"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 0eebb234-7cc1-417f-9138-87c0240fa6db-1783438760
+      x-shopify-api-deprecated-reason:
+      - ChannelDefinition.svgIcon, Order.channelInformation, Order.riskLevel, OrderRisk.display,
+        OrderRisk.level and 3 more
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-07
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
+      $sortKey: OrderSortKeys) { orders(first: $first, after: $after, query: $filter,
+      sortKey: $sortKey) { edges { cursor node { id app { id name icon { altText height
+      id url width } } channelInformation { app { id apiKey appStoreAppUrl appStoreDeveloperUrl
+      banner { altText height id url width } description developerName developerType
+      embedded features icon { altText height id url width } installUrl isPostPurchaseAppInUse
+      previouslyInstalled pricingDetails pricingDetailsSummary privacyPolicyUrl publicCategory
+      published requestedAccessScopes { description handle } shopifyDeveloped title
+      uninstallMessage webhookApiVersion } channelDefinition { id channelName handle
+      isMarketplace subChannelName svgIcon } channelId id } billingAddress { address1
+      address2 city company coordinatesValidated country countryCodeV2 firstName formatted
+      formattedArea lastName latitude longitude name phone province provinceCode timeZone
+      zip } billingAddressMatchesShippingAddress cancelledAt cancelReason canMarkAsPaid
+      canNotifyCustomer capturable cartDiscountAmountSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } clientIp closed closedAt
+      confirmed createdAt currencyCode currentCartDiscountAmountSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } currentSubtotalLineItemsQuantity
+      currentSubtotalPriceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } currentTaxLines { channelLiable priceSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } rate ratePercentage
+      title } currentTotalDiscountsSet { presentmentMoney { amount currencyCode }
+      shopMoney { amount currencyCode } } currentTotalDutiesSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } currentTotalPriceSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } currentTotalTaxSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } currentTotalWeight customer { id } customerAcceptsMarketing
+      customerLocale discountCode displayAddress { address1 address2 city company
+      coordinatesValidated country countryCodeV2 firstName formatted formattedArea
+      lastName latitude longitude name phone province provinceCode timeZone zip }
+      displayFinancialStatus displayFulfillmentStatus disputes { id initiatedAs status
+      } edited email estimatedTaxes fulfillable fulfillments { id } fullyPaid legacyResourceId
+      hasTimelineComment merchantEditable name netPaymentSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } note originalTotalDutiesSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } originalTotalPriceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } paymentGatewayNames phone presentmentCurrencyCode
+      processedAt refundable refundDiscrepancySet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } refunds { id } registeredSourceUrl requiresShipping
+      restockable riskLevel risks { display level message } shippingAddress { address1
+      address2 city company coordinatesValidated country countryCodeV2 firstName formatted
+      formattedArea lastName latitude longitude name phone province provinceCode timeZone
+      zip } shippingLine { carrierIdentifier code custom discountAllocations { allocatedAmountSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } discountApplication { allocationMethod targetSelection targetType value {
+      ... on MoneyV2 { amount currencyCode } ... on PricingPercentageValue { percentage
+      } } index } } } subtotalLineItemsQuantity subtotalPriceSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } taxesIncluded taxLines
+      { channelLiable priceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } rate ratePercentage title } totalCapturableSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } totalDiscountsSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } totalOutstandingSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } totalPriceSet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } totalReceivedSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } totalRefundedSet {
+      presentmentMoney { amount currencyCode } shopMoney { amount currencyCode } }
+      totalRefundedShippingSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } totalShippingPriceSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } totalTaxSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } totalTipReceivedSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } totalWeight transactions { id accountNumber amountSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } authorizationCode
+      authorizationExpiresAt createdAt errorCode fees { amount { amount currencyCode
+      } flatFee { amount currencyCode } flatFeeName id rate rateName taxAmount { amount
+      currencyCode } type } formattedGateway gateway kind manuallyCapturable maximumRefundableV2
+      { amount currencyCode } multiCapturable order { id } parentTransaction { id
+      } paymentIcon { altText height id url width } paymentId processedAt receiptJson
+      settlementCurrency settlementCurrencyRate status test totalUnsettledSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } } unpaid updatedAt
+      sourceIdentifier lineItems(first: 25) { edges { cursor node { contract { id
+      } currentQuantity discountAllocations { allocatedAmountSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } discountApplication
+      { allocationMethod targetSelection targetType value { ... on MoneyV2 { amount
+      currencyCode } ... on PricingPercentageValue { percentage } } index } } discountedTotalSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } discountedUnitPriceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } id image { altText height id url width } lineItemGroup
+      { id quantity title variantId variantSku } merchantEditable name nonFulfillableQuantity
+      originalTotalSet { presentmentMoney { amount currencyCode } shopMoney { amount
+      currencyCode } } originalUnitPriceSet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } product { id } quantity refundableQuantity
+      requiresShipping restockable sellingPlan { name sellingPlanId } sku taxable
+      taxLines { channelLiable priceSet { presentmentMoney { amount currencyCode }
+      shopMoney { amount currencyCode } } rate ratePercentage title } title totalDiscountSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } unfulfilledDiscountedTotalSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } unfulfilledOriginalTotalSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } unfulfilledQuantity variant
+      { id } variantTitle vendor customAttributes { key value } } } pageInfo { hasNextPage
+      } } } }, pageInfo { hasNextPage } } } ", "variables": {"first": 15, "after":
+      "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyNS4wNDU3MDQifQ==",
+      "filter": "updated_at:>''2026-05-30T00:00:00''", "sortKey": "UPDATED_AT"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '7512'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: "{\"errors\":[{\"message\":\"Access denied for customer field. Required
+        access: `read_customers` access scope.\",\"locations\":[{\"line\":1,\"column\":2063}],\"extensions\":{\"code\":\"ACCESS_DENIED\",\"documentation\":\"https://shopify.dev/api/usage/access-scopes\",\"requiredAccess\":\"`read_customers`
+        access scope.\"},\"path\":[\"orders\",\"edges\",0,\"node\",\"customer\"]},{\"message\":\"Access
+        denied for contract field. Required access: the `read_own_subscription_contracts`
+        or `write_own_subscription_contracts` scope.\",\"locations\":[{\"line\":1,\"column\":5705}],\"extensions\":{\"code\":\"ACCESS_DENIED\",\"documentation\":\"https://shopify.dev/api/usage/access-scopes\",\"requiredAccess\":\"the
+        `read_own_subscription_contracts` or `write_own_subscription_contracts` scope.\"},\"path\":[\"orders\",\"edges\",0,\"node\",\"lineItems\",\"edges\",0,\"node\",\"contract\"]},{\"message\":\"Access
+        denied for customer field. Required access: `read_customers` access scope.\",\"locations\":[{\"line\":1,\"column\":2063}],\"extensions\":{\"code\":\"ACCESS_DENIED\",\"documentation\":\"https://shopify.dev/api/usage/access-scopes\",\"requiredAccess\":\"`read_customers`
+        access scope.\"},\"path\":[\"orders\",\"edges\",1,\"node\",\"customer\"]},{\"message\":\"Access
+        denied for contract field. Required access: the `read_own_subscription_contracts`
+        or `write_own_subscription_contracts` scope.\",\"locations\":[{\"line\":1,\"column\":5705}],\"extensions\":{\"code\":\"ACCESS_DENIED\",\"documentation\":\"https://shopify.dev/api/usage/access-scopes\",\"requiredAccess\":\"the
+        `read_own_subscription_contracts` or `write_own_subscription_contracts` scope.\"},\"path\":[\"orders\",\"edges\",1,\"node\",\"lineItems\",\"edges\",0,\"node\",\"contract\"]},{\"message\":\"Access
+        denied for customer field. Required access: `read_customers` access scope.\",\"locations\":[{\"line\":1,\"column\":2063}],\"extensions\":{\"code\":\"ACCESS_DENIED\",\"documentation\":\"https://shopify.dev/api/usage/access-scopes\",\"requiredAccess\":\"`read_customers`
+        access scope.\"},\"path\":[\"orders\",\"edges\",2,\"node\",\"customer\"]},{\"message\":\"Access
+        denied for contract field. Required access: the `read_own_subscription_contracts`
+        or `write_own_subscription_contracts` scope.\",\"locations\":[{\"line\":1,\"column\":5705}],\"extensions\":{\"code\":\"ACCESS_DENIED\",\"documentation\":\"https://shopify.dev/api/usage/access-scopes\",\"requiredAccess\":\"the
+        `read_own_subscription_contracts` or `write_own_subscription_contracts` scope.\"},\"path\":[\"orders\",\"edges\",2,\"node\",\"lineItems\",\"edges\",0,\"node\",\"contract\"]}],\"data\":{\"orders\":{\"edges\":[{\"cursor\":\"eyJsYXN0X2lkIjo3MTg1ODk0NjcwNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wMSAwMTo0NjoxNy40MTQ3MTcifQ==\",\"node\":{\"id\":\"gid://shopify/Order/7185894670556\",\"app\":{\"id\":\"gid://shopify/App/5284869\",\"name\":\"Loop
+        Subscriptions\",\"icon\":{\"altText\":null,\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/s/files/applications/afedc08b31165df4c41d3d60cc6051dc_512x512.png?v=1677586327\",\"width\":null}},\"channelInformation\":null,\"billingAddress\":{\"address1\":\"Av
+        La Marina 2255\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 2255\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rafael\",\"latitude\":-12.078509,\"longitude\":-77.0863516,\"name\":\"Rafael\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"billingAddressMatchesShippingAddress\":true,\"cancelledAt\":null,\"cancelReason\":null,\"canMarkAsPaid\":false,\"canNotifyCustomer\":true,\"capturable\":false,\"cartDiscountAmountSet\":null,\"clientIp\":\"127.0.0.1\",\"closed\":false,\"closedAt\":null,\"confirmed\":true,\"createdAt\":\"2026-07-01T01:45:36Z\",\"currencyCode\":\"USD\",\"currentCartDiscountAmountSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentSubtotalLineItemsQuantity\":1,\"currentSubtotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"currentTaxLines\":[],\"currentTotalDiscountsSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTotalDutiesSet\":null,\"currentTotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"currentTotalTaxSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTotalWeight\":\"0\",\"customer\":null,\"customerAcceptsMarketing\":true,\"customerLocale\":\"en-PE\",\"discountCode\":null,\"displayAddress\":{\"address1\":\"Av
+        La Marina 2255\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 2255\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rafael\",\"latitude\":-12.078509,\"longitude\":-77.0863516,\"name\":\"Rafael\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"displayFinancialStatus\":\"PAID\",\"displayFulfillmentStatus\":\"UNFULFILLED\",\"disputes\":[],\"edited\":false,\"email\":\"keyna@hotglue.io\",\"estimatedTaxes\":false,\"fulfillable\":true,\"fulfillments\":[],\"fullyPaid\":true,\"legacyResourceId\":\"7185894670556\",\"hasTimelineComment\":false,\"merchantEditable\":true,\"name\":\"#1281\",\"netPaymentSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"note\":null,\"originalTotalDutiesSet\":null,\"originalTotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"paymentGatewayNames\":[\"bogus\"],\"phone\":null,\"presentmentCurrencyCode\":\"USD\",\"processedAt\":\"2026-07-01T01:45:34Z\",\"refundable\":true,\"refundDiscrepancySet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"refunds\":[],\"registeredSourceUrl\":null,\"requiresShipping\":true,\"restockable\":true,\"riskLevel\":\"LOW\",\"risks\":[{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Card
+        Verification Value (CVV) isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Billing
+        address or credit card's address wasn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Billing
+        address ZIP or postal code isn't available to match with credit card's registered
+        address\"},{\"display\":true,\"level\":\"LOW\",\"message\":\"There was 1 payment
+        attempt\"},{\"display\":true,\"level\":\"LOW\",\"message\":\"Payment was made
+        with 1 credit card\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Location
+        of IP address used to place the order isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Distance
+        between shipping address and location of IP address isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"The
+        billing country or the country of the IP used to place the order isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Can't
+        determine if a high risk internet connection was used because the IP address
+        isn't available\"}],\"shippingAddress\":{\"address1\":\"Av La Marina 2255\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 2255\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rafael\",\"latitude\":-12.078509,\"longitude\":-77.0863516,\"name\":\"Rafael\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"shippingLine\":{\"carrierIdentifier\":null,\"code\":\"FirstClassPackageInternationalService\",\"custom\":false,\"discountAllocations\":[]},\"subtotalLineItemsQuantity\":1,\"subtotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"taxesIncluded\":false,\"taxLines\":[],\"totalCapturableSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalDiscountsSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalOutstandingSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"totalReceivedSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"totalRefundedSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalRefundedShippingSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalShippingPriceSet\":{\"presentmentMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"}},\"totalTaxSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalTipReceivedSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalWeight\":\"0\",\"transactions\":[{\"id\":\"gid://shopify/OrderTransaction/8555824775388\",\"accountNumber\":\"\u2022\u2022\u2022\u2022
+        \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 1\",\"amountSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"authorizationCode\":\"53433\",\"authorizationExpiresAt\":null,\"createdAt\":\"2026-07-01T01:45:34Z\",\"errorCode\":null,\"fees\":[],\"formattedGateway\":\"(For
+        Testing) Bogus Gateway\",\"gateway\":\"bogus\",\"kind\":\"SALE\",\"manuallyCapturable\":false,\"maximumRefundableV2\":null,\"multiCapturable\":true,\"order\":{\"id\":\"gid://shopify/Order/7185894670556\"},\"parentTransaction\":null,\"paymentIcon\":{\"altText\":\"Bogus\",\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/bogus-13c83bc142b1d1b69905f99e38a897f75581e477a1233254ce01e64b3e3ae2b8.svg.png\",\"width\":null},\"paymentId\":\"r1JZ5dE7MxpWHqSy1KzQeHdRd\",\"processedAt\":\"2026-07-01T01:45:34Z\",\"receiptJson\":\"{\\\"paid_amount\\\":\\\"28.39\\\"}\",\"settlementCurrency\":null,\"settlementCurrencyRate\":null,\"status\":\"SUCCESS\",\"test\":true,\"totalUnsettledSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}}}],\"unpaid\":false,\"updatedAt\":\"2026-07-01T01:46:17Z\",\"sourceIdentifier\":null,\"lineItems\":{\"edges\":[{\"cursor\":\"eyJsYXN0X2lkIjoxNjkyNjY3MjA2MDYzNiwibGFzdF92YWx1ZSI6MTY5MjY2NzIwNjA2MzZ9\",\"node\":{\"contract\":null,\"currentQuantity\":1,\"discountAllocations\":[],\"discountedTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"discountedUnitPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"id\":\"gid://shopify/LineItem/16926672060636\",\"image\":null,\"lineItemGroup\":null,\"merchantEditable\":true,\"name\":\"autumn
+        field - Black / Medium\",\"nonFulfillableQuantity\":0,\"originalTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"originalUnitPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"product\":{\"id\":\"gid://shopify/Product/7510223519964\"},\"quantity\":1,\"refundableQuantity\":1,\"requiresShipping\":true,\"restockable\":true,\"sellingPlan\":{\"name\":\"Deliver
+        every month\",\"sellingPlanId\":\"gid://shopify/SellingPlan/33305133276\"},\"sku\":\"\",\"taxable\":true,\"taxLines\":[],\"title\":\"autumn
+        field\",\"totalDiscountSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"unfulfilledDiscountedTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"unfulfilledOriginalTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"unfulfilledQuantity\":1,\"variant\":{\"id\":\"gid://shopify/ProductVariant/43697951965404\"},\"variantTitle\":\"Black
+        / Medium\",\"vendor\":\"hotglue testing 1\",\"customAttributes\":[]}}],\"pageInfo\":{\"hasNextPage\":false}}}},{\"cursor\":\"eyJsYXN0X2lkIjo3MDkxNjA5NDM2MzgwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wNyAxNTozMTo1OC41NzA0NTQifQ==\",\"node\":{\"id\":\"gid://shopify/Order/7091609436380\",\"app\":{\"id\":\"gid://shopify/App/5284869\",\"name\":\"Loop
+        Subscriptions\",\"icon\":{\"altText\":null,\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/s/files/applications/afedc08b31165df4c41d3d60cc6051dc_512x512.png?v=1677586327\",\"width\":null}},\"channelInformation\":null,\"billingAddress\":{\"address1\":\"Av
+        La Marina 478\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 478\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rosa\",\"latitude\":-12.0834453,\"longitude\":-77.06575579999999,\"name\":\"Rosa\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"billingAddressMatchesShippingAddress\":true,\"cancelledAt\":null,\"cancelReason\":null,\"canMarkAsPaid\":false,\"canNotifyCustomer\":true,\"capturable\":false,\"cartDiscountAmountSet\":null,\"clientIp\":\"127.0.0.1\",\"closed\":true,\"closedAt\":\"2026-07-07T15:31:58Z\",\"confirmed\":true,\"createdAt\":\"2026-05-30T16:30:05Z\",\"currencyCode\":\"USD\",\"currentCartDiscountAmountSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentSubtotalLineItemsQuantity\":1,\"currentSubtotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"currentTaxLines\":[],\"currentTotalDiscountsSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTotalDutiesSet\":null,\"currentTotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"currentTotalTaxSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTotalWeight\":\"0\",\"customer\":null,\"customerAcceptsMarketing\":false,\"customerLocale\":\"en-PE\",\"discountCode\":null,\"displayAddress\":{\"address1\":\"Av
+        La Marina 478\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 478\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rosa\",\"latitude\":-12.0834453,\"longitude\":-77.06575579999999,\"name\":\"Rosa\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"displayFinancialStatus\":\"PAID\",\"displayFulfillmentStatus\":\"FULFILLED\",\"disputes\":[],\"edited\":false,\"email\":\"rosa@hotglue.io\",\"estimatedTaxes\":false,\"fulfillable\":false,\"fulfillments\":[{\"id\":\"gid://shopify/Fulfillment/6447570911452\"}],\"fullyPaid\":true,\"legacyResourceId\":\"7091609436380\",\"hasTimelineComment\":false,\"merchantEditable\":true,\"name\":\"#1278\",\"netPaymentSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"note\":null,\"originalTotalDutiesSet\":null,\"originalTotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"paymentGatewayNames\":[\"bogus\"],\"phone\":null,\"presentmentCurrencyCode\":\"USD\",\"processedAt\":\"2026-05-30T16:30:04Z\",\"refundable\":true,\"refundDiscrepancySet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"refunds\":[],\"registeredSourceUrl\":null,\"requiresShipping\":true,\"restockable\":true,\"riskLevel\":\"LOW\",\"risks\":[{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Card
+        Verification Value (CVV) isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Billing
+        address or credit card's address wasn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Billing
+        address ZIP or postal code isn't available to match with credit card's registered
+        address\"},{\"display\":true,\"level\":\"LOW\",\"message\":\"There was 1 payment
+        attempt\"},{\"display\":true,\"level\":\"LOW\",\"message\":\"Payment was made
+        with 1 credit card\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Location
+        of IP address used to place the order isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Distance
+        between shipping address and location of IP address isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"The
+        billing country or the country of the IP used to place the order isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Can't
+        determine if a high risk internet connection was used because the IP address
+        isn't available\"}],\"shippingAddress\":{\"address1\":\"Av La Marina 478\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 478\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rosa\",\"latitude\":-12.0834453,\"longitude\":-77.06575579999999,\"name\":\"Rosa\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"shippingLine\":{\"carrierIdentifier\":null,\"code\":\"FirstClassPackageInternationalService\",\"custom\":false,\"discountAllocations\":[]},\"subtotalLineItemsQuantity\":1,\"subtotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"taxesIncluded\":false,\"taxLines\":[],\"totalCapturableSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalDiscountsSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalOutstandingSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"totalReceivedSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"totalRefundedSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalRefundedShippingSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalShippingPriceSet\":{\"presentmentMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"}},\"totalTaxSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalTipReceivedSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalWeight\":\"0\",\"transactions\":[{\"id\":\"gid://shopify/OrderTransaction/8438619668700\",\"accountNumber\":\"\u2022\u2022\u2022\u2022
+        \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 1\",\"amountSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"authorizationCode\":\"53433\",\"authorizationExpiresAt\":null,\"createdAt\":\"2026-05-30T16:30:04Z\",\"errorCode\":null,\"fees\":[],\"formattedGateway\":\"(For
+        Testing) Bogus Gateway\",\"gateway\":\"bogus\",\"kind\":\"SALE\",\"manuallyCapturable\":false,\"maximumRefundableV2\":null,\"multiCapturable\":true,\"order\":{\"id\":\"gid://shopify/Order/7091609436380\"},\"parentTransaction\":null,\"paymentIcon\":{\"altText\":\"Bogus\",\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/bogus-13c83bc142b1d1b69905f99e38a897f75581e477a1233254ce01e64b3e3ae2b8.svg.png\",\"width\":null},\"paymentId\":\"rn2tNfVfsDKm2NTaT47W8kFK1\",\"processedAt\":\"2026-05-30T16:30:04Z\",\"receiptJson\":\"{\\\"paid_amount\\\":\\\"28.39\\\"}\",\"settlementCurrency\":null,\"settlementCurrencyRate\":null,\"status\":\"SUCCESS\",\"test\":true,\"totalUnsettledSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}}}],\"unpaid\":false,\"updatedAt\":\"2026-07-07T15:31:58Z\",\"sourceIdentifier\":null,\"lineItems\":{\"edges\":[{\"cursor\":\"eyJsYXN0X2lkIjoxNjY5NDE0OTQ0NzkwMCwibGFzdF92YWx1ZSI6MTY2OTQxNDk0NDc5MDB9\",\"node\":{\"contract\":null,\"currentQuantity\":1,\"discountAllocations\":[],\"discountedTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"discountedUnitPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"id\":\"gid://shopify/LineItem/16694149447900\",\"image\":null,\"lineItemGroup\":null,\"merchantEditable\":true,\"name\":\"autumn
+        field - Black / Medium\",\"nonFulfillableQuantity\":0,\"originalTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"originalUnitPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"product\":{\"id\":\"gid://shopify/Product/7510223519964\"},\"quantity\":1,\"refundableQuantity\":1,\"requiresShipping\":true,\"restockable\":true,\"sellingPlan\":{\"name\":\"Deliver
+        every month\",\"sellingPlanId\":\"gid://shopify/SellingPlan/33305133276\"},\"sku\":\"\",\"taxable\":true,\"taxLines\":[],\"title\":\"autumn
+        field\",\"totalDiscountSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"unfulfilledDiscountedTotalSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"unfulfilledOriginalTotalSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"unfulfilledQuantity\":0,\"variant\":{\"id\":\"gid://shopify/ProductVariant/43697951965404\"},\"variantTitle\":\"Black
+        / Medium\",\"vendor\":\"hotglue testing 1\",\"customAttributes\":[]}}],\"pageInfo\":{\"hasNextPage\":false}}}},{\"cursor\":\"eyJsYXN0X2lkIjo3MDkyMzczNTg2MTQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wNyAxNTozMjowMC4yMDQ5MDIifQ==\",\"node\":{\"id\":\"gid://shopify/Order/7092373586140\",\"app\":{\"id\":\"gid://shopify/App/5284869\",\"name\":\"Loop
+        Subscriptions\",\"icon\":{\"altText\":null,\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/s/files/applications/afedc08b31165df4c41d3d60cc6051dc_512x512.png?v=1677586327\",\"width\":null}},\"channelInformation\":null,\"billingAddress\":{\"address1\":\"Av
+        La Marina 2255\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 2255\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rafael\",\"latitude\":-12.078509,\"longitude\":-77.0863516,\"name\":\"Rafael\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"billingAddressMatchesShippingAddress\":true,\"cancelledAt\":null,\"cancelReason\":null,\"canMarkAsPaid\":false,\"canNotifyCustomer\":true,\"capturable\":false,\"cartDiscountAmountSet\":null,\"clientIp\":\"127.0.0.1\",\"closed\":false,\"closedAt\":null,\"confirmed\":true,\"createdAt\":\"2026-05-31T01:45:20Z\",\"currencyCode\":\"USD\",\"currentCartDiscountAmountSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentSubtotalLineItemsQuantity\":0,\"currentSubtotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTaxLines\":[],\"currentTotalDiscountsSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTotalDutiesSet\":null,\"currentTotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"}},\"currentTotalTaxSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"currentTotalWeight\":\"0\",\"customer\":null,\"customerAcceptsMarketing\":true,\"customerLocale\":\"en-PE\",\"discountCode\":null,\"displayAddress\":{\"address1\":\"Av
+        La Marina 2255\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 2255\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rafael\",\"latitude\":-12.078509,\"longitude\":-77.0863516,\"name\":\"Rafael\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"displayFinancialStatus\":\"PARTIALLY_REFUNDED\",\"displayFulfillmentStatus\":\"UNFULFILLED\",\"disputes\":[],\"edited\":false,\"email\":\"keyna@hotglue.io\",\"estimatedTaxes\":false,\"fulfillable\":false,\"fulfillments\":[],\"fullyPaid\":true,\"legacyResourceId\":\"7092373586140\",\"hasTimelineComment\":false,\"merchantEditable\":true,\"name\":\"#1279\",\"netPaymentSet\":{\"presentmentMoney\":{\"amount\":\"27.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"27.39\",\"currencyCode\":\"USD\"}},\"note\":null,\"originalTotalDutiesSet\":null,\"originalTotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"paymentGatewayNames\":[\"bogus\"],\"phone\":null,\"presentmentCurrencyCode\":\"USD\",\"processedAt\":\"2026-05-31T01:45:18Z\",\"refundable\":true,\"refundDiscrepancySet\":{\"presentmentMoney\":{\"amount\":\"7.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"7.0\",\"currencyCode\":\"USD\"}},\"refunds\":[{\"id\":\"gid://shopify/Refund/974227767516\"}],\"registeredSourceUrl\":null,\"requiresShipping\":true,\"restockable\":false,\"riskLevel\":\"LOW\",\"risks\":[{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Card
+        Verification Value (CVV) isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Billing
+        address or credit card's address wasn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Billing
+        address ZIP or postal code isn't available to match with credit card's registered
+        address\"},{\"display\":true,\"level\":\"LOW\",\"message\":\"There was 1 payment
+        attempt\"},{\"display\":true,\"level\":\"LOW\",\"message\":\"Payment was made
+        with 1 credit card\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Location
+        of IP address used to place the order isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Distance
+        between shipping address and location of IP address isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"The
+        billing country or the country of the IP used to place the order isn't available\"},{\"display\":true,\"level\":\"MEDIUM\",\"message\":\"Can't
+        determine if a high risk internet connection was used because the IP address
+        isn't available\"}],\"shippingAddress\":{\"address1\":\"Av La Marina 2255\",\"address2\":null,\"city\":\"Lima\",\"company\":null,\"coordinatesValidated\":true,\"country\":\"Peru\",\"countryCodeV2\":\"PE\",\"firstName\":null,\"formatted\":[\"Av
+        La Marina 2255\",\"Lima\",\"LMA\",\"Peru\"],\"formattedArea\":\"Lima, LMA,
+        Peru\",\"lastName\":\"Rafael\",\"latitude\":-12.078509,\"longitude\":-77.0863516,\"name\":\"Rafael\",\"phone\":null,\"province\":\"Lima
+        (provincia)\",\"provinceCode\":\"PE-LMA\",\"timeZone\":\"America/Lima\",\"zip\":null},\"shippingLine\":{\"carrierIdentifier\":null,\"code\":\"FirstClassPackageInternationalService\",\"custom\":false,\"discountAllocations\":[]},\"subtotalLineItemsQuantity\":1,\"subtotalPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"taxesIncluded\":false,\"taxLines\":[],\"totalCapturableSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalDiscountsSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalOutstandingSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalPriceSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"totalReceivedSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"totalRefundedSet\":{\"presentmentMoney\":{\"amount\":\"1.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"1.0\",\"currencyCode\":\"USD\"}},\"totalRefundedShippingSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalShippingPriceSet\":{\"presentmentMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"20.39\",\"currencyCode\":\"USD\"}},\"totalTaxSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalTipReceivedSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"totalWeight\":\"0\",\"transactions\":[{\"id\":\"gid://shopify/OrderTransaction/8439881629916\",\"accountNumber\":\"\u2022\u2022\u2022\u2022
+        \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 1\",\"amountSet\":{\"presentmentMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"28.39\",\"currencyCode\":\"USD\"}},\"authorizationCode\":\"53433\",\"authorizationExpiresAt\":null,\"createdAt\":\"2026-05-31T01:45:18Z\",\"errorCode\":null,\"fees\":[],\"formattedGateway\":\"(For
+        Testing) Bogus Gateway\",\"gateway\":\"bogus\",\"kind\":\"SALE\",\"manuallyCapturable\":false,\"maximumRefundableV2\":null,\"multiCapturable\":true,\"order\":{\"id\":\"gid://shopify/Order/7092373586140\"},\"parentTransaction\":null,\"paymentIcon\":{\"altText\":\"Bogus\",\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/bogus-13c83bc142b1d1b69905f99e38a897f75581e477a1233254ce01e64b3e3ae2b8.svg.png\",\"width\":null},\"paymentId\":\"rhbvdf9xELlKYXtffUHEcKA9Z\",\"processedAt\":\"2026-05-31T01:45:18Z\",\"receiptJson\":\"{\\\"paid_amount\\\":\\\"28.39\\\"}\",\"settlementCurrency\":null,\"settlementCurrencyRate\":null,\"status\":\"SUCCESS\",\"test\":true,\"totalUnsettledSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}}},{\"id\":\"gid://shopify/OrderTransaction/8575044780252\",\"accountNumber\":\"\u2022\u2022\u2022\u2022
+        \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 1\",\"amountSet\":{\"presentmentMoney\":{\"amount\":\"1.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"1.0\",\"currencyCode\":\"USD\"}},\"authorizationCode\":null,\"authorizationExpiresAt\":null,\"createdAt\":\"2026-07-07T15:31:59Z\",\"errorCode\":null,\"fees\":[],\"formattedGateway\":\"(For
+        Testing) Bogus Gateway\",\"gateway\":\"bogus\",\"kind\":\"REFUND\",\"manuallyCapturable\":false,\"maximumRefundableV2\":null,\"multiCapturable\":true,\"order\":{\"id\":\"gid://shopify/Order/7092373586140\"},\"parentTransaction\":{\"id\":\"gid://shopify/OrderTransaction/8439881629916\"},\"paymentIcon\":{\"altText\":\"Bogus\",\"height\":null,\"id\":null,\"url\":\"https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/bogus-13c83bc142b1d1b69905f99e38a897f75581e477a1233254ce01e64b3e3ae2b8.svg.png\",\"width\":null},\"paymentId\":\"#1279.1\",\"processedAt\":\"2026-07-07T15:31:59Z\",\"receiptJson\":\"{\\\"paid_amount\\\":\\\"1.00\\\"}\",\"settlementCurrency\":null,\"settlementCurrencyRate\":null,\"status\":\"SUCCESS\",\"test\":true,\"totalUnsettledSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}}}],\"unpaid\":false,\"updatedAt\":\"2026-07-07T15:32:00Z\",\"sourceIdentifier\":null,\"lineItems\":{\"edges\":[{\"cursor\":\"eyJsYXN0X2lkIjoxNjY5NTY2NzcyMDQxMiwibGFzdF92YWx1ZSI6MTY2OTU2Njc3MjA0MTJ9\",\"node\":{\"contract\":null,\"currentQuantity\":0,\"discountAllocations\":[],\"discountedTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"discountedUnitPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"id\":\"gid://shopify/LineItem/16695667720412\",\"image\":null,\"lineItemGroup\":null,\"merchantEditable\":false,\"name\":\"autumn
+        field - Black / Medium\",\"nonFulfillableQuantity\":1,\"originalTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"originalUnitPriceSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"product\":{\"id\":\"gid://shopify/Product/7510223519964\"},\"quantity\":1,\"refundableQuantity\":0,\"requiresShipping\":true,\"restockable\":false,\"sellingPlan\":{\"name\":\"Deliver
+        every month\",\"sellingPlanId\":\"gid://shopify/SellingPlan/33305133276\"},\"sku\":\"\",\"taxable\":true,\"taxLines\":[],\"title\":\"autumn
+        field\",\"totalDiscountSet\":{\"presentmentMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"0.0\",\"currencyCode\":\"USD\"}},\"unfulfilledDiscountedTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"unfulfilledOriginalTotalSet\":{\"presentmentMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"},\"shopMoney\":{\"amount\":\"8.0\",\"currencyCode\":\"USD\"}},\"unfulfilledQuantity\":1,\"variant\":{\"id\":\"gid://shopify/ProductVariant/43697951965404\"},\"variantTitle\":\"Black
+        / Medium\",\"vendor\":\"hotglue testing 1\",\"customAttributes\":[]}}],\"pageInfo\":{\"hasNextPage\":false}}}}],\"pageInfo\":{\"hasNextPage\":false}}},\"extensions\":{\"cost\":{\"requestedQueryCost\":477,\"actualQueryCost\":28,\"throttleStatus\":{\"maximumAvailable\":2000.0,\"currentlyAvailable\":1972,\"restoreRate\":100.0}}}}"
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a177f1041978f22d-GRU
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '32807'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 07 Jul 2026 15:39:22 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=khfOsP1KF27VKBwDcoxkXrltMzW%2Byn%2FJZ1%2Bx01unmjIqmB0r85ZbNw0omzXKnxMKqaez0QNb0jVrNbfHglkMB7wjVieFR5%2BsM5%2FEUoGkIbqUevDXb%2Bj4l2PNmqb638o3jK2jaGh0%2Bqh1v8RIMryXAOmPMYfYlB5RXco2WX4%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '32807'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=49e3afd6-f785-4c32-b4bb-3381f24de623-1783438761;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=49e3afd6-f785-4c32-b4bb-3381f24de623-1783438761"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=484, verdict_flag_enabled;desc="count=61";dur=2.087, graphql;desc="admin/query/other",
+        _y;desc="def174fc-1763-45e8-9923-f3e39249e264", _s;desc="537fc8af-b1b6-40b4-9ded-3164a904f7c2"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 49e3afd6-f785-4c32-b4bb-3381f24de623-1783438761
+      x-shopify-api-deprecated-reason:
+      - ChannelDefinition.svgIcon, Order.channelInformation, Order.riskLevel, OrderRisk.display,
+        OrderRisk.level and 3 more
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-07
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

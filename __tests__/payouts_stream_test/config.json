@@ -1,10 +1,10 @@
 {
-    "start_date": "2015-01-01T00:00:00.000Z",
+    "start_date": "2025-01-01T00:00:00.000Z",
     "api_type": "BULK",
     "select_fields_by_default": true,
-    "shop": "hotglue-tx-test-1",
+    "shop": "hotglue-testing-1",
     "api_key": "API_KEY",
-    "domain": "hotglue.xyz",
+    "domain": "hotglue.com",
     "hg_sync_output": "estimated-count-output",
     "apply_concurrency": false
 }

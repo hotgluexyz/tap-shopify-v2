@@ -1,0 +1,188 @@
+interactions:
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String) { shopifyPaymentsAccount { id payouts(first: $first, after: $after, query: $filter) { edges { cursor node { id issuedAt legacyResourceId net { amount currencyCode } status summary { adjustmentsFee { amount currencyCode } adjustmentsGross { amount currencyCode } chargesFee { amount currencyCode } chargesGross { amount currencyCode } reservedFundsFee { amount currencyCode } reservedFundsGross { amount currencyCode } retriedPayoutsFee { amount currencyCode } retriedPayoutsGross { amount currencyCode } } transactionType } }, pageInfo { hasNextPage } } } } ", "variables": {"first": 100, "filter": "issued_at:>''2025-01-01T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '709'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.32.3
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"data":{"shopifyPaymentsAccount":{"id":"gid://shopify/ShopifyPaymentsAccount/999000459309356","payouts":{"edges":[{"cursor":"eyJsYXN0X2lkIjoxMjI2NzkyNjM1MzIsImxhc3RfdmFsdWUiOjE3MzU3NzYwMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/122679263532","issuedAt":"2025-01-02T00:00:00Z","legacyResourceId":"122679263532","net":{"amount":"3908.61","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"140.86","currencyCode":"USD"},"chargesGross":{"amount":"4098.2","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}}],"pageInfo":{"hasNextPage":false}}}},"extensions":{"cost":{"requestedQueryCost":21,"actualQueryCost":21,"throttleStatus":{"maximumAvailable":20000.0,"currentlyAvailable":19979,"restoreRate":1000.0}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - 940c243dcbb6d059-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 16 May 2025 16:09:51 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=TT%2Fkj6qtEk%2B9USG9jPNQIOabmJV3lWy3A8s24EvC46LpfpjFu9%2BOX42rBZ%2BSRCi72nK9ChfsSzm1G3R5LsgdTQ2Px%2BxcVAqJvwojcIz0EhR6RaD9aOzdszbof4ox9ySiJyMN%2BdL1TT8D%2BpKe1VRLJ6ELPFXW8eI%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Shopify-Edge-Ip:
+      - 23.227.38.74
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '77845'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://* shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*; connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/75a428d/card_fields.js https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=97dd0f39-a761-4609-8a01-4162b50c0b2b-1747411788; report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=97dd0f39-a761-4609-8a01-4162b50c0b2b-1747411788"
+      server-timing:
+      - processing;dur=2328, graphql;desc="admin/query/other"
+      - cfRequestDuration;dur=2720.999956
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-central1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 97dd0f39-a761-4609-8a01-4162b50c0b2b-1747411788
+      x-shardid:
+      - '299'
+      x-shopid:
+      - '70609043756'
+      x-shopify-api-version:
+      - 2024-07
+      x-sorting-hat-podid:
+      - '299'
+      x-sorting-hat-shopid:
+      - '70609043756'
+      x-stats-apiclientid:
+      - '185023266817'
+      x-stats-apipermissionid:
+      - '793609339180'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String) { shopifyPaymentsAccount { id payouts(first: $first, after: $after, query: $filter) { edges { cursor node { id issuedAt legacyResourceId net { amount currencyCode } status summary { adjustmentsFee { amount currencyCode } adjustmentsGross { amount currencyCode } chargesFee { amount currencyCode } chargesGross { amount currencyCode } reservedFundsFee { amount currencyCode } reservedFundsGross { amount currencyCode } retriedPayoutsFee { amount currencyCode } retriedPayoutsGross { amount currencyCode } } transactionType } }, pageInfo { hasNextPage } } } } ", "variables": {"first": 100, "after": "eyJsYXN0X2lkIjoxMjcwNjk5MTMzODgsImxhc3RfdmFsdWUiOjE3NDU5NzEyMDAwMDB9", "filter": "issued_at:>''2025-01-01T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '790'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.32.3
+    method: POST
+    uri: https://sheets-laundry-club-pro.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"data":{"shopifyPaymentsAccount":{"id":"gid://shopify/ShopifyPaymentsAccount/999000459309356","payouts":{"edges":[{"cursor":"eyJsYXN0X2lkIjoxMjcxMjE4NTA2NjgsImxhc3RfdmFsdWUiOjE3NDYwNTc2MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127121850668","issuedAt":"2025-05-01T00:00:00Z","legacyResourceId":"127121850668","net":{"amount":"2645.11","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"96.05","currencyCode":"USD"},"chargesGross":{"amount":"2741.16","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjcxOTk2MDkxMzIsImxhc3RfdmFsdWUiOjE3NDYwNzIwMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127199609132","issuedAt":"2025-05-01T04:00:00Z","legacyResourceId":"127199609132","net":{"amount":"27.91","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"0.95","currencyCode":"USD"},"chargesGross":{"amount":"28.86","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjcxNzQwODI4NjAsImxhc3RfdmFsdWUiOjE3NDYxNDQwMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127174082860","issuedAt":"2025-05-02T00:00:00Z","legacyResourceId":"127174082860","net":{"amount":"8406.94","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"320.85","currencyCode":"USD"},"chargesGross":{"amount":"9783.91","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjcyMjY1NDQ0MjgsImxhc3RfdmFsdWUiOjE3NDYxNTg0MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127226544428","issuedAt":"2025-05-02T04:00:00Z","legacyResourceId":"127226544428","net":{"amount":"20.51","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"0.78","currencyCode":"USD"},"chargesGross":{"amount":"21.29","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjcyNDIwNDM2OTIsImxhc3RfdmFsdWUiOjE3NDYyNDQ4MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127242043692","issuedAt":"2025-05-03T04:00:00Z","legacyResourceId":"127242043692","net":{"amount":"124.13","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"3.16","currencyCode":"USD"},"chargesGross":{"amount":"127.29","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjcyNzUwNzM4MzYsImxhc3RfdmFsdWUiOjE3NDYzMzEyMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127275073836","issuedAt":"2025-05-04T04:00:00Z","legacyResourceId":"127275073836","net":{"amount":"71.36","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"1.95","currencyCode":"USD"},"chargesGross":{"amount":"73.31","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjcyNTQyMzMzODgsImxhc3RfdmFsdWUiOjE3NDY0MDMyMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127254233388","issuedAt":"2025-05-05T00:00:00Z","legacyResourceId":"127254233388","net":{"amount":"5612.31","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"-8.22","currencyCode":"USD"},"chargesFee":{"amount":"200.08","currencyCode":"USD"},"chargesGross":{"amount":"5837.63","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjczMTkzNDM0MDQsImxhc3RfdmFsdWUiOjE3NDY0MTc2MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127319343404","issuedAt":"2025-05-05T04:00:00Z","legacyResourceId":"127319343404","net":{"amount":"117.76","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"3.33","currencyCode":"USD"},"chargesGross":{"amount":"121.09","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjcyOTc3NDkyOTIsImxhc3RfdmFsdWUiOjE3NDY0ODk2MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127297749292","issuedAt":"2025-05-06T00:00:00Z","legacyResourceId":"127297749292","net":{"amount":"1944.61","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"67.56","currencyCode":"USD"},"chargesGross":{"amount":"2012.17","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjczNzU3MDQzNjQsImxhc3RfdmFsdWUiOjE3NDY1MDQwMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127375704364","issuedAt":"2025-05-06T04:00:00Z","legacyResourceId":"127375704364","net":{"amount":"54.0","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"1.86","currencyCode":"USD"},"chargesGross":{"amount":"55.86","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjczNTA0NDAyMzYsImxhc3RfdmFsdWUiOjE3NDY1NzYwMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127350440236","issuedAt":"2025-05-07T00:00:00Z","legacyResourceId":"127350440236","net":{"amount":"2234.84","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"78.05","currencyCode":"USD"},"chargesGross":{"amount":"2364.85","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc0MjQ5MjE5MDAsImxhc3RfdmFsdWUiOjE3NDY1OTA0MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127424921900","issuedAt":"2025-05-07T04:00:00Z","legacyResourceId":"127424921900","net":{"amount":"167.04","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"4.46","currencyCode":"USD"},"chargesGross":{"amount":"171.5","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc0MDUwNjQ0OTIsImxhc3RfdmFsdWUiOjE3NDY2NjI0MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127405064492","issuedAt":"2025-05-08T00:00:00Z","legacyResourceId":"127405064492","net":{"amount":"5548.38","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"185.16","currencyCode":"USD"},"chargesGross":{"amount":"5733.54","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc0NzU3NDUwNjgsImxhc3RfdmFsdWUiOjE3NDY2NzY4MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127475745068","issuedAt":"2025-05-08T04:00:00Z","legacyResourceId":"127475745068","net":{"amount":"67.08","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"2.39","currencyCode":"USD"},"chargesGross":{"amount":"69.47","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc0NDkyMzU3NTYsImxhc3RfdmFsdWUiOjE3NDY3NDg4MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127449235756","issuedAt":"2025-05-09T00:00:00Z","legacyResourceId":"127449235756","net":{"amount":"11631.41","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.01","currencyCode":"USD"},"adjustmentsGross":{"amount":"-2.76","currencyCode":"USD"},"chargesFee":{"amount":"399.03","currencyCode":"USD"},"chargesGross":{"amount":"12049.69","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc1MDEyMzg1NzIsImxhc3RfdmFsdWUiOjE3NDY3NjMyMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127501238572","issuedAt":"2025-05-09T04:00:00Z","legacyResourceId":"127501238572","net":{"amount":"260.38","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"7.53","currencyCode":"USD"},"chargesGross":{"amount":"267.91","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc1NTEzMDgwNzYsImxhc3RfdmFsdWUiOjE3NDY5MzYwMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127551308076","issuedAt":"2025-05-11T04:00:00Z","legacyResourceId":"127551308076","net":{"amount":"22.1","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"0.82","currencyCode":"USD"},"chargesGross":{"amount":"22.92","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc1MjgyMDY2MzYsImxhc3RfdmFsdWUiOjE3NDcwMDgwMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127528206636","issuedAt":"2025-05-12T00:00:00Z","legacyResourceId":"127528206636","net":{"amount":"2632.65","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.28","currencyCode":"USD"},"adjustmentsGross":{"amount":"4.61","currencyCode":"USD"},"chargesFee":{"amount":"92.35","currencyCode":"USD"},"chargesGross":{"amount":"2720.67","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc1OTYzOTY4NDQsImxhc3RfdmFsdWUiOjE3NDcwMjI0MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127596396844","issuedAt":"2025-05-12T04:00:00Z","legacyResourceId":"127596396844","net":{"amount":"22.2","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"0.98","currencyCode":"USD"},"chargesGross":{"amount":"23.18","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc1NjcxNjc3ODgsImxhc3RfdmFsdWUiOjE3NDcwOTQ0MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127567167788","issuedAt":"2025-05-13T00:00:00Z","legacyResourceId":"127567167788","net":{"amount":"2747.63","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.66","currencyCode":"USD"},"adjustmentsGross":{"amount":"14.98","currencyCode":"USD"},"chargesFee":{"amount":"97.89","currencyCode":"USD"},"chargesGross":{"amount":"2831.2","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc2MTgyMjAzMzIsImxhc3RfdmFsdWUiOjE3NDcxODA4MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127618220332","issuedAt":"2025-05-14T00:00:00Z","legacyResourceId":"127618220332","net":{"amount":"2483.93","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"86.28","currencyCode":"USD"},"chargesGross":{"amount":"2570.21","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc2OTkxNTcyOTIsImxhc3RfdmFsdWUiOjE3NDcxOTUyMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127699157292","issuedAt":"2025-05-14T04:00:00Z","legacyResourceId":"127699157292","net":{"amount":"59.7","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"1.98","currencyCode":"USD"},"chargesGross":{"amount":"61.68","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc2NzAyNTU5MTYsImxhc3RfdmFsdWUiOjE3NDcyNjcyMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127670255916","issuedAt":"2025-05-15T00:00:00Z","legacyResourceId":"127670255916","net":{"amount":"3012.76","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"106.22","currencyCode":"USD"},"chargesGross":{"amount":"3184.66","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc3NDgzNzQ4MjgsImxhc3RfdmFsdWUiOjE3NDcyODE2MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127748374828","issuedAt":"2025-05-15T04:00:00Z","legacyResourceId":"127748374828","net":{"amount":"12.95","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"0.61","currencyCode":"USD"},"chargesGross":{"amount":"13.56","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc3MjAzOTA5NTYsImxhc3RfdmFsdWUiOjE3NDczNTM2MDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127720390956","issuedAt":"2025-05-16T00:00:00Z","legacyResourceId":"127720390956","net":{"amount":"9125.86","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"312.33","currencyCode":"USD"},"chargesGross":{"amount":"9482.25","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}},{"cursor":"eyJsYXN0X2lkIjoxMjc3NzQ3MjAzMDAsImxhc3RfdmFsdWUiOjE3NDczNjgwMDAwMDB9","node":{"id":"gid://shopify/ShopifyPaymentsPayout/127774720300","issuedAt":"2025-05-16T04:00:00Z","legacyResourceId":"127774720300","net":{"amount":"3.16","currencyCode":"USD"},"status":"PAID","summary":{"adjustmentsFee":{"amount":"0.0","currencyCode":"USD"},"adjustmentsGross":{"amount":"0.0","currencyCode":"USD"},"chargesFee":{"amount":"0.38","currencyCode":"USD"},"chargesGross":{"amount":"3.54","currencyCode":"USD"},"reservedFundsFee":{"amount":"0.0","currencyCode":"USD"},"reservedFundsGross":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsFee":{"amount":"0.0","currencyCode":"USD"},"retriedPayoutsGross":{"amount":"0.0","currencyCode":"USD"}},"transactionType":"DEPOSIT"}}],"pageInfo":{"hasNextPage":false}}}},"extensions":{"cost":{"requestedQueryCost":21,"actualQueryCost":15,"throttleStatus":{"maximumAvailable":20000.0,"currentlyAvailable":19985,"restoreRate":1000.0}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - 940c244ff9c290aa-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 16 May 2025 16:09:52 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=UG0kXhzwKLgEdl5BtSK28vpds%2Bo%2BwUUrSMVa6ro5u3FHeO5vmCs2grLJTAF6aTz2nPuFWxAP7KcHnqHOk51051V8QvaQvUuDTfzjJbY8s2yxn5LYvoNrP26bzgIs05esczlqiZz0izu7ibTx1dbX5O%2BGXraAtiU%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Shopify-Edge-Ip:
+      - 23.227.38.74
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '20413'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://* shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*; connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/75a428d/card_fields.js https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=2efd83b4-fd3e-4436-97e0-d5863982c4ab-1747411791; report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=2efd83b4-fd3e-4436-97e0-d5863982c4ab-1747411791"
+      server-timing:
+      - processing;dur=403, graphql;desc="admin/query/other"
+      - cfRequestDuration;dur=741.999865
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-central1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 2efd83b4-fd3e-4436-97e0-d5863982c4ab-1747411791
+      x-shardid:
+      - '299'
+      x-shopid:
+      - '70609043756'
+      x-shopify-api-version:
+      - 2024-07
+      x-sorting-hat-podid:
+      - '299'
+      x-sorting-hat-shopid:
+      - '70609043756'
+      x-stats-apiclientid:
+      - '185023266817'
+      x-stats-apipermissionid:
+      - '793609339180'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

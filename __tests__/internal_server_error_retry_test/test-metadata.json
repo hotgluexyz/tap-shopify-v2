@@ -1,0 +1,10 @@
+{
+    "env_id": null,
+    "job_root": null,
+    "tap_name": "shopify-v2",
+    "stream_counts": {
+        "customer_journey_summary": 86,
+        "customers": 23,
+        "orders": 86
+    }
+}
