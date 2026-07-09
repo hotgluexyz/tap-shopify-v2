@@ -20,6 +20,7 @@ import concurrent.futures
 import queue
 import threading
 from pendulum import parse
+from tap_shopify_beta.shopify_dates import to_shopify_utc
 
 
 class GraphQLInternalServerError(RetriableAPIError):
@@ -185,33 +186,36 @@ class shopifyGqlStream(shopifyStream):
             # fetch data in monthly chunks
             if self.config.get(f"sync_{self.name}_monthly"):
                 start_date = self.start_date or self.get_starting_timestamp(context)
-                date = start_date.strftime("%Y-%m-%dT%H:%M:%S")
+                date = to_shopify_utc(start_date)
                 date_filter = f"updated_at:>'{date}'"
                 self.start_date = start_date
                 self.end_date = start_date + relativedelta(months=1)
                 config_end_date = self.config.get("end_date")
                 if config_end_date and self.end_date > parse(config_end_date):
                     self.end_date = parse(config_end_date)
-                end_date = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
+                end_date = to_shopify_utc(self.end_date)
                 date_filter = f"{date_filter} AND updated_at:<='{end_date}'"
                 params["filter"] = date_filter
 
             elif context and context.get("date_range"):
-                start_date = context['date_range']['start_date'].strftime("%Y-%m-%dT%H:%M:%S")
+                start_date = to_shopify_utc(context['date_range']['start_date'])
                 date_filter = f"updated_at:>'{start_date}'"
                 end_date = context['date_range'].get('end_date')
                 if end_date:
-                    end_date = end_date.strftime("%Y-%m-%dT%H:%M:%S")
+                    end_date = to_shopify_utc(end_date)
                     date_filter = f"{date_filter} AND updated_at:<='{end_date}'"
                 params["filter"] = date_filter
 
             else:
                 start_date = self.start_date or self.get_starting_timestamp(context)
                 if start_date:
-                    date_filter = f"updated_at:>'{start_date.strftime('%Y-%m-%dT%H:%M:%S')}'"
+                    date_filter = f"updated_at:>'{to_shopify_utc(start_date)}'"
                     config_end_date = self.config.get("end_date")
                     if config_end_date:
-                        date_filter = f"{date_filter} AND updated_at:<='{parse(config_end_date).strftime('%Y-%m-%dT%H:%M:%S')}'"
+                        date_filter = (
+                            f"{date_filter} AND "
+                            f"updated_at:<='{to_shopify_utc(parse(config_end_date))}'"
+                        )
                     params["filter"] = date_filter
         if self.single_object_params:
             params = self.single_object_params(context)

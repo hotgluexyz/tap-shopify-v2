@@ -10,6 +10,7 @@ import simplejson
 from hotglue_singer_sdk.helpers.jsonpath import extract_jsonpath
 
 from tap_shopify_beta.client import shopifyStream
+from tap_shopify_beta.shopify_dates import to_shopify_utc
 import re
 
 
@@ -83,12 +84,12 @@ class shopifyBulkStream(shopifyStream):
         if self.replication_key:
             self.start_date = self.start_date or self.get_starting_timestamp({})
             if self.start_date:
-                date = self.start_date.strftime("%Y-%m-%dT%H:%M:%S")
+                date = to_shopify_utc(self.start_date)
                 self.end_date = self.start_date + timedelta(days=1)
                 config_end_date = self.config.get("end_date")
                 if config_end_date and self.end_date > parse(config_end_date):
                     self.end_date = parse(config_end_date)
-                end_str = self.end_date.strftime("%Y-%m-%dT%H:%M:%S")
+                end_str = to_shopify_utc(self.end_date)
                 query = f'(query: "updated_at:>\'{date}\' AND updated_at:<=\'{end_str}\'")'
             return query
         return ""

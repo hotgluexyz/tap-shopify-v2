@@ -10,6 +10,8 @@ import backoff
 from hotglue_singer_sdk.exceptions import RetriableAPIError
 import http.client
 
+from tap_shopify_beta.shopify_dates import to_shopify_utc
+
 
 
 class shopifyRestStream(RESTStream):
@@ -74,10 +76,10 @@ class shopifyRestStream(RESTStream):
         params["limit"] = self.limit
         start_date = self.get_starting_time(context)
         if self.replication_key and start_date:
-            params[f"{self.replication_key}_min"] = start_date.strftime('%Y-%m-%dT%H:%M:%S.%f')
+            params[f"{self.replication_key}_min"] = to_shopify_utc(start_date)
         end_date = self.config.get("end_date")
         if self.replication_key and end_date:
-            params[f"{self.replication_key}_max"] = parse(end_date).strftime('%Y-%m-%dT%H:%M:%S.%f')
+            params[f"{self.replication_key}_max"] = to_shopify_utc(parse(end_date))
         if self.add_params:
             params.update(self.add_params)
         if next_page_token:
