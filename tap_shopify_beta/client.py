@@ -89,6 +89,14 @@ class shopifyStream(GraphQLStream):
                     page_size=50,
                 )
                 output.append(query)
+            elif key == "refundLineItems":
+                query = self.get_field_query(
+                    key,
+                    value["properties"],
+                    is_paginated=True,
+                    page_size=50,
+                )
+                output.append(query)
             elif "properties" in value:
                 query = self.get_field_query(key, value["properties"])
                 output.append(query)

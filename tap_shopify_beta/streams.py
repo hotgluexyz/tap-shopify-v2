@@ -642,10 +642,34 @@ class RefundsStream(GqlChildStream):
         ),
         th.Property("legacyResourceId", th.StringType),
         th.Property("note", th.StringType),
+        th.Property(
+            "refundLineItems",
+            th.ArrayType(th.ObjectType(
+                th.Property("id", th.StringType),
+                th.Property("lineItem", th.ObjectType(
+                    th.Property("id", th.StringType),
+                )),
+                th.Property("quantity", th.IntegerType),
+                th.Property("restockType", th.StringType),
+                th.Property("priceSet", MoneyBagType()),
+                th.Property("subtotalSet", MoneyBagType()),
+            )),
+        ),
         th.Property("totalRefundedSet", MoneyBagType()),
         th.Property("updatedAt", th.DateTimeType),
     ).to_dict()
-    
+
+    def post_process(self, row: dict, context: Optional[dict] = None):
+        row = super().post_process(row, context)
+        if not row:
+            return row
+        refund_line_items = row.get("refundLineItems")
+        if isinstance(refund_line_items, dict):
+            row["refundLineItems"] = [
+                edge["node"] for edge in refund_line_items.get("edges", [])
+            ]
+        return row
+
 
 class ShopStream(shopifyGqlStream):
     """Define shop stream."""
