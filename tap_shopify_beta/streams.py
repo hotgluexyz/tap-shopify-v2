@@ -642,10 +642,23 @@ class RefundsStream(GqlChildStream):
         ),
         th.Property("legacyResourceId", th.StringType),
         th.Property("note", th.StringType),
+        th.Property(
+            "refundLineItems",
+            th.ArrayType(th.ObjectType(
+                th.Property("id", th.StringType),
+                th.Property("lineItem", th.ObjectType(
+                    th.Property("id", th.StringType),
+                )),
+                th.Property("quantity", th.IntegerType),
+                th.Property("restockType", th.StringType),
+                th.Property("priceSet", MoneyBagType()),
+                th.Property("subtotalSet", MoneyBagType()),
+            )),
+        ),
         th.Property("totalRefundedSet", MoneyBagType()),
         th.Property("updatedAt", th.DateTimeType),
     ).to_dict()
-    
+
 
 class ShopStream(shopifyGqlStream):
     """Define shop stream."""

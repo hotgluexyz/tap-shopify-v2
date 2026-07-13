@@ -256,6 +256,8 @@ class shopifyGqlStream(shopifyStream):
         for record in records:
             if isinstance(record.get("metafields"), dict):
                 record["metafields"] = self._fetch_all_metafields(record)
+            if isinstance(record.get("refundLineItems"), dict):
+                record["refundLineItems"] = self._fetch_all_refund_line_items(record)
             yield record
 
     def filter_response(self, response_json: dict) -> dict:
