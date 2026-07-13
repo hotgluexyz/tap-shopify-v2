@@ -171,35 +171,58 @@ class shopifyStream(GraphQLStream):
         )(func)
         return decorator
     
-    def _fetch_all_metafields(self, record: dict) -> list:
-        """Fetch all metafields for a record, paginating through additional pages via the node interface."""
-        resource_gid = record["id"]
-        resource_type = resource_gid.split("/")[-2]  # e.g. "Product", "Order", "ProductVariant"
+    def _build_schema_fields_query(self, schema: dict) -> str:
+        """Build a GraphQL field selection string from a JSON schema properties dict."""
+        parts = []
+        for key, value in schema.items():
+            if "items" in value:
+                value = value["items"]
+            if "properties" in value:
+                parts.append(" ".join(self.get_field_query(key, value["properties"]).split()))
+            else:
+                parts.append(key)
+        return " ".join(parts)
 
-        all_edges = list(record.get("metafields", {}).get("edges", []))
-        has_next = record.get("metafields", {}).get("pageInfo", {}).get("hasNextPage", False)
+    def _fetch_paginated_connection(
+        self,
+        record: dict,
+        field_name: str,
+        resource_type: Optional[str] = None,
+        page_size: int = 250,
+        default_fields: str = "id",
+    ) -> list:
+        """Fetch all nodes from a paginated connection field via the node interface."""
+        resource_gid = record["id"]
+        if resource_type is None:
+            resource_type = resource_gid.split("/")[-2]
+
+        connection = record.get(field_name, {})
+        all_edges = list(connection.get("edges", []))
+        has_next = connection.get("pageInfo", {}).get("hasNextPage", False)
 
         if not has_next:
             return [e["node"] for e in all_edges]
 
-        self.logger.info(f"Fetching additional metafields pages for {resource_gid}")
+        self.logger.info(f"Fetching additional {field_name} pages for {resource_gid}")
         decorated_request = self.request_decorator(self._request)
 
-        metafields_schema = (
+        field_schema = (
             self.schema.get("properties", {})
-            .get("metafields", {})
+            .get(field_name, {})
             .get("items", {})
             .get("properties", {})
         )
-        metafield_fields = " ".join(metafields_schema.keys()) if metafields_schema else "id key namespace value type"
+        node_fields = (
+            self._build_schema_fields_query(field_schema) if field_schema else default_fields
+        )
 
         while has_next:
             after_cursor = all_edges[-1]["cursor"]
             query = (
                 f'query {{ node(id: "{resource_gid}") {{'
                 f' ... on {resource_type} {{'
-                f' metafields(first: 250, after: "{after_cursor}") {{'
-                f' edges {{ cursor node {{ {metafield_fields} }} }}'
+                f' {field_name}(first: {page_size}, after: "{after_cursor}") {{'
+                f' edges {{ cursor node {{ {node_fields} }} }}'
                 f' pageInfo {{ hasNextPage }}'
                 f' }} }} }} }}'
             )
@@ -214,11 +237,28 @@ class shopifyStream(GraphQLStream):
             )
             resp = decorated_request(prepared, {})
             node_data = resp.json().get("data", {}).get("node", {})
-            metafields_page = node_data.get("metafields", {})
-            all_edges.extend(metafields_page.get("edges", []))
-            has_next = metafields_page.get("pageInfo", {}).get("hasNextPage", False)
+            page = node_data.get(field_name, {})
+            all_edges.extend(page.get("edges", []))
+            has_next = page.get("pageInfo", {}).get("hasNextPage", False)
 
         return [e["node"] for e in all_edges]
+
+    def _fetch_all_metafields(self, record: dict) -> list:
+        """Fetch all metafields for a record, paginating through additional pages via the node interface."""
+        return self._fetch_paginated_connection(
+            record,
+            "metafields",
+            default_fields="id key namespace value type",
+        )
+
+    def _fetch_all_refund_line_items(self, record: dict) -> list:
+        """Fetch all refund line items, paginating through additional pages via the node interface."""
+        return self._fetch_paginated_connection(
+            record,
+            "refundLineItems",
+            resource_type="Refund",
+            default_fields="id quantity restockType",
+        )
 
     def log_memory_usage(self, tag=""):
         process = psutil.Process(os.getpid())
