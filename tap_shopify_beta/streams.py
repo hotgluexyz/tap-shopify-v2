@@ -161,7 +161,15 @@ class VariantsStream(DynamicStream):
                 th.Property("id", th.StringType), th.Property("altText", th.StringType)
             ),
         ),
-        th.Property("inventoryItem", th.ObjectType(th.Property("id", th.StringType))),
+        th.Property("inventoryItem", th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("measurement", th.ObjectType(
+                th.Property("weight", th.ObjectType(
+                    th.Property("unit", th.StringType),
+                    th.Property("value", th.NumberType),
+                )),
+            )),
+        )),
         th.Property("inventoryPolicy", th.StringType),
         th.Property("inventoryQuantity", th.IntegerType),
         th.Property("legacyResourceId", th.StringType),
