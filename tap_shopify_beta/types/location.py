@@ -31,7 +31,6 @@ class LocationType(th.ObjectType):
                                 th.Property("location", th.ObjectType(
                                     th.Property("id", th.StringType)
                                 )),
-                                th.Property("permitsSkuSharing", th.BooleanType),
                                 th.Property("serviceName", th.StringType),
                                 th.Property("type", th.StringType),
                             )),

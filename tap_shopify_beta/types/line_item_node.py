@@ -10,6 +10,7 @@ from tap_shopify_beta.types.discount_allocations import DiscountAllocationsType
 class LineItemNodeType(th.ObjectType):
     def __init__(self):
         super().__init__(
+            # contract requires read_own_subscription_contracts permission.
             # th.Property("contract", ContractType()),
             th.Property("contract", th.ObjectType(
                 th.Property("id", th.StringType)
