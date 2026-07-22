@@ -45,12 +45,13 @@ jobs:
       - name: Setup and run tests
         run: |
           cd test-framework
-          # Try to switch to the same branch as the current PR
+          # Use the same-named branch on test-framework if it exists on origin; else main
           BRANCH_NAME=${{ github.head_ref }}
-          if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then
-            git checkout $BRANCH_NAME
+          if git fetch --depth 1 origin "$BRANCH_NAME" && git checkout FETCH_HEAD; then
+            echo "Using test-framework branch: $BRANCH_NAME"
           else
             git checkout main
+            echo "No origin/$BRANCH_NAME — using test-framework main"
           fi
           
           python -m venv .venv
