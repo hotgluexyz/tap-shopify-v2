@@ -31,7 +31,7 @@ class shopifyStream(GraphQLStream):
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
         shop = self.get_shop_name()
-        return f"https://{shop}.myshopify.com/admin/api/2024-07/graphql.json"
+        return f"https://{shop}.myshopify.com/admin/api/2026-07/graphql.json"
 
     @property
     def authenticator(self) -> ShopifyAuthenticator:

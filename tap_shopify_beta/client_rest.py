@@ -32,7 +32,7 @@ class shopifyRestStream(RESTStream):
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
         shop = self.get_shop_name()
-        return f"https://{shop}.myshopify.com/admin/api/2021-07/"
+        return f"https://{shop}.myshopify.com/admin/api/2026-07/"
     
     @property
     def authenticator(self) -> ShopifyAuthenticator:
