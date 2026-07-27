@@ -106,7 +106,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"errors": [{"message": "-Fallback-scrubbed-srCToeKOlgvqoyAagSVwdvQUzbklFvaLsTGkEPBlktmnVWOpmwtuqCvwlNZplTTvHLXhoZkSKXXonfgPmJVlVlGUdVvfuYvEkeWcruzqpLFqAtRqnXvMlgjujQEjKncbdxyMo",
@@ -462,7 +462,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"errors": [{"message": "-Fallback-scrubbed-srCToeKOlgvqoyAagSVwdvQUzbklFvaLsTGkEPBlktmnVWOpmwtuqCvwlNZplTTvHLXhoZkSKXXonfgPmJVlVlGUdVvfuYvEkeWcruzqpLFqAtRqnXvMlgjujQEjKncbdxyMo",

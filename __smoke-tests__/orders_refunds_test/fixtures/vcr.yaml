@@ -19,7 +19,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyNS4wNDU3MDQifQ==",
@@ -126,7 +126,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo3MTg1ODk0NjcwNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wMSAwMTo0NjoxNy40MTQ3MTcifQ==",
@@ -243,7 +243,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"data": {"q1": {"id": "gid://shopify/Refund/974227767516", "order":

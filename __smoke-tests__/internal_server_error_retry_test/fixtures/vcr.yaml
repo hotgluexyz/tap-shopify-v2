@@ -28,7 +28,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"errors":[{"message":"Internal error. Looks like something went wrong on our end.\nRequest ID: ff98c7e7-c012-4797-b5ee-4242fe7fd3f8-1738885851 (include this in support requests)","extensions":{"code":"INTERNAL_SERVER_ERROR","requestId":"ff98c7e7-c012-4797-b5ee-4242fe7fd3f8-1738885851"}}],"data":null}'
@@ -139,7 +139,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"errors": [{"message": "-Fallback-scrubbed-sKgOaknuXOAhCAnCkyvGIsAetrCSHYRaibEeVlBvpZOIvMHeBIhyxonglobZPwCaUcrbeKkhgvjUOqBULYEmqSEgyddyLf",
@@ -291,7 +291,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"errors": [{"message": "-Fallback-scrubbed-sKgOaknuXOAhCAnCkyvGIsAetrCSHYRaibEeVlBvpZOIvMHeBIhyxonglobZPwCaUcrbeKkhgvjUOqBULYEmqSEgyddyLf",
@@ -460,7 +460,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"errors": [{"message": "-Fallback-scrubbed-sKgOaknuXOAhCAnCkyvGIsAetrCSHYRaibEeVlBvpZOIvMHeBIhyxonglobZPwCaUcrbeKkhgvjUOqBULYEmqSEgyddyLf",
@@ -602,7 +602,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"data": {"customers": {"edges": [{"cursor": "eyJsYXN0X2lkIjo5MjczNjI0NDYxNTMyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyMC4wMDAwMDAifQ==",
@@ -748,7 +748,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"data": {"customers": {"edges": [{"cursor": "eyJsYXN0X2lkIjo4MTAwOTEyMjM0NzE2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wNyAxNTozMjowMy4wMDAwMDAifQ==",
@@ -969,7 +969,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyNS4wNDU3MDQifQ==",
@@ -1257,7 +1257,7 @@ interactions:
       User-Agent:
       - python-requests/2.33.1
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
       string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo3MTg1ODk0NjcwNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wMSAwMTo0NjoxNy40MTQ3MTcifQ==",
