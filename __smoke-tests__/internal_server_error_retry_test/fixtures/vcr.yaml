@@ -1,0 +1,2092 @@
+interactions:
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String)
+      { orders(first: $first, after: $after, query: $filter) { edges { cursor node
+      { id updatedAt customerJourneySummary { firstVisit { id landingPage landingPageHtml
+      marketingEvent { app { id apiKey appStoreAppUrl appStoreDeveloperUrl banner
+      { altText height id url width } description developerName developerType embedded
+      features icon { altText height id url width } installUrl isPostPurchaseAppInUse
+      previouslyInstalled pricingDetails pricingDetailsSummary privacyPolicyUrl publicCategory
+      published requestedAccessScopes { description handle } shopifyDeveloped title
+      uninstallMessage webhookApiVersion } channelHandle description endedAt id manageUrl
+      marketingChannelType previewUrl remoteId scheduledToEndAt sourceAndMedium startedAt
+      type utmCampaign utmMedium utmSource } occurredAt referralCode referralInfoHtml
+      referrerUrl source sourceDescription sourceType utmParameters { campaign content
+      medium source term } } } } }, pageInfo { hasNextPage } } } ", "variables": {"first":
+      100, "filter": "updated_at:>''2026-05-30T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1105'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"errors":[{"message":"Internal error. Looks like something went wrong on our end.\nRequest ID: ff98c7e7-c012-4797-b5ee-4242fe7fd3f8-1738885851 (include this in support requests)","extensions":{"code":"INTERNAL_SERVER_ERROR","requestId":"ff98c7e7-c012-4797-b5ee-4242fe7fd3f8-1738885851"}}],"data":null}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a1cb42e8f9b86257-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 17 Jul 2026 18:20:34 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=bCJOhHR0GuBqcoq%2BDa2dRLXh4zqGa7VK510uR7c9U1mEPCeg7zge7DgHm0rNfy3IOG4F%2Bo8%2FVwobpp4PjlStrwpZf2%2FSeAw0szOTehTjmh16BG%2BiEph14w%2BWOEXeI1CLk5v8b49%2BUxKFeLcHqkzaIOl%2F2fqF9uXBHKX3nY4%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '2782'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=92c57a4d-0925-4e99-8a8d-50450a6d9394-1784312434;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=92c57a4d-0925-4e99-8a8d-50450a6d9394-1784312434"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=80, verdict_flag_enabled;desc="count=14";dur=0.703, graphql;desc="admin/query/other",
+        _y;desc="315b9558-078c-40c5-b664-fb78c7d25aee", _s;desc="609801f6-3ae2-4d4c-8283-57088fdd8068"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 92c57a4d-0925-4e99-8a8d-50450a6d9394-1784312434
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-10
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String)
+      { orders(first: $first, after: $after, query: $filter) { edges { cursor node
+      { id updatedAt customerJourneySummary { firstVisit { id landingPage landingPageHtml
+      marketingEvent { app { id apiKey appStoreAppUrl appStoreDeveloperUrl banner
+      { altText height id url width } description developerName developerType embedded
+      features icon { altText height id url width } installUrl isPostPurchaseAppInUse
+      previouslyInstalled pricingDetails pricingDetailsSummary privacyPolicyUrl publicCategory
+      published requestedAccessScopes { description handle } shopifyDeveloped title
+      uninstallMessage webhookApiVersion } channelHandle description endedAt id manageUrl
+      marketingChannelType previewUrl remoteId scheduledToEndAt sourceAndMedium startedAt
+      type utmCampaign utmMedium utmSource } occurredAt referralCode referralInfoHtml
+      referrerUrl source sourceDescription sourceType utmParameters { campaign content
+      medium source term } } } } }, pageInfo { hasNextPage } } } ", "variables": {"first":
+      100, "filter": "updated_at:>''2026-05-30T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1105'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"errors": [{"message": "-Fallback-scrubbed-sKgOaknuXOAhCAnCkyvGIsAetrCSHYRaibEeVlBvpZOIvMHeBIhyxonglobZPwCaUcrbeKkhgvjUOqBULYEmqSEgyddyLf",
+        "locations": [{"line": 8699, "column": 668}], "extensions": {"code": "-Fallback-scrubbed-BINGUSnCMbcPX",
+        "documentation": "-Fallback-scrubbed-RmKbfyEjxKijUvCTwcSiJuEBnCoDmLgWMrwEDMdbbcL",
+        "requiredAccess": "-Fallback-scrubbed-uSFVBFxUGAZFHasLfknBQKjnHdYFZLQlLfjdL"},
+        "path": ["-Fallback-scrubbed-mnPdRD", "-Fallback-scrubbed-OaAaA", 7303, "-Fallback-scrubbed-hnRA",
+        "-Fallback-scrubbed-EBfmffryPDhXBueqVLeeZN", "-Fallback-scrubbed-hsUArqbYba",
+        "-Fallback-scrubbed-EaQVVwjMQxJTIB"]}], "data": {"orders": {"edges": [{"cursor":
+        "eyJsYXN0X2lkIjo3MDkxNjA5NDM2MzgwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNS0zMCAxNjozMDowNC41ODk4MDMifQ==",
+        "node": {"id": "gid://shopify/Order/7091609436380", "updatedAt": "2026-07-07T15:31:58Z",
+        "customerJourneySummary": {"firstVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3MDkyMzczNTg2MTQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNS0zMSAwMTo0NToxOC4zNzY5OTYifQ==",
+        "node": {"id": "gid://shopify/Order/7092373586140", "updatedAt": "2026-07-07T15:32:00Z",
+        "customerJourneySummary": {"firstVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoxNy44Mjg4OTMifQ==",
+        "node": {"id": "gid://shopify/Order/7185087365340", "updatedAt": "2026-06-30T16:30:25Z",
+        "customerJourneySummary": {"firstVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3MTg1ODk0NjcwNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wMSAwMTo0NTozNC41MDQ1MTYifQ==",
+        "node": {"id": "gid://shopify/Order/7185894670556", "updatedAt": "2026-07-01T01:46:17Z",
+        "customerJourneySummary": {"firstVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3Mjk2MDU3NzcwMjA0LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNCAxODoyNToyNC4yMjAxMTQifQ==",
+        "node": {"id": "gid://shopify/Order/7296057770204", "updatedAt": "2026-07-14T18:25:29Z",
+        "customerJourneySummary": {"firstVisit": {"id": "gid://shopify/CustomerVisit/14674298798300",
+        "landingPage": "-Fallback-scrubbed-meTdFurHLeQyMlEBmGQlEIpFwLvpLMMpLPLqrGSc",
+        "landingPageHtml": "-Fallback-scrubbed-KEjqUyiLXglfEeXMXMjdUyvEXSVzajDBSSAbmMIoIOIYJzyVybqLNafbXtMxReKzeVlNABHaWvRGdKAjKWDhMJTBZvbcDJJtlwpSPsMJgnADAVvxBeAETq",
+        "marketingEvent": null, "occurredAt": "-Fallback-scrubbed-CiBJqdLzewGkgWYJhHfH",
+        "referralCode": null, "referralInfoHtml": "-Fallback-scrubbed-gSKsdIwnyGTHCrQTpFZQMW",
+        "referrerUrl": null, "source": "-Fallback-scrubbed-mZBwGW", "sourceDescription":
+        "-Fallback-scrubbed-LynmPpIMCnJUysZdCNHEWddNTXlZJjAZDdgM", "sourceType": null,
+        "utmParameters": null}}}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNDY2MTYxMzcyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjoxMzoyMC45MDcxOTkifQ==",
+        "node": {"id": "gid://shopify/Order/7301466161372", "updatedAt": "2026-07-17T16:13:22Z",
+        "customerJourneySummary": {"firstVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNTIwMzkyNDEyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjo0NDozMy43MDA0NDQifQ==",
+        "node": {"id": "gid://shopify/Order/7301520392412", "updatedAt": "2026-07-17T16:44:35Z",
+        "customerJourneySummary": {"firstVisit": null}}}], "pageInfo": {"hasNextPage":
+        false}}}, "extensions": {"cost": {"requestedQueryCost": 4026, "actualQueryCost":
+        8216, "throttleStatus": {"maximumAvailable": -730456.23800708, "currentlyAvailable":
+        7001, "restoreRate": 70.8541872986456}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a1eaaecd388da169-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 13:51:52 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=2mB17osI%2B9jNgOioRayoiWqYE9MIJon9Ogabnp2NE47dACDxIfHg8XQH2kLopWluU7kMkmwk5Gcqk03ZKBzZcUUWTNKlEf37MzObrm4g5z3%2FfJtU%2FD0KkMjd3uTZFPzIkWAQD%2FptvLUfE9V964UbljdWBujMJRQX%2BQrgMtk%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '2782'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=4e146d84-6f09-472b-81fe-c291d24056f6-1784641911;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=4e146d84-6f09-472b-81fe-c291d24056f6-1784641911"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=139, verdict_flag_enabled;desc="count=13";dur=0.8, graphql;desc="admin/query/other",
+        _y;desc="be494296-7cf4-404c-918b-3b7d2795dab0", _s;desc="6d133841-3fa8-4bae-ac6a-1092cddde29e"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 4e146d84-6f09-472b-81fe-c291d24056f6-1784641911
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-10
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String)
+      { orders(first: $first, after: $after, query: $filter) { edges { cursor node
+      { id updatedAt customerJourneySummary { customerOrderIndex daysToConversion
+      firstVisit { id landingPage landingPageHtml marketingEvent { app { id apiKey
+      appStoreAppUrl appStoreDeveloperUrl banner { altText height id url width } description
+      developerName developerType embedded features icon { altText height id url width
+      } installUrl isPostPurchaseAppInUse previouslyInstalled pricingDetails pricingDetailsSummary
+      privacyPolicyUrl publicCategory published requestedAccessScopes { description
+      handle } shopifyDeveloped title uninstallMessage webhookApiVersion } channelHandle
+      description endedAt id manageUrl marketingChannelType previewUrl remoteId scheduledToEndAt
+      sourceAndMedium startedAt type utmCampaign utmMedium utmSource } occurredAt
+      referralCode referralInfoHtml referrerUrl source sourceDescription sourceType
+      utmParameters { campaign content medium source term } } lastVisit { id landingPage
+      landingPageHtml marketingEvent { app { id apiKey appStoreAppUrl appStoreDeveloperUrl
+      banner { altText height id url width } description developerName developerType
+      embedded features icon { altText height id url width } installUrl isPostPurchaseAppInUse
+      previouslyInstalled pricingDetails pricingDetailsSummary privacyPolicyUrl publicCategory
+      published requestedAccessScopes { description handle } shopifyDeveloped title
+      uninstallMessage webhookApiVersion } channelHandle description endedAt id manageUrl
+      marketingChannelType previewUrl remoteId scheduledToEndAt sourceAndMedium startedAt
+      type utmCampaign utmMedium utmSource } occurredAt referralCode referralInfoHtml
+      referrerUrl source sourceDescription sourceType utmParameters { campaign content
+      medium source term } } momentsCount { count precision } ready } } }, pageInfo
+      { hasNextPage } } } ", "variables": {"first": 100, "filter": "updated_at:>''2026-05-30T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1979'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"errors": [{"message": "-Fallback-scrubbed-sKgOaknuXOAhCAnCkyvGIsAetrCSHYRaibEeVlBvpZOIvMHeBIhyxonglobZPwCaUcrbeKkhgvjUOqBULYEmqSEgyddyLf",
+        "locations": [{"line": 8699, "column": 4481}], "extensions": {"code": "-Fallback-scrubbed-BINGUSnCMbcPX",
+        "documentation": "-Fallback-scrubbed-RmKbfyEjxKijUvCTwcSiJuEBnCoDmLgWMrwEDMdbbcL",
+        "requiredAccess": "-Fallback-scrubbed-uSFVBFxUGAZFHasLfknBQKjnHdYFZLQlLfjdL"},
+        "path": ["-Fallback-scrubbed-mnPdRD", "-Fallback-scrubbed-OaAaA", 7303, "-Fallback-scrubbed-hnRA",
+        "-Fallback-scrubbed-EBfmffryPDhXBueqVLeeZN", "-Fallback-scrubbed-hsUArqbYba",
+        "-Fallback-scrubbed-EaQVVwjMQxJTIB"]}, {"message": "-Fallback-scrubbed-sKgOaknuXOAhCAnCkyvGIsAetrCSHYRaibEeVlBvpZOIvMHeBIhyxonglobZPwCaUcrbeKkhgvjUOqBULYEmqSEgyddyLf",
+        "locations": [{"line": 8699, "column": 7416}], "extensions": {"code": "-Fallback-scrubbed-BINGUSnCMbcPX",
+        "documentation": "-Fallback-scrubbed-RmKbfyEjxKijUvCTwcSiJuEBnCoDmLgWMrwEDMdbbcL",
+        "requiredAccess": "-Fallback-scrubbed-uSFVBFxUGAZFHasLfknBQKjnHdYFZLQlLfjdL"},
+        "path": ["-Fallback-scrubbed-mnPdRD", "-Fallback-scrubbed-OaAaA", 7303, "-Fallback-scrubbed-hnRA",
+        "-Fallback-scrubbed-EBfmffryPDhXBueqVLeeZN", "-Fallback-scrubbed-aaPWtOSnn",
+        "-Fallback-scrubbed-EaQVVwjMQxJTIB"]}], "data": {"orders": {"edges": [{"cursor":
+        "eyJsYXN0X2lkIjo3MDkxNjA5NDM2MzgwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNS0zMCAxNjozMDowNC41ODk4MDMifQ==",
+        "node": {"id": "gid://shopify/Order/7091609436380", "updatedAt": "2026-07-07T15:31:58Z",
+        "customerJourneySummary": {"customerOrderIndex": 1361, "daysToConversion":
+        null, "firstVisit": null, "lastVisit": null, "momentsCount": {"count": 1361,
+        "precision": "-Fallback-scrubbed-mfAaG"}, "ready": true}}}, {"cursor": "eyJsYXN0X2lkIjo3MDkyMzczNTg2MTQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNS0zMSAwMTo0NToxOC4zNzY5OTYifQ==",
+        "node": {"id": "gid://shopify/Order/7092373586140", "updatedAt": "2026-07-07T15:32:00Z",
+        "customerJourneySummary": {"customerOrderIndex": 1361, "daysToConversion":
+        null, "firstVisit": null, "lastVisit": null, "momentsCount": {"count": 1361,
+        "precision": "-Fallback-scrubbed-mfAaG"}, "ready": true}}}, {"cursor": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoxNy44Mjg4OTMifQ==",
+        "node": {"id": "gid://shopify/Order/7185087365340", "updatedAt": "2026-06-30T16:30:25Z",
+        "customerJourneySummary": {"customerOrderIndex": 1361, "daysToConversion":
+        null, "firstVisit": null, "lastVisit": null, "momentsCount": {"count": 1361,
+        "precision": "-Fallback-scrubbed-mfAaG"}, "ready": true}}}, {"cursor": "eyJsYXN0X2lkIjo3MTg1ODk0NjcwNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wMSAwMTo0NTozNC41MDQ1MTYifQ==",
+        "node": {"id": "gid://shopify/Order/7185894670556", "updatedAt": "2026-07-01T01:46:17Z",
+        "customerJourneySummary": {"customerOrderIndex": 1361, "daysToConversion":
+        null, "firstVisit": null, "lastVisit": null, "momentsCount": {"count": 1361,
+        "precision": "-Fallback-scrubbed-mfAaG"}, "ready": true}}}, {"cursor": "eyJsYXN0X2lkIjo3Mjk2MDU3NzcwMjA0LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNCAxODoyNToyNC4yMjAxMTQifQ==",
+        "node": {"id": "gid://shopify/Order/7296057770204", "updatedAt": "2026-07-14T18:25:29Z",
+        "customerJourneySummary": {"customerOrderIndex": 1361, "daysToConversion":
+        8699, "firstVisit": {"id": "gid://shopify/CustomerVisit/14674298798300", "landingPage":
+        "-Fallback-scrubbed-meTdFurHLeQyMlEBmGQlEIpFwLvpLMMpLPLqrGSc", "landingPageHtml":
+        "-Fallback-scrubbed-KEjqUyiLXglfEeXMXMjdUyvEXSVzajDBSSAbmMIoIOIYJzyVybqLNafbXtMxReKzeVlNABHaWvRGdKAjKWDhMJTBZvbcDJJtlwpSPsMJgnADAVvxBeAETq",
+        "marketingEvent": null, "occurredAt": "-Fallback-scrubbed-CiBJqdLzewGkgWYJhHfH",
+        "referralCode": null, "referralInfoHtml": "-Fallback-scrubbed-gSKsdIwnyGTHCrQTpFZQMW",
+        "referrerUrl": null, "source": "-Fallback-scrubbed-mZBwGW", "sourceDescription":
+        "-Fallback-scrubbed-LynmPpIMCnJUysZdCNHEWddNTXlZJjAZDdgM", "sourceType": null,
+        "utmParameters": null}, "lastVisit": {"id": "gid://shopify/CustomerVisit/14674298798300",
+        "landingPage": "-Fallback-scrubbed-meTdFurHLeQyMlEBmGQlEIpFwLvpLMMpLPLqrGSc",
+        "landingPageHtml": "-Fallback-scrubbed-KEjqUyiLXglfEeXMXMjdUyvEXSVzajDBSSAbmMIoIOIYJzyVybqLNafbXtMxReKzeVlNABHaWvRGdKAjKWDhMJTBZvbcDJJtlwpSPsMJgnADAVvxBeAETq",
+        "marketingEvent": null, "occurredAt": "-Fallback-scrubbed-CiBJqdLzewGkgWYJhHfH",
+        "referralCode": null, "referralInfoHtml": "-Fallback-scrubbed-gSKsdIwnyGTHCrQTpFZQMW",
+        "referrerUrl": null, "source": "-Fallback-scrubbed-mZBwGW", "sourceDescription":
+        "-Fallback-scrubbed-LynmPpIMCnJUysZdCNHEWddNTXlZJjAZDdgM", "sourceType": null,
+        "utmParameters": null}, "momentsCount": {"count": 8699, "precision": "-Fallback-scrubbed-mfAaG"},
+        "ready": true}}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNDY2MTYxMzcyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjoxMzoyMC45MDcxOTkifQ==",
+        "node": {"id": "gid://shopify/Order/7301466161372", "updatedAt": "2026-07-17T16:13:22Z",
+        "customerJourneySummary": {"customerOrderIndex": 8699, "daysToConversion":
+        null, "firstVisit": null, "lastVisit": null, "momentsCount": {"count": 1361,
+        "precision": "-Fallback-scrubbed-mfAaG"}, "ready": true}}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNTIwMzkyNDEyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjo0NDozMy43MDA0NDQifQ==",
+        "node": {"id": "gid://shopify/Order/7301520392412", "updatedAt": "2026-07-17T16:44:35Z",
+        "customerJourneySummary": {"customerOrderIndex": 8699, "daysToConversion":
+        null, "firstVisit": null, "lastVisit": null, "momentsCount": {"count": 1361,
+        "precision": "-Fallback-scrubbed-mfAaG"}, "ready": true}}}], "pageInfo": {"hasNextPage":
+        false}}}, "extensions": {"cost": {"requestedQueryCost": 5363, "actualQueryCost":
+        2323, "throttleStatus": {"maximumAvailable": -730456.23800708, "currentlyAvailable":
+        6464, "restoreRate": 70.8541872986456}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a1eaaed00d84a10e-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 13:51:52 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=QuxSbx7HVHqP0LcFZb7UBzugD9H6zXb4S6tz03JBqgpav9oTzICyooJWAJPf42fug50djuf4onbWvQ1OZfbAb5mBbdtZpDQOvjTSCtFDyqCd67bJIgY4nuIBuS437tLumUEWlbXSsxFj4Xh829zE9yTp2sNlsnRjQp0881k%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '4544'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=6d22cb6a-27cc-4917-a0fa-9171c7c8d40d-1784641912;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=6d22cb6a-27cc-4917-a0fa-9171c7c8d40d-1784641912"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=103, verdict_flag_enabled;desc="count=16";dur=0.743, graphql;desc="admin/query/other",
+        _y;desc="71bc9c1f-ad32-4c6b-9121-35447f2cedca", _s;desc="77966203-d4c5-4e74-8fa1-c6ee619ef471"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 6d22cb6a-27cc-4917-a0fa-9171c7c8d40d-1784641912
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-10
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String)
+      { orders(first: $first, after: $after, query: $filter) { edges { cursor node
+      { id updatedAt customerJourneySummary { lastVisit { id landingPage landingPageHtml
+      marketingEvent { app { id apiKey appStoreAppUrl appStoreDeveloperUrl banner
+      { altText height id url width } description developerName developerType embedded
+      features icon { altText height id url width } installUrl isPostPurchaseAppInUse
+      previouslyInstalled pricingDetails pricingDetailsSummary privacyPolicyUrl publicCategory
+      published requestedAccessScopes { description handle } shopifyDeveloped title
+      uninstallMessage webhookApiVersion } channelHandle description endedAt id manageUrl
+      marketingChannelType previewUrl remoteId scheduledToEndAt sourceAndMedium startedAt
+      type utmCampaign utmMedium utmSource } occurredAt referralCode referralInfoHtml
+      referrerUrl source sourceDescription sourceType utmParameters { campaign content
+      medium source term } } } } }, pageInfo { hasNextPage } } } ", "variables": {"first":
+      100, "filter": "updated_at:>''2026-05-30T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1104'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"errors": [{"message": "-Fallback-scrubbed-sKgOaknuXOAhCAnCkyvGIsAetrCSHYRaibEeVlBvpZOIvMHeBIhyxonglobZPwCaUcrbeKkhgvjUOqBULYEmqSEgyddyLf",
+        "locations": [{"line": 8699, "column": 9163}], "extensions": {"code": "-Fallback-scrubbed-BINGUSnCMbcPX",
+        "documentation": "-Fallback-scrubbed-RmKbfyEjxKijUvCTwcSiJuEBnCoDmLgWMrwEDMdbbcL",
+        "requiredAccess": "-Fallback-scrubbed-uSFVBFxUGAZFHasLfknBQKjnHdYFZLQlLfjdL"},
+        "path": ["-Fallback-scrubbed-mnPdRD", "-Fallback-scrubbed-OaAaA", 7303, "-Fallback-scrubbed-hnRA",
+        "-Fallback-scrubbed-EBfmffryPDhXBueqVLeeZN", "-Fallback-scrubbed-aaPWtOSnn",
+        "-Fallback-scrubbed-EaQVVwjMQxJTIB"]}], "data": {"orders": {"edges": [{"cursor":
+        "eyJsYXN0X2lkIjo3MDkxNjA5NDM2MzgwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNS0zMCAxNjozMDowNC41ODk4MDMifQ==",
+        "node": {"id": "gid://shopify/Order/7091609436380", "updatedAt": "2026-07-07T15:31:58Z",
+        "customerJourneySummary": {"lastVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3MDkyMzczNTg2MTQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNS0zMSAwMTo0NToxOC4zNzY5OTYifQ==",
+        "node": {"id": "gid://shopify/Order/7092373586140", "updatedAt": "2026-07-07T15:32:00Z",
+        "customerJourneySummary": {"lastVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoxNy44Mjg4OTMifQ==",
+        "node": {"id": "gid://shopify/Order/7185087365340", "updatedAt": "2026-06-30T16:30:25Z",
+        "customerJourneySummary": {"lastVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3MTg1ODk0NjcwNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wMSAwMTo0NTozNC41MDQ1MTYifQ==",
+        "node": {"id": "gid://shopify/Order/7185894670556", "updatedAt": "2026-07-01T01:46:17Z",
+        "customerJourneySummary": {"lastVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3Mjk2MDU3NzcwMjA0LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNCAxODoyNToyNC4yMjAxMTQifQ==",
+        "node": {"id": "gid://shopify/Order/7296057770204", "updatedAt": "2026-07-14T18:25:29Z",
+        "customerJourneySummary": {"lastVisit": {"id": "gid://shopify/CustomerVisit/14674298798300",
+        "landingPage": "-Fallback-scrubbed-meTdFurHLeQyMlEBmGQlEIpFwLvpLMMpLPLqrGSc",
+        "landingPageHtml": "-Fallback-scrubbed-KEjqUyiLXglfEeXMXMjdUyvEXSVzajDBSSAbmMIoIOIYJzyVybqLNafbXtMxReKzeVlNABHaWvRGdKAjKWDhMJTBZvbcDJJtlwpSPsMJgnADAVvxBeAETq",
+        "marketingEvent": null, "occurredAt": "-Fallback-scrubbed-CiBJqdLzewGkgWYJhHfH",
+        "referralCode": null, "referralInfoHtml": "-Fallback-scrubbed-gSKsdIwnyGTHCrQTpFZQMW",
+        "referrerUrl": null, "source": "-Fallback-scrubbed-mZBwGW", "sourceDescription":
+        "-Fallback-scrubbed-LynmPpIMCnJUysZdCNHEWddNTXlZJjAZDdgM", "sourceType": null,
+        "utmParameters": null}}}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNDY2MTYxMzcyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjoxMzoyMC45MDcxOTkifQ==",
+        "node": {"id": "gid://shopify/Order/7301466161372", "updatedAt": "2026-07-17T16:13:22Z",
+        "customerJourneySummary": {"lastVisit": null}}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNTIwMzkyNDEyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjo0NDozMy43MDA0NDQifQ==",
+        "node": {"id": "gid://shopify/Order/7301520392412", "updatedAt": "2026-07-17T16:44:35Z",
+        "customerJourneySummary": {"lastVisit": null}}}], "pageInfo": {"hasNextPage":
+        false}}}, "extensions": {"cost": {"requestedQueryCost": 4026, "actualQueryCost":
+        8216, "throttleStatus": {"maximumAvailable": -730456.23800708, "currentlyAvailable":
+        7001, "restoreRate": 70.8541872986456}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a1eaaed24c74011f-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 13:51:52 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=VpLKM9GFB2m5qNVWu0Ak3%2BBt2Ekr2KewAI2SLsd4MHrtsxlE%2FylM4HPQDTIZuZ3uKq56%2BHHShkhB4W%2FLXO40yuaAV2tADV3XUDKTMfhcRogaaSnzjBsysojnKXtwRXY6HYPCwNX52CqQBFnDxnQuBIp8tgQYNmQs%2Fb3xWuc%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '2774'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=cdf1eb8b-66e5-4cf5-8134-9558e1c830ee-1784641912;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=cdf1eb8b-66e5-4cf5-8134-9558e1c830ee-1784641912"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=71, verdict_flag_enabled;desc="count=12";dur=0.536, graphql;desc="admin/query/other",
+        _y;desc="591548cf-4903-4c8e-afb1-449c230373ec", _s;desc="7cc370ab-b4ec-4d04-96a3-889e8ec36403"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - cdf1eb8b-66e5-4cf5-8134-9558e1c830ee-1784641912
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-10
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
+      $sortKey: CustomerSortKeys) { customers(first: $first, after: $after, query:
+      $filter, sortKey: $sortKey) { edges { cursor node { id firstName lastName email
+      phone numberOfOrders amountSpent { amount currencyCode } note verifiedEmail
+      validEmailAddress tags lifetimeDuration defaultAddress { address1 address2 city
+      company coordinatesValidated country countryCodeV2 firstName formatted formattedArea
+      lastName latitude longitude name phone province provinceCode timeZone zip }
+      addresses { address1 address2 city company coordinatesValidated country countryCodeV2
+      firstName formatted formattedArea lastName latitude longitude name phone province
+      provinceCode timeZone zip } image { altText height id url width } canDelete
+      createdAt updatedAt emailMarketingConsent { consentUpdatedAt marketingOptInLevel
+      marketingState } smsMarketingConsent { consentCollectedFrom consentUpdatedAt
+      marketingOptInLevel marketingState } } }, pageInfo { hasNextPage } } } ", "variables":
+      {"first": 1, "filter": "updated_at:>''2026-05-30T00:00:00''", "sortKey": "UPDATED_AT"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1122'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"data": {"customers": {"edges": [{"cursor": "eyJsYXN0X2lkIjo5MjczNjI0NDYxNTMyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyMC4wMDAwMDAifQ==",
+        "node": {"id": "gid://shopify/Customer/9273624461532", "firstName": null,
+        "lastName": "Spencer", "email": "lyonsemily@example.net", "phone": null, "numberOfOrders":
+        "-Fallback-scrubbed-o", "amountSpent": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "note": null, "verifiedEmail":
+        true, "validEmailAddress": true, "tags": ["-Fallback-scrubbed-tNwqjUYWTSsAalyrN",
+        "-Fallback-scrubbed-WuFnfgkYPQQVVUYQEdxNawtSshdBwfgPAPxXnSfRNycunnl"], "lifetimeDuration":
+        "-Fallback-scrubbed-xNNyYdkI", "defaultAddress": {"address1": "545 Leslie
+        Rest Suite 882", "address2": null, "city": "Crawfordmouth", "company": null,
+        "coordinatesValidated": true, "country": "-Fallback-scrubbed-EQfe", "countryCodeV2":
+        "-Fallback-scrubbed-lA", "firstName": null, "formatted": ["545 Leslie Rest
+        Suite 882", "Crawfordmouth", "-Fallback-scrubbed-gIP", "-Fallback-scrubbed-EQfe"],
+        "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW", "lastName": "Spencer",
+        "latitude": 63.5886325, "longitude": 93.778322, "name": "Spencer", "phone":
+        null, "province": "Delaware", "provinceCode": "Pennsylvania", "timeZone":
+        "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "addresses": [{"address1":
+        "545 Leslie Rest Suite 882", "address2": null, "city": "Crawfordmouth", "company":
+        null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-EQfe",
+        "countryCodeV2": "-Fallback-scrubbed-lA", "firstName": null, "formatted":
+        ["545 Leslie Rest Suite 882", "Crawfordmouth", "-Fallback-scrubbed-gIP", "-Fallback-scrubbed-EQfe"],
+        "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW", "lastName": "Spencer",
+        "latitude": 63.5886325, "longitude": 93.778322, "name": "Spencer", "phone":
+        null, "province": "Delaware", "provinceCode": "Pennsylvania", "timeZone":
+        "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}], "image": {"altText": null,
+        "height": null, "id": null, "url": "-Fallback-scrubbed-wZmRWlEGAqNTSKwTewkIIngVLfyHTdXXdLQhmvqZECBQoXTfKTkQlrqOCLYgxuLqXcuEpXHvqYhpFefSDDivlOyjRjYRjoeNlIDhRcdWNTDAoXEfoUQokvvLSLTsskmaJwOsjMYwXvcSELuzvPxRRdibysnbauJyqraTuysgbjQNHUwsswOlGXAJvlWzheLUYPBudGGFFDyLxcFZBBZlANMSNincvQbiSgcPWBnMEvnmWWlBaWBWsNkWFnWryObYIXyszzWWZdWkwIWDuWNgslXBJBkIZfnheJKBMtGAqjPjnlODtgrOXTJxbDcnIRSCzbquouMLhBltJysQnd",
+        "width": null}, "canDelete": false, "createdAt": "-Fallback-scrubbed-NjUGEJKBPiHlSIgljFku",
+        "updatedAt": "2026-06-30T16:30:20Z", "emailMarketingConsent": {"consentUpdatedAt":
+        null, "marketingOptInLevel": "-Fallback-scrubbed-GhHeMcWcTpucS", "marketingState":
+        "-Fallback-scrubbed-QYWVHvSeERuDUp"}, "smsMarketingConsent": null}}], "pageInfo":
+        {"hasNextPage": true}}}, "extensions": {"cost": {"requestedQueryCost": 7303,
+        "actualQueryCost": 7303, "throttleStatus": {"maximumAvailable": -730456.23800708,
+        "currentlyAvailable": 7938, "restoreRate": 70.8541872986456}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a1eaaed45f34f199-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 13:51:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=9IRQ5mFUPO%2Fda0WBpdDpRNjdvUMeHRKfL5tGA%2FeG6Uepqt3nM9R%2FIj03lPET%2Fec75fPcaOvj1xuMaanh6tdW3kJh0CpeG%2BLgorwduJq84D%2FJPuE64WB8sHDP0x2H1zJt6y6jX%2FrXwNUL0rMvGOH1Lj4iM3SFv%2FgKKpJ2nP0%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '2248'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=e8cc166f-fd23-4256-9f12-06aa217a90ed-1784641913;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=e8cc166f-fd23-4256-9f12-06aa217a90ed-1784641913"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=90, verdict_flag_enabled;desc="count=14";dur=0.826, graphql;desc="admin/query/other",
+        _y;desc="cbd0553a-a758-428e-9255-c3db25b69ed6", _s;desc="ca45156b-f7b3-487f-af8a-558c12d3509e"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - e8cc166f-fd23-4256-9f12-06aa217a90ed-1784641913
+      x-shopify-api-deprecated-reason:
+      - Customer.email, Customer.phone, Customer.validEmailAddress, Customer.addresses,
+        Customer.emailMarketingConsent and 1 more
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-10
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
+      $sortKey: CustomerSortKeys) { customers(first: $first, after: $after, query:
+      $filter, sortKey: $sortKey) { edges { cursor node { id firstName lastName email
+      phone numberOfOrders amountSpent { amount currencyCode } note verifiedEmail
+      validEmailAddress tags lifetimeDuration defaultAddress { address1 address2 city
+      company coordinatesValidated country countryCodeV2 firstName formatted formattedArea
+      lastName latitude longitude name phone province provinceCode timeZone zip }
+      addresses { address1 address2 city company coordinatesValidated country countryCodeV2
+      firstName formatted formattedArea lastName latitude longitude name phone province
+      provinceCode timeZone zip } image { altText height id url width } canDelete
+      createdAt updatedAt emailMarketingConsent { consentUpdatedAt marketingOptInLevel
+      marketingState } smsMarketingConsent { consentCollectedFrom consentUpdatedAt
+      marketingOptInLevel marketingState } } }, pageInfo { hasNextPage } } } ", "variables":
+      {"first": 250, "after": "eyJsYXN0X2lkIjo5MjczNjI0NDYxNTMyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyMC4wMDAwMDAifQ==",
+      "filter": "updated_at:>''2026-05-30T00:00:00''", "sortKey": "UPDATED_AT"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1229'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"data": {"customers": {"edges": [{"cursor": "eyJsYXN0X2lkIjo4MTAwOTEyMjM0NzE2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wNyAxNTozMjowMy4wMDAwMDAifQ==",
+        "node": {"id": "gid://shopify/Customer/8100912234716", "firstName": "Melanie",
+        "lastName": "Simmons", "email": "april28@example.com", "phone": null, "numberOfOrders":
+        "-Fallback-scrubbed-o", "amountSpent": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "note": null, "verifiedEmail":
+        true, "validEmailAddress": true, "tags": [], "lifetimeDuration": "-Fallback-scrubbed-LKURnqoyAmFt",
+        "defaultAddress": {"address1": "774 Ramirez Corners", "address2": null, "city":
+        "Crawfordmouth", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA", "firstName":
+        null, "formatted": ["774 Ramirez Corners", "Crawfordmouth", "-Fallback-scrubbed-gIP",
+        "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Cherry", "latitude": 48.7130545, "longitude": -99.76649, "name":
+        "Cherry", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "addresses":
+        [{"address1": "774 Ramirez Corners", "address2": null, "city": "Crawfordmouth",
+        "company": null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-EQfe",
+        "countryCodeV2": "-Fallback-scrubbed-lA", "firstName": null, "formatted":
+        ["774 Ramirez Corners", "Crawfordmouth", "-Fallback-scrubbed-gIP", "-Fallback-scrubbed-EQfe"],
+        "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW", "lastName": "Cherry",
+        "latitude": 48.7130545, "longitude": -99.76649, "name": "Cherry", "phone":
+        null, "province": "Delaware", "provinceCode": "Pennsylvania", "timeZone":
+        "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}], "image": {"altText": null,
+        "height": null, "id": null, "url": "-Fallback-scrubbed-SSVsrxyCfWlCLKJYmbiYvKJQmTeYvIfvRqsrSEYxdGwXzGFxfDpgwZdJsUvIdWVOecOUZIRIijWtULYqdAInxWcFzcivMFtaadHUaWjoklOvuIsvtnIyuLfdavARxouRPVxRRTiaoVaBeVfAkPnnAhxNGvKVjRMNRFqszZAhlpHVBSWqtwallbDqClZrorpzfhCcaCKadGMJAHItwfAomowyXwkfSpbeOvWhoLFruARwISgBiZnKdGqfWpcHAjcSjNvLJtXaOLZjLHkaeFmhiUWpbNwJpeVAiSUlOvJBrhTTJAoYiRoAMpAUCmGJkHmktsKrFdafvXyPMgHwVX",
+        "width": null}, "canDelete": false, "createdAt": "-Fallback-scrubbed-hFiLQWGyooXRxGydoUXL",
+        "updatedAt": "2026-07-07T15:32:03Z", "emailMarketingConsent": {"consentUpdatedAt":
+        "-Fallback-scrubbed-hcMlFtpYRjcBQeylxIzF", "marketingOptInLevel": "-Fallback-scrubbed-CpEbZsn",
+        "marketingState": "-Fallback-scrubbed-pIAOjYfJsq"}, "smsMarketingConsent":
+        null}}, {"cursor": "eyJsYXN0X2lkIjo5NzU5NzAyNjQ3MDA0LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNCAxODoyNTozNS4wMDAwMDAifQ==",
+        "node": {"id": "gid://shopify/Customer/9759702647004", "firstName": "April",
+        "lastName": "Hooper", "email": "jane15@example.org", "phone": null, "numberOfOrders":
+        "-Fallback-scrubbed-o", "amountSpent": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "note": null, "verifiedEmail":
+        true, "validEmailAddress": true, "tags": [], "lifetimeDuration": "-Fallback-scrubbed-tpMOOt",
+        "defaultAddress": {"address1": "8549 Norton Flat", "address2": "458 Robert
+        Haven Apt. 755", "city": "New Ronald", "company": null, "coordinatesValidated":
+        true, "country": "-Fallback-scrubbed-UEdjIS", "countryCodeV2": "-Fallback-scrubbed-bV",
+        "firstName": "April", "formatted": ["8549 Norton Flat", "458 Robert Haven
+        Apt. 755", "-Fallback-scrubbed-pvinDvfaYEiqIJRCAosXFXKFRN", "-Fallback-scrubbed-UEdjIS"],
+        "formattedArea": "-Fallback-scrubbed-QadejYGHInYypUAvdJbtn", "lastName": "Hooper",
+        "latitude": 28.985315, "longitude": -147.119644, "name": "Angela Vega", "phone":
+        null, "province": "New York", "provinceCode": "New Mexico", "timeZone": "-Fallback-scrubbed-wmBAwCYVHBJrK",
+        "zip": "06560"}, "addresses": [{"address1": "8549 Norton Flat", "address2":
+        "458 Robert Haven Apt. 755", "city": "New Ronald", "company": null, "coordinatesValidated":
+        true, "country": "-Fallback-scrubbed-UEdjIS", "countryCodeV2": "-Fallback-scrubbed-bV",
+        "firstName": "April", "formatted": ["8549 Norton Flat", "458 Robert Haven
+        Apt. 755", "-Fallback-scrubbed-pvinDvfaYEiqIJRCAosXFXKFRN", "-Fallback-scrubbed-UEdjIS"],
+        "formattedArea": "-Fallback-scrubbed-QadejYGHInYypUAvdJbtn", "lastName": "Hooper",
+        "latitude": 28.985315, "longitude": -147.119644, "name": "Angela Vega", "phone":
+        null, "province": "New York", "provinceCode": "New Mexico", "timeZone": "-Fallback-scrubbed-wmBAwCYVHBJrK",
+        "zip": "06560"}], "image": {"altText": null, "height": null, "id": null, "url":
+        "-Fallback-scrubbed-GYGKDkpQZCCLTpcLlGoSCqTcdwaaaJgTmixeWRHGGTnvXdtlzQwivYunduFYhehiLhUIGrxsjMKPaAqtEZoWqFoVuhtGVoEFKhgDpAwNhnnERQFUIVQjVMCvECYgwfKPdiTrtlerFxzeDfiVUSpKUYUDZEUWvVQnYCyKykOHAHtawToONtRArvtYzsJndmceePSQmabOpkAepkUhcSrQUoTWaMpPDqzvZueHnzQAKNUWEDMbjYQUBkZTdlIyHAjmtRxVBNHNRzAwkILIFSkEXlDDLSNkfPXIKikEwmRdAnktzHbtItctBlnuMstpMupmwErnccngTisoIezRzU",
+        "width": null}, "canDelete": true, "createdAt": "-Fallback-scrubbed-YXjYfiQKcErIUSrKubOF",
+        "updatedAt": "2026-07-14T18:25:35Z", "emailMarketingConsent": {"consentUpdatedAt":
+        null, "marketingOptInLevel": "-Fallback-scrubbed-GhHeMcWcTpucS", "marketingState":
+        "-Fallback-scrubbed-QYWVHvSeERuDUp"}, "smsMarketingConsent": null}}], "pageInfo":
+        {"hasNextPage": false}}}, "extensions": {"cost": {"requestedQueryCost": 456,
+        "actualQueryCost": 7716, "throttleStatus": {"maximumAvailable": -730456.23800708,
+        "currentlyAvailable": 364, "restoreRate": 70.8541872986456}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a1eaaed6d8f2e638-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 13:51:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=MUuCEudRju0hSf6w3WpmIMrkzmDxIMMmd4cLl6wMAWD7cUjo%2Faqkb2aDz9HTliGGfYD0uwQWGh8dsd306AWBIMjnU6JSgOJT2yEYz3jxplQDsMXRDrH4CrAOwfiXn9xoEfovgcMsSqY2QI%2FZeTCvEqCWNOvPNbL2QQ9CbTw%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '4402'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=0cbcbceb-ef7d-4dea-996e-95ebd6e14742-1784641913;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=0cbcbceb-ef7d-4dea-996e-95ebd6e14742-1784641913"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=114, verdict_flag_enabled;desc="count=16";dur=1.076, graphql;desc="admin/query/other",
+        _y;desc="bd203bb1-ee8c-4ecb-bef8-37c7e4c45a59", _s;desc="f8dc7332-73db-4514-bf02-c7a8f922bc53"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 0cbcbceb-ef7d-4dea-996e-95ebd6e14742-1784641913
+      x-shopify-api-deprecated-reason:
+      - Customer.email, Customer.phone, Customer.validEmailAddress, Customer.addresses,
+        Customer.emailMarketingConsent and 1 more
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-10
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
+      $sortKey: OrderSortKeys) { orders(first: $first, after: $after, query: $filter,
+      sortKey: $sortKey) { edges { cursor node { id billingAddress { address1 address2
+      city company coordinatesValidated country countryCodeV2 firstName formatted
+      formattedArea lastName latitude longitude name phone province provinceCode timeZone
+      zip } billingAddressMatchesShippingAddress cancelledAt cancelReason canMarkAsPaid
+      canNotifyCustomer capturable cartDiscountAmountSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } clientIp closed closedAt
+      confirmed createdAt currencyCode currentCartDiscountAmountSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } currentSubtotalLineItemsQuantity
+      currentSubtotalPriceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } currentTaxLines { channelLiable priceSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } rate ratePercentage
+      title } currentTotalDiscountsSet { presentmentMoney { amount currencyCode }
+      shopMoney { amount currencyCode } } currentTotalDutiesSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } currentTotalPriceSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } currentTotalTaxSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } currentTotalWeight customerAcceptsMarketing customerLocale
+      discountCode displayAddress { address1 address2 city company coordinatesValidated
+      country countryCodeV2 firstName formatted formattedArea lastName latitude longitude
+      name phone province provinceCode timeZone zip } displayFinancialStatus displayFulfillmentStatus
+      disputes { id initiatedAs status } edited email estimatedTaxes fulfillable fulfillments
+      { id } fullyPaid legacyResourceId hasTimelineComment merchantEditable name netPaymentSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } note originalTotalDutiesSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } originalTotalPriceSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } paymentGatewayNames phone
+      presentmentCurrencyCode processedAt refundable refundDiscrepancySet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } refunds { id } registeredSourceUrl
+      requiresShipping restockable riskLevel risks { display level message } shippingAddress
+      { address1 address2 city company coordinatesValidated country countryCodeV2
+      firstName formatted formattedArea lastName latitude longitude name phone province
+      provinceCode timeZone zip } shippingLine { carrierIdentifier code custom discountAllocations
+      { allocatedAmountSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } discountApplication { allocationMethod targetSelection
+      targetType value { ... on MoneyV2 { amount currencyCode } ... on PricingPercentageValue
+      { percentage } } index } } } subtotalLineItemsQuantity subtotalPriceSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } taxesIncluded taxLines
+      { channelLiable priceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } rate ratePercentage title } totalCapturableSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } totalDiscountsSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } totalOutstandingSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } totalPriceSet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } totalReceivedSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } totalRefundedSet {
+      presentmentMoney { amount currencyCode } shopMoney { amount currencyCode } }
+      totalRefundedShippingSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } totalShippingPriceSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } totalTaxSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } totalTipReceivedSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } totalWeight transactions { id accountNumber amountSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } authorizationCode
+      authorizationExpiresAt createdAt errorCode fees { amount { amount currencyCode
+      } flatFee { amount currencyCode } flatFeeName id rate rateName taxAmount { amount
+      currencyCode } type } formattedGateway gateway kind manuallyCapturable maximumRefundableV2
+      { amount currencyCode } multiCapturable order { id } parentTransaction { id
+      } paymentIcon { altText height id url width } paymentId processedAt receiptJson
+      settlementCurrency settlementCurrencyRate status test totalUnsettledSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } } unpaid updatedAt
+      sourceIdentifier } }, pageInfo { hasNextPage } } } ", "variables": {"first":
+      1, "filter": "updated_at:>''2026-05-30T00:00:00''", "sortKey": "UPDATED_AT"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '5195'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyNS4wNDU3MDQifQ==",
+        "node": {"id": "gid://shopify/Order/7185087365340", "billingAddress": {"address1":
+        "545 Leslie Rest Suite 882", "address2": null, "city": "Crawfordmouth", "company":
+        null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-EQfe",
+        "countryCodeV2": "-Fallback-scrubbed-lA", "firstName": null, "formatted":
+        ["545 Leslie Rest Suite 882", "Crawfordmouth", "-Fallback-scrubbed-gIP", "-Fallback-scrubbed-EQfe"],
+        "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW", "lastName": "Spencer",
+        "latitude": 52.5507375, "longitude": -52.700255, "name": "Spencer", "phone":
+        null, "province": "Delaware", "provinceCode": "Pennsylvania", "timeZone":
+        "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "billingAddressMatchesShippingAddress":
+        true, "cancelledAt": null, "cancelReason": null, "canMarkAsPaid": false, "canNotifyCustomer":
+        true, "capturable": false, "cartDiscountAmountSet": null, "clientIp": "16.23.52.194",
+        "closed": false, "closedAt": null, "confirmed": true, "createdAt": "-Fallback-scrubbed-ExkYiiyYhkykNVEdjFoN",
+        "currencyCode": "-Fallback-scrubbed-bzH", "currentCartDiscountAmountSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentSubtotalLineItemsQuantity":
+        8699, "currentSubtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTaxLines": [], "currentTotalDiscountsSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalDutiesSet": null,
+        "currentTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalTaxSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTotalWeight": "-Fallback-scrubbed-o", "customerAcceptsMarketing":
+        false, "customerLocale": "-Fallback-scrubbed-mDBCF", "discountCode": null,
+        "displayAddress": {"address1": "545 Leslie Rest Suite 882", "address2": null,
+        "city": "Crawfordmouth", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA", "firstName":
+        null, "formatted": ["545 Leslie Rest Suite 882", "Crawfordmouth", "-Fallback-scrubbed-gIP",
+        "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Spencer", "latitude": 52.5507375, "longitude": -52.700255, "name":
+        "Spencer", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "displayFinancialStatus":
+        "-Fallback-scrubbed-aHIJ", "displayFulfillmentStatus": "-Fallback-scrubbed-awpJiBkpiPn",
+        "disputes": [], "edited": false, "email": "lyonsemily@example.net", "estimatedTaxes":
+        false, "fulfillable": true, "fulfillments": [], "fullyPaid": true, "legacyResourceId":
+        "-Fallback-scrubbed-PgTadslKWueuA", "hasTimelineComment": false, "merchantEditable":
+        true, "name": "Billy Gilbert", "netPaymentSet": {"presentmentMoney": {"amount":
+        "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "note": null, "originalTotalDutiesSet": null, "originalTotalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "paymentGatewayNames": ["-Fallback-scrubbed-iGRyM"], "phone": null, "presentmentCurrencyCode":
+        "-Fallback-scrubbed-bzH", "processedAt": "-Fallback-scrubbed-HWnlfQExeukedZmjVOOZ",
+        "refundable": true, "refundDiscrepancySet": {"presentmentMoney": {"amount":
+        "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "refunds": [], "registeredSourceUrl": null, "requiresShipping": true, "restockable":
+        true, "riskLevel": "-Fallback-scrubbed-Xyf", "risks": [{"display": true, "level":
+        "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-GGUJqWeAhJxpqelGtDVdzsZELpLZKtjwsEFaOnUWVyjNY"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-PVtRBZxVxfsARVrTrGLxrhcFtXemQPBbxZuJoEVEdlaHFysYeDdmTAyrP"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-yhMxuUMJHTaPgKLdJejMuDlCaPIUzcAggMkkfnXApGKYUBbhSfoXPqAnHVKLMDPVUbIofwoVVryFFAdZBHzWeIGNJdBnkcKId"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-XBxVPAshCHjfeKbRNjyfdXkNgip"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-qegHMXbEpJZCIRfHmaWsxEaMBbdkzQBxViZ"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-mdKyQeaCvlzvRexQcgfHaCIDtgjScfEiHegpQjdmzqLgBQxRUwfnoEraeOqbOj"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-wjVQLOlrFbanaWqSEszIcXdlHJqUSwhmEhpnaxjcwNlbiTTAxlpiDYXhBBTpjorqpfUsHLYGvhUL"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-zrZiHMtivwQbaxWqbGwZDGLWvRJxyQLpnyGXmVSvNbRdBWuftyntJqVGURzVZzvWvUSLROzEIVeLKZZPqkML"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-cKQdiDxRbpRdHYuiVHgHBkCHkmjHIWptMARewevMeBVGTxAfkWaFzkidpgFXbMiLfgeWyOJwelCmDVzqegqVWqyKpjQgOuRprL"}],
+        "shippingAddress": {"address1": "545 Leslie Rest Suite 882", "address2": null,
+        "city": "Crawfordmouth", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA", "firstName":
+        null, "formatted": ["545 Leslie Rest Suite 882", "Crawfordmouth", "-Fallback-scrubbed-gIP",
+        "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Spencer", "latitude": 52.5507375, "longitude": -52.700255, "name":
+        "Spencer", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "shippingLine":
+        {"carrierIdentifier": null, "code": "-Fallback-scrubbed-LwFFkVWXyWbyQqzzvesVNRanuUbjVKamuTdbz",
+        "custom": false, "discountAllocations": []}, "subtotalLineItemsQuantity":
+        8699, "subtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "taxesIncluded": false, "taxLines":
+        [], "totalCapturableSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalDiscountsSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalOutstandingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalReceivedSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalRefundedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalRefundedShippingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalShippingPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-MwNdm", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-MwNdm", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalTaxSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalTipReceivedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalWeight": "-Fallback-scrubbed-o", "transactions": [{"id": "gid://shopify/OrderTransaction/8554553147612",
+        "accountNumber": "-Fallback-scrubbed-TuwMBSvOeVUGQyar", "amountSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "authorizationCode": "-Fallback-scrubbed-gcBSK", "authorizationExpiresAt":
+        null, "createdAt": "-Fallback-scrubbed-mAyIwPSpzqhSZreDWhqV", "errorCode":
+        null, "fees": [], "formattedGateway": "-Fallback-scrubbed-mkUpGeryaLQHzYSMDZpZswFBjMY",
+        "gateway": "-Fallback-scrubbed-iGRyM", "kind": "-Fallback-scrubbed-CifP",
+        "manuallyCapturable": false, "maximumRefundableV2": null, "multiCapturable":
+        true, "order": {"id": "gid://shopify/Order/7185087365340"}, "parentTransaction":
+        null, "paymentIcon": {"altText": "-Fallback-scrubbed-bnBsp", "height": null,
+        "id": null, "url": "-Fallback-scrubbed-AIPXAxDZRierZbSgujsmygaPYnpRzDniUGQvahRNjlinfeUbEPOpiTJigusZkwhxdWdZUbonEEqfPbejrZDkdqpIOUGrNCdhQKwstYIPGtHOUdrLrjQUaiPFPhaBQDrGrMyauREbnatwemZh",
+        "width": null}, "paymentId": "-Fallback-scrubbed-RFnlwtxdxMuVaVMAneBqNZCsK",
+        "processedAt": "-Fallback-scrubbed-mAyIwPSpzqhSZreDWhqV", "receiptJson": "-Fallback-scrubbed-FNEcVjdgtBNCcozBapeeoDL",
+        "settlementCurrency": null, "settlementCurrencyRate": null, "status": "-Fallback-scrubbed-QDvMLox",
+        "test": true, "totalUnsettledSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}}], "unpaid": false, "updatedAt":
+        "2026-06-30T16:30:25Z", "sourceIdentifier": null}}], "pageInfo": {"hasNextPage":
+        true}}}, "extensions": {"cost": {"requestedQueryCost": 3720, "actualQueryCost":
+        9135, "throttleStatus": {"maximumAvailable": -730456.23800708, "currentlyAvailable":
+        6339, "restoreRate": 70.8541872986456}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a1eaaed92847c0df-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 13:51:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=AJd77sfCxlGtSGPAITOJr5JPqHB3vDplINUJ%2FMjcKgFbhcZvLYlN1okHoNfH%2Fbs5h%2Fzss6skyuE%2Bq5SDgGhPxD%2FzjQlhkHkxDgIy0fduhZQA25FMXkkoLEyuEfCDyI5N2HNhRtwZbftDjQ69aPwkCCDX2%2BrlzLsfU8RPIA0%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '7768'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=e7602884-29c0-4f71-b4f9-12f7b2bf116e-1784641913;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=e7602884-29c0-4f71-b4f9-12f7b2bf116e-1784641913"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=256, verdict_flag_enabled;desc="count=22";dur=0.952, graphql;desc="admin/query/other",
+        _y;desc="186ba82e-96e5-43e1-bc7a-7ea8533633e9", _s;desc="5171f9b8-1615-420c-aa3e-2858c39712b9"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - e7602884-29c0-4f71-b4f9-12f7b2bf116e-1784641913
+      x-shopify-api-deprecated-reason:
+      - Order.riskLevel, OrderRisk.display, OrderRisk.level, OrderRisk.message, Order.risks
+        and 1 more
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-10
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
+      $sortKey: OrderSortKeys) { orders(first: $first, after: $after, query: $filter,
+      sortKey: $sortKey) { edges { cursor node { id billingAddress { address1 address2
+      city company coordinatesValidated country countryCodeV2 firstName formatted
+      formattedArea lastName latitude longitude name phone province provinceCode timeZone
+      zip } billingAddressMatchesShippingAddress cancelledAt cancelReason canMarkAsPaid
+      canNotifyCustomer capturable cartDiscountAmountSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } clientIp closed closedAt
+      confirmed createdAt currencyCode currentCartDiscountAmountSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } currentSubtotalLineItemsQuantity
+      currentSubtotalPriceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } currentTaxLines { channelLiable priceSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } rate ratePercentage
+      title } currentTotalDiscountsSet { presentmentMoney { amount currencyCode }
+      shopMoney { amount currencyCode } } currentTotalDutiesSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } currentTotalPriceSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } currentTotalTaxSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } currentTotalWeight customerAcceptsMarketing customerLocale
+      discountCode displayAddress { address1 address2 city company coordinatesValidated
+      country countryCodeV2 firstName formatted formattedArea lastName latitude longitude
+      name phone province provinceCode timeZone zip } displayFinancialStatus displayFulfillmentStatus
+      disputes { id initiatedAs status } edited email estimatedTaxes fulfillable fulfillments
+      { id } fullyPaid legacyResourceId hasTimelineComment merchantEditable name netPaymentSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } note originalTotalDutiesSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } originalTotalPriceSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } paymentGatewayNames phone
+      presentmentCurrencyCode processedAt refundable refundDiscrepancySet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } refunds { id } registeredSourceUrl
+      requiresShipping restockable riskLevel risks { display level message } shippingAddress
+      { address1 address2 city company coordinatesValidated country countryCodeV2
+      firstName formatted formattedArea lastName latitude longitude name phone province
+      provinceCode timeZone zip } shippingLine { carrierIdentifier code custom discountAllocations
+      { allocatedAmountSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } discountApplication { allocationMethod targetSelection
+      targetType value { ... on MoneyV2 { amount currencyCode } ... on PricingPercentageValue
+      { percentage } } index } } } subtotalLineItemsQuantity subtotalPriceSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } taxesIncluded taxLines
+      { channelLiable priceSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } rate ratePercentage title } totalCapturableSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } totalDiscountsSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } totalOutstandingSet { presentmentMoney { amount currencyCode } shopMoney {
+      amount currencyCode } } totalPriceSet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } totalReceivedSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } totalRefundedSet {
+      presentmentMoney { amount currencyCode } shopMoney { amount currencyCode } }
+      totalRefundedShippingSet { presentmentMoney { amount currencyCode } shopMoney
+      { amount currencyCode } } totalShippingPriceSet { presentmentMoney { amount
+      currencyCode } shopMoney { amount currencyCode } } totalTaxSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } totalTipReceivedSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } totalWeight transactions { id accountNumber amountSet { presentmentMoney {
+      amount currencyCode } shopMoney { amount currencyCode } } authorizationCode
+      authorizationExpiresAt createdAt errorCode fees { amount { amount currencyCode
+      } flatFee { amount currencyCode } flatFeeName id rate rateName taxAmount { amount
+      currencyCode } type } formattedGateway gateway kind manuallyCapturable maximumRefundableV2
+      { amount currencyCode } multiCapturable order { id } parentTransaction { id
+      } paymentIcon { altText height id url width } paymentId processedAt receiptJson
+      settlementCurrency settlementCurrencyRate status test totalUnsettledSet { presentmentMoney
+      { amount currencyCode } shopMoney { amount currencyCode } } } unpaid updatedAt
+      sourceIdentifier } }, pageInfo { hasNextPage } } } ", "variables": {"first":
+      51, "after": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyNS4wNDU3MDQifQ==",
+      "filter": "updated_at:>''2026-05-30T00:00:00''", "sortKey": "UPDATED_AT"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '5301'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2024-07/graphql.json
+  response:
+    body:
+      string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo3MTg1ODk0NjcwNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wMSAwMTo0NjoxNy40MTQ3MTcifQ==",
+        "node": {"id": "gid://shopify/Order/7185894670556", "billingAddress": {"address1":
+        "774 Ramirez Corners", "address2": null, "city": "Crawfordmouth", "company":
+        null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-EQfe",
+        "countryCodeV2": "-Fallback-scrubbed-lA", "firstName": null, "formatted":
+        ["774 Ramirez Corners", "Crawfordmouth", "-Fallback-scrubbed-gIP", "-Fallback-scrubbed-EQfe"],
+        "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW", "lastName": "Cherry",
+        "latitude": 48.7130545, "longitude": -99.76649, "name": "Cherry", "phone":
+        null, "province": "Delaware", "provinceCode": "Pennsylvania", "timeZone":
+        "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "billingAddressMatchesShippingAddress":
+        true, "cancelledAt": null, "cancelReason": null, "canMarkAsPaid": false, "canNotifyCustomer":
+        true, "capturable": false, "cartDiscountAmountSet": null, "clientIp": "16.23.52.194",
+        "closed": false, "closedAt": null, "confirmed": true, "createdAt": "-Fallback-scrubbed-OaniDyJyqvJXLTBoghJt",
+        "currencyCode": "-Fallback-scrubbed-bzH", "currentCartDiscountAmountSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentSubtotalLineItemsQuantity":
+        8699, "currentSubtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTaxLines": [], "currentTotalDiscountsSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalDutiesSet": null,
+        "currentTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalTaxSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTotalWeight": "-Fallback-scrubbed-o", "customerAcceptsMarketing":
+        true, "customerLocale": "-Fallback-scrubbed-mDBCF", "discountCode": null,
+        "displayAddress": {"address1": "774 Ramirez Corners", "address2": null, "city":
+        "Crawfordmouth", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA", "firstName":
+        null, "formatted": ["774 Ramirez Corners", "Crawfordmouth", "-Fallback-scrubbed-gIP",
+        "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Cherry", "latitude": 48.7130545, "longitude": -99.76649, "name":
+        "Cherry", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "displayFinancialStatus":
+        "-Fallback-scrubbed-aHIJ", "displayFulfillmentStatus": "-Fallback-scrubbed-awpJiBkpiPn",
+        "disputes": [], "edited": false, "email": "april28@example.com", "estimatedTaxes":
+        false, "fulfillable": true, "fulfillments": [], "fullyPaid": true, "legacyResourceId":
+        "-Fallback-scrubbed-ECrmZwyiJrNOm", "hasTimelineComment": false, "merchantEditable":
+        true, "name": "Todd Johnson", "netPaymentSet": {"presentmentMoney": {"amount":
+        "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "note": null, "originalTotalDutiesSet": null, "originalTotalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "paymentGatewayNames": ["-Fallback-scrubbed-iGRyM"], "phone": null, "presentmentCurrencyCode":
+        "-Fallback-scrubbed-bzH", "processedAt": "-Fallback-scrubbed-KrHXLLXRwmpznkrdaNGv",
+        "refundable": true, "refundDiscrepancySet": {"presentmentMoney": {"amount":
+        "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "refunds": [], "registeredSourceUrl": null, "requiresShipping": true, "restockable":
+        true, "riskLevel": "-Fallback-scrubbed-Xyf", "risks": [{"display": true, "level":
+        "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-GGUJqWeAhJxpqelGtDVdzsZELpLZKtjwsEFaOnUWVyjNY"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-PVtRBZxVxfsARVrTrGLxrhcFtXemQPBbxZuJoEVEdlaHFysYeDdmTAyrP"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-yhMxuUMJHTaPgKLdJejMuDlCaPIUzcAggMkkfnXApGKYUBbhSfoXPqAnHVKLMDPVUbIofwoVVryFFAdZBHzWeIGNJdBnkcKId"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-XBxVPAshCHjfeKbRNjyfdXkNgip"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-qegHMXbEpJZCIRfHmaWsxEaMBbdkzQBxViZ"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-mdKyQeaCvlzvRexQcgfHaCIDtgjScfEiHegpQjdmzqLgBQxRUwfnoEraeOqbOj"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-wjVQLOlrFbanaWqSEszIcXdlHJqUSwhmEhpnaxjcwNlbiTTAxlpiDYXhBBTpjorqpfUsHLYGvhUL"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-zrZiHMtivwQbaxWqbGwZDGLWvRJxyQLpnyGXmVSvNbRdBWuftyntJqVGURzVZzvWvUSLROzEIVeLKZZPqkML"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-cKQdiDxRbpRdHYuiVHgHBkCHkmjHIWptMARewevMeBVGTxAfkWaFzkidpgFXbMiLfgeWyOJwelCmDVzqegqVWqyKpjQgOuRprL"}],
+        "shippingAddress": {"address1": "774 Ramirez Corners", "address2": null, "city":
+        "Crawfordmouth", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA", "firstName":
+        null, "formatted": ["774 Ramirez Corners", "Crawfordmouth", "-Fallback-scrubbed-gIP",
+        "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Cherry", "latitude": 48.7130545, "longitude": -99.76649, "name":
+        "Cherry", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "shippingLine":
+        {"carrierIdentifier": null, "code": "-Fallback-scrubbed-LwFFkVWXyWbyQqzzvesVNRanuUbjVKamuTdbz",
+        "custom": false, "discountAllocations": []}, "subtotalLineItemsQuantity":
+        8699, "subtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "taxesIncluded": false, "taxLines":
+        [], "totalCapturableSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalDiscountsSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalOutstandingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalReceivedSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalRefundedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalRefundedShippingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalShippingPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-MwNdm", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-MwNdm", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalTaxSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalTipReceivedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalWeight": "-Fallback-scrubbed-o", "transactions": [{"id": "gid://shopify/OrderTransaction/8555824775388",
+        "accountNumber": "-Fallback-scrubbed-TuwMBSvOeVUGQyar", "amountSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "authorizationCode": "-Fallback-scrubbed-gcBSK", "authorizationExpiresAt":
+        null, "createdAt": "-Fallback-scrubbed-KrHXLLXRwmpznkrdaNGv", "errorCode":
+        null, "fees": [], "formattedGateway": "-Fallback-scrubbed-mkUpGeryaLQHzYSMDZpZswFBjMY",
+        "gateway": "-Fallback-scrubbed-iGRyM", "kind": "-Fallback-scrubbed-CifP",
+        "manuallyCapturable": false, "maximumRefundableV2": null, "multiCapturable":
+        true, "order": {"id": "gid://shopify/Order/7185894670556"}, "parentTransaction":
+        null, "paymentIcon": {"altText": "-Fallback-scrubbed-bnBsp", "height": null,
+        "id": null, "url": "-Fallback-scrubbed-AIPXAxDZRierZbSgujsmygaPYnpRzDniUGQvahRNjlinfeUbEPOpiTJigusZkwhxdWdZUbonEEqfPbejrZDkdqpIOUGrNCdhQKwstYIPGtHOUdrLrjQUaiPFPhaBQDrGrMyauREbnatwemZh",
+        "width": null}, "paymentId": "-Fallback-scrubbed-SWIqxRKJFWtuolobDgMGvWohB",
+        "processedAt": "-Fallback-scrubbed-KrHXLLXRwmpznkrdaNGv", "receiptJson": "-Fallback-scrubbed-FNEcVjdgtBNCcozBapeeoDL",
+        "settlementCurrency": null, "settlementCurrencyRate": null, "status": "-Fallback-scrubbed-QDvMLox",
+        "test": true, "totalUnsettledSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}}], "unpaid": false, "updatedAt":
+        "2026-07-01T01:46:17Z", "sourceIdentifier": null}}, {"cursor": "eyJsYXN0X2lkIjo3MDkxNjA5NDM2MzgwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wNyAxNTozMTo1OC41NzA0NTQifQ==",
+        "node": {"id": "gid://shopify/Order/7091609436380", "billingAddress": {"address1":
+        "545 Leslie Rest Suite 882", "address2": null, "city": "Crawfordmouth", "company":
+        null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-EQfe",
+        "countryCodeV2": "-Fallback-scrubbed-lA", "firstName": null, "formatted":
+        ["545 Leslie Rest Suite 882", "Crawfordmouth", "-Fallback-scrubbed-gIP", "-Fallback-scrubbed-EQfe"],
+        "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW", "lastName": "Spencer",
+        "latitude": 63.5886325, "longitude": 93.778322, "name": "Spencer", "phone":
+        null, "province": "Delaware", "provinceCode": "Pennsylvania", "timeZone":
+        "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "billingAddressMatchesShippingAddress":
+        true, "cancelledAt": null, "cancelReason": null, "canMarkAsPaid": false, "canNotifyCustomer":
+        true, "capturable": false, "cartDiscountAmountSet": null, "clientIp": "16.23.52.194",
+        "closed": true, "closedAt": "-Fallback-scrubbed-JrLpbxEENjqEPLuFDiCM", "confirmed":
+        true, "createdAt": "-Fallback-scrubbed-ozvQAttAXjjQWaAMMPIR", "currencyCode":
+        "-Fallback-scrubbed-bzH", "currentCartDiscountAmountSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentSubtotalLineItemsQuantity": 8699, "currentSubtotalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-jgU", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-jgU", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTaxLines": [], "currentTotalDiscountsSet": {"presentmentMoney": {"amount":
+        "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTotalDutiesSet": null, "currentTotalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTotalTaxSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalWeight": "-Fallback-scrubbed-o",
+        "customerAcceptsMarketing": false, "customerLocale": "-Fallback-scrubbed-mDBCF",
+        "discountCode": null, "displayAddress": {"address1": "545 Leslie Rest Suite
+        882", "address2": null, "city": "Crawfordmouth", "company": null, "coordinatesValidated":
+        true, "country": "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA",
+        "firstName": null, "formatted": ["545 Leslie Rest Suite 882", "Crawfordmouth",
+        "-Fallback-scrubbed-gIP", "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Spencer", "latitude": 63.5886325, "longitude": 93.778322, "name":
+        "Spencer", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "displayFinancialStatus":
+        "-Fallback-scrubbed-aHIJ", "displayFulfillmentStatus": "-Fallback-scrubbed-rsPAPAgDJ",
+        "disputes": [], "edited": false, "email": "lyonsemily@example.net", "estimatedTaxes":
+        false, "fulfillable": false, "fulfillments": [{"id": "gid://shopify/Fulfillment/6447570911452"}],
+        "fullyPaid": true, "legacyResourceId": "-Fallback-scrubbed-hgbqwcMqcoMrN",
+        "hasTimelineComment": false, "merchantEditable": true, "name": "Aaron Lynch",
+        "netPaymentSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "note": null, "originalTotalDutiesSet":
+        null, "originalTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "paymentGatewayNames": ["-Fallback-scrubbed-iGRyM"],
+        "phone": null, "presentmentCurrencyCode": "-Fallback-scrubbed-bzH", "processedAt":
+        "-Fallback-scrubbed-QqoWUSQKnKSIHGPRrkqE", "refundable": true, "refundDiscrepancySet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "refunds": [], "registeredSourceUrl":
+        null, "requiresShipping": true, "restockable": true, "riskLevel": "-Fallback-scrubbed-Xyf",
+        "risks": [{"display": true, "level": "-Fallback-scrubbed-iItFVS", "message":
+        "-Fallback-scrubbed-GGUJqWeAhJxpqelGtDVdzsZELpLZKtjwsEFaOnUWVyjNY"}, {"display":
+        true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-PVtRBZxVxfsARVrTrGLxrhcFtXemQPBbxZuJoEVEdlaHFysYeDdmTAyrP"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-yhMxuUMJHTaPgKLdJejMuDlCaPIUzcAggMkkfnXApGKYUBbhSfoXPqAnHVKLMDPVUbIofwoVVryFFAdZBHzWeIGNJdBnkcKId"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-XBxVPAshCHjfeKbRNjyfdXkNgip"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-qegHMXbEpJZCIRfHmaWsxEaMBbdkzQBxViZ"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-mdKyQeaCvlzvRexQcgfHaCIDtgjScfEiHegpQjdmzqLgBQxRUwfnoEraeOqbOj"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-wjVQLOlrFbanaWqSEszIcXdlHJqUSwhmEhpnaxjcwNlbiTTAxlpiDYXhBBTpjorqpfUsHLYGvhUL"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-zrZiHMtivwQbaxWqbGwZDGLWvRJxyQLpnyGXmVSvNbRdBWuftyntJqVGURzVZzvWvUSLROzEIVeLKZZPqkML"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-cKQdiDxRbpRdHYuiVHgHBkCHkmjHIWptMARewevMeBVGTxAfkWaFzkidpgFXbMiLfgeWyOJwelCmDVzqegqVWqyKpjQgOuRprL"}],
+        "shippingAddress": {"address1": "545 Leslie Rest Suite 882", "address2": null,
+        "city": "Crawfordmouth", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA", "firstName":
+        null, "formatted": ["545 Leslie Rest Suite 882", "Crawfordmouth", "-Fallback-scrubbed-gIP",
+        "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Spencer", "latitude": 63.5886325, "longitude": 93.778322, "name":
+        "Spencer", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "shippingLine":
+        {"carrierIdentifier": null, "code": "-Fallback-scrubbed-LwFFkVWXyWbyQqzzvesVNRanuUbjVKamuTdbz",
+        "custom": false, "discountAllocations": []}, "subtotalLineItemsQuantity":
+        8699, "subtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "taxesIncluded": false, "taxLines":
+        [], "totalCapturableSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalDiscountsSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalOutstandingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalReceivedSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalRefundedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalRefundedShippingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalShippingPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-MwNdm", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-MwNdm", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalTaxSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalTipReceivedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalWeight": "-Fallback-scrubbed-o", "transactions": [{"id": "gid://shopify/OrderTransaction/8438619668700",
+        "accountNumber": "-Fallback-scrubbed-TuwMBSvOeVUGQyar", "amountSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "authorizationCode": "-Fallback-scrubbed-gcBSK", "authorizationExpiresAt":
+        null, "createdAt": "-Fallback-scrubbed-QqoWUSQKnKSIHGPRrkqE", "errorCode":
+        null, "fees": [], "formattedGateway": "-Fallback-scrubbed-mkUpGeryaLQHzYSMDZpZswFBjMY",
+        "gateway": "-Fallback-scrubbed-iGRyM", "kind": "-Fallback-scrubbed-CifP",
+        "manuallyCapturable": false, "maximumRefundableV2": null, "multiCapturable":
+        true, "order": {"id": "gid://shopify/Order/7091609436380"}, "parentTransaction":
+        null, "paymentIcon": {"altText": "-Fallback-scrubbed-bnBsp", "height": null,
+        "id": null, "url": "-Fallback-scrubbed-AIPXAxDZRierZbSgujsmygaPYnpRzDniUGQvahRNjlinfeUbEPOpiTJigusZkwhxdWdZUbonEEqfPbejrZDkdqpIOUGrNCdhQKwstYIPGtHOUdrLrjQUaiPFPhaBQDrGrMyauREbnatwemZh",
+        "width": null}, "paymentId": "-Fallback-scrubbed-TwDkgcMQzQccbcXqESStEDpbY",
+        "processedAt": "-Fallback-scrubbed-QqoWUSQKnKSIHGPRrkqE", "receiptJson": "-Fallback-scrubbed-FNEcVjdgtBNCcozBapeeoDL",
+        "settlementCurrency": null, "settlementCurrencyRate": null, "status": "-Fallback-scrubbed-QDvMLox",
+        "test": true, "totalUnsettledSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}}], "unpaid": false, "updatedAt":
+        "2026-07-07T15:31:58Z", "sourceIdentifier": null}}, {"cursor": "eyJsYXN0X2lkIjo3MDkyMzczNTg2MTQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wNyAxNTozMjowMC4yMDQ5MDIifQ==",
+        "node": {"id": "gid://shopify/Order/7092373586140", "billingAddress": {"address1":
+        "774 Ramirez Corners", "address2": null, "city": "Crawfordmouth", "company":
+        null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-EQfe",
+        "countryCodeV2": "-Fallback-scrubbed-lA", "firstName": null, "formatted":
+        ["774 Ramirez Corners", "Crawfordmouth", "-Fallback-scrubbed-gIP", "-Fallback-scrubbed-EQfe"],
+        "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW", "lastName": "Cherry",
+        "latitude": 48.7130545, "longitude": -99.76649, "name": "Cherry", "phone":
+        null, "province": "Delaware", "provinceCode": "Pennsylvania", "timeZone":
+        "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "billingAddressMatchesShippingAddress":
+        true, "cancelledAt": null, "cancelReason": null, "canMarkAsPaid": false, "canNotifyCustomer":
+        true, "capturable": false, "cartDiscountAmountSet": null, "clientIp": "16.23.52.194",
+        "closed": false, "closedAt": null, "confirmed": true, "createdAt": "-Fallback-scrubbed-pjpTYErrbbBhSXhpjqjF",
+        "currencyCode": "-Fallback-scrubbed-bzH", "currentCartDiscountAmountSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentSubtotalLineItemsQuantity":
+        1361, "currentSubtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTaxLines": [], "currentTotalDiscountsSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalDutiesSet": null,
+        "currentTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-MwNdm",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-MwNdm",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalTaxSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTotalWeight": "-Fallback-scrubbed-o", "customerAcceptsMarketing":
+        true, "customerLocale": "-Fallback-scrubbed-mDBCF", "discountCode": null,
+        "displayAddress": {"address1": "774 Ramirez Corners", "address2": null, "city":
+        "Crawfordmouth", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA", "firstName":
+        null, "formatted": ["774 Ramirez Corners", "Crawfordmouth", "-Fallback-scrubbed-gIP",
+        "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Cherry", "latitude": 48.7130545, "longitude": -99.76649, "name":
+        "Cherry", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "displayFinancialStatus":
+        "-Fallback-scrubbed-ZJldmKzXnDrcoSSqiz", "displayFulfillmentStatus": "-Fallback-scrubbed-awpJiBkpiPn",
+        "disputes": [], "edited": false, "email": "april28@example.com", "estimatedTaxes":
+        false, "fulfillable": false, "fulfillments": [], "fullyPaid": true, "legacyResourceId":
+        "-Fallback-scrubbed-fksTtUXAQpkpK", "hasTimelineComment": false, "merchantEditable":
+        true, "name": "Michael Turner", "netPaymentSet": {"presentmentMoney": {"amount":
+        "-Fallback-scrubbed-Kcvek", "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney":
+        {"amount": "-Fallback-scrubbed-Kcvek", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "note": null, "originalTotalDutiesSet": null, "originalTotalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "paymentGatewayNames": ["-Fallback-scrubbed-iGRyM"], "phone": null, "presentmentCurrencyCode":
+        "-Fallback-scrubbed-bzH", "processedAt": "-Fallback-scrubbed-aryRCdpnnxhOmMiPGPub",
+        "refundable": true, "refundDiscrepancySet": {"presentmentMoney": {"amount":
+        "-Fallback-scrubbed-xXo", "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney":
+        {"amount": "-Fallback-scrubbed-xXo", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "refunds": [{"id": "gid://shopify/Refund/974227767516"}], "registeredSourceUrl":
+        null, "requiresShipping": true, "restockable": false, "riskLevel": "-Fallback-scrubbed-Xyf",
+        "risks": [{"display": true, "level": "-Fallback-scrubbed-iItFVS", "message":
+        "-Fallback-scrubbed-GGUJqWeAhJxpqelGtDVdzsZELpLZKtjwsEFaOnUWVyjNY"}, {"display":
+        true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-PVtRBZxVxfsARVrTrGLxrhcFtXemQPBbxZuJoEVEdlaHFysYeDdmTAyrP"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-yhMxuUMJHTaPgKLdJejMuDlCaPIUzcAggMkkfnXApGKYUBbhSfoXPqAnHVKLMDPVUbIofwoVVryFFAdZBHzWeIGNJdBnkcKId"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-XBxVPAshCHjfeKbRNjyfdXkNgip"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-qegHMXbEpJZCIRfHmaWsxEaMBbdkzQBxViZ"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-mdKyQeaCvlzvRexQcgfHaCIDtgjScfEiHegpQjdmzqLgBQxRUwfnoEraeOqbOj"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-wjVQLOlrFbanaWqSEszIcXdlHJqUSwhmEhpnaxjcwNlbiTTAxlpiDYXhBBTpjorqpfUsHLYGvhUL"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-zrZiHMtivwQbaxWqbGwZDGLWvRJxyQLpnyGXmVSvNbRdBWuftyntJqVGURzVZzvWvUSLROzEIVeLKZZPqkML"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-cKQdiDxRbpRdHYuiVHgHBkCHkmjHIWptMARewevMeBVGTxAfkWaFzkidpgFXbMiLfgeWyOJwelCmDVzqegqVWqyKpjQgOuRprL"}],
+        "shippingAddress": {"address1": "774 Ramirez Corners", "address2": null, "city":
+        "Crawfordmouth", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-EQfe", "countryCodeV2": "-Fallback-scrubbed-lA", "firstName":
+        null, "formatted": ["774 Ramirez Corners", "Crawfordmouth", "-Fallback-scrubbed-gIP",
+        "-Fallback-scrubbed-EQfe"], "formattedArea": "-Fallback-scrubbed-XBmNoBpRXiUDIlW",
+        "lastName": "Cherry", "latitude": 48.7130545, "longitude": -99.76649, "name":
+        "Cherry", "phone": null, "province": "Delaware", "provinceCode": "Pennsylvania",
+        "timeZone": "-Fallback-scrubbed-HsTAUShXCLFE", "zip": null}, "shippingLine":
+        {"carrierIdentifier": null, "code": "-Fallback-scrubbed-LwFFkVWXyWbyQqzzvesVNRanuUbjVKamuTdbz",
+        "custom": false, "discountAllocations": []}, "subtotalLineItemsQuantity":
+        8699, "subtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-jgU",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "taxesIncluded": false, "taxLines":
+        [], "totalCapturableSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalDiscountsSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalOutstandingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalReceivedSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalRefundedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-mIJ", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-mIJ", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalRefundedShippingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalShippingPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-MwNdm", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-MwNdm", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalTaxSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalTipReceivedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalWeight": "-Fallback-scrubbed-o", "transactions": [{"id": "gid://shopify/OrderTransaction/8439881629916",
+        "accountNumber": "-Fallback-scrubbed-TuwMBSvOeVUGQyar", "amountSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-YFfzr", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "authorizationCode": "-Fallback-scrubbed-gcBSK", "authorizationExpiresAt":
+        null, "createdAt": "-Fallback-scrubbed-aryRCdpnnxhOmMiPGPub", "errorCode":
+        null, "fees": [], "formattedGateway": "-Fallback-scrubbed-mkUpGeryaLQHzYSMDZpZswFBjMY",
+        "gateway": "-Fallback-scrubbed-iGRyM", "kind": "-Fallback-scrubbed-CifP",
+        "manuallyCapturable": false, "maximumRefundableV2": null, "multiCapturable":
+        true, "order": {"id": "gid://shopify/Order/7092373586140"}, "parentTransaction":
+        null, "paymentIcon": {"altText": "-Fallback-scrubbed-bnBsp", "height": null,
+        "id": null, "url": "-Fallback-scrubbed-AIPXAxDZRierZbSgujsmygaPYnpRzDniUGQvahRNjlinfeUbEPOpiTJigusZkwhxdWdZUbonEEqfPbejrZDkdqpIOUGrNCdhQKwstYIPGtHOUdrLrjQUaiPFPhaBQDrGrMyauREbnatwemZh",
+        "width": null}, "paymentId": "-Fallback-scrubbed-NbJdBrZWcdiqzWMYUPgUkhbeG",
+        "processedAt": "-Fallback-scrubbed-aryRCdpnnxhOmMiPGPub", "receiptJson": "-Fallback-scrubbed-FNEcVjdgtBNCcozBapeeoDL",
+        "settlementCurrency": null, "settlementCurrencyRate": null, "status": "-Fallback-scrubbed-QDvMLox",
+        "test": true, "totalUnsettledSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}}, {"id": "gid://shopify/OrderTransaction/8575044780252",
+        "accountNumber": "-Fallback-scrubbed-TuwMBSvOeVUGQyar", "amountSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-mIJ", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-mIJ", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "authorizationCode": null, "authorizationExpiresAt": null, "createdAt": "-Fallback-scrubbed-aaHZXEYoZrNVddXxafBN",
+        "errorCode": null, "fees": [], "formattedGateway": "-Fallback-scrubbed-mkUpGeryaLQHzYSMDZpZswFBjMY",
+        "gateway": "-Fallback-scrubbed-iGRyM", "kind": "-Fallback-scrubbed-wTbAMb",
+        "manuallyCapturable": false, "maximumRefundableV2": null, "multiCapturable":
+        true, "order": {"id": "gid://shopify/Order/7092373586140"}, "parentTransaction":
+        {"id": "gid://shopify/OrderTransaction/8439881629916"}, "paymentIcon": {"altText":
+        "-Fallback-scrubbed-bnBsp", "height": null, "id": null, "url": "-Fallback-scrubbed-AIPXAxDZRierZbSgujsmygaPYnpRzDniUGQvahRNjlinfeUbEPOpiTJigusZkwhxdWdZUbonEEqfPbejrZDkdqpIOUGrNCdhQKwstYIPGtHOUdrLrjQUaiPFPhaBQDrGrMyauREbnatwemZh",
+        "width": null}, "paymentId": "-Fallback-scrubbed-ZKxytNr", "processedAt":
+        "-Fallback-scrubbed-aaHZXEYoZrNVddXxafBN", "receiptJson": "-Fallback-scrubbed-qXcHjVIPGZlUWxFbTRMSof",
+        "settlementCurrency": null, "settlementCurrencyRate": null, "status": "-Fallback-scrubbed-QDvMLox",
+        "test": true, "totalUnsettledSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}}], "unpaid": false, "updatedAt":
+        "2026-07-07T15:32:00Z", "sourceIdentifier": null}}, {"cursor": "eyJsYXN0X2lkIjo3Mjk2MDU3NzcwMjA0LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNCAxODoyNToyOS45OTY2NjIifQ==",
+        "node": {"id": "gid://shopify/Order/7296057770204", "billingAddress": {"address1":
+        "8549 Norton Flat", "address2": "458 Robert Haven Apt. 755", "city": "New
+        Ronald", "company": null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-UEdjIS",
+        "countryCodeV2": "-Fallback-scrubbed-bV", "firstName": "April", "formatted":
+        ["8549 Norton Flat", "458 Robert Haven Apt. 755", "-Fallback-scrubbed-pvinDvfaYEiqIJRCAosXFXKFRN",
+        "-Fallback-scrubbed-UEdjIS"], "formattedArea": "-Fallback-scrubbed-QadejYGHInYypUAvdJbtn",
+        "lastName": "Hooper", "latitude": 28.985315, "longitude": -147.119644, "name":
+        "Angela Vega", "phone": null, "province": "New York", "provinceCode": "New
+        Mexico", "timeZone": "-Fallback-scrubbed-bkuDdECrLmYYdlTly", "zip": "06560"},
+        "billingAddressMatchesShippingAddress": true, "cancelledAt": null, "cancelReason":
+        null, "canMarkAsPaid": false, "canNotifyCustomer": true, "capturable": false,
+        "cartDiscountAmountSet": null, "clientIp": "198.91.203.51", "closed": false,
+        "closedAt": null, "confirmed": true, "createdAt": "-Fallback-scrubbed-WaSONbpsvsyLYNtlskGd",
+        "currencyCode": "-Fallback-scrubbed-bzH", "currentCartDiscountAmountSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentSubtotalLineItemsQuantity":
+        8699, "currentSubtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-qqgIpB",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-qqgIpB",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTaxLines": [], "currentTotalDiscountsSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalDutiesSet": null,
+        "currentTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-KfiNPAw",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-KfiNPAw",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalTaxSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTotalWeight": "-Fallback-scrubbed-zey", "customerAcceptsMarketing":
+        false, "customerLocale": "-Fallback-scrubbed-nbWET", "discountCode": null,
+        "displayAddress": {"address1": "8549 Norton Flat", "address2": "458 Robert
+        Haven Apt. 755", "city": "New Ronald", "company": null, "coordinatesValidated":
+        true, "country": "-Fallback-scrubbed-UEdjIS", "countryCodeV2": "-Fallback-scrubbed-bV",
+        "firstName": "April", "formatted": ["8549 Norton Flat", "458 Robert Haven
+        Apt. 755", "-Fallback-scrubbed-pvinDvfaYEiqIJRCAosXFXKFRN", "-Fallback-scrubbed-UEdjIS"],
+        "formattedArea": "-Fallback-scrubbed-QadejYGHInYypUAvdJbtn", "lastName": "Hooper",
+        "latitude": 28.985315, "longitude": -147.119644, "name": "Angela Vega", "phone":
+        null, "province": "New York", "provinceCode": "New Mexico", "timeZone": "-Fallback-scrubbed-bkuDdECrLmYYdlTly",
+        "zip": "06560"}, "displayFinancialStatus": "-Fallback-scrubbed-aHIJ", "displayFulfillmentStatus":
+        "-Fallback-scrubbed-awpJiBkpiPn", "disputes": [], "edited": false, "email":
+        "jane15@example.org", "estimatedTaxes": false, "fulfillable": true, "fulfillments":
+        [], "fullyPaid": true, "legacyResourceId": "-Fallback-scrubbed-jbqjEdDsHGUXh",
+        "hasTimelineComment": false, "merchantEditable": true, "name": "Kevin Flores",
+        "netPaymentSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-KfiNPAw",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-KfiNPAw",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "note": null, "originalTotalDutiesSet":
+        null, "originalTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-KfiNPAw",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-KfiNPAw",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "paymentGatewayNames": ["-Fallback-scrubbed-npNpwUbsQMGCkPPg"],
+        "phone": null, "presentmentCurrencyCode": "-Fallback-scrubbed-bzH", "processedAt":
+        "-Fallback-scrubbed-ttooOGugUaXaeqfWdcjz", "refundable": true, "refundDiscrepancySet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "refunds": [], "registeredSourceUrl":
+        null, "requiresShipping": true, "restockable": true, "riskLevel": "-Fallback-scrubbed-Xyf",
+        "risks": [{"display": true, "level": "-Fallback-scrubbed-Xyf", "message":
+        "-Fallback-scrubbed-lHmLleCViUWNEufPpIUMovJwIcmMGrSixnIURWJT"}, {"display":
+        true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-SgbJBzwBRTFOfTrbnKgWpyyeujuuTLDOSBhzhKwPKqbcQTnSxqPHxRlFngglavW"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-tSgvKzfnYGfqeKHzJPlPptvuuvoBqfdzyJAmNOEAIERjWaTssHcvtjjlaEhwaLrlzYDwXfmLjkhqpeY"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-XBxVPAshCHjfeKbRNjyfdXkNgip"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-qegHMXbEpJZCIRfHmaWsxEaMBbdkzQBxViZ"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-UFXIrTMGDYeZhTdvrerMcopTVXDHfGkVbcrfEnBPznGnRhuMDDAGePeiBLwAHxDYZZcZUqDBzHACjiMpAg"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-zeazXxIovWUTmqfgmwbRhsRHpoNTTdVAjzRotTMVadNbmANNNJbkGNbL"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-untcfnLtaKxxOcClTZhGowxFfCTpcGRLxOjaoUlvHWNzUWpDVRglqwGJxpRrmHwttAQ"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-RnonTgkoWegRrzYmgBnAsiZrwdXUdGebRhpSJDtSZVYEzivINayUikGsTsGhkQvzuqBixffBlKBYaqXzfSeXUBFN"}],
+        "shippingAddress": {"address1": "8549 Norton Flat", "address2": "458 Robert
+        Haven Apt. 755", "city": "New Ronald", "company": null, "coordinatesValidated":
+        true, "country": "-Fallback-scrubbed-UEdjIS", "countryCodeV2": "-Fallback-scrubbed-bV",
+        "firstName": "April", "formatted": ["8549 Norton Flat", "458 Robert Haven
+        Apt. 755", "-Fallback-scrubbed-pvinDvfaYEiqIJRCAosXFXKFRN", "-Fallback-scrubbed-UEdjIS"],
+        "formattedArea": "-Fallback-scrubbed-QadejYGHInYypUAvdJbtn", "lastName": "Hooper",
+        "latitude": 28.985315, "longitude": -147.119644, "name": "Angela Vega", "phone":
+        null, "province": "New York", "provinceCode": "New Mexico", "timeZone": "-Fallback-scrubbed-bkuDdECrLmYYdlTly",
+        "zip": "06560"}, "shippingLine": {"carrierIdentifier": null, "code": "-Fallback-scrubbed-Q",
+        "custom": false, "discountAllocations": []}, "subtotalLineItemsQuantity":
+        8699, "subtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-qqgIpB",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-qqgIpB",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "taxesIncluded": false, "taxLines":
+        [], "totalCapturableSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalDiscountsSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalOutstandingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-KfiNPAw", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-KfiNPAw", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalReceivedSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-KfiNPAw",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-KfiNPAw",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalRefundedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalRefundedShippingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalShippingPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-rkZdT", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-rkZdT", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalTaxSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalTipReceivedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalWeight": "-Fallback-scrubbed-doc", "transactions": [{"id": "gid://shopify/OrderTransaction/8677006278876",
+        "accountNumber": "-Fallback-scrubbed-HMIdaQtzwxNKOwlrXqF", "amountSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-KfiNPAw", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-KfiNPAw", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "authorizationCode": "-Fallback-scrubbed-HDpgtxfYsDEhRWSxCPasPcSVdrt", "authorizationExpiresAt":
+        null, "createdAt": "-Fallback-scrubbed-ttooOGugUaXaeqfWdcjz", "errorCode":
+        null, "fees": [{"amount": {"amount": "-Fallback-scrubbed-QAigO", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "flatFee": {"amount": "-Fallback-scrubbed-uso",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "flatFeeName": null, "id": "gid://shopify/TransactionFee/3164655878364",
+        "rate": "-Fallback-scrubbed-tAIOf", "rateName": "-Fallback-scrubbed-VXgDKqiCPWvKFGJxYCWrXOCyDhYjvL",
+        "taxAmount": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "type": "-Fallback-scrubbed-zImvFWuYhRAJPk"}], "formattedGateway": "-Fallback-scrubbed-BHVCnGgrcxtGtCHe",
+        "gateway": "-Fallback-scrubbed-npNpwUbsQMGCkPPg", "kind": "-Fallback-scrubbed-CifP",
+        "manuallyCapturable": false, "maximumRefundableV2": null, "multiCapturable":
+        false, "order": {"id": "gid://shopify/Order/7296057770204"}, "parentTransaction":
+        null, "paymentIcon": {"altText": "-Fallback-scrubbed-MESP", "height": null,
+        "id": null, "url": "-Fallback-scrubbed-WjfRFubfnrQKYHNklIkfSymemjbZtvQmAykRHoFuqsrFrENsJGNkRJUSOMsmuuXaPssfdOxrbOkLvSttAdvVoYzePRbcTCxPLELhMqrALTUOBhLLdrKQkuXrbXuViwedjfBFEFPpWZxbXMP",
+        "width": null}, "paymentId": "-Fallback-scrubbed-wKnHvnLDxoxkZpDruBujQbjAu",
+        "processedAt": "-Fallback-scrubbed-ttooOGugUaXaeqfWdcjz", "receiptJson": "-Fallback-scrubbed-vGnQDjHIefdrnYXPRTZNfMMSvGcnhjrMEajNpuVRUyCClkOGQHEYZdYNWKQFbuAsbfMbUnUhtPZntjvLrFANFSxPQMMLwZfaooTYWpsWKEmZLwUErUrFfdyekZYrDSfXMafZiIRqvYEPZseEhTYpBMrvRJNCpVSJMcifpSKguSbTlwrUcLbTNdoQGnwPSQkKGWXQlSvaoVQAUQzMdndEdvYALIIRSsspgbOaFCXTgMDGUROWhdLLElrfyOrhNfoNuokKsTEppmyClOXzbOLhhTBFFVSqveKueyrsGpQpkQeQQgQwBphznvOQYhqastUcTKCBzubeDwMIyqTrFZVPMnGVpVYyutQcJYqjkkJwJglyYISNGKcDxfbgLqUoxDTPcxWnZNrfbeYrmjTKaYyPripPSipidiqKHjIFxmPOwCGaJFLdJvqKVlcDoBfcAzNFqLrhUrIXPGvqZTBJXNcnBfrXytjGyZFVfPYYUYDwHKDlGpvpVtXekFTAOaehFcjwrsSHoufalSEzNShSPFuHphJGpsmzkuCeZfFjERWisqSFvWmpLHhsWewYvJzSkSeQIRTizbfrNmbNYWRzduDmUcYjdExdmSvQmWPvIeFFIwuVyMqlTcudsxsPhNujXDmRgqfjBkCnFEMZSzZGcAbEqKPIShglGeVCEeWqGXvPaThFKRCPcUwFBUQRZvopMHcOKKapfPvFBxcZtwPoGONPnpJtPLDKOEeAyUJUhkystGBJLLFBNoAsdnvrjfyZGmoECcKXQftLgPTwAizRCpLIIiEatIDAdlZSljzbQXHlSexfKRlafSYzSyOgRlRSSmtYfolGwZwrAVrVgnBYhBuoGzeLyDiwGToiqKGThTtNSTZjLLkxbpnFIYMxfEEMiPiDWAftFibbsFGgLjhwtxhCFGWfeVDsXBASsWDxDKvoKDVcHLckkecHTRailPcGArjgjeFQqdYblgdWGbFzAmKysfLxhUsxRcsuCapmSRKNmNLCrXFyikaHPaxjjSZsfLycsAuQTEqXUZTcyHoBBfYNNQdkoBcVMyhLbtDZrEwRdzsbAlZkfQbAHHsGYszMZsPAMEydWtAskljcAXhxKDMtLTUXdwSUpULjPanDZojBOfZqZYywWdRplHuNttVJQmWHKCHIeJashjNUPhmAeBGIyMaKYcvlAjKkwDCBFjnihKifwYKkVUffrgdbHEDUfEfmNFMjtMjwiuizNMZKPUumvqFfJuCanuGsIEiXLKVYYafJbZusdbZwRKqbdsCtaxaAqhrXFdBvGDWhkiiSyFRyVscgvUIUwsVSPisPjOyAhsLmeIUvLUKuLhplNjYYoehoQrWQjuktklLveoHeIVuYJXQTCDvOflWZsiUZzSzNFeejKSfhlgEFQgmwwOtiMCIHSUWeOhXKkrlVQcRZAHhYfPeLAPAHnMZiTrBSaeEHfcLzhKHvVdiHHhhmstrgpgdOzgtlWsMsuddRsywDBWqFUVLlqWMhoihKsWKFOacfaahEwtEEFVIhUliYdFvasUqCpInLGEfVRLSJFflsuFPexKyQtsQKhWVkaUEViNRntmnMsThazNvYttrnfgkihhvhPAJpkwGwHOVYogUZirKlrvNUiKTjLdrCkaiMuurPOXICYAyKskgKEmtnnGoDVVqxVnyfQhtYEScvmCGRHqEHoIXvCUhVqACfvIqRtFGPmzDmCSWaxGWoYTSmJJfFFckJTRaVJwyIQbxhcIvTnBCFZEvDciFaGzCDkdjkwflFtWhsGjwvJnnwFWhcZxmbpfDXVkTpuwDfMeOjEBtzyxCudZXuQXCyHAzsLzPqvGoBtOOqmPwudjBtBqBPdeVVHlnXoIINlepuirOEUShbpJfPLwnWfGwxBgjJbODzrnXqnheKWGMQApefGPwypjChambxyRJtHoSljVUBHNipYeZtgVTNcLJXaCoYYVdBqhDhEYCflRCPKBpJDxdpYNJxEqUYnTNCGlUvxcVNtqtxHFrEUUhdUBIudDKqUjEVjQAjMzVVcWOEORaLNRLhaReRgRzJdheoNdQwkfwfRFCwPlKoxKGYqCYKRzBUBumuAfuxAIyYPnvnXEtYGHRVUfLrGXDcwpJUKbDEFmgPuhfkbUUrFSkqnjCzxNAEcFrDDntcSdMzqYHxYwrOOeGsNBNGEQomzobfUdywSwXRxVPOhpFFAFZmOKobfSnDdjtsfevErCkttbHOmNtQKQIJwKzrbUMlCRRViZVYlvxEbpfCHKswKRjuRwKhTcFpdUeRSVNhpEQsEwiFrFAZEAFjpnNXQGFGgEsxVvvTyfVCFxOpHMEPpkwUeORlTgZHBhfBICuVqGxSSCMKRPDhffaIfNvlKgzajeSZQUdAnkWbKsCJwJWKdpbvJULzGJUiUfqmpRhNDVfFGpshIecjNodroYwbJOyZlvonvqYDHreFThzgGcLveDQYgZuoQHpQavfyaUusiHsSYCggeocVRitLKEULGDvdZXYczhUHtHwbMFSjaqJCVtrqCmJtfUZwUDVchLlaHCxUrOQhJGnLXsKrCjiDi",
+        "settlementCurrency": "-Fallback-scrubbed-bzH", "settlementCurrencyRate":
+        "-Fallback-scrubbed-mIJ", "status": "-Fallback-scrubbed-QDvMLox", "test":
+        true, "totalUnsettledSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}}], "unpaid": false, "updatedAt":
+        "2026-07-14T18:25:29Z", "sourceIdentifier": null}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNDY2MTYxMzcyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjoxMzoyMi41NDU2MTkifQ==",
+        "node": {"id": "gid://shopify/Order/7301466161372", "billingAddress": {"address1":
+        "92467 Margaret Trafficway Suite 945", "address2": null, "city": "Port Catherine",
+        "company": null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-DLwsbURdLkAVu",
+        "countryCodeV2": "-Fallback-scrubbed-RM", "firstName": null, "formatted":
+        ["92467 Margaret Trafficway Suite 945", "-Fallback-scrubbed-clsEISCiATQFRPqz",
+        "-Fallback-scrubbed-DLwsbURdLkAVu"], "formattedArea": "-Fallback-scrubbed-byrpwXworBfGYHZJmkUESpAaT",
+        "lastName": "Baker", "latitude": 73.3455685, "longitude": 78.831967, "name":
+        "Baker", "phone": null, "province": "Tennessee", "provinceCode": "Oklahoma",
+        "timeZone": "-Fallback-scrubbed-jeyurlbwysYacwGO", "zip": "81239"}, "billingAddressMatchesShippingAddress":
+        true, "cancelledAt": null, "cancelReason": null, "canMarkAsPaid": false, "canNotifyCustomer":
+        false, "capturable": false, "cartDiscountAmountSet": null, "clientIp": "199.12.14.237",
+        "closed": false, "closedAt": null, "confirmed": true, "createdAt": "-Fallback-scrubbed-mEyuhfjtAjcshRBSPuJg",
+        "currencyCode": "-Fallback-scrubbed-bzH", "currentCartDiscountAmountSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentSubtotalLineItemsQuantity":
+        8699, "currentSubtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-dBM",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-dBM",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTaxLines": [], "currentTotalDiscountsSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalDutiesSet": null,
+        "currentTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalTaxSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTotalWeight": "-Fallback-scrubbed-TqTo", "customerAcceptsMarketing":
+        false, "customerLocale": "-Fallback-scrubbed-YQ", "discountCode": null, "displayAddress":
+        {"address1": "92467 Margaret Trafficway Suite 945", "address2": null, "city":
+        "Port Catherine", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-DLwsbURdLkAVu", "countryCodeV2": "-Fallback-scrubbed-RM",
+        "firstName": null, "formatted": ["92467 Margaret Trafficway Suite 945", "-Fallback-scrubbed-clsEISCiATQFRPqz",
+        "-Fallback-scrubbed-DLwsbURdLkAVu"], "formattedArea": "-Fallback-scrubbed-byrpwXworBfGYHZJmkUESpAaT",
+        "lastName": "Baker", "latitude": 73.3455685, "longitude": 78.831967, "name":
+        "Baker", "phone": null, "province": "Tennessee", "provinceCode": "Oklahoma",
+        "timeZone": "-Fallback-scrubbed-jeyurlbwysYacwGO", "zip": "81239"}, "displayFinancialStatus":
+        "-Fallback-scrubbed-aHIJ", "displayFulfillmentStatus": "-Fallback-scrubbed-awpJiBkpiPn",
+        "disputes": [], "edited": false, "email": null, "estimatedTaxes": false, "fulfillable":
+        true, "fulfillments": [], "fullyPaid": true, "legacyResourceId": "-Fallback-scrubbed-mmrGNhAgWsyFt",
+        "hasTimelineComment": false, "merchantEditable": true, "name": "Patrick Johnson",
+        "netPaymentSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "note": null, "originalTotalDutiesSet":
+        null, "originalTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "paymentGatewayNames": ["-Fallback-scrubbed-aLLjJb"],
+        "phone": null, "presentmentCurrencyCode": "-Fallback-scrubbed-bzH", "processedAt":
+        "-Fallback-scrubbed-ZeexEgOPCWcqTUJXytOR", "refundable": true, "refundDiscrepancySet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "refunds": [], "registeredSourceUrl":
+        null, "requiresShipping": true, "restockable": true, "riskLevel": "-Fallback-scrubbed-Xyf",
+        "risks": [{"display": true, "level": "-Fallback-scrubbed-iItFVS", "message":
+        "-Fallback-scrubbed-GGUJqWeAhJxpqelGtDVdzsZELpLZKtjwsEFaOnUWVyjNY"}, {"display":
+        true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-PVtRBZxVxfsARVrTrGLxrhcFtXemQPBbxZuJoEVEdlaHFysYeDdmTAyrP"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-yhMxuUMJHTaPgKLdJejMuDlCaPIUzcAggMkkfnXApGKYUBbhSfoXPqAnHVKLMDPVUbIofwoVVryFFAdZBHzWeIGNJdBnkcKId"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-XBxVPAshCHjfeKbRNjyfdXkNgip"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-bzDpddWlyGnjtBmwawcKLQrUeqYlctBUllLvBIeRmZauOtEqiN"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-zeFMdQmaOUvQrZQBnqIhmbaZOYkzkNreUFCKXnssbNmgGifjQeXXPhoRFhYeZMBbnJv"},
+        {"display": true, "level": "-Fallback-scrubbed-rjEF", "message": "-Fallback-scrubbed-nYVvqLgGUYuauumLOivkgvzhagLBUtgchXxeYvvHxgziNPbHHOmYMnPwN"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-untcfnLtaKxxOcClTZhGowxFfCTpcGRLxOjaoUlvHWNzUWpDVRglqwGJxpRrmHwttAQ"},
+        {"display": true, "level": "-Fallback-scrubbed-rjEF", "message": "-Fallback-scrubbed-SglaGBqccSgZQZBeXEVFpPrUSCUPVkjSeGthmnVaAEWaSNvRrVPDhxTKtExWzYUOmcWPPcR"}],
+        "shippingAddress": {"address1": "92467 Margaret Trafficway Suite 945", "address2":
+        null, "city": "Port Catherine", "company": null, "coordinatesValidated": true,
+        "country": "-Fallback-scrubbed-DLwsbURdLkAVu", "countryCodeV2": "-Fallback-scrubbed-RM",
+        "firstName": null, "formatted": ["92467 Margaret Trafficway Suite 945", "-Fallback-scrubbed-clsEISCiATQFRPqz",
+        "-Fallback-scrubbed-DLwsbURdLkAVu"], "formattedArea": "-Fallback-scrubbed-byrpwXworBfGYHZJmkUESpAaT",
+        "lastName": "Baker", "latitude": 73.3455685, "longitude": 78.831967, "name":
+        "Baker", "phone": null, "province": "Tennessee", "provinceCode": "Oklahoma",
+        "timeZone": "-Fallback-scrubbed-jeyurlbwysYacwGO", "zip": "81239"}, "shippingLine":
+        {"carrierIdentifier": null, "code": "-Fallback-scrubbed-pZJDGH", "custom":
+        true, "discountAllocations": []}, "subtotalLineItemsQuantity": 8699, "subtotalPriceSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-dBM", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-dBM",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "taxesIncluded": false, "taxLines":
+        [], "totalCapturableSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalDiscountsSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalOutstandingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-NhUlye", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalReceivedSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalRefundedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalRefundedShippingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalShippingPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-HhrEQO", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-HhrEQO", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalTaxSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalTipReceivedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalWeight": "-Fallback-scrubbed-TqTo", "transactions": [{"id": "gid://shopify/OrderTransaction/8685884014812",
+        "accountNumber": "Baker", "amountSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "authorizationCode": null, "authorizationExpiresAt":
+        null, "createdAt": "-Fallback-scrubbed-mEyuhfjtAjcshRBSPuJg", "errorCode":
+        null, "fees": [], "formattedGateway": "-Fallback-scrubbed-zgpDst", "gateway":
+        "-Fallback-scrubbed-aLLjJb", "kind": "-Fallback-scrubbed-CifP", "manuallyCapturable":
+        false, "maximumRefundableV2": null, "multiCapturable": true, "order": {"id":
+        "gid://shopify/Order/7301466161372"}, "parentTransaction": null, "paymentIcon":
+        {"altText": "-Fallback-scrubbed-llYMO", "height": null, "id": null, "url":
+        "-Fallback-scrubbed-bEiGkKDERaCpyScRJnVlloTfmUsdZfTNQHsUCKZPMrxHcZlVZeYznxzPrvpQWVTvZpsNncTsngViZQsbgqEtVmDAXapdaUAQQTdZDQJSaoglXwOYbKhDhZfIpTSWhlKoMcPWjujrFMunyeBNuB",
+        "width": null}, "paymentId": "-Fallback-scrubbed-YdGkbwvBvLMnYZdNWPqSYFVVx",
+        "processedAt": "-Fallback-scrubbed-mEyuhfjtAjcshRBSPuJg", "receiptJson": "-Fallback-scrubbed-rH",
+        "settlementCurrency": null, "settlementCurrencyRate": null, "status": "-Fallback-scrubbed-QDvMLox",
+        "test": false, "totalUnsettledSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}}], "unpaid": false, "updatedAt":
+        "2026-07-17T16:13:22Z", "sourceIdentifier": null}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNTIwMzkyNDEyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjo0NDozNS4xMTQ5NTQifQ==",
+        "node": {"id": "gid://shopify/Order/7301520392412", "billingAddress": {"address1":
+        "92467 Margaret Trafficway Suite 945", "address2": null, "city": "Port Catherine",
+        "company": null, "coordinatesValidated": true, "country": "-Fallback-scrubbed-DLwsbURdLkAVu",
+        "countryCodeV2": "-Fallback-scrubbed-RM", "firstName": null, "formatted":
+        ["92467 Margaret Trafficway Suite 945", "-Fallback-scrubbed-clsEISCiATQFRPqz",
+        "-Fallback-scrubbed-DLwsbURdLkAVu"], "formattedArea": "-Fallback-scrubbed-byrpwXworBfGYHZJmkUESpAaT",
+        "lastName": "Baker", "latitude": 73.3455685, "longitude": 78.831967, "name":
+        "Baker", "phone": null, "province": "Tennessee", "provinceCode": "Oklahoma",
+        "timeZone": "-Fallback-scrubbed-jeyurlbwysYacwGO", "zip": "81239"}, "billingAddressMatchesShippingAddress":
+        true, "cancelledAt": null, "cancelReason": null, "canMarkAsPaid": false, "canNotifyCustomer":
+        false, "capturable": false, "cartDiscountAmountSet": null, "clientIp": "199.12.14.237",
+        "closed": false, "closedAt": null, "confirmed": true, "createdAt": "-Fallback-scrubbed-bCJKDEGHWzNwhbDztOET",
+        "currencyCode": "-Fallback-scrubbed-bzH", "currentCartDiscountAmountSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentSubtotalLineItemsQuantity":
+        8699, "currentSubtotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-dBM",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-dBM",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTaxLines": [], "currentTotalDiscountsSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalDutiesSet": null,
+        "currentTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "currentTotalTaxSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "currentTotalWeight": "-Fallback-scrubbed-TqTo", "customerAcceptsMarketing":
+        false, "customerLocale": "-Fallback-scrubbed-YQ", "discountCode": null, "displayAddress":
+        {"address1": "92467 Margaret Trafficway Suite 945", "address2": null, "city":
+        "Port Catherine", "company": null, "coordinatesValidated": true, "country":
+        "-Fallback-scrubbed-DLwsbURdLkAVu", "countryCodeV2": "-Fallback-scrubbed-RM",
+        "firstName": null, "formatted": ["92467 Margaret Trafficway Suite 945", "-Fallback-scrubbed-clsEISCiATQFRPqz",
+        "-Fallback-scrubbed-DLwsbURdLkAVu"], "formattedArea": "-Fallback-scrubbed-byrpwXworBfGYHZJmkUESpAaT",
+        "lastName": "Baker", "latitude": 73.3455685, "longitude": 78.831967, "name":
+        "Baker", "phone": null, "province": "Tennessee", "provinceCode": "Oklahoma",
+        "timeZone": "-Fallback-scrubbed-jeyurlbwysYacwGO", "zip": "81239"}, "displayFinancialStatus":
+        "-Fallback-scrubbed-aHIJ", "displayFulfillmentStatus": "-Fallback-scrubbed-awpJiBkpiPn",
+        "disputes": [], "edited": false, "email": null, "estimatedTaxes": false, "fulfillable":
+        true, "fulfillments": [], "fullyPaid": true, "legacyResourceId": "-Fallback-scrubbed-SJNarwsQpsQgO",
+        "hasTimelineComment": false, "merchantEditable": true, "name": "Jeremy Sherman",
+        "netPaymentSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "note": null, "originalTotalDutiesSet":
+        null, "originalTotalPriceSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "paymentGatewayNames": ["-Fallback-scrubbed-aLLjJb"],
+        "phone": null, "presentmentCurrencyCode": "-Fallback-scrubbed-bzH", "processedAt":
+        "-Fallback-scrubbed-wCZVAGQpFTYBtqoASQPv", "refundable": true, "refundDiscrepancySet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "refunds": [], "registeredSourceUrl":
+        null, "requiresShipping": true, "restockable": true, "riskLevel": "-Fallback-scrubbed-Xyf",
+        "risks": [{"display": true, "level": "-Fallback-scrubbed-iItFVS", "message":
+        "-Fallback-scrubbed-GGUJqWeAhJxpqelGtDVdzsZELpLZKtjwsEFaOnUWVyjNY"}, {"display":
+        true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-PVtRBZxVxfsARVrTrGLxrhcFtXemQPBbxZuJoEVEdlaHFysYeDdmTAyrP"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-yhMxuUMJHTaPgKLdJejMuDlCaPIUzcAggMkkfnXApGKYUBbhSfoXPqAnHVKLMDPVUbIofwoVVryFFAdZBHzWeIGNJdBnkcKId"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-XBxVPAshCHjfeKbRNjyfdXkNgip"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-bzDpddWlyGnjtBmwawcKLQrUeqYlctBUllLvBIeRmZauOtEqiN"},
+        {"display": true, "level": "-Fallback-scrubbed-iItFVS", "message": "-Fallback-scrubbed-zeFMdQmaOUvQrZQBnqIhmbaZOYkzkNreUFCKXnssbNmgGifjQeXXPhoRFhYeZMBbnJv"},
+        {"display": true, "level": "-Fallback-scrubbed-rjEF", "message": "-Fallback-scrubbed-nYVvqLgGUYuauumLOivkgvzhagLBUtgchXxeYvvHxgziNPbHHOmYMnPwN"},
+        {"display": true, "level": "-Fallback-scrubbed-Xyf", "message": "-Fallback-scrubbed-untcfnLtaKxxOcClTZhGowxFfCTpcGRLxOjaoUlvHWNzUWpDVRglqwGJxpRrmHwttAQ"},
+        {"display": true, "level": "-Fallback-scrubbed-rjEF", "message": "-Fallback-scrubbed-SglaGBqccSgZQZBeXEVFpPrUSCUPVkjSeGthmnVaAEWaSNvRrVPDhxTKtExWzYUOmcWPPcR"}],
+        "shippingAddress": {"address1": "92467 Margaret Trafficway Suite 945", "address2":
+        null, "city": "Port Catherine", "company": null, "coordinatesValidated": true,
+        "country": "-Fallback-scrubbed-DLwsbURdLkAVu", "countryCodeV2": "-Fallback-scrubbed-RM",
+        "firstName": null, "formatted": ["92467 Margaret Trafficway Suite 945", "-Fallback-scrubbed-clsEISCiATQFRPqz",
+        "-Fallback-scrubbed-DLwsbURdLkAVu"], "formattedArea": "-Fallback-scrubbed-byrpwXworBfGYHZJmkUESpAaT",
+        "lastName": "Baker", "latitude": 73.3455685, "longitude": 78.831967, "name":
+        "Baker", "phone": null, "province": "Tennessee", "provinceCode": "Oklahoma",
+        "timeZone": "-Fallback-scrubbed-jeyurlbwysYacwGO", "zip": "81239"}, "shippingLine":
+        {"carrierIdentifier": null, "code": "-Fallback-scrubbed-pZJDGH", "custom":
+        true, "discountAllocations": []}, "subtotalLineItemsQuantity": 8699, "subtotalPriceSet":
+        {"presentmentMoney": {"amount": "-Fallback-scrubbed-dBM", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-dBM",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "taxesIncluded": false, "taxLines":
+        [], "totalCapturableSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalDiscountsSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalOutstandingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-NhUlye", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalReceivedSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalRefundedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalRefundedShippingSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalShippingPriceSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-HhrEQO", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-HhrEQO", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalTaxSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode":
+        "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "totalTipReceivedSet": {"presentmentMoney":
+        {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"},
+        "shopMoney": {"amount": "-Fallback-scrubbed-LcC", "currencyCode": "-Fallback-scrubbed-bzH"}},
+        "totalWeight": "-Fallback-scrubbed-TqTo", "transactions": [{"id": "gid://shopify/OrderTransaction/8685966786780",
+        "accountNumber": "Baker", "amountSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-NhUlye",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}, "authorizationCode": null, "authorizationExpiresAt":
+        null, "createdAt": "-Fallback-scrubbed-wCZVAGQpFTYBtqoASQPv", "errorCode":
+        null, "fees": [], "formattedGateway": "-Fallback-scrubbed-zgpDst", "gateway":
+        "-Fallback-scrubbed-aLLjJb", "kind": "-Fallback-scrubbed-CifP", "manuallyCapturable":
+        false, "maximumRefundableV2": null, "multiCapturable": true, "order": {"id":
+        "gid://shopify/Order/7301520392412"}, "parentTransaction": null, "paymentIcon":
+        {"altText": "-Fallback-scrubbed-llYMO", "height": null, "id": null, "url":
+        "-Fallback-scrubbed-bEiGkKDERaCpyScRJnVlloTfmUsdZfTNQHsUCKZPMrxHcZlVZeYznxzPrvpQWVTvZpsNncTsngViZQsbgqEtVmDAXapdaUAQQTdZDQJSaoglXwOYbKhDhZfIpTSWhlKoMcPWjujrFMunyeBNuB",
+        "width": null}, "paymentId": "-Fallback-scrubbed-HOIrKMfyfINyjMVErvulePlDY",
+        "processedAt": "-Fallback-scrubbed-wCZVAGQpFTYBtqoASQPv", "receiptJson": "-Fallback-scrubbed-rH",
+        "settlementCurrency": null, "settlementCurrencyRate": null, "status": "-Fallback-scrubbed-QDvMLox",
+        "test": false, "totalUnsettledSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}, "shopMoney": {"amount": "-Fallback-scrubbed-LcC",
+        "currencyCode": "-Fallback-scrubbed-bzH"}}}], "unpaid": false, "updatedAt":
+        "2026-07-17T16:44:35Z", "sourceIdentifier": null}}], "pageInfo": {"hasNextPage":
+        false}}}, "extensions": {"cost": {"requestedQueryCost": 7093, "actualQueryCost":
+        261, "throttleStatus": {"maximumAvailable": -730456.23800708, "currentlyAvailable":
+        5701, "restoreRate": 70.8541872986456}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a1eaaedc7f99b6fb-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 13:51:55 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Qc%2BEXIFewa1RnxSiH3Jx3H1s70ycestL3bOlBfLzC%2BnYPKSlc59yBoCP4z8%2F80o6qjEkc7fF9gmn0sQQ15cm4bLEA4WgxuyqNn0rOLsVV7e3Gkwd0%2BlixsTF7sM45i6TvkZhfnqyoHatxc8s%2FyfAq66Cu3wCYFfcGuJEytM%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '50258'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=2506e697-0a06-4d03-aebb-63a3c707c95b-1784641914;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=2506e697-0a06-4d03-aebb-63a3c707c95b-1784641914"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=894, verdict_flag_enabled;desc="count=25";dur=2.886, graphql;desc="admin/query/other",
+        _y;desc="65a59be4-39ef-46c0-b67e-26dc2f962533", _s;desc="8400c9b7-4e4f-4d92-85e2-e8cc5dab03d7"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 2506e697-0a06-4d03-aebb-63a3c707c95b-1784641914
+      x-shopify-api-deprecated-reason:
+      - Order.riskLevel, OrderRisk.display, OrderRisk.level, OrderRisk.message, Order.risks
+        and 1 more
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2025-10
+      x-shopify-api-version-warning:
+      - https://shopify.dev/concepts/about-apis/versioning
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
