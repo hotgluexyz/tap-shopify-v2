@@ -11,6 +11,7 @@ class ShopifyBetaTestRunner(VCRTapTestRunner):
         "id",
         "cursor",
         "hasNextPage",
+        "count",
     }
     # What is not on the PRESERVE_KEYS will be heavily scrubbed.
 

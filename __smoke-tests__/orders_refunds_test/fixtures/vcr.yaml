@@ -1,5 +1,104 @@
 interactions:
 - request:
+    body: '{"query": "{ ordersCount(query: \"updated_at:>''2026-05-30T00:00:00Z''\",
+      limit: null) { count } }"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '98'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.33.1
+    method: POST
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
+  response:
+    body:
+      string: '{"data": {"ordersCount": {"count": 7}}, "extensions": {"cost": {"requestedQueryCost":
+        5524, "actualQueryCost": 5524, "throttleStatus": {"maximumAvailable": -47372395.6296908,
+        "currentlyAvailable": 7287, "restoreRate": 418923.693376896}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a23e3ef77af11ab5-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 13:41:10 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8MlX%2BGcSrO37wd1q%2BeoOtmxiP2PmRngKQ%2FdmTqSzOWmpLYaWTbcUsA1ibeuMB6pJN6aYbnsDGkJLWNoa5gpa1Uj%2BuOTxI4H2yiBJr9TB2z9shX22h9ZoZ63Sq3Y%2FyK9nsTXRajKc2gS5srQlXA3yli4hl4EWeGIA7e1Xisg%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '196'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=1bd4c231-c66c-4d2a-8a5e-cb74120a7a3e-1785518134;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=1bd4c231-c66c-4d2a-8a5e-cb74120a7a3e-1785518134"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=53, verdict_flag_enabled;desc="count=10";dur=0.564, graphql;desc="admin/query/other",
+        _y;desc="08a072fe-c147-4655-ae3b-1fc49ffb3d83", _s;desc="e0d7d7e4-1c4e-45c0-8844-3d8bbf90da97"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 1bd4c231-c66c-4d2a-8a5e-cb74120a7a3e-1785518134
+      x-shopify-api-gql-engine:
+      - cardinal
+      x-shopify-api-version:
+      - 2026-07
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
     body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
       $sortKey: OrderSortKeys) { orders(first: $first, after: $after, query: $filter,
       sortKey: $sortKey) { edges { cursor node { id refunds { id } updatedAt } },

@@ -1,7 +1,6 @@
 from hotglue_singer_sdk.streams.rest import RESTStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
 from hotglue_singer_sdk.authenticators import APIKeyAuthenticator
-from hotglue_singer_sdk.streams.core import REPLICATION_FULL_TABLE
 import requests
 from typing import Any, Dict, Optional, Callable
 from pendulum import parse

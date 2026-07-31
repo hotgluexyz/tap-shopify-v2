@@ -1,6 +1,7 @@
 """GraphQL client handling, including shopifyStream base class."""
 
 import backoff
+import json
 import requests
 import urllib3
 
@@ -10,6 +11,8 @@ from backports.cached_property import cached_property
 from hotglue_singer_sdk.streams import GraphQLStream
 from tap_shopify_beta.auth import ShopifyAuthenticator
 from hotglue_singer_sdk.exceptions import RetriableAPIError
+from pendulum import parse
+from tap_shopify_beta.shopify_dates import to_shopify_utc
 import psutil
 import os
 import http.client
@@ -19,6 +22,8 @@ class shopifyStream(GraphQLStream):
     """shopify stream class."""
 
     query_name = None
+    # Opt into GraphQL {query_name}Count — unlike REST, the field name is derived.
+    estimate_count = False
 
     def get_shop_name(self) -> str:
         """Return the shop name, configurable via tap settings."""
@@ -117,6 +122,43 @@ class shopifyStream(GraphQLStream):
         }
         # self.logger.info(f"Attempting request with variables {params} and query: {request_data['query']}")
         return request_data
+
+    def get_estimated_record_count(self) -> Optional[int]:
+        if not self.estimate_count or not self.query_name:
+            return None
+        count_field = f"{self.query_name}Count"
+        try:
+            start_date = self.get_starting_timestamp(None)
+            date_filter = f"updated_at:>'{to_shopify_utc(start_date)}'"
+            config_end_date = self.config.get("end_date")
+            if config_end_date:
+                date_filter = (
+                    f"{date_filter} AND "
+                    f"updated_at:<='{to_shopify_utc(parse(config_end_date))}'"
+                )
+            query = (
+                f"{{ {count_field}(query: {json.dumps(date_filter)}, "
+                f"limit: null) {{ count }} }}"
+            )
+            headers = {**self.http_headers, **(self.authenticator.auth_headers or {})}
+            prepared_request = self.requests_session.prepare_request(
+                requests.Request(
+                    method="POST",
+                    url=self.url_base,
+                    headers=headers,
+                    json={"query": query},
+                )
+            )
+            response = self.request_decorator(self._request)(prepared_request, None)
+            payload = response.json()
+            if payload.get("errors"):
+                raise Exception(payload["errors"])
+            return int(payload["data"][count_field]["count"])
+        except Exception as e:
+            self.logger.warning(
+                f"Error getting estimated record count for stream {self.name}: {e}"
+            )
+            return None
 
     def get_field_query(
         self,
