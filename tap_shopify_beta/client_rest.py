@@ -92,6 +92,9 @@ class shopifyRestStream(RESTStream):
         return params
 
     def get_estimated_record_count(self) -> Optional[int]:
+        # price_rules: count.json ignores updated_at_min/max, but get_url_params
+        # always sends them (replication_key=updated_at), so the estimate would be
+        # full-table while sync is incremental.
         if not self.count_path or self.name in ["price_rules"]:
             return None
         try:
