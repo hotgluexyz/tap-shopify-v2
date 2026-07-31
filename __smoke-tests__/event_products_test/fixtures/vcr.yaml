@@ -1,0 +1,230 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.34.2
+    method: GET
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/events/count.json?created_at_min=2026-07-29T17%3A45%3A00Z&created_at_max=2026-07-29T18%3A00%3A00Z
+  response:
+    body:
+      string: '{"count": 16}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a23e57b388085f0f-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 31 Jul 2026 17:32:28 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=O1Fe4uHB5LBABBpmpznZg7ffluIPrMxkj39uMzTBOUGAr5pfBe5uXccU7g1XjSO8jHsv%2FL0qF%2Bxhx7IpbOLI1md4La6azMY1dSPSk3ITiAjpIYK86nW7QcqE%2Bkk99uoiKzaDwFghBeHMs2lmLQgiuGoxTU2Z6jLhEYoaJAM%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '12'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=count&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fevents&source%5Bsection%5D=admin_api&source%5Buuid%5D=4e8ff5ce-863b-4de0-907f-0600575b6a59-1785519148;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=count&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fevents&source%5Bsection%5D=admin_api&source%5Buuid%5D=4e8ff5ce-863b-4de0-907f-0600575b6a59-1785519148"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=72, verdict_flag_enabled;desc="count=7";dur=0.457, _y;desc="92cbfce6-4341-434a-879f-e75dcb81fb63",
+        _s;desc="18aa9e46-c04e-4a5e-8e42-f7272a77d015"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 4e8ff5ce-863b-4de0-907f-0600575b6a59-1785519148
+      x-shopify-api-version:
+      - 2026-07
+      x-shopify-shop-api-call-limit:
+      - 1/40
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.34.2
+    method: GET
+    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/events.json?limit=100&created_at_min=2026-07-29T17%3A45%3A00Z&created_at_max=2026-07-29T18%3A00%3A00Z
+  response:
+    body:
+      string: '{"events": [{"id": 162099022233820, "subject_id": 1729, "created_at":
+        "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm", "subject_type": "-Fallback-scrubbed-WOdhqHV",
+        "verb": "-Fallback-scrubbed-ZjaNDioPkGl", "author": "-Fallback-scrubbed-brfNUHAEFVbh",
+        "path": "-Fallback-scrubbed-hfLgfcLWnRZoOBVUORFDHYYWxqUVM"}, {"id": 162099022266588,
+        "subject_id": 4384, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-LsmCobQJclsOHePFsyNKHXmWVHlvJ"},
+        {"id": 162099022299356, "subject_id": 4384, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-LsmCobQJclsOHePFsyNKHXmWVHlvJ"},
+        {"id": 162099022332124, "subject_id": 4212, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-XJcZBOSNpIOiCkhdqqQmdfCgqjqae"},
+        {"id": 162099022364892, "subject_id": 4212, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-XJcZBOSNpIOiCkhdqqQmdfCgqjqae"},
+        {"id": 162099022430428, "subject_id": 577, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-XLAVCuuDkFQXVGdTYxQlkFUFotmVu"},
+        {"id": 162099022463196, "subject_id": 2367, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-CfCqVLEgQUoPmfzqNWXmBLayvsWND"},
+        {"id": 162099022495964, "subject_id": 2367, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-CfCqVLEgQUoPmfzqNWXmBLayvsWND"},
+        {"id": 162099022594268, "subject_id": 2429, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-ZQNXVrIQfbIuhyvlRuYeyuscJfXOu"},
+        {"id": 162099022627036, "subject_id": 2429, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-ZQNXVrIQfbIuhyvlRuYeyuscJfXOu"},
+        {"id": 162099022692572, "subject_id": 368, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-iiMxmoJyllDgmTalWdKbVXCCkFRdu"},
+        {"id": 162099022725340, "subject_id": 368, "created_at": "-Fallback-scrubbed-KScpbSCkgGukwddoXPnYBCJJm",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-iiMxmoJyllDgmTalWdKbVXCCkFRdu"},
+        {"id": 162099032195292, "subject_id": 6007, "created_at": "-Fallback-scrubbed-WwbZgabNQQSTRUBjLbDNyqDhF",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZBGjgRj",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": null}, {"id": 162099041075420,
+        "subject_id": 5286, "created_at": "-Fallback-scrubbed-axMyGPuRpqVxUwJyTymvCouPO",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZBGjgRj",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": null}, {"id": 162099074433244,
+        "subject_id": 6007, "created_at": "-Fallback-scrubbed-XLNyVEkExEFcCPxgwmQmYucTn",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-jcwNCXjpgHWQwAYyQHEsXizAKpmCv"},
+        {"id": 162099074564316, "subject_id": 5286, "created_at": "-Fallback-scrubbed-XLNyVEkExEFcCPxgwmQmYucTn",
+        "subject_type": "-Fallback-scrubbed-WOdhqHV", "verb": "-Fallback-scrubbed-ZjaNDioPkGl",
+        "author": "-Fallback-scrubbed-brfNUHAEFVbh", "path": "-Fallback-scrubbed-bNTmSReIvkXXctyTlLFvwSHAPuFUe"}]}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a23e57b5b801f262-GRU
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 31 Jul 2026 17:32:28 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=h4rdudiedGn5HYbPPRQPiXTvxEBgjBjDgbg8iwM0bP0tFmquwaiMkZPZ61WIrUvjKy0XmkbxLYkeU50iwuZqtQzErU0qgUxetB%2BDuc6xutbxqBWNbTTFWBmUKLxKyYK776Ym1tTcp6OVDgjU9rY4HmoZbaRV7cmd1D7AuY4%3D"}]}'
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3192'
+      content-security-policy:
+      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
+        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
+        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
+        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
+        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
+        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
+        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
+        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
+        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
+        /csp-report?source%5Baction%5D=index&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fevents&source%5Bsection%5D=admin_api&source%5Buuid%5D=19b4e2ef-90fe-4b70-942d-bfb8f2c129da-1785519148;
+        report-to shopify-csp'
+      referrer-policy:
+      - origin-when-cross-origin
+      reporting-endpoints:
+      - shopify-csp="/csp-report?source%5Baction%5D=index&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fevents&source%5Bsection%5D=admin_api&source%5Buuid%5D=19b4e2ef-90fe-4b70-942d-bfb8f2c129da-1785519148"
+      server:
+      - cloudflare
+      server-timing:
+      - processing;dur=66, verdict_flag_enabled;desc="count=6";dur=0.353, _y;desc="7f43fd4c-2243-4479-a61c-72f7840edec2",
+        _s;desc="19c79d2d-0bb9-4f39-96c2-df19874d4d1e"
+      - ipv6
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding,Sec-Fetch-Site
+      x-content-type-options:
+      - nosniff
+      x-dc:
+      - gcp-us-east1,gcp-us-central1,gcp-us-central1
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 19b4e2ef-90fe-4b70-942d-bfb8f2c129da-1785519148
+      x-shopify-api-version:
+      - 2026-07
+      x-shopify-shop-api-call-limit:
+      - 1/40
+      x-stats-apiclientid:
+      - '347932033025'
+      x-stats-apipermissionid:
+      - '691266257116'
+      x-stats-userid:
+      - ''
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
