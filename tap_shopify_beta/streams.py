@@ -56,6 +56,7 @@ class ProductsStream(DynamicStream):
     name = "products"
     primary_keys = ["id", "updatedAt"]
     query_name = "products"
+    estimate_count = True
     replication_key = "updatedAt"
 
     schema = th.PropertiesList(
@@ -208,6 +209,7 @@ class OrdersStream(DynamicStream):
     name = "orders"
     primary_keys = ["id", "updatedAt"]
     query_name = "orders"
+    estimate_count = True
     replication_key = "updatedAt"
     first_line_item = 25  # works as page_size for line_items
     _after_line_item = None
@@ -677,6 +679,9 @@ class ShopStream(shopifyGqlStream):
     replication_key = None
     is_list = False
 
+    def get_estimated_record_count(self) -> Optional[int]:
+        return 1
+
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
         th.Property("contactEmail", th.StringType),
@@ -879,6 +884,7 @@ class CollectionsStream(DynamicStream):
     name = "collections"
     primary_keys = ["id"]
     query_name = "collections"
+    estimate_count = True
     replication_key = "updatedAt"
 
     schema = th.PropertiesList(
@@ -908,6 +914,7 @@ class CustomersStream(DynamicStream):
     name = "customers"
     primary_keys = ["id"]
     query_name = "customers"
+    estimate_count = True
     replication_key = "updatedAt"
     sort_key = "UPDATED_AT"
     sort_key_type = "CustomerSortKeys"
@@ -951,6 +958,7 @@ class LocationsStream(shopifyRestStream):
     """Define collections stream."""
 
     path = "locations.json"
+    count_path = "locations/count.json"
     name = "locations"
     primary_keys = ["id"]
     replication_key = None
@@ -1063,6 +1071,7 @@ class PriceRulesStream(shopifyRestStream):
     replication_key = "updated_at"
     records_jsonpath = "$.price_rules.[*]"
     path = "price_rules.json"
+    count_path = "price_rules/count.json"
 
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
@@ -1122,6 +1131,7 @@ class EventProductsStream(shopifyRestStream):
     replication_key = "created_at"
     records_jsonpath = "$.events.[*]"
     path = "events.json"
+    count_path = "events/count.json"
     limit = 100
 
     schema = th.PropertiesList(
@@ -1145,6 +1155,7 @@ class MarketingEventsStream(shopifyRestStream):
     name = "marketing_events"
     primary_keys = ["id"]
     path = "marketing_events.json"
+    count_path = "marketing_events/count.json"
     records_jsonpath= "$.marketing_events.[*]"
 
     schema = th.PropertiesList(
@@ -1239,6 +1250,7 @@ class CustomerJourneySummaryStream(shopifyGqlStream):
     name = "customer_journey_summary"
     primary_keys = ["id", "updatedAt"]
     query_name = "orders"
+    estimate_count = True
     replication_key = "updatedAt"
     page_size = 100
     is_timestamp_replication_key = True
