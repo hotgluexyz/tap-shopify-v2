@@ -6,6 +6,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 import requests
+from hotglue_etl_exceptions import InvalidCredentialsError
 
 import tap_shopify_beta.auth as auth_module
 from tap_shopify_beta.auth import (
@@ -47,20 +48,6 @@ def test_get_shop_name_from_config_strips_domain():
     assert get_shop_name_from_config({"shop": "https://acme.myshopify.com/admin"}) == "acme"
 
 
-def test_oauth_request_body_code_exchange_includes_expiring():
-    """Authorization code exchange requests expiring offline tokens."""
-    config = {
-        "shop": "acme",
-        "client_id": "cid",
-        "client_secret": "sec",
-        "code": "auth-code",
-    }
-    body = _make_authenticator(config).oauth_request_body
-    assert body["expiring"] == 1
-    assert body["code"] == "auth-code"
-    assert "grant_type" not in body
-
-
 def test_oauth_request_body_refresh_grant():
     """Refresh uses grant_type refresh_token."""
     config = {
@@ -72,6 +59,17 @@ def test_oauth_request_body_refresh_grant():
     body = _make_authenticator(config).oauth_request_body
     assert body["grant_type"] == "refresh_token"
     assert body["refresh_token"] == "rt-fake"
+
+
+def test_oauth_request_body_requires_refresh_token():
+    """Sync-time refresh only uses refresh_token grant."""
+    config = {
+        "shop": "acme",
+        "client_id": "cid",
+        "client_secret": "sec",
+    }
+    with pytest.raises(InvalidCredentialsError, match="refresh_token"):
+        _make_authenticator(config).oauth_request_body
 
 
 def test_legacy_config_skips_refresh_and_logs(caplog):
@@ -111,7 +109,7 @@ def test_absolute_expiry_valid_without_in_memory_refresh_state():
         "client_secret": "sec",
         "access_token": "shpat-fake-token",
         "refresh_token": "shprt-fake",
-        "expires_in": 2_000_000_000_000,
+        "expires_in": 2_000_000_000,
     }
     authenticator = _make_authenticator(config)
     assert authenticator.is_token_valid() is True

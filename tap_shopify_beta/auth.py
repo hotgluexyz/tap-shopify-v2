@@ -12,7 +12,8 @@ from hotglue_singer_sdk.exceptions import RetriableAPIError
 from hotglue_etl_exceptions import InvalidCredentialsError
 
 _LEGACY_REFRESH_SKIP_LOGGED = False
-_EPOCH_EXPIRY_THRESHOLD = 10**12
+# SDK persists expires_in as Unix epoch seconds (~1e9). TTL from Shopify is much smaller.
+_EPOCH_EXPIRY_THRESHOLD = 10**9
 
 
 def get_shop_name_from_config(config: dict) -> str:
@@ -50,13 +51,6 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
     def oauth_request_body(self) -> dict:
         """Build the Shopify token exchange or refresh request body."""
         config = self._tap._config
-        if config.get("code"):
-            return {
-                "client_id": config["client_id"],
-                "client_secret": config["client_secret"],
-                "code": config["code"],
-                "expiring": 1,
-            }
         refresh_token = config.get("refresh_token")
         if refresh_token:
             return {
@@ -66,7 +60,7 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
                 "refresh_token": refresh_token,
             }
         raise InvalidCredentialsError(
-            "OAuth token refresh requires refresh_token or authorization code."
+            "OAuth token refresh requires refresh_token."
         )
 
     def is_token_valid(self) -> bool:
@@ -132,10 +126,31 @@ class ShopifyOAuthRequestMixin:
 
     _oauth_401_refresh_attempted: bool = False
 
-    def _request(self, prepared_request, context=None):
-        """Reset per-request OAuth retry state before delegating to the SDK."""
+    def prepare_request(self, context, next_page_token=None):
+        """Reset OAuth 401 retry state for each new prepared request."""
         self._oauth_401_refresh_attempted = False
-        return super()._request(prepared_request, context)
+        return super().prepare_request(context, next_page_token)
+
+    def _apply_refreshed_token_to_prepared_request(
+        self, prepared_request: requests.PreparedRequest
+    ) -> None:
+        """Update a prepared request with the access token from tap config after refresh."""
+        token = self.config.get("access_token")
+        if token:
+            prepared_request.headers["X-Shopify-Access-Token"] = token
+
+    def _request(self, prepared_request, context=None):
+        """Delegate to the SDK; patch auth header on 401 refresh before retry."""
+        try:
+            return super()._request(prepared_request, context)
+        except RetriableAPIError as exc:
+            if (
+                exc.response is not None
+                and exc.response.status_code == 401
+                and getattr(self, "_oauth_401_refresh_attempted", False)
+            ):
+                self._apply_refreshed_token_to_prepared_request(prepared_request)
+            raise
 
     def validate_response(self, response: requests.Response) -> None:
         """Refresh OAuth tokens on 401 once, then apply default response validation."""
