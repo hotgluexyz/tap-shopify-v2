@@ -9,6 +9,7 @@ import requests
 from singer import utils
 from hotglue_singer_sdk.authenticators import OAuthAuthenticator, _token_lock
 from hotglue_singer_sdk.exceptions import RetriableAPIError
+from hotglue_singer_sdk.helpers._secrets import SecretString
 from hotglue_etl_exceptions import InvalidCredentialsError
 
 _LEGACY_REFRESH_SKIP_LOGGED = False
@@ -31,14 +32,26 @@ def shopify_oauth_token_url(config: dict) -> str:
     return f"https://{shop}.myshopify.com/admin/oauth/access_token"
 
 
+def plain_config_value(value: Any) -> Any:
+    """Unwrap SDK SecretString values (JSON null becomes SecretString(None))."""
+    if isinstance(value, SecretString):
+        return value.contents
+    return value
+
+
 def has_refresh_token(config: dict) -> bool:
     """Return True when config has a non-empty refresh_token."""
-    refresh_token = config.get("refresh_token")
+    refresh_token = plain_config_value(config.get("refresh_token"))
     if refresh_token is None:
         return False
     if isinstance(refresh_token, str):
         return bool(refresh_token.strip())
     return bool(refresh_token)
+
+
+def has_expires_in(config: dict) -> bool:
+    """Return True when config carries OAuth expiry metadata (TTL or epoch)."""
+    return plain_config_value(config.get("expires_in")) is not None
 
 
 class ShopifyOAuthAuthenticator(OAuthAuthenticator):
@@ -62,12 +75,12 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
             _LEGACY_REFRESH_SKIP_LOGGED = True
 
     def _legacy_permanent_token(self) -> str | None:
-        """Access token that should be used as-is when no refresh_token is configured."""
+        """Permanent offline token: access_token present, no refresh_token, no expires_in."""
         cfg = self._tap_config()
-        access_token = cfg.get("access_token")
+        access_token = plain_config_value(cfg.get("access_token"))
         if not access_token:
             return None
-        if has_refresh_token(cfg):
+        if has_refresh_token(cfg) or has_expires_in(cfg):
             return None
         return str(access_token)
 
@@ -83,7 +96,7 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
                     self.update_access_token()
         result = super().auth_headers
         result.pop("Authorization", None)
-        token = self._tap_config().get("access_token") or self.access_token
+        token = plain_config_value(self._tap_config().get("access_token")) or self.access_token
         result["X-Shopify-Access-Token"] = f"{token}"
         return result
 
@@ -99,11 +112,11 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
     def oauth_request_body(self) -> dict:
         """Build the Shopify token exchange or refresh request body."""
         config = self._tap_config()
-        refresh_token = config.get("refresh_token")
+        refresh_token = plain_config_value(config.get("refresh_token"))
         if has_refresh_token(config):
             return {
-                "client_id": config["client_id"],
-                "client_secret": config["client_secret"],
+                "client_id": plain_config_value(config["client_id"]),
+                "client_secret": plain_config_value(config["client_secret"]),
                 "grant_type": "refresh_token",
                 "refresh_token": refresh_token,
             }
@@ -119,16 +132,17 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
             return True
 
         cfg = self._tap_config()
-        access_token = cfg.get("access_token")
+        access_token = plain_config_value(cfg.get("access_token"))
         if not access_token:
             return False
 
-        if self.expires_in is None and cfg.get("expires_in") is not None:
-            self.expires_in = cfg.get("expires_in")
+        expires_in = plain_config_value(cfg.get("expires_in"))
+        if self.expires_in is None and expires_in is not None:
+            self.expires_in = expires_in
         if self.access_token is None:
             self.access_token = access_token
 
-        raw_expires = cfg.get("expires_in")
+        raw_expires = expires_in
         if raw_expires is not None:
             raw_int = int(raw_expires)
             if raw_int >= _EPOCH_EXPIRY_THRESHOLD:
@@ -182,7 +196,8 @@ class ShopifyOAuthRequestMixin:
     ) -> None:
         """Update a prepared request with the access token from tap config after refresh."""
         tap_cfg = getattr(self._tap, "_config", self.config)
-        token = tap_cfg.get("access_token") if isinstance(tap_cfg, dict) else self.config.get("access_token")
+        raw_token = tap_cfg.get("access_token") if isinstance(tap_cfg, dict) else self.config.get("access_token")
+        token = plain_config_value(raw_token)
         if token:
             prepared_request.headers["X-Shopify-Access-Token"] = token
 

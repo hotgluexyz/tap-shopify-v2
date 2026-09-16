@@ -7,11 +7,13 @@ from unittest.mock import MagicMock, patch
 import pytest
 import requests
 from hotglue_etl_exceptions import InvalidCredentialsError
+from hotglue_singer_sdk.helpers._secrets import SecretString
 
 import tap_shopify_beta.auth as auth_module
 from tap_shopify_beta.auth import (
     ShopifyOAuthAuthenticator,
     get_shop_name_from_config,
+    has_expires_in,
     has_refresh_token,
     refresh_oauth_token_on_401,
     shopify_oauth_token_url,
@@ -95,6 +97,20 @@ def test_has_refresh_token_treats_null_and_blank_as_absent():
     assert has_refresh_token({"refresh_token": None}) is False
     assert has_refresh_token({"refresh_token": ""}) is False
     assert has_refresh_token({}) is False
+    assert has_refresh_token({"refresh_token": SecretString(None)}) is False
+
+
+def test_legacy_secret_string_refresh_token_null_is_permanent_token():
+    """SDK wraps JSON null refresh_token as SecretString(None); must not refresh."""
+    config = {
+        "shop": "acme",
+        "client_id": SecretString("cid"),
+        "client_secret": SecretString("sec"),
+        "access_token": SecretString("shpat-fake-token"),
+        "refresh_token": SecretString(None),
+    }
+    authenticator = _make_authenticator(config)
+    assert authenticator._legacy_permanent_token() == "shpat-fake-token"
 
 
 def test_legacy_config_skips_refresh_and_logs(caplog):
@@ -140,6 +156,23 @@ def test_update_access_token_skips_hg_api_for_legacy(mock_super_update):
     authenticator.update_access_token()
     mock_super_update.assert_not_called()
     assert authenticator.access_token == "shpat-fake-token"
+
+
+def test_expiring_without_refresh_token_is_not_legacy():
+    """expires_in without refresh_token is not a permanent token; must not skip refresh."""
+    config = {
+        "shop": "acme",
+        "client_id": "cid",
+        "client_secret": "sec",
+        "access_token": "shpat-fake-token",
+        "expires_in": 3600,
+    }
+    authenticator = _make_authenticator(config)
+    assert has_expires_in(config) is True
+    assert authenticator._legacy_permanent_token() is None
+    assert authenticator.is_token_valid() is False
+    with pytest.raises(InvalidCredentialsError, match="refresh_token"):
+        authenticator.oauth_request_body
 
 
 def test_expiring_config_invalid_until_refreshed():
