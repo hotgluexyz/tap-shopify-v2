@@ -31,28 +31,76 @@ def shopify_oauth_token_url(config: dict) -> str:
     return f"https://{shop}.myshopify.com/admin/oauth/access_token"
 
 
+def has_refresh_token(config: dict) -> bool:
+    """Return True when config has a non-empty refresh_token."""
+    refresh_token = config.get("refresh_token")
+    if refresh_token is None:
+        return False
+    if isinstance(refresh_token, str):
+        return bool(refresh_token.strip())
+    return bool(refresh_token)
+
+
 class ShopifyOAuthAuthenticator(OAuthAuthenticator):
     """OAuth authenticator for Shopify Admin API (expiring offline tokens)."""
+
+    def _tap_config(self) -> dict[str, Any]:
+        """Live tap config (authoritative for tokens); fall back to stream snapshot."""
+        tap_cfg = getattr(self._tap, "_config", None)
+        if isinstance(tap_cfg, dict):
+            return tap_cfg
+        return dict(self._config)
+
+    def _mark_legacy_token_valid(self, access_token: str) -> None:
+        """Use a permanent offline token without calling Shopify or the HG accesstoken API."""
+        global _LEGACY_REFRESH_SKIP_LOGGED
+        self.access_token = access_token
+        if not _LEGACY_REFRESH_SKIP_LOGGED:
+            self.logger.info(
+                "Skipping OAuth token refresh: no refresh_token (legacy non-expiring token)."
+            )
+            _LEGACY_REFRESH_SKIP_LOGGED = True
+
+    def _legacy_permanent_token(self) -> str | None:
+        """Access token that should be used as-is when no refresh_token is configured."""
+        cfg = self._tap_config()
+        access_token = cfg.get("access_token")
+        if not access_token:
+            return None
+        if has_refresh_token(cfg):
+            return None
+        return str(access_token)
 
     @property
     def auth_headers(self) -> dict:
         """Return Shopify Admin API auth headers."""
-        if not self.is_token_valid():
+        legacy_token = self._legacy_permanent_token()
+        if legacy_token is not None:
+            self._mark_legacy_token_valid(legacy_token)
+        elif not self.is_token_valid():
             with _token_lock:
                 if not self.is_token_valid():
                     self.update_access_token()
         result = super().auth_headers
         result.pop("Authorization", None)
-        token = self._tap._config.get("access_token") or self.access_token
+        token = self._tap_config().get("access_token") or self.access_token
         result["X-Shopify-Access-Token"] = f"{token}"
         return result
+
+    def update_access_token(self) -> None:
+        """Refresh expiring tokens; never call Shopify refresh for legacy permanent tokens."""
+        legacy_token = self._legacy_permanent_token()
+        if legacy_token is not None:
+            self._mark_legacy_token_valid(legacy_token)
+            return
+        super().update_access_token()
 
     @property
     def oauth_request_body(self) -> dict:
         """Build the Shopify token exchange or refresh request body."""
-        config = self._tap._config
+        config = self._tap_config()
         refresh_token = config.get("refresh_token")
-        if refresh_token:
+        if has_refresh_token(config):
             return {
                 "client_id": config["client_id"],
                 "client_secret": config["client_secret"],
@@ -65,25 +113,22 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
 
     def is_token_valid(self) -> bool:
         """Return whether the configured access token should be used without refresh."""
-        global _LEGACY_REFRESH_SKIP_LOGGED
-        access_token = self.config.get("access_token")
-        if not access_token:
-            return False
-        if not self.config.get("refresh_token"):
-            if not _LEGACY_REFRESH_SKIP_LOGGED:
-                self.logger.info(
-                    "Skipping OAuth token refresh: no refresh_token (legacy non-expiring token)."
-                )
-                _LEGACY_REFRESH_SKIP_LOGGED = True
-            self.access_token = access_token
+        legacy_token = self._legacy_permanent_token()
+        if legacy_token is not None:
+            self._mark_legacy_token_valid(legacy_token)
             return True
 
-        if self.expires_in is None and self.config.get("expires_in") is not None:
-            self.expires_in = self.config.get("expires_in")
+        cfg = self._tap_config()
+        access_token = cfg.get("access_token")
+        if not access_token:
+            return False
+
+        if self.expires_in is None and cfg.get("expires_in") is not None:
+            self.expires_in = cfg.get("expires_in")
         if self.access_token is None:
             self.access_token = access_token
 
-        raw_expires = self.config.get("expires_in")
+        raw_expires = cfg.get("expires_in")
         if raw_expires is not None:
             raw_int = int(raw_expires)
             if raw_int >= _EPOCH_EXPIRY_THRESHOLD:
@@ -108,7 +153,8 @@ def invalidate_shopify_oauth_token(authenticator: ShopifyOAuthAuthenticator) -> 
 
 def refresh_oauth_token_on_401(stream: Any) -> bool:
     """Refresh OAuth credentials after a 401; return True if the request may be retried."""
-    if not stream.config.get("client_id") or not stream.config.get("refresh_token"):
+    cfg = getattr(getattr(stream, "_tap", None), "_config", None) or stream.config
+    if not cfg.get("client_id") or not has_refresh_token(cfg):
         return False
     if getattr(stream, "_oauth_401_refresh_attempted", False):
         return False
@@ -135,7 +181,8 @@ class ShopifyOAuthRequestMixin:
         self, prepared_request: requests.PreparedRequest
     ) -> None:
         """Update a prepared request with the access token from tap config after refresh."""
-        token = self.config.get("access_token")
+        tap_cfg = getattr(self._tap, "_config", self.config)
+        token = tap_cfg.get("access_token") if isinstance(tap_cfg, dict) else self.config.get("access_token")
         if token:
             prepared_request.headers["X-Shopify-Access-Token"] = token
 
