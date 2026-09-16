@@ -1,112 +1,148 @@
-"""Unbounce Authentication."""
+"""Shopify OAuth authentication."""
 
-import json
-from typing import Optional
-import sys
+from __future__ import annotations
+
+import re
+from typing import Any
 
 import requests
-from hotglue_singer_sdk.authenticators import APIAuthenticatorBase
-from hotglue_singer_sdk.streams import Stream as RESTStreamBase
+from singer import utils
+from hotglue_singer_sdk.authenticators import OAuthAuthenticator, _token_lock
+from hotglue_singer_sdk.exceptions import RetriableAPIError
+from hotglue_etl_exceptions import InvalidCredentialsError
+
+_LEGACY_REFRESH_SKIP_LOGGED = False
+_EPOCH_EXPIRY_THRESHOLD = 10**12
 
 
-class ShopifyAuthenticator(APIAuthenticatorBase):
-    """API Authenticator for OAuth 2.0 flows."""
+def get_shop_name_from_config(config: dict) -> str:
+    """Return the myshopify shop slug from tap config."""
+    shop_no_https = config["shop"].replace("https://", "")
+    shop_no_extra_slashes = re.sub(r"/.*", "", shop_no_https)
+    if shop_no_extra_slashes.endswith(".myshopify.com"):
+        return shop_no_extra_slashes[: -len(".myshopify.com")]
+    return shop_no_extra_slashes
 
-    def __init__(
-        self,
-        stream: RESTStreamBase,
-        config_file: Optional[str] = None,
-        auth_endpoint: Optional[str] = None,
-    ) -> None:
-        super().__init__(stream=stream)
-        self._auth_endpoint = auth_endpoint
-        self._config_file = config_file
-        self._tap = stream._tap
 
-    @property
-    def auth_endpoint(self) -> str:
-        """Get the authorization endpoint.
+def shopify_oauth_token_url(config: dict) -> str:
+    """Build the Shopify admin OAuth access token URL for the configured shop."""
+    shop = get_shop_name_from_config(config)
+    return f"https://{shop}.myshopify.com/admin/oauth/access_token"
 
-        Returns:
-            The API authorization endpoint if it is set.
 
-        Raises:
-            ValueError: If the endpoint is not set.
-        """
-        if not self._auth_endpoint:
-            raise ValueError("Authorization endpoint not set.")
-        return self._auth_endpoint
+class ShopifyOAuthAuthenticator(OAuthAuthenticator):
+    """OAuth authenticator for Shopify Admin API (expiring offline tokens)."""
 
     @property
     def auth_headers(self) -> dict:
-        """Return a dictionary of auth headers to be applied.
-
-        These will be merged with any `http_headers` specified in the stream.
-
-        Returns:
-            HTTP headers for authentication.
-        """
-        if not self.config.get("access_token"):
-            self.update_access_token()
+        """Return Shopify Admin API auth headers."""
+        if not self.is_token_valid():
+            with _token_lock:
+                if not self.is_token_valid():
+                    self.update_access_token()
         result = super().auth_headers
-        result["X-Shopify-Access-Token"] = f"{self._tap._config.get('access_token')}"
+        result.pop("Authorization", None)
+        token = self._tap._config.get("access_token") or self.access_token
+        result["X-Shopify-Access-Token"] = f"{token}"
         return result
 
     @property
     def oauth_request_body(self) -> dict:
-        """Define the OAuth request body for the hubspot API."""
-        if self._tap._config.get("code"):
+        """Build the Shopify token exchange or refresh request body."""
+        config = self._tap._config
+        if config.get("code"):
             return {
-                "client_id": self._tap._config["client_id"],
-                "client_secret": self._tap._config["client_secret"],
-                "code": self._tap._config["code"]
+                "client_id": config["client_id"],
+                "client_secret": config["client_secret"],
+                "code": config["code"],
+                "expiring": 1,
             }
-        else:
+        refresh_token = config.get("refresh_token")
+        if refresh_token:
             return {
-                "client_id": self._tap._config["client_id"],
-                "client_secret": self._tap._config["client_secret"],
-                "grant_type": "client_credentials"
+                "client_id": config["client_id"],
+                "client_secret": config["client_secret"],
+                "grant_type": "refresh_token",
+                "refresh_token": refresh_token,
             }
+        raise InvalidCredentialsError(
+            "OAuth token refresh requires refresh_token or authorization code."
+        )
 
-    @property
-    def oauth_request_payload(self) -> dict:
-        """Get request body.
+    def is_token_valid(self) -> bool:
+        """Return whether the configured access token should be used without refresh."""
+        global _LEGACY_REFRESH_SKIP_LOGGED
+        access_token = self.config.get("access_token")
+        if not access_token:
+            return False
+        if not self.config.get("refresh_token"):
+            if not _LEGACY_REFRESH_SKIP_LOGGED:
+                self.logger.info(
+                    "Skipping OAuth token refresh: no refresh_token (legacy non-expiring token)."
+                )
+                _LEGACY_REFRESH_SKIP_LOGGED = True
+            self.access_token = access_token
+            return True
 
-        Returns:
-            A plain (OAuth) or encrypted (JWT) request body.
-        """
-        return self.oauth_request_body
+        if self.expires_in is None and self.config.get("expires_in") is not None:
+            self.expires_in = self.config.get("expires_in")
+        if self.access_token is None:
+            self.access_token = access_token
 
-    # Authentication and refresh
-    def update_access_token(self) -> None:
-        """Update `access_token` along with: `last_refreshed` and `expires_in`.
+        raw_expires = self.config.get("expires_in")
+        if raw_expires is not None:
+            raw_int = int(raw_expires)
+            if raw_int >= _EPOCH_EXPIRY_THRESHOLD:
+                if raw_int - int(utils.now().timestamp()) > 120:
+                    self.access_token = access_token
+                    if self.expires_in is None:
+                        self.expires_in = raw_int
+                    return True
+                return False
+            if self.last_refreshed is None:
+                return False
 
-        Raises:
-            RuntimeError: When OAuth login fails.
-        """
-        auth_request_payload = self.oauth_request_payload
-        token_response = requests.post(self.auth_endpoint, data={}, params=auth_request_payload)
-        try:
-            token_response.raise_for_status()
-            self.logger.info("OAuth authorization attempt was successful.")
-        except Exception as ex:
-            raise RuntimeError(
-                f"Failed OAuth login, response was '{token_response.json()}'. {ex}"
-            )
-        token_json = token_response.json()
-        access_token = token_json["access_token"]
-        self._tap._config["access_token"] = access_token
+        return super().is_token_valid()
 
-        # Save the access token to the config file if we're using a code-exchange
-        if self._tap._config.get("code"):
-            config_path = "config.json"
-            for i, arg in enumerate(sys.argv):
-                if arg == "--config":
-                    if i + 1 < len(sys.argv):
-                        config_path = sys.argv[i + 1]
-                    break
-            with open(config_path) as file:
-                config = json.load(file)
-            config["access_token"] = access_token
-            with open(config_path, "w") as file:
-                json.dump(config, file, indent=2)
+
+def invalidate_shopify_oauth_token(authenticator: ShopifyOAuthAuthenticator) -> None:
+    """Clear cached expiry state so the authenticator will refresh on the next attempt."""
+    authenticator.last_refreshed = None
+    authenticator.expires_in = None
+    authenticator.access_token = None
+
+
+def refresh_oauth_token_on_401(stream: Any) -> bool:
+    """Refresh OAuth credentials after a 401; return True if the request may be retried."""
+    if not stream.config.get("client_id") or not stream.config.get("refresh_token"):
+        return False
+    if getattr(stream, "_oauth_401_refresh_attempted", False):
+        return False
+    stream._oauth_401_refresh_attempted = True
+    auth = stream.authenticator
+    if not isinstance(auth, ShopifyOAuthAuthenticator):
+        return False
+    invalidate_shopify_oauth_token(auth)
+    auth.update_access_token()
+    return True
+
+
+class ShopifyOAuthRequestMixin:
+    """HTTP helpers for Shopify OAuth token refresh on 401 responses."""
+
+    _oauth_401_refresh_attempted: bool = False
+
+    def _request(self, prepared_request, context=None):
+        """Reset per-request OAuth retry state before delegating to the SDK."""
+        self._oauth_401_refresh_attempted = False
+        return super()._request(prepared_request, context)
+
+    def validate_response(self, response: requests.Response) -> None:
+        """Refresh OAuth tokens on 401 once, then apply default response validation."""
+        if response.status_code == 401 and refresh_oauth_token_on_401(self):
+            raise RetriableAPIError(self.response_error_message(response), response)
+        super().validate_response(response)
+
+
+# Backwards-compatible alias
+ShopifyAuthenticator = ShopifyOAuthAuthenticator

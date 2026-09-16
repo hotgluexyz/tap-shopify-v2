@@ -9,7 +9,11 @@ from typing import Any, Optional, Callable
 from hotglue_singer_sdk.authenticators import APIKeyAuthenticator
 from backports.cached_property import cached_property
 from hotglue_singer_sdk.streams import GraphQLStream
-from tap_shopify_beta.auth import ShopifyAuthenticator
+from tap_shopify_beta.auth import (
+    ShopifyOAuthAuthenticator,
+    ShopifyOAuthRequestMixin,
+    shopify_oauth_token_url,
+)
 from hotglue_singer_sdk.exceptions import RetriableAPIError
 from pendulum import parse
 from tap_shopify_beta.shopify_dates import to_shopify_utc
@@ -18,7 +22,7 @@ import os
 import http.client
 import re
 
-class shopifyStream(GraphQLStream):
+class shopifyStream(ShopifyOAuthRequestMixin, GraphQLStream):
     """shopify stream class."""
 
     query_name = None
@@ -39,12 +43,13 @@ class shopifyStream(GraphQLStream):
         return f"https://{shop}.myshopify.com/admin/api/2026-07/graphql.json"
 
     @property
-    def authenticator(self) -> ShopifyAuthenticator:
+    def authenticator(self) -> ShopifyOAuthAuthenticator:
         """Return a new authenticator object."""
         if self.config.get("client_id"):
-            shop = self.get_shop_name()
-            return ShopifyAuthenticator(
-                self, self._tap.config, f"https://{shop}.myshopify.com/admin/oauth/access_token"
+            return ShopifyOAuthAuthenticator(
+                stream=self,
+                auth_endpoint=shopify_oauth_token_url(self.config),
+                config_file=self._tap.config_file,
             )
         else:
             return APIKeyAuthenticator.create_for_stream(
