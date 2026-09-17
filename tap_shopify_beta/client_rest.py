@@ -1,5 +1,9 @@
 from hotglue_singer_sdk.streams.rest import RESTStream
-from tap_shopify_beta.auth import ShopifyAuthenticator
+from tap_shopify_beta.auth import (
+    ShopifyOAuthAuthenticator,
+    ShopifyOAuthRequestMixin,
+    shopify_oauth_token_url,
+)
 from hotglue_singer_sdk.authenticators import APIKeyAuthenticator
 import requests
 from typing import Any, Dict, Optional, Callable
@@ -14,7 +18,7 @@ from tap_shopify_beta.shopify_dates import to_shopify_utc
 
 
 
-class shopifyRestStream(RESTStream):
+class shopifyRestStream(ShopifyOAuthRequestMixin, RESTStream):
     """shopify stream class."""
 
     add_params = None
@@ -36,12 +40,13 @@ class shopifyRestStream(RESTStream):
         return f"https://{shop}.myshopify.com/admin/api/2026-07/"
     
     @property
-    def authenticator(self) -> ShopifyAuthenticator:
+    def authenticator(self) -> ShopifyOAuthAuthenticator:
         """Return a new authenticator object."""
         if self.config.get("client_id"):
-            shop = self.get_shop_name()
-            return ShopifyAuthenticator(
-                self, self._tap.config, f"https://{shop}.myshopify.com/admin/oauth/access_token"
+            return ShopifyOAuthAuthenticator(
+                stream=self,
+                auth_endpoint=shopify_oauth_token_url(self.config),
+                config_file=self._tap.config_file,
             )
         else:
             return APIKeyAuthenticator.create_for_stream(
