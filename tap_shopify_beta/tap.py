@@ -125,7 +125,13 @@ class TapshopifyBeta(Tap):
 
     @classmethod
     def access_token_support(cls, connector: Optional[Any] = None):
-        """Return the Shopify OAuth authenticator and token endpoint for HG API refresh."""
+        """Authenticator and token URL for the ``--access-token`` CLI.
+
+        The SDK calls this with no ``connector`` to detect support; we return a
+        placeholder endpoint because ``shop`` is not available yet. When
+        ``connector.config`` includes ``shop``, the URL is built for that store
+        (the path used for real refresh runs).
+        """
         if connector is None or not (connector.config or {}).get("shop"):
             auth_endpoint = "https://{shop}.myshopify.com/admin/oauth/access_token"
         else:

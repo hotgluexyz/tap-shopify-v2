@@ -13,7 +13,6 @@ import tap_shopify_beta.auth as auth_module
 from tap_shopify_beta.auth import (
     ShopifyOAuthAuthenticator,
     get_shop_name_from_config,
-    has_expires_in,
     has_refresh_token,
     refresh_oauth_token_on_401,
     shopify_oauth_token_url,
@@ -168,7 +167,6 @@ def test_expiring_without_refresh_token_is_not_legacy():
         "expires_in": 3600,
     }
     authenticator = _make_authenticator(config)
-    assert has_expires_in(config) is True
     assert authenticator._legacy_permanent_token() is None
     assert authenticator.is_token_valid() is False
     with pytest.raises(InvalidCredentialsError, match="refresh_token"):

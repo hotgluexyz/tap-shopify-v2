@@ -1,4 +1,14 @@
-"""Shopify OAuth authentication."""
+"""Shopify Admin API OAuth authentication.
+
+Supports legacy permanent tokens (``access_token`` only) and expiring offline
+tokens with ``refresh_token`` / ``expires_in``. Expiring tokens are refreshed
+with ``grant_type=refresh_token`` when the access token is missing or past
+expiry. ``expires_in`` in config may be seconds until expiry or a Unix epoch
+after a refresh; see ``is_token_valid()``.
+
+Background on expiring tokens:
+https://shopify.dev/docs/apps/build/authentication-authorization/migrate-to-expiring-offline-access-tokens
+"""
 
 from __future__ import annotations
 
@@ -12,6 +22,7 @@ from hotglue_singer_sdk.exceptions import RetriableAPIError
 from hotglue_singer_sdk.helpers._secrets import SecretString
 from hotglue_etl_exceptions import InvalidCredentialsError
 
+# Flag to log once when a legacy non-expiring token is used without refresh.
 _LEGACY_REFRESH_SKIP_LOGGED = False
 # SDK persists expires_in as Unix epoch seconds (~1e9). TTL from Shopify is much smaller.
 _EPOCH_EXPIRY_THRESHOLD = 10**9
@@ -49,11 +60,6 @@ def has_refresh_token(config: dict) -> bool:
     return bool(refresh_token)
 
 
-def has_expires_in(config: dict) -> bool:
-    """Return True when config carries OAuth expiry metadata (TTL or epoch)."""
-    return plain_config_value(config.get("expires_in")) is not None
-
-
 class ShopifyOAuthAuthenticator(OAuthAuthenticator):
     """OAuth authenticator for Shopify Admin API (expiring offline tokens)."""
 
@@ -80,7 +86,7 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
         access_token = plain_config_value(cfg.get("access_token"))
         if not access_token:
             return None
-        if has_refresh_token(cfg) or has_expires_in(cfg):
+        if has_refresh_token(cfg) or plain_config_value(cfg.get("expires_in")) is not None:
             return None
         return str(access_token)
 
@@ -125,7 +131,15 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
         )
 
     def is_token_valid(self) -> bool:
-        """Return whether the configured access token should be used without refresh."""
+        """Whether the current access token can be sent without calling refresh.
+
+        Legacy permanent tokens (no refresh metadata) always count as valid.
+
+        For expiring tokens, ``expires_in`` may be a TTL from Shopify (e.g. 3599) or a
+        Unix expiry time after refresh. Small values are TTL and are not trusted until
+        this process has refreshed once. Large values are treated as expiry time and
+        stay valid until within 120 seconds of that moment.
+        """
         legacy_token = self._legacy_permanent_token()
         if legacy_token is not None:
             self._mark_legacy_token_valid(legacy_token)
@@ -182,7 +196,11 @@ def refresh_oauth_token_on_401(stream: Any) -> bool:
 
 
 class ShopifyOAuthRequestMixin:
-    """HTTP helpers for Shopify OAuth token refresh on 401 responses."""
+    """
+    HTTP helpers for Shopify OAuth token refresh on 401 responses.
+    
+    This mixin can be added to SDK streams to automatically refresh OAuth tokens on 401 responses.
+    """
 
     _oauth_401_refresh_attempted: bool = False
 
