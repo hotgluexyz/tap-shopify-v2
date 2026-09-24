@@ -29,6 +29,32 @@ from tap_shopify_beta.streams import (
     PayoutsStream
 )
 
+# DISPLAY list for the connector landing page, not a support contract.
+# Sourced from __smoke-tests__/event_products_test/catalog-selected.json.
+# Runtime discovery remains authoritative; this list is not validated against it.
+COMMON_SHOPIFY_OBJECTS = [
+    "collections",
+    "customer_first_visit",
+    "customer_journey_summary",
+    "customer_last_visit",
+    "customers",
+    "event_destroyed_products",
+    "event_products",
+    "inventory_items",
+    "inventory_level_gql",
+    "inventory_level_rest",
+    "locations",
+    "marketing_events",
+    "orders",
+    "orders_fulfillments",
+    "orders_refunds",
+    "payouts",
+    "price_rules",
+    "products",
+    "shop",
+    "variants",
+]
+
 STREAM_TYPES = [
     ProductsStream,
     VariantsStream,
@@ -57,6 +83,8 @@ class TapshopifyBeta(Tap):
     """shopify-beta tap class."""
 
     name = "tap-shopify-beta"
+    dynamic_catalog = True
+    static_stream_names = COMMON_SHOPIFY_OBJECTS
 
     # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(

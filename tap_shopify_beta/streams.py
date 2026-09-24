@@ -43,8 +43,11 @@ for i, arg in enumerate(sys.argv):
             config_path = sys.argv[i + 1]
         break
 
-with open(config_path, "r") as jsonfile:
-    data = json.load(jsonfile)
+try:
+    with open(config_path, "r") as jsonfile:
+        data = json.load(jsonfile)
+except FileNotFoundError:
+    data = {}
 
 stream_condition = data.get("bulk", False)
 class DynamicStream(shopifyBulkStream if stream_condition else shopifyGqlStream):
