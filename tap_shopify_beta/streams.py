@@ -258,6 +258,10 @@ class OrdersStream(DynamicStream):
         th.Property("currentTotalPriceSet", MoneyBagType()),
         th.Property("currentTotalTaxSet", MoneyBagType()),
         th.Property("currentTotalWeight", th.StringType),
+        th.Property("customAttributes", th.ArrayType(th.ObjectType(
+            th.Property("key", th.StringType),
+            th.Property("value", th.StringType),
+        ))),
         th.Property("customerId", th.StringType),
         th.Property("customerAcceptsMarketing", th.BooleanType),
         th.Property("customerLocale", th.StringType),
