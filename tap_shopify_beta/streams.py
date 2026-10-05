@@ -47,6 +47,8 @@ try:
     with open(config_path, "r") as jsonfile:
         data = json.load(jsonfile)
 except FileNotFoundError:
+    if "--about" not in sys.argv:
+        raise
     data = {}
 
 stream_condition = data.get("bulk", False)
