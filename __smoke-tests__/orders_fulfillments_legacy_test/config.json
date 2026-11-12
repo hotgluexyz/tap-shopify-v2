@@ -1,0 +1,8 @@
+{
+    "shop": "fake-shop",
+    "api_key": "shp***",
+    "access_token": "ddf***",
+    "start_date": "2025-01-01T00:00:00",
+    "bulk": false,
+    "apply_concurrency": false
+}
