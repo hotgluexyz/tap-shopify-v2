@@ -1,8 +1,11 @@
 {
-    "shop": "fake-shop",
+    "start_date": "2026-05-30T00:00:00.000Z",
+    "api_type": "BULK",
+    "select_fields_by_default": true,
+    "shop": "hotglue-testing-1",
     "api_key": "shp***",
-    "access_token": "ddf***",
-    "start_date": "2025-01-01T00:00:00",
-    "bulk": false,
-    "apply_concurrency": false
+    "domain": "hotglue.com",
+    "hg_sync_output": "estimated-count-output",
+    "apply_concurrency": false,
+    "bulk": false
 }
