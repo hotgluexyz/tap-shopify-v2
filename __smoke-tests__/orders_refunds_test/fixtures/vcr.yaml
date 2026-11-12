@@ -1,7 +1,9 @@
 interactions:
 - request:
-    body: '{"query": "{ ordersCount(query: \"updated_at:>''2026-05-30T00:00:00Z''\",
-      limit: null) { count } }"}'
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
+      $sortKey: OrderSortKeys) { orders(first: $first, after: $after, query: $filter,
+      sortKey: $sortKey) { edges { cursor node { id refunds { id } updatedAt } },
+      pageInfo { hasNextPage } } } ", "variables": {"first": 1, "sortKey": "UPDATED_AT"}}'
     headers:
       Accept:
       - '*/*'
@@ -10,33 +12,31 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '98'
+      - '313'
       Content-Type:
       - application/json
       User-Agent:
-      - python-requests/2.33.1
+      - python-requests/2.31.0
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
+    uri: https://fake-shop.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
-      string: '{"data": {"ordersCount": {"count": 7}}, "extensions": {"cost": {"requestedQueryCost":
-        5524, "actualQueryCost": 5524, "throttleStatus": {"maximumAvailable": -47372395.6296908,
-        "currentlyAvailable": 7287, "restoreRate": 418923.693376896}}}}'
+      string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo0NjQ0NjI0MTA1NjkyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0wMyAxODoyOToxOS4zMzg0NzUifQ==",
+        "node": {"id": "gid://shopify/Order/4644624105692", "refunds": [], "updatedAt":
+        "2022-01-03T18:29:19Z"}}], "pageInfo": {"hasNextPage": true}}}, "extensions":
+        {"cost": {"requestedQueryCost": 4, "actualQueryCost": 4, "throttleStatus":
+        {"maximumAvailable": 2000.0, "currentlyAvailable": 1996, "restoreRate": 100.0}}}}'
     headers:
       Alt-Svc:
       - h3=":443"; ma=86400
-      CF-RAY:
-      - a23e3ef77af11ab5-GRU
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Jul 2026 13:41:10 GMT
-      Nel:
-      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
-      Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8MlX%2BGcSrO37wd1q%2BeoOtmxiP2PmRngKQ%2FdmTqSzOWmpLYaWTbcUsA1ibeuMB6pJN6aYbnsDGkJLWNoa5gpa1Uj%2BuOTxI4H2yiBJr9TB2z9shX22h9ZoZ63Sq3Y%2FyK9nsTXRajKc2gS5srQlXA3yli4hl4EWeGIA7e1Xisg%3D"}]}'
+      - Thu, 17 Apr 2025 20:39:44 GMT
+      Server:
+      - cloudflare
       Transfer-Encoding:
       - chunked
       cf-cache-status:
@@ -44,55 +44,23 @@ interactions:
       content-language:
       - en
       content-length:
-      - '196'
-      content-security-policy:
-      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
-        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
-        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
-        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
-        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
-        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
-        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
-        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
-        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
-        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=1bd4c231-c66c-4d2a-8a5e-cb74120a7a3e-1785518134;
-        report-to shopify-csp'
+      - '452'
       referrer-policy:
       - origin-when-cross-origin
-      reporting-endpoints:
-      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=1bd4c231-c66c-4d2a-8a5e-cb74120a7a3e-1785518134"
-      server:
-      - cloudflare
-      server-timing:
-      - processing;dur=53, verdict_flag_enabled;desc="count=10";dur=0.564, graphql;desc="admin/query/other",
-        _y;desc="08a072fe-c147-4655-ae3b-1fc49ffb3d83", _s;desc="e0d7d7e4-1c4e-45c0-8844-3d8bbf90da97"
-      - ipv6
       strict-transport-security:
       - max-age=7889238
       vary:
-      - Accept-Encoding,Sec-Fetch-Site
+      - Accept-Encoding
       x-content-type-options:
       - nosniff
-      x-dc:
-      - gcp-us-east1,gcp-us-central1,gcp-us-central1
       x-download-options:
       - noopen
       x-frame-options:
       - DENY
       x-permitted-cross-domain-policies:
       - none
-      x-request-id:
-      - 1bd4c231-c66c-4d2a-8a5e-cb74120a7a3e-1785518134
-      x-shopify-api-gql-engine:
-      - cardinal
       x-shopify-api-version:
-      - 2026-07
-      x-stats-apiclientid:
-      - '347932033025'
-      x-stats-apipermissionid:
-      - '691266257116'
-      x-stats-userid:
-      - ''
+      - 2024-07
       x-xss-protection:
       - 1; mode=block
     status:
@@ -102,7 +70,7 @@ interactions:
     body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
       $sortKey: OrderSortKeys) { orders(first: $first, after: $after, query: $filter,
       sortKey: $sortKey) { edges { cursor node { id refunds { id } updatedAt } },
-      pageInfo { hasNextPage } } } ", "variables": {"first": 1, "filter": "updated_at:>''2026-05-30T00:00:00''",
+      pageInfo { hasNextPage } } } ", "variables": {"first": 250, "after": "eyJsYXN0X2lkIjo0NjQ0NjI0MTA1NjkyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0wMyAxODoyOToxOS4zMzg0NzUifQ==",
       "sortKey": "UPDATED_AT"}}'
     headers:
       Accept:
@@ -112,36 +80,491 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '360'
+      - '420'
       Content-Type:
       - application/json
       User-Agent:
-      - python-requests/2.33.1
+      - python-requests/2.31.0
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
+    uri: https://fake-shop.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
-      string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyNS4wNDU3MDQifQ==",
-        "node": {"id": "gid://shopify/Order/7185087365340", "refunds": [], "updatedAt":
-        "2026-06-30T16:30:25Z"}}], "pageInfo": {"hasNextPage": true}}}, "extensions":
-        {"cost": {"requestedQueryCost": 6866, "actualQueryCost": 6866, "throttleStatus":
-        {"maximumAvailable": -303.926889338547, "currentlyAvailable": 6055, "restoreRate":
-        -751752370.180347}}}}'
+      string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo0NjQ0NjI1MDg4NzMyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0wMyAxODoyOTo0Mi44NjMwODYifQ==",
+        "node": {"id": "gid://shopify/Order/4644625088732", "refunds": [], "updatedAt":
+        "2022-01-03T18:29:42Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjQ0NjI1MzUwODc2LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0wMyAxODozMDowNS43NzU0MzMifQ==",
+        "node": {"id": "gid://shopify/Order/4644625350876", "refunds": [], "updatedAt":
+        "2022-01-03T18:30:05Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjQ0NjI1ODA5NjI4LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0wMyAxODozMDoyNC40MTEyMzYifQ==",
+        "node": {"id": "gid://shopify/Order/4644625809628", "refunds": [], "updatedAt":
+        "2022-01-03T18:30:24Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjQ0NjI2MTM3MzA4LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0wMyAxODozMDo0Ny45MDYzNTEifQ==",
+        "node": {"id": "gid://shopify/Order/4644626137308", "refunds": [], "updatedAt":
+        "2022-01-03T18:30:47Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjQ0Njc0MTA5NjYwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0wMyAxOToyMzowNC4yOTcxNDgifQ==",
+        "node": {"id": "gid://shopify/Order/4644674109660", "refunds": [], "updatedAt":
+        "2022-01-03T19:23:04Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjQ0Njc0NTY4NDEyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0wMyAxOToyMzo0NC4xMzc2MjgifQ==",
+        "node": {"id": "gid://shopify/Order/4644674568412", "refunds": [], "updatedAt":
+        "2022-01-03T19:23:44Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjY3OTc1OTI1OTgwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0yOCAyMDo1NToyMi44NjI1OTgifQ==",
+        "node": {"id": "gid://shopify/Order/4667975925980", "refunds": [], "updatedAt":
+        "2022-01-28T20:55:22Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjY3OTgyNTEyMzQ4LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0yOCAyMTowNDo1Mi45MjM5NjkifQ==",
+        "node": {"id": "gid://shopify/Order/4667982512348", "refunds": [], "updatedAt":
+        "2022-01-28T21:04:52Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjY3OTgyNTc3ODg0LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMS0yOCAyMTowNDo1Ny4yMzA3NzIifQ==",
+        "node": {"id": "gid://shopify/Order/4667982577884", "refunds": [], "updatedAt":
+        "2022-01-28T21:04:57Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODIyODQxMDUyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNjo1NjozMy42MTY0NjYifQ==",
+        "node": {"id": "gid://shopify/Order/4677822841052", "refunds": [], "updatedAt":
+        "2022-02-08T16:56:33Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODMzNjU0NDkyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowNzoyMC43MTEyMjkifQ==",
+        "node": {"id": "gid://shopify/Order/4677833654492", "refunds": [], "updatedAt":
+        "2022-02-08T17:07:20Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM0MDE0OTQwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowNzo0MC41ODk1NDgifQ==",
+        "node": {"id": "gid://shopify/Order/4677834014940", "refunds": [], "updatedAt":
+        "2022-02-08T17:07:40Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM0MDQ3NzA4LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowNzo0MS44MTAwMjQifQ==",
+        "node": {"id": "gid://shopify/Order/4677834047708", "refunds": [], "updatedAt":
+        "2022-02-08T17:07:41Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM0MDgwNDc2LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowNzo0NC4zMDU0OTgifQ==",
+        "node": {"id": "gid://shopify/Order/4677834080476", "refunds": [], "updatedAt":
+        "2022-02-08T17:07:44Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM0NTcxOTk2LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowODoyMC4wNDIzNTAifQ==",
+        "node": {"id": "gid://shopify/Order/4677834571996", "refunds": [], "updatedAt":
+        "2022-02-08T17:08:20Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM0NjM3NTMyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowODoyMS42NTY0NjMifQ==",
+        "node": {"id": "gid://shopify/Order/4677834637532", "refunds": [], "updatedAt":
+        "2022-02-08T17:08:21Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM1OTE1NDg0LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowOTozNy45MDcxMTgifQ==",
+        "node": {"id": "gid://shopify/Order/4677835915484", "refunds": [], "updatedAt":
+        "2022-02-08T17:09:37Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM1OTgxMDIwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowOTo0MC41NzI4NDYifQ==",
+        "node": {"id": "gid://shopify/Order/4677835981020", "refunds": [], "updatedAt":
+        "2022-02-08T17:09:40Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM2MDc5MzI0LCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzowOTo0My4wMDQzOTEifQ==",
+        "node": {"id": "gid://shopify/Order/4677836079324", "refunds": [], "updatedAt":
+        "2022-02-08T17:09:43Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM2OTMxMjkyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wMi0wOCAxNzoxMDo0My43NTE1NTIifQ==",
+        "node": {"id": "gid://shopify/Order/4677836931292", "refunds": [], "updatedAt":
+        "2022-02-08T17:10:43Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM3NzgzMjYwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wNS0wNiAyMjo0MTo1Ni40ODYwNjAifQ==",
+        "node": {"id": "gid://shopify/Order/4677837783260", "refunds": [], "updatedAt":
+        "2022-05-06T22:41:56Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM0ODAxMzcyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wNS0xMiAxOTozNjo1NC4zMzczMTIifQ==",
+        "node": {"id": "gid://shopify/Order/4677834801372", "refunds": [], "updatedAt":
+        "2022-05-12T19:36:54Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc0MzMyNTkwMzAwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wNS0xMiAxOTozNjo1NS4zNTQ0MjAifQ==",
+        "node": {"id": "gid://shopify/Order/4674332590300", "refunds": [], "updatedAt":
+        "2022-05-12T19:36:55Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Nzk0ODEyMTM3NjkyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wNS0yNSAxNjo1OTo0NC4wMjEyMzQifQ==",
+        "node": {"id": "gid://shopify/Order/4794812137692", "refunds": [{"id": "gid://shopify/Refund/858613809372"}],
+        "updatedAt": "2022-05-25T16:59:44Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE0NTU0MjM1MTAwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wNi0xMyAxNzo1MTozNy4yMzk4NTEifQ==",
+        "node": {"id": "gid://shopify/Order/4814554235100", "refunds": [], "updatedAt":
+        "2022-06-13T17:51:37Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE0NTU5MTE3NTMyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wNi0xMyAxNzo1NTozOC4xOTIyODQifQ==",
+        "node": {"id": "gid://shopify/Order/4814559117532", "refunds": [], "updatedAt":
+        "2022-06-13T17:55:38Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE0NTU5MTgzMDY4LCJsYXN0X3ZhbHVlIjoiMjAyMi0wNi0xMyAxNzo1NTozOS4yMzY0MTEifQ==",
+        "node": {"id": "gid://shopify/Order/4814559183068", "refunds": [], "updatedAt":
+        "2022-06-13T17:55:39Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE1NDkxODI1ODg0LCJsYXN0X3ZhbHVlIjoiMjAyMi0wNi0xNCAxNjozNjoxNy45MzUwNTcifQ==",
+        "node": {"id": "gid://shopify/Order/4815491825884", "refunds": [], "updatedAt":
+        "2022-06-14T16:36:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE1NDkzMDA1NTMyLCJsYXN0X3ZhbHVlIjoiMjAyMi0wNi0xNCAxNjozNzo1NS40MjU1NzMifQ==",
+        "node": {"id": "gid://shopify/Order/4815493005532", "refunds": [], "updatedAt":
+        "2022-06-14T16:37:55Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE1NDk0ODczMzA4LCJsYXN0X3ZhbHVlIjoiMjAyMi0wNi0xNCAxNjozOTo0My4yMTE1MzgifQ==",
+        "node": {"id": "gid://shopify/Order/4815494873308", "refunds": [], "updatedAt":
+        "2022-06-14T16:39:43Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE1NDk1Mzk3NTk2LCJsYXN0X3ZhbHVlIjoiMjAyMi0wNi0xNCAxNjo0MDoyOS43MzA3MzYifQ==",
+        "node": {"id": "gid://shopify/Order/4815495397596", "refunds": [], "updatedAt":
+        "2022-06-14T16:40:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE1NTAzMjk0Njg0LCJsYXN0X3ZhbHVlIjoiMjAyMi0wNi0xNCAxNjo1MDozNy4xMTc5NTAifQ==",
+        "node": {"id": "gid://shopify/Order/4815503294684", "refunds": [], "updatedAt":
+        "2022-06-14T16:50:37Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTU2OTQyMTcyMzgwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wOC0xNiAxOToyODowMy44NTc5NjgifQ==",
+        "node": {"id": "gid://shopify/Order/4956942172380", "refunds": [], "updatedAt":
+        "2022-08-16T19:28:03Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTU3MDI1Nzk2MzE2LCJsYXN0X3ZhbHVlIjoiMjAyMi0wOC0xNiAyMDo1OTo0NC41MDE1MDgifQ==",
+        "node": {"id": "gid://shopify/Order/4957025796316", "refunds": [], "updatedAt":
+        "2022-08-16T20:59:44Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTU3MDMwNjQ1OTgwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wOC0xNiAyMTowNTozMS40MzQwMTgifQ==",
+        "node": {"id": "gid://shopify/Order/4957030645980", "refunds": [], "updatedAt":
+        "2022-08-16T21:05:31Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTU3MDUxNjUwMjY4LCJsYXN0X3ZhbHVlIjoiMjAyMi0wOC0xNiAyMTozMTo0Ni45NDEwNDMifQ==",
+        "node": {"id": "gid://shopify/Order/4957051650268", "refunds": [], "updatedAt":
+        "2022-08-16T21:31:46Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTU3MDUyMjcyODYwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wOC0xNiAyMTozMjo1MC44MDI4MTYifQ==",
+        "node": {"id": "gid://shopify/Order/4957052272860", "refunds": [], "updatedAt":
+        "2022-08-16T21:32:50Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTc1NjQwMDg0NzAwLCJsYXN0X3ZhbHVlIjoiMjAyMi0wOS0wMSAxNjoxODo1NS4zMTk2NzcifQ==",
+        "node": {"id": "gid://shopify/Order/4975640084700", "refunds": [], "updatedAt":
+        "2022-09-01T16:18:55Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM2MDQ2NTU2LCJsYXN0X3ZhbHVlIjoiMjAyMi0xMC0xNyAyMDoyMDoxNy43MTM1NDUifQ==",
+        "node": {"id": "gid://shopify/Order/4677836046556", "refunds": [], "updatedAt":
+        "2022-10-17T20:20:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTczNjk1NDM0OTcyLCJsYXN0X3ZhbHVlIjoiMjAyMi0xMC0yMCAxOTo1ODo0OS45MTczMDYifQ==",
+        "node": {"id": "gid://shopify/Order/4973695434972", "refunds": [], "updatedAt":
+        "2022-10-20T19:58:49Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTc1ODE4NzAzMDY4LCJsYXN0X3ZhbHVlIjoiMjAyMi0xMC0yMCAxOTo1ODo1MC4yOTk4NzEifQ==",
+        "node": {"id": "gid://shopify/Order/4975818703068", "refunds": [], "updatedAt":
+        "2022-10-20T19:58:50Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MTIyNzcyNTAwNzAwLCJsYXN0X3ZhbHVlIjoiMjAyMi0xMi0xNCAyMTo0ODo0My43OTMyNzIifQ==",
+        "node": {"id": "gid://shopify/Order/5122772500700", "refunds": [], "updatedAt":
+        "2022-12-14T21:48:43Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MTIyNzk2NTE5NjQ0LCJsYXN0X3ZhbHVlIjoiMjAyMi0xMi0yOCAxOTo0NToyOS41MTYzMjEifQ==",
+        "node": {"id": "gid://shopify/Order/5122796519644", "refunds": [], "updatedAt":
+        "2022-12-28T19:45:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MTQ3NjIwOTMzODUyLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wMiAyMDozMToyNS40MzgyOTgifQ==",
+        "node": {"id": "gid://shopify/Order/5147620933852", "refunds": [], "updatedAt":
+        "2023-01-02T20:31:25Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MTIyNzc2MDA2ODc2LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wNiAyMTo0MzozNC4zODQ5NjIifQ==",
+        "node": {"id": "gid://shopify/Order/5122776006876", "refunds": [], "updatedAt":
+        "2023-01-06T21:43:34Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjY3OTgyMTg0NjY4LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAxODoyNToxNy4xNDc4MzYifQ==",
+        "node": {"id": "gid://shopify/Order/4667982184668", "refunds": [], "updatedAt":
+        "2023-01-09T18:25:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjQ0NjcyMjc0NjUyLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAxOTo0ODowMC44Nzg3MjAifQ==",
+        "node": {"id": "gid://shopify/Order/4644672274652", "refunds": [], "updatedAt":
+        "2023-01-09T19:48:00Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTc1MDMyNTk4NzQ4LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAyMDoyMzowOS40NzIxNTcifQ==",
+        "node": {"id": "gid://shopify/Order/4975032598748", "refunds": [], "updatedAt":
+        "2023-01-09T20:23:09Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjY3OTcxNTM1MDY4LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAyMTozMzo0OS42MzE5NzgifQ==",
+        "node": {"id": "gid://shopify/Order/4667971535068", "refunds": [], "updatedAt":
+        "2023-01-09T21:33:49Z"}}, {"cursor": "eyJsYXN0X2lkIjo0NjY3OTc1ODkzMjEyLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAyMjoyMToyOC40NjgxNDkifQ==",
+        "node": {"id": "gid://shopify/Order/4667975893212", "refunds": [], "updatedAt":
+        "2023-01-09T22:21:28Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODIyNTQ2MTQwLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAyMjozMDo1NS43MDk5NjcifQ==",
+        "node": {"id": "gid://shopify/Order/4677822546140", "refunds": [], "updatedAt":
+        "2023-01-09T22:30:55Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODIyNjc3MjEyLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAyMjozMTo1OS45MDc1MTgifQ==",
+        "node": {"id": "gid://shopify/Order/4677822677212", "refunds": [], "updatedAt":
+        "2023-01-09T22:31:59Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM2OTk2ODI4LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAyMjo0Nzo0Mi43MTgxMzEifQ==",
+        "node": {"id": "gid://shopify/Order/4677836996828", "refunds": [], "updatedAt":
+        "2023-01-09T22:47:42Z"}}, {"cursor": "eyJsYXN0X2lkIjo0Njc3ODM3NTg2NjUyLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0wOSAyMjo0ODozOS4xNDA3MDcifQ==",
+        "node": {"id": "gid://shopify/Order/4677837586652", "refunds": [], "updatedAt":
+        "2023-01-09T22:48:39Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MTIyNzI0MjY2MjA0LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAxNjozMTo1NC45MDU3MDIifQ==",
+        "node": {"id": "gid://shopify/Order/5122724266204", "refunds": [], "updatedAt":
+        "2023-01-10T16:31:54Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTczNzI0ODYwNjM2LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAxNjozNTo1NC44MDk4NzkifQ==",
+        "node": {"id": "gid://shopify/Order/4973724860636", "refunds": [], "updatedAt":
+        "2023-01-10T16:35:54Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTczNjgxODM2MjUyLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAxNjo0OTo0Mi44OTA5ODEifQ==",
+        "node": {"id": "gid://shopify/Order/4973681836252", "refunds": [], "updatedAt":
+        "2023-01-10T16:49:42Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTU3MDUzMjIzMTMyLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAxNjo1Mjo0Ny45MjgxNTAifQ==",
+        "node": {"id": "gid://shopify/Order/4957053223132", "refunds": [], "updatedAt":
+        "2023-01-10T16:52:47Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MTIyNjc0MzYwNTQwLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAxNzoxMTo0NS4zNDgzNzkifQ==",
+        "node": {"id": "gid://shopify/Order/5122674360540", "refunds": [], "updatedAt":
+        "2023-01-10T17:11:45Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTc0OTQ4ODc2NTA4LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAxODoxMjoyNS45Mjk0NTEifQ==",
+        "node": {"id": "gid://shopify/Order/4974948876508", "refunds": [], "updatedAt":
+        "2023-01-10T18:12:25Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTczNzE2NjAzMTAwLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAxODoxODowNi45MTE3MjkifQ==",
+        "node": {"id": "gid://shopify/Order/4973716603100", "refunds": [], "updatedAt":
+        "2023-01-10T18:18:06Z"}}, {"cursor": "eyJsYXN0X2lkIjo0ODE0NTU0MjAyMzMyLCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAyMDowOToyOS4zNTcxMTMifQ==",
+        "node": {"id": "gid://shopify/Order/4814554202332", "refunds": [], "updatedAt":
+        "2023-01-10T20:09:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo0OTczNzM0MzYzMzU2LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMCAyMDoxOToyNy4zNjc3NTAifQ==",
+        "node": {"id": "gid://shopify/Order/4973734363356", "refunds": [], "updatedAt":
+        "2023-01-10T20:19:27Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MTU5MTYyODcyMDI4LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMiAxOTo1MTo1Ni45NjM3MDkifQ==",
+        "node": {"id": "gid://shopify/Order/5159162872028", "refunds": [], "updatedAt":
+        "2023-01-12T19:51:56Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MTU5MTk0ODUzNTk2LCJsYXN0X3ZhbHVlIjoiMjAyMy0wMS0xMiAxOTo1NToyNy4wMjM5OTgifQ==",
+        "node": {"id": "gid://shopify/Order/5159194853596", "refunds": [], "updatedAt":
+        "2023-01-12T19:55:27Z"}}, {"cursor": "eyJsYXN0X2lkIjo1MzEwOTQ2MTgxMzQwLCJsYXN0X3ZhbHVlIjoiMjAyMy0wNS0yNCAwNDozMDowNy4wNTk5OTQifQ==",
+        "node": {"id": "gid://shopify/Order/5310946181340", "refunds": [], "updatedAt":
+        "2023-05-24T04:30:07Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDEyNzcwNjExNDIwLCJsYXN0X3ZhbHVlIjoiMjAyMy0wOC0yNiAwMzo1OTo0OC4yNjQwNjgifQ==",
+        "node": {"id": "gid://shopify/Order/5412770611420", "refunds": [], "updatedAt":
+        "2023-08-26T03:59:48Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDgzMDQzNDU1MTk2LCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wMiAxNDoxNjoxOC40NDM1ODkifQ==",
+        "node": {"id": "gid://shopify/Order/5483043455196", "refunds": [], "updatedAt":
+        "2023-11-02T14:16:18Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDgzMDQ1Mzg4NTA4LCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wMiAxNDoxODowMC4zNjQwOTAifQ==",
+        "node": {"id": "gid://shopify/Order/5483045388508", "refunds": [], "updatedAt":
+        "2023-11-02T14:18:00Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDgzMDY4OTE1OTMyLCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wMiAxNDozOTo0OC4xNDM0NTgifQ==",
+        "node": {"id": "gid://shopify/Order/5483068915932", "refunds": [], "updatedAt":
+        "2023-11-02T14:39:48Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDgzMDcwNDIzMjYwLCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wMiAxNDo0MjowOC40MzQ3NTUifQ==",
+        "node": {"id": "gid://shopify/Order/5483070423260", "refunds": [], "updatedAt":
+        "2023-11-02T14:42:08Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDg5MzIwMjk2NjY4LCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wNyAxNzoyODoyOS45Nzk1MTYifQ==",
+        "node": {"id": "gid://shopify/Order/5489320296668", "refunds": [], "updatedAt":
+        "2023-11-07T17:28:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDg5MzQ5ODIwNjM2LCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wNyAxNzo0NDoyMS4yOTE4OTkifQ==",
+        "node": {"id": "gid://shopify/Order/5489349820636", "refunds": [], "updatedAt":
+        "2023-11-07T17:44:21Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDg5MzUxMjk1MTk2LCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wNyAxNzo0NTo0MC43MDk5NTEifQ==",
+        "node": {"id": "gid://shopify/Order/5489351295196", "refunds": [], "updatedAt":
+        "2023-11-07T17:45:40Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDg5MzUyMTE0Mzk2LCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wNyAxNzo0NjoyNS45NTUxMDkifQ==",
+        "node": {"id": "gid://shopify/Order/5489352114396", "refunds": [], "updatedAt":
+        "2023-11-07T17:46:25Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDg5MzUzMjYxMjc2LCJsYXN0X3ZhbHVlIjoiMjAyMy0xMS0wNyAxNzo0NzozNi44NDQxMDcifQ==",
+        "node": {"id": "gid://shopify/Order/5489353261276", "refunds": [], "updatedAt":
+        "2023-11-07T17:47:36Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NDg5MzYwMDExNDg0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMi0yNiAwNzowNDozNi4yMzAwOTEifQ==",
+        "node": {"id": "gid://shopify/Order/5489360011484", "refunds": [], "updatedAt":
+        "2024-02-26T07:04:36Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjQ4NjI4NjQ2MTA4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0xNCAwNDoxMjo1Ny4zMTYwNzUifQ==",
+        "node": {"id": "gid://shopify/Order/5648628646108", "refunds": [], "updatedAt":
+        "2024-03-14T04:12:57Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjQ4NjMxNzkxODM2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0xNCAwNDoxNzowMi41ODg4NTgifQ==",
+        "node": {"id": "gid://shopify/Order/5648631791836", "refunds": [], "updatedAt":
+        "2024-03-14T04:17:02Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY1NDg3MzIzMzU2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNiAyMTowMTo0OC40NTk4OTIifQ==",
+        "node": {"id": "gid://shopify/Order/5665487323356", "refunds": [], "updatedAt":
+        "2024-03-26T21:01:48Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY1NDg4MTc1MzI0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNiAyMTowMjozNS4zMjE5NzYifQ==",
+        "node": {"id": "gid://shopify/Order/5665488175324", "refunds": [], "updatedAt":
+        "2024-03-26T21:02:35Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY1NTEzNzY3MTMyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNiAyMToyOTo0MS4yNzQ1ODUifQ==",
+        "node": {"id": "gid://shopify/Order/5665513767132", "refunds": [], "updatedAt":
+        "2024-03-26T21:29:41Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY1NTE0MjI1ODg0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNiAyMTozMDoxOC41MDk5MDIifQ==",
+        "node": {"id": "gid://shopify/Order/5665514225884", "refunds": [], "updatedAt":
+        "2024-03-26T21:30:18Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDMzMzAyNzQ4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxNzo1NTo1NC4zMjI5NDEifQ==",
+        "node": {"id": "gid://shopify/Order/5666433302748", "refunds": [], "updatedAt":
+        "2024-03-27T17:55:54Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDMzNjk1OTY0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxNzo1NjoxNS4yMzMwMDMifQ==",
+        "node": {"id": "gid://shopify/Order/5666433695964", "refunds": [], "updatedAt":
+        "2024-03-27T17:56:15Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDM1ODkxNDIwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxNzo1ODozMi43Mzc2NzYifQ==",
+        "node": {"id": "gid://shopify/Order/5666435891420", "refunds": [], "updatedAt":
+        "2024-03-27T17:58:32Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDQwODcyMTU2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxODowMjo1OC40NjI2NDcifQ==",
+        "node": {"id": "gid://shopify/Order/5666440872156", "refunds": [], "updatedAt":
+        "2024-03-27T18:02:58Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDQyMDUxODA0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxODowMzozOC43NDczODQifQ==",
+        "node": {"id": "gid://shopify/Order/5666442051804", "refunds": [], "updatedAt":
+        "2024-03-27T18:03:38Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDY5NDEzMDg0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxODoyODo1OC43MzQ2MzYifQ==",
+        "node": {"id": "gid://shopify/Order/5666469413084", "refunds": [], "updatedAt":
+        "2024-03-27T18:28:58Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDgwNTU0MjA0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxODo0MDoxNy45MjM0NTQifQ==",
+        "node": {"id": "gid://shopify/Order/5666480554204", "refunds": [], "updatedAt":
+        "2024-03-27T18:40:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDg3MDA5NTAwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxODo0NzowMC44ODU5NzIifQ==",
+        "node": {"id": "gid://shopify/Order/5666487009500", "refunds": [], "updatedAt":
+        "2024-03-27T18:47:00Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDg4MjU0Njg0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxODo0OTowOC44NDg0OTQifQ==",
+        "node": {"id": "gid://shopify/Order/5666488254684", "refunds": [], "updatedAt":
+        "2024-03-27T18:49:08Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NDkxMjY5MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAxODo1MTo1Ny4wOTAwOTMifQ==",
+        "node": {"id": "gid://shopify/Order/5666491269340", "refunds": [], "updatedAt":
+        "2024-03-27T18:51:57Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NTc2NzI4Mjg0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAyMDoxNjoyMi42NDQ5MjkifQ==",
+        "node": {"id": "gid://shopify/Order/5666576728284", "refunds": [], "updatedAt":
+        "2024-03-27T20:16:22Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY2NTg0NjU4MTQwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yNyAyMDoyNDoyNy4zMjI1ODQifQ==",
+        "node": {"id": "gid://shopify/Order/5666584658140", "refunds": [], "updatedAt":
+        "2024-03-27T20:24:27Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY3NjMyNjQ0MzE2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yOCAxNDowMDozMS4xNDY0NDMifQ==",
+        "node": {"id": "gid://shopify/Order/5667632644316", "refunds": [], "updatedAt":
+        "2024-03-28T14:00:31Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY4MDM3ODg2MTcyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yOCAxODo1MTo0Mi42MDY1MDUifQ==",
+        "node": {"id": "gid://shopify/Order/5668037886172", "refunds": [], "updatedAt":
+        "2024-03-28T18:51:42Z"}}, {"cursor": "eyJsYXN0X2lkIjo1NjY4MDUzMTIzMjkyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wMy0yOCAxOTowNToxNy41NTkxMzEifQ==",
+        "node": {"id": "gid://shopify/Order/5668053123292", "refunds": [], "updatedAt":
+        "2024-03-28T19:05:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4ODg0OTEzMzcyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAxOTo0MDoyNy44MDY4NjkifQ==",
+        "node": {"id": "gid://shopify/Order/5678884913372", "refunds": [], "updatedAt":
+        "2024-04-05T19:40:27Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4ODg4NTgzMzg4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAxOTo0MzoyNi45NTYwMjkifQ==",
+        "node": {"id": "gid://shopify/Order/5678888583388", "refunds": [], "updatedAt":
+        "2024-04-05T19:43:26Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4ODg5NDY4MTI0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAxOTo0NDoxNS43MTA4ODYifQ==",
+        "node": {"id": "gid://shopify/Order/5678889468124", "refunds": [], "updatedAt":
+        "2024-04-05T19:44:15Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTA2NzA0MDkyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAxOTo1OTowMC4wOTc1OTEifQ==",
+        "node": {"id": "gid://shopify/Order/5678906704092", "refunds": [], "updatedAt":
+        "2024-04-05T19:59:00Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTE1NTg0MjIwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDowNzoxNi42MzM1NTgifQ==",
+        "node": {"id": "gid://shopify/Order/5678915584220", "refunds": [], "updatedAt":
+        "2024-04-05T20:07:16Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTE2OTYwNDc2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDowODoyMi41MTM4MTIifQ==",
+        "node": {"id": "gid://shopify/Order/5678916960476", "refunds": [], "updatedAt":
+        "2024-04-05T20:08:22Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTIyOTU3MDIwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDoxNDo1MS4zMjM0MjIifQ==",
+        "node": {"id": "gid://shopify/Order/5678922957020", "refunds": [], "updatedAt":
+        "2024-04-05T20:14:51Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTI2NDYzMTk2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDoxNzo1MS41OTQwNjEifQ==",
+        "node": {"id": "gid://shopify/Order/5678926463196", "refunds": [], "updatedAt":
+        "2024-04-05T20:17:51Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTI3NzczOTE2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDoxOTowMC4zNDAzNjEifQ==",
+        "node": {"id": "gid://shopify/Order/5678927773916", "refunds": [], "updatedAt":
+        "2024-04-05T20:19:00Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTI4NzU2OTU2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDoxOTo0OC40MjkyODIifQ==",
+        "node": {"id": "gid://shopify/Order/5678928756956", "refunds": [], "updatedAt":
+        "2024-04-05T20:19:48Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTMwMDM0OTA4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDoyMDo1OS43NDIwOTMifQ==",
+        "node": {"id": "gid://shopify/Order/5678930034908", "refunds": [], "updatedAt":
+        "2024-04-05T20:20:59Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTMxMTE2MjUyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDoyMTo0OS4wNDIyNzEifQ==",
+        "node": {"id": "gid://shopify/Order/5678931116252", "refunds": [], "updatedAt":
+        "2024-04-05T20:21:49Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTM2NTU1NzQwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDoyNzoxMS4yNDYxODEifQ==",
+        "node": {"id": "gid://shopify/Order/5678936555740", "refunds": [], "updatedAt":
+        "2024-04-05T20:27:11Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTQ1NTk5NzA4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDozNToyOS42MzIzNTkifQ==",
+        "node": {"id": "gid://shopify/Order/5678945599708", "refunds": [], "updatedAt":
+        "2024-04-05T20:35:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTQ4NzEyNjY4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDozODowOS40MTkwOTQifQ==",
+        "node": {"id": "gid://shopify/Order/5678948712668", "refunds": [], "updatedAt":
+        "2024-04-05T20:38:09Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTQ5Nzk0MDEyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDozODo0Ny44NTI2NTAifQ==",
+        "node": {"id": "gid://shopify/Order/5678949794012", "refunds": [], "updatedAt":
+        "2024-04-05T20:38:47Z"}}, {"cursor": "eyJsYXN0X2lkIjo1Njc4OTUwMDIzMzg4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNC0wNSAyMDozOTowNi4xNDg5NDAifQ==",
+        "node": {"id": "gid://shopify/Order/5678950023388", "refunds": [], "updatedAt":
+        "2024-04-05T20:39:06Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA0MzUxNzgzMTMyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yNyAxOTowMDo1OC4yMzg1NzIifQ==",
+        "node": {"id": "gid://shopify/Order/5804351783132", "refunds": [], "updatedAt":
+        "2024-06-27T19:00:58Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA0MzU4NTk4ODc2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yNyAxOTowNzoxMC4zNTI0NDcifQ==",
+        "node": {"id": "gid://shopify/Order/5804358598876", "refunds": [], "updatedAt":
+        "2024-06-27T19:07:10Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA0MzYxOTA4NDQ0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yNyAxOToxMDowMC42NDI2NTEifQ==",
+        "node": {"id": "gid://shopify/Order/5804361908444", "refunds": [], "updatedAt":
+        "2024-06-27T19:10:00Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA0NDQ3NDY1NjkyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yNyAyMDoyODowOC40NTk4OTUifQ==",
+        "node": {"id": "gid://shopify/Order/5804447465692", "refunds": [], "updatedAt":
+        "2024-06-27T20:28:08Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA1MzM4NzIyNTI0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yOCAxNToxMTo1NS4xNDU1MDQifQ==",
+        "node": {"id": "gid://shopify/Order/5805338722524", "refunds": [], "updatedAt":
+        "2024-06-28T15:11:55Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA1MzQxODY4MjUyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yOCAxNToxNDozMC44MDMwMTIifQ==",
+        "node": {"id": "gid://shopify/Order/5805341868252", "refunds": [], "updatedAt":
+        "2024-06-28T15:14:30Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA1MzQzNjA0OTU2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yOCAxNToxNTo0MC43NzE5MDQifQ==",
+        "node": {"id": "gid://shopify/Order/5805343604956", "refunds": [], "updatedAt":
+        "2024-06-28T15:15:40Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA1MzUwOTEyMjIwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yOCAxNToyMTowOC44ODA0MDQifQ==",
+        "node": {"id": "gid://shopify/Order/5805350912220", "refunds": [], "updatedAt":
+        "2024-06-28T15:21:08Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA1Mzc3NTUyNjA0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yOCAxNTo0MTo0NC4xNTM5NTgifQ==",
+        "node": {"id": "gid://shopify/Order/5805377552604", "refunds": [], "updatedAt":
+        "2024-06-28T15:41:44Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODA1Mzc5NjE2OTg4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNi0yOCAxNTo0MzoyOS4yNTY4MDEifQ==",
+        "node": {"id": "gid://shopify/Order/5805379616988", "refunds": [], "updatedAt":
+        "2024-06-28T15:43:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODM2NzU2NDE4NzgwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNy0yMiAyMToxMjoyOS4yODQyNDIifQ==",
+        "node": {"id": "gid://shopify/Order/5836756418780", "refunds": [], "updatedAt":
+        "2024-07-22T21:12:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODM2Nzc4NTA0NDEyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNy0yMiAyMTozNzoxMS42NjQ2NDMifQ==",
+        "node": {"id": "gid://shopify/Order/5836778504412", "refunds": [], "updatedAt":
+        "2024-07-22T21:37:11Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODM2Nzk4ODUzMzQwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNy0yMiAyMTo1OTowMi45ODIzMDcifQ==",
+        "node": {"id": "gid://shopify/Order/5836798853340", "refunds": [], "updatedAt":
+        "2024-07-22T21:59:02Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODM2ODAxMTE0MzMyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNy0yMiAyMjowMTo0MC41MjU2OTAifQ==",
+        "node": {"id": "gid://shopify/Order/5836801114332", "refunds": [], "updatedAt":
+        "2024-07-22T22:01:40Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODM2ODAzMjc3MDIwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNy0yMiAyMjowMzo0NS42NDEwNjgifQ==",
+        "node": {"id": "gid://shopify/Order/5836803277020", "refunds": [], "updatedAt":
+        "2024-07-22T22:03:45Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODM3NzUyNDM0OTA4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wNy0yMyAxMzo0NjozMC4wNDEyMzgifQ==",
+        "node": {"id": "gid://shopify/Order/5837752434908", "refunds": [], "updatedAt":
+        "2024-07-23T13:46:30Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODM3NzgwNzQ2NDYwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNy0yMyAxNDoxMTowNi40ODk5MjgifQ==",
+        "node": {"id": "gid://shopify/Order/5837780746460", "refunds": [], "updatedAt":
+        "2024-07-23T14:11:06Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODM3Nzg5Mzk3MjEyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wNy0yMyAxNDoxODowNy43MzYwMjEifQ==",
+        "node": {"id": "gid://shopify/Order/5837789397212", "refunds": [], "updatedAt":
+        "2024-07-23T14:18:07Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODc4MTgxMjMyODYwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0xNSAxNzowNTowOC40MTEyMDYifQ==",
+        "node": {"id": "gid://shopify/Order/5878181232860", "refunds": [], "updatedAt":
+        "2024-08-15T17:05:08Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODc4MjQzOTgzNTgwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0xNSAxNzozMzoxNy43NjIxMTMifQ==",
+        "node": {"id": "gid://shopify/Order/5878243983580", "refunds": [], "updatedAt":
+        "2024-08-15T17:33:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3NjkyMzE1ODY4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAxNzoyMjozMS4yOTg5NTUifQ==",
+        "node": {"id": "gid://shopify/Order/5897692315868", "refunds": [], "updatedAt":
+        "2024-08-28T17:22:31Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3Njk5MzI4MjIwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAxNzoyNzo1OS4yOTYzODgifQ==",
+        "node": {"id": "gid://shopify/Order/5897699328220", "refunds": [], "updatedAt":
+        "2024-08-28T17:27:59Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3ODcxMTk2MzgwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAxOTo0NTowMy4zMzg3NTcifQ==",
+        "node": {"id": "gid://shopify/Order/5897871196380", "refunds": [], "updatedAt":
+        "2024-08-28T19:45:03Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3OTA4NzQ4NTA4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAyMDoyMDo1Ny4zMzI4MDAifQ==",
+        "node": {"id": "gid://shopify/Order/5897908748508", "refunds": [], "updatedAt":
+        "2024-08-28T20:20:57Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3OTEzNzYyMDEyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAyMDoyNDo0Mi40MTM4NjkifQ==",
+        "node": {"id": "gid://shopify/Order/5897913762012", "refunds": [], "updatedAt":
+        "2024-08-28T20:24:42Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3OTE1MDcyNzMyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAyMDoyNzoyMS4zOTgzNTMifQ==",
+        "node": {"id": "gid://shopify/Order/5897915072732", "refunds": [], "updatedAt":
+        "2024-08-28T20:27:21Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3OTU2NzUzNjI4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAyMTowNTozNy43OTM2MjMifQ==",
+        "node": {"id": "gid://shopify/Order/5897956753628", "refunds": [], "updatedAt":
+        "2024-08-28T21:05:37Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3OTU5Mjc2NzY0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAyMTowODoxNy45NTc3MjAifQ==",
+        "node": {"id": "gid://shopify/Order/5897959276764", "refunds": [], "updatedAt":
+        "2024-08-28T21:08:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3OTYwMTI4NzMyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAyMTowOTozMC4yNDU0MTEifQ==",
+        "node": {"id": "gid://shopify/Order/5897960128732", "refunds": [], "updatedAt":
+        "2024-08-28T21:09:30Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3OTYxNTcwNTI0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAyMToxMToxMy44MTIxNjUifQ==",
+        "node": {"id": "gid://shopify/Order/5897961570524", "refunds": [], "updatedAt":
+        "2024-08-28T21:11:13Z"}}, {"cursor": "eyJsYXN0X2lkIjo1ODk3OTY0MjI0NzMyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOC0yOCAyMToxMzo0OC4xNDY5MzIifQ==",
+        "node": {"id": "gid://shopify/Order/5897964224732", "refunds": [], "updatedAt":
+        "2024-08-28T21:13:48Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NDk0OTM1NzcyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAxOToyNzoyMi43MTgwNzkifQ==",
+        "node": {"id": "gid://shopify/Order/5917494935772", "refunds": [], "updatedAt":
+        "2024-09-09T19:27:22Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NDk4NTQwMjUyLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAxOTozMDoxMC4yMDg4NjcifQ==",
+        "node": {"id": "gid://shopify/Order/5917498540252", "refunds": [], "updatedAt":
+        "2024-09-09T19:30:10Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NTIxOTAzODM2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAxOTo1MjoxNS41ODI0NjQifQ==",
+        "node": {"id": "gid://shopify/Order/5917521903836", "refunds": [], "updatedAt":
+        "2024-09-09T19:52:15Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NTI3NDc0Mzk2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAxOTo1NzowNC41NjUzMDYifQ==",
+        "node": {"id": "gid://shopify/Order/5917527474396", "refunds": [], "updatedAt":
+        "2024-09-09T19:57:04Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NTI4MTYyNTI0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAxOTo1Nzo0Mi41OTA1NjcifQ==",
+        "node": {"id": "gid://shopify/Order/5917528162524", "refunds": [], "updatedAt":
+        "2024-09-09T19:57:42Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NTg0NDkwNzE2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAyMDo0ODo1My4yMzYxOTIifQ==",
+        "node": {"id": "gid://shopify/Order/5917584490716", "refunds": [], "updatedAt":
+        "2024-09-09T20:48:53Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NjE3MjU4NzE2LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAyMTowMzozOS40MTAzMTcifQ==",
+        "node": {"id": "gid://shopify/Order/5917617258716", "refunds": [], "updatedAt":
+        "2024-09-09T21:03:39Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NjQzMTc4MjA0LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAyMToxMjoyMi44MjI5NjEifQ==",
+        "node": {"id": "gid://shopify/Order/5917643178204", "refunds": [], "updatedAt":
+        "2024-09-09T21:12:22Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3Njc3NDg2MzAwLCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAyMToyMzoyMS44MTI0NjgifQ==",
+        "node": {"id": "gid://shopify/Order/5917677486300", "refunds": [], "updatedAt":
+        "2024-09-09T21:23:21Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NjgxOTQyNzQ4LCJsYXN0X3ZhbHVlIjoiMjAyNC0wOS0wOSAyMToyNDo1My4zNDQ2MTcifQ==",
+        "node": {"id": "gid://shopify/Order/5917681942748", "refunds": [], "updatedAt":
+        "2024-09-09T21:24:53Z"}}, {"cursor": "eyJsYXN0X2lkIjo1OTE3NDk2OTAxODUyLCJsYXN0X3ZhbHVlIjoiMjAyNC0xMS0xNCAwMDoyNzowMi43MjA1OTIifQ==",
+        "node": {"id": "gid://shopify/Order/5917496901852", "refunds": [], "updatedAt":
+        "2024-11-14T00:27:02Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MDQ4NjY4MTg4ODkyLCJsYXN0X3ZhbHVlIjoiMjAyNC0xMS0xNCAwMDo1NjowMi4wODU3NzgifQ==",
+        "node": {"id": "gid://shopify/Order/6048668188892", "refunds": [], "updatedAt":
+        "2024-11-14T00:56:02Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MDQ4NzEyMDMyNDc2LCJsYXN0X3ZhbHVlIjoiMjAyNC0xMS0xNCAwMToyMzowNy44OTM5NDkifQ==",
+        "node": {"id": "gid://shopify/Order/6048712032476", "refunds": [{"id": "gid://shopify/Refund/917181858012"}],
+        "updatedAt": "2024-11-14T01:23:07Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MDQ4NzQ0MDc5NTgwLCJsYXN0X3ZhbHVlIjoiMjAyNC0xMS0xNCAwMTozNzoyMS4yMTM3NTYifQ==",
+        "node": {"id": "gid://shopify/Order/6048744079580", "refunds": [], "updatedAt":
+        "2024-11-14T01:37:21Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTg3MDQ0NDcxMDA0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0wNCAxNzoxMTozMy40NDkwNjYifQ==",
+        "node": {"id": "gid://shopify/Order/6187044471004", "refunds": [], "updatedAt":
+        "2025-02-04T17:11:33Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTg3MTgwOTE2OTU2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0wNCAxOToxNTo0OS43MDg1NzQifQ==",
+        "node": {"id": "gid://shopify/Order/6187180916956", "refunds": [], "updatedAt":
+        "2025-02-04T19:15:49Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk1NTM3MTE3NDA0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMSAyMTo0ODoxNy40ODYxOTcifQ==",
+        "node": {"id": "gid://shopify/Order/6195537117404", "refunds": [], "updatedAt":
+        "2025-02-11T21:48:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk1NTQzNDc0Mzk2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMSAyMTo1NjoxMS40ODU1NjIifQ==",
+        "node": {"id": "gid://shopify/Order/6195543474396", "refunds": [], "updatedAt":
+        "2025-02-11T21:56:11Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk2ODQwOTIzMzU2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMiAyMjoyNTozNi41MDQ1NTkifQ==",
+        "node": {"id": "gid://shopify/Order/6196840923356", "refunds": [], "updatedAt":
+        "2025-02-12T22:25:36Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3NjUxNTcwOTA4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAxNzowNjozMS42NTM4NDUifQ==",
+        "node": {"id": "gid://shopify/Order/6197651570908", "refunds": [], "updatedAt":
+        "2025-02-13T17:06:31Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3NjU4NjQ4Nzk2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAxNzoxMDoxNi44NjQ4NTMifQ==",
+        "node": {"id": "gid://shopify/Order/6197658648796", "refunds": [], "updatedAt":
+        "2025-02-13T17:10:16Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3NjU5MTA3NTQ4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAxNzoxMDozMi40ODI4MTgifQ==",
+        "node": {"id": "gid://shopify/Order/6197659107548", "refunds": [], "updatedAt":
+        "2025-02-13T17:10:32Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3NzIyMzgyNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAxODowMjoxNy40MTE3NDEifQ==",
+        "node": {"id": "gid://shopify/Order/6197722382556", "refunds": [], "updatedAt":
+        "2025-02-13T18:02:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3NzMxODUyNTA4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAxODoxMDo0MC4xNjUzNDUifQ==",
+        "node": {"id": "gid://shopify/Order/6197731852508", "refunds": [], "updatedAt":
+        "2025-02-13T18:10:40Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3NzQwNTM2MDI4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAxODoxODoxNi42ODQyNzQifQ==",
+        "node": {"id": "gid://shopify/Order/6197740536028", "refunds": [], "updatedAt":
+        "2025-02-13T18:18:16Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3NzQzMTkwMjM2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAxODoyMDoyNy44ODI1NTAifQ==",
+        "node": {"id": "gid://shopify/Order/6197743190236", "refunds": [], "updatedAt":
+        "2025-02-13T18:20:27Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3OTExMTkxNzcyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAyMDoyNDo0OC45NTI3NTYifQ==",
+        "node": {"id": "gid://shopify/Order/6197911191772", "refunds": [], "updatedAt":
+        "2025-02-13T20:24:48Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3OTE2MTA2OTcyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAyMDoyOToyNS4yMTM0NTgifQ==",
+        "node": {"id": "gid://shopify/Order/6197916106972", "refunds": [], "updatedAt":
+        "2025-02-13T20:29:25Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3OTIxMTg2MDEyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAyMDozNDoxMy4wNDI1NDEifQ==",
+        "node": {"id": "gid://shopify/Order/6197921186012", "refunds": [], "updatedAt":
+        "2025-02-13T20:34:13Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3OTI3OTY4OTg4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAyMDo0MToyOC4xNzMwMDcifQ==",
+        "node": {"id": "gid://shopify/Order/6197927968988", "refunds": [], "updatedAt":
+        "2025-02-13T20:41:28Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk3OTMyNjg3NTgwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xMyAyMDo0NzoxNy4wNjEwMTEifQ==",
+        "node": {"id": "gid://shopify/Order/6197932687580", "refunds": [], "updatedAt":
+        "2025-02-13T20:47:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk4OTU2MjI4ODI4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xNCAxNjo0Njo1NS45MzcwMDQifQ==",
+        "node": {"id": "gid://shopify/Order/6198956228828", "refunds": [], "updatedAt":
+        "2025-02-14T16:46:55Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk5MjcxNTg4MDYwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xNCAyMDoyNToxMS41MzEwNjgifQ==",
+        "node": {"id": "gid://shopify/Order/6199271588060", "refunds": [], "updatedAt":
+        "2025-02-14T20:25:11Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MTk5MjcyMzc0NDkyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xNCAyMDoyNTo0Mi42MDI1ODIifQ==",
+        "node": {"id": "gid://shopify/Order/6199272374492", "refunds": [], "updatedAt":
+        "2025-02-14T20:25:42Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA0OTU5NTIzMDM2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAxNToxNzozMC4wMjIyMDQifQ==",
+        "node": {"id": "gid://shopify/Order/6204959523036", "refunds": [], "updatedAt":
+        "2025-02-19T15:17:30Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA0OTc0NDY1MjQ0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAxNTozMzozNy42OTA4MjQifQ==",
+        "node": {"id": "gid://shopify/Order/6204974465244", "refunds": [], "updatedAt":
+        "2025-02-19T15:33:37Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA1MDA2NDE0MDQ0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAxNjowOTo0My41NjgxNjIifQ==",
+        "node": {"id": "gid://shopify/Order/6205006414044", "refunds": [], "updatedAt":
+        "2025-02-19T16:09:43Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA1MDExNDkzMDg0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAxNjoxNjoyMC42NjMyMzAifQ==",
+        "node": {"id": "gid://shopify/Order/6205011493084", "refunds": [], "updatedAt":
+        "2025-02-19T16:16:20Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA1MDExOTUxODM2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAxNjoxNjo0NC45Mjg2MTMifQ==",
+        "node": {"id": "gid://shopify/Order/6205011951836", "refunds": [], "updatedAt":
+        "2025-02-19T16:16:44Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA1MjA2NTI4MjIwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAxOToyODowNy4yOTUxMTEifQ==",
+        "node": {"id": "gid://shopify/Order/6205206528220", "refunds": [], "updatedAt":
+        "2025-02-19T19:28:07Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA1MjE4MDI5Nzg4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAxOTo0MDowMS4yMDMyMTYifQ==",
+        "node": {"id": "gid://shopify/Order/6205218029788", "refunds": [], "updatedAt":
+        "2025-02-19T19:40:01Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA1MjU4NzYwNDEyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAyMDoyMzoyOS44ODY3OTkifQ==",
+        "node": {"id": "gid://shopify/Order/6205258760412", "refunds": [], "updatedAt":
+        "2025-02-19T20:23:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA1MjY3NTA5NDY4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0xOSAyMDozMzoyMC4wNDc0MDgifQ==",
+        "node": {"id": "gid://shopify/Order/6205267509468", "refunds": [], "updatedAt":
+        "2025-02-19T20:33:20Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjA2MDgyMTIxOTQ4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0yMCAxNTozMTo1MS4zNjY2NTEifQ==",
+        "node": {"id": "gid://shopify/Order/6206082121948", "refunds": [], "updatedAt":
+        "2025-02-20T15:31:51Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjEzMzQ1OTAyODEyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMi0yNSAyMDozMDoxOS4yOTYwNzAifQ==",
+        "node": {"id": "gid://shopify/Order/6213345902812", "refunds": [], "updatedAt":
+        "2025-02-25T20:30:19Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI0MzIwNTk0MTQwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNSAxNDoyMzo0MS41NDQ1NzMifQ==",
+        "node": {"id": "gid://shopify/Order/6224320594140", "refunds": [], "updatedAt":
+        "2025-03-05T14:23:41Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI0MzIxMDUyODkyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNSAxNDoyNDowOS4zMzU2OTUifQ==",
+        "node": {"id": "gid://shopify/Order/6224321052892", "refunds": [], "updatedAt":
+        "2025-03-05T14:24:09Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI0MzI2MjMwMjM2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNSAxNDoyOTo1Mi4wODYzODkifQ==",
+        "node": {"id": "gid://shopify/Order/6224326230236", "refunds": [], "updatedAt":
+        "2025-03-05T14:29:52Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI0MzQwNzc5MjI4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNSAxNDo0MzoyOC42OTcyNzcifQ==",
+        "node": {"id": "gid://shopify/Order/6224340779228", "refunds": [], "updatedAt":
+        "2025-03-05T14:43:28Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI0NjgyNDUxMTY0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNSAxOToyOTozMi42MDA5NjEifQ==",
+        "node": {"id": "gid://shopify/Order/6224682451164", "refunds": [], "updatedAt":
+        "2025-03-05T19:29:32Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI0Njg0NjEzODUyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNSAxOTozMTo1MS43Njc1ODQifQ==",
+        "node": {"id": "gid://shopify/Order/6224684613852", "refunds": [], "updatedAt":
+        "2025-03-05T19:31:51Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI0OTc2NDc4NDI4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAwMTowNjoxNS41NTU5NjkifQ==",
+        "node": {"id": "gid://shopify/Order/6224976478428", "refunds": [], "updatedAt":
+        "2025-03-06T01:06:15Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI0OTkxODQ2NjIwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAwMToyOTowOS43MjQ1NjYifQ==",
+        "node": {"id": "gid://shopify/Order/6224991846620", "refunds": [], "updatedAt":
+        "2025-03-06T01:29:09Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1Mzc2ODA1MDg0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAxMDo0NzoyMC42NTEzNjgifQ==",
+        "node": {"id": "gid://shopify/Order/6225376805084", "refunds": [], "updatedAt":
+        "2025-03-06T10:47:20Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1Mzc3MDM0NDYwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAxMDo0NzozMy45MzE5OTAifQ==",
+        "node": {"id": "gid://shopify/Order/6225377034460", "refunds": [], "updatedAt":
+        "2025-03-06T10:47:33Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1MzgwMzc2Nzk2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAxMDo1MjoyMC45NTkxNDkifQ==",
+        "node": {"id": "gid://shopify/Order/6225380376796", "refunds": [], "updatedAt":
+        "2025-03-06T10:52:20Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1MzgxODE4NTg4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAxMDo1NDoxNy43MjE1NTQifQ==",
+        "node": {"id": "gid://shopify/Order/6225381818588", "refunds": [], "updatedAt":
+        "2025-03-06T10:54:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1MzgzNDI0MjIwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAxMDo1Njo1OS43NjMwMzUifQ==",
+        "node": {"id": "gid://shopify/Order/6225383424220", "refunds": [], "updatedAt":
+        "2025-03-06T10:56:59Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1NDI3NDMxNjQ0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAxMjowNjo1MS4zOTE3MjYifQ==",
+        "node": {"id": "gid://shopify/Order/6225427431644", "refunds": [], "updatedAt":
+        "2025-03-06T12:06:51Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1NTU5OTEyNjY4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAxNDozNToxNS45ODg0MTcifQ==",
+        "node": {"id": "gid://shopify/Order/6225559912668", "refunds": [], "updatedAt":
+        "2025-03-06T14:35:15Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1NjYyNjQwMzQ4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNiAxNjoxNDozMC4wOTg1MzcifQ==",
+        "node": {"id": "gid://shopify/Order/6225662640348", "refunds": [], "updatedAt":
+        "2025-03-06T16:14:30Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI1NjE1NTg1NTAwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNyAxOTozMjowMi4wNjAyMzEifQ==",
+        "node": {"id": "gid://shopify/Order/6225615585500", "refunds": [], "updatedAt":
+        "2025-03-07T19:32:02Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI3MjIxNDQ2ODc2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNyAyMTowMDowNy44MzU0MjMifQ==",
+        "node": {"id": "gid://shopify/Order/6227221446876", "refunds": [], "updatedAt":
+        "2025-03-07T21:00:07Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjI3MjI1OTAzMzI0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0wNyAyMTowNTowMC4zMDIyOTkifQ==",
+        "node": {"id": "gid://shopify/Order/6227225903324", "refunds": [], "updatedAt":
+        "2025-03-07T21:05:00Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjMxNzg4ODE0NTU2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMCAxMDo1MDowNC44MDY0MzYifQ==",
+        "node": {"id": "gid://shopify/Order/6231788814556", "refunds": [], "updatedAt":
+        "2025-03-10T10:50:04Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjMzODEyNDM1MTY0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMSAxOToxODo0My40NTc3MjMifQ==",
+        "node": {"id": "gid://shopify/Order/6233812435164", "refunds": [], "updatedAt":
+        "2025-03-11T19:18:43Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjMzODEzNjQ3NTgwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMSAxOToyMDowNC41NTUxOTUifQ==",
+        "node": {"id": "gid://shopify/Order/6233813647580", "refunds": [], "updatedAt":
+        "2025-03-11T19:20:04Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjMzODIyMjk4MzMyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMSAxOToyNzoxOC44ODA4MTgifQ==",
+        "node": {"id": "gid://shopify/Order/6233822298332", "refunds": [], "updatedAt":
+        "2025-03-11T19:27:18Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjMzODI2ODUzMDg0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMSAxOTozMTowNy42NzQ0MTQifQ==",
+        "node": {"id": "gid://shopify/Order/6233826853084", "refunds": [], "updatedAt":
+        "2025-03-11T19:31:07Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjMzODMxMDQ3Mzg4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMSAxOTozNTowOS42NDA4ODgifQ==",
+        "node": {"id": "gid://shopify/Order/6233831047388", "refunds": [], "updatedAt":
+        "2025-03-11T19:35:09Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjMzODY0OTI5NTAwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMSAyMDowNzoxNS4zMzQyMTcifQ==",
+        "node": {"id": "gid://shopify/Order/6233864929500", "refunds": [], "updatedAt":
+        "2025-03-11T20:07:15Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjM0NTY4NDI1NjkyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMiAxMDozNjoyMS41OTQ0MTkifQ==",
+        "node": {"id": "gid://shopify/Order/6234568425692", "refunds": [], "updatedAt":
+        "2025-03-12T10:36:21Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjM0NTY5OTMzMDIwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMiAxMDozNzozNC40NjQxNTIifQ==",
+        "node": {"id": "gid://shopify/Order/6234569933020", "refunds": [], "updatedAt":
+        "2025-03-12T10:37:34Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjM2NTM5MDkzMjEyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMyAxMjo1MzowMy43ODE1NDgifQ==",
+        "node": {"id": "gid://shopify/Order/6236539093212", "refunds": [], "updatedAt":
+        "2025-03-13T12:53:03Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjM2NTQwNzk3MTQ4LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xMyAxMjo1NDo1MC40NjYzODQifQ==",
+        "node": {"id": "gid://shopify/Order/6236540797148", "refunds": [], "updatedAt":
+        "2025-03-13T12:54:50Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjM4MTAyNjUxMTAwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xNCAxNDo0Mjo0NS4yNjEwMDgifQ==",
+        "node": {"id": "gid://shopify/Order/6238102651100", "refunds": [], "updatedAt":
+        "2025-03-14T14:42:45Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjM4MTA5NDY2ODQ0LCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xNCAxNDo0Nzo1MS4zNDc0MTYifQ==",
+        "node": {"id": "gid://shopify/Order/6238109466844", "refunds": [], "updatedAt":
+        "2025-03-14T14:47:51Z"}}, {"cursor": "eyJsYXN0X2lkIjo2MjM4MTE0Nzc1MjYwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wMy0xNCAxNDo1MTo0MC40NzYyMTcifQ==",
+        "node": {"id": "gid://shopify/Order/6238114775260", "refunds": [], "updatedAt":
+        "2025-03-14T14:51:40Z"}}, {"cursor": "eyJsYXN0X2lkIjo2Mjg0MzI4MDQyNzE2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wNC0wOCAxNTowNTo1NC40NTAxNjYifQ==",
+        "node": {"id": "gid://shopify/Order/6284328042716", "refunds": [], "updatedAt":
+        "2025-04-08T15:05:54Z"}}, {"cursor": "eyJsYXN0X2lkIjo2Mjg0MzMyMzAyNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wNC0wOCAxNTowOTowOC40MTA3ODMifQ==",
+        "node": {"id": "gid://shopify/Order/6284332302556", "refunds": [], "updatedAt":
+        "2025-04-08T15:09:08Z"}}, {"cursor": "eyJsYXN0X2lkIjo2Mjg0NDg4MjEyNzAwLCJsYXN0X3ZhbHVlIjoiMjAyNS0wNC0wOCAxNzoxMzo0OC4xOTM0NjYifQ==",
+        "node": {"id": "gid://shopify/Order/6284488212700", "refunds": [], "updatedAt":
+        "2025-04-08T17:13:48Z"}}, {"cursor": "eyJsYXN0X2lkIjo2Mjg0NzY1MzMxNjc2LCJsYXN0X3ZhbHVlIjoiMjAyNS0wNC0wOCAyMDo1Njo0MS4wNjg2MTYifQ==",
+        "node": {"id": "gid://shopify/Order/6284765331676", "refunds": [], "updatedAt":
+        "2025-04-08T20:56:41Z"}}, {"cursor": "eyJsYXN0X2lkIjo2Mjg1NTQ4NTUyNDEyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wNC0wOSAxMzowOToyMC41MTU3MzgifQ==",
+        "node": {"id": "gid://shopify/Order/6285548552412", "refunds": [], "updatedAt":
+        "2025-04-09T13:09:20Z"}}, {"cursor": "eyJsYXN0X2lkIjo2Mjg1OTE0MjQzMjkyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wNC0wOSAxODoyMzoxNC43ODQxOTEifQ==",
+        "node": {"id": "gid://shopify/Order/6285914243292", "refunds": [], "updatedAt":
+        "2025-04-09T18:23:14Z"}}, {"cursor": "eyJsYXN0X2lkIjo2Mjk0NzMwOTY1MjEyLCJsYXN0X3ZhbHVlIjoiMjAyNS0wNC0xNSAwMjowMzoyNy4wMjkzMjAifQ==",
+        "node": {"id": "gid://shopify/Order/6294730965212", "refunds": [], "updatedAt":
+        "2025-04-15T02:03:27Z"}}], "pageInfo": {"hasNextPage": false}}}, "extensions":
+        {"cost": {"requestedQueryCost": 24, "actualQueryCost": 22, "throttleStatus":
+        {"maximumAvailable": 2000.0, "currentlyAvailable": 1978, "restoreRate": 100.0}}}}'
     headers:
       Alt-Svc:
       - h3=":443"; ma=86400
-      CF-RAY:
-      - a1ea9f25f86ef241-GRU
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Jul 2026 13:41:10 GMT
-      Nel:
-      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
-      Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=WaEyExvumnmfMk2N8TJoioJ5pteFhKlNUsbE%2BEuj%2BkUgIY8Zhi%2Fre23GP7TFdH4fr51ZJb4plgsw87KTxh5QhbeJPf3%2FSvvsc8ppYOUzL7QLSxfCuZafCCndtpeUlK3NR14XSTqGsyb7ie48h6U46VDOzn90s%2F32aGk3tE4%3D"}]}'
+      - Thu, 17 Apr 2025 20:39:45 GMT
+      Server:
+      - cloudflare
       Transfer-Encoding:
       - chunked
       cf-cache-status:
@@ -149,185 +572,38 @@ interactions:
       content-language:
       - en
       content-length:
-      - '425'
-      content-security-policy:
-      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
-        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
-        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
-        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
-        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
-        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
-        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
-        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
-        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
-        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=13f3dea0-162a-4739-9f5f-8e48cb421032-1784641270;
-        report-to shopify-csp'
+      - '49531'
       referrer-policy:
       - origin-when-cross-origin
-      reporting-endpoints:
-      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=13f3dea0-162a-4739-9f5f-8e48cb421032-1784641270"
-      server:
-      - cloudflare
-      server-timing:
-      - processing;dur=57, verdict_flag_enabled;desc="count=13";dur=1.22, graphql;desc="admin/query/other",
-        _y;desc="bc03e33a-ab49-4000-a150-ce98442a087e", _s;desc="440be8d9-39ec-4958-9312-787887322b54"
-      - ipv6
       strict-transport-security:
       - max-age=7889238
       vary:
-      - Accept-Encoding,Sec-Fetch-Site
+      - Accept-Encoding
       x-content-type-options:
       - nosniff
-      x-dc:
-      - gcp-us-east1,gcp-us-central1,gcp-us-central1
       x-download-options:
       - noopen
       x-frame-options:
       - DENY
       x-permitted-cross-domain-policies:
       - none
-      x-request-id:
-      - 13f3dea0-162a-4739-9f5f-8e48cb421032-1784641270
-      x-shopify-api-gql-engine:
-      - cardinal
       x-shopify-api-version:
-      - 2025-10
-      x-shopify-api-version-warning:
-      - https://shopify.dev/concepts/about-apis/versioning
-      x-stats-apiclientid:
-      - '347932033025'
-      x-stats-apipermissionid:
-      - '691266257116'
-      x-stats-userid:
-      - ''
+      - 2024-07
       x-xss-protection:
       - 1; mode=block
     status:
       code: 200
       message: OK
 - request:
-    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String,
-      $sortKey: OrderSortKeys) { orders(first: $first, after: $after, query: $filter,
-      sortKey: $sortKey) { edges { cursor node { id refunds { id } updatedAt } },
-      pageInfo { hasNextPage } } } ", "variables": {"first": 250, "after": "eyJsYXN0X2lkIjo3MTg1MDg3MzY1MzQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNi0zMCAxNjozMDoyNS4wNDU3MDQifQ==",
-      "filter": "updated_at:>''2026-05-30T00:00:00''", "sortKey": "UPDATED_AT"}}'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '467'
-      Content-Type:
-      - application/json
-      User-Agent:
-      - python-requests/2.33.1
-    method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
-  response:
-    body:
-      string: '{"data": {"orders": {"edges": [{"cursor": "eyJsYXN0X2lkIjo3MTg1ODk0NjcwNTU2LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wMSAwMTo0NjoxNy40MTQ3MTcifQ==",
-        "node": {"id": "gid://shopify/Order/7185894670556", "refunds": [], "updatedAt":
-        "2026-07-01T01:46:17Z"}}, {"cursor": "eyJsYXN0X2lkIjo3MDkxNjA5NDM2MzgwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wNyAxNTozMTo1OC41NzA0NTQifQ==",
-        "node": {"id": "gid://shopify/Order/7091609436380", "refunds": [], "updatedAt":
-        "2026-07-07T15:31:58Z"}}, {"cursor": "eyJsYXN0X2lkIjo3MDkyMzczNTg2MTQwLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0wNyAxNTozMjowMC4yMDQ5MDIifQ==",
-        "node": {"id": "gid://shopify/Order/7092373586140", "refunds": [{"id": "gid://shopify/Refund/974227767516"}],
-        "updatedAt": "2026-07-07T15:32:00Z"}}, {"cursor": "eyJsYXN0X2lkIjo3Mjk2MDU3NzcwMjA0LCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNCAxODoyNToyOS45OTY2NjIifQ==",
-        "node": {"id": "gid://shopify/Order/7296057770204", "refunds": [], "updatedAt":
-        "2026-07-14T18:25:29Z"}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNDY2MTYxMzcyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjoxMzoyMi41NDU2MTkifQ==",
-        "node": {"id": "gid://shopify/Order/7301466161372", "refunds": [], "updatedAt":
-        "2026-07-17T16:13:22Z"}}, {"cursor": "eyJsYXN0X2lkIjo3MzAxNTIwMzkyNDEyLCJsYXN0X3ZhbHVlIjoiMjAyNi0wNy0xNyAxNjo0NDozNS4xMTQ5NTQifQ==",
-        "node": {"id": "gid://shopify/Order/7301520392412", "refunds": [], "updatedAt":
-        "2026-07-17T16:44:35Z"}}], "pageInfo": {"hasNextPage": false}}}, "extensions":
-        {"cost": {"requestedQueryCost": 3104, "actualQueryCost": 7428, "throttleStatus":
-        {"maximumAvailable": -303.926889338547, "currentlyAvailable": 4316, "restoreRate":
-        -751752370.180347}}}}'
-    headers:
-      Alt-Svc:
-      - h3=":443"; ma=86400
-      CF-RAY:
-      - a1ea9f285cf5f1eb-GRU
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Tue, 21 Jul 2026 13:41:11 GMT
-      Nel:
-      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
-      Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=y%2FGi3MJbFuv0h0Zw7h8gMQjboKmO5Nuas4gMSXHB9EUKSBnXAdKiQRK9K%2ByLLiVpf9yn85jO9LgKGoz%2BIW8a8mszbgDzpdXaCzQZzQGLIt3m3z3mHUZGsO2m6Wrel1zMDXnh8LjLNRFUNG1TD%2F91CWLAzVnAK81OrXo1KjQ%3D"}]}'
-      Transfer-Encoding:
-      - chunked
-      cf-cache-status:
-      - DYNAMIC
-      content-language:
-      - en
-      content-length:
-      - '1489'
-      content-security-policy:
-      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
-        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
-        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
-        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
-        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
-        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
-        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
-        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
-        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
-        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=13d9a5d5-e7d4-4f4c-8860-6bf362fc945a-1784641271;
-        report-to shopify-csp'
-      referrer-policy:
-      - origin-when-cross-origin
-      reporting-endpoints:
-      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=13d9a5d5-e7d4-4f4c-8860-6bf362fc945a-1784641271"
-      server:
-      - cloudflare
-      server-timing:
-      - processing;dur=79, verdict_flag_enabled;desc="count=12";dur=1.13, graphql;desc="admin/query/other",
-        _y;desc="ccd9be51-d3a9-46c9-9920-1cad3f7462fe", _s;desc="2e05a76d-ab7d-45e7-8d31-be5dc501d860"
-      - ipv6
-      strict-transport-security:
-      - max-age=7889238
-      vary:
-      - Accept-Encoding,Sec-Fetch-Site
-      x-content-type-options:
-      - nosniff
-      x-dc:
-      - gcp-us-east1,gcp-us-central1,gcp-us-central1
-      x-download-options:
-      - noopen
-      x-frame-options:
-      - DENY
-      x-permitted-cross-domain-policies:
-      - none
-      x-request-id:
-      - 13d9a5d5-e7d4-4f4c-8860-6bf362fc945a-1784641271
-      x-shopify-api-gql-engine:
-      - cardinal
-      x-shopify-api-version:
-      - 2025-10
-      x-shopify-api-version-warning:
-      - https://shopify.dev/concepts/about-apis/versioning
-      x-stats-apiclientid:
-      - '347932033025'
-      x-stats-apipermissionid:
-      - '691266257116'
-      x-stats-userid:
-      - ''
-      x-xss-protection:
-      - 1; mode=block
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"query": "query tapShopify($id1: ID!) {  q1: refund(id: $id1) { id order
-      { id } createdAt duties { amountSet { presentmentMoney { amount currencyCode
+    body: '{"query": "query tapShopify($id1: ID!, $id2: ID!) {  q1: refund(id: $id1)
+      { id order { id } createdAt duties { amountSet { presentmentMoney { amount currencyCode
       } shopMoney { amount currencyCode } } } legacyResourceId note totalRefundedSet
       { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
-      } updatedAt }  }", "variables": {"id1": "gid://shopify/Refund/974227767516"}}'
+      } updatedAt }  q2: refund(id: $id2) { id order { id } createdAt duties { amountSet
+      { presentmentMoney { amount currencyCode } shopMoney { amount currencyCode }
+      } } legacyResourceId note totalRefundedSet { presentmentMoney { amount currencyCode
+      } shopMoney { amount currencyCode } } updatedAt }  }", "variables": {"id1":
+      "gid://shopify/Refund/858613809372", "id2": "gid://shopify/Refund/917181858012"}}'
     headers:
       Accept:
       - '*/*'
@@ -336,39 +612,39 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '384'
+      - '719'
       Content-Type:
       - application/json
       User-Agent:
-      - python-requests/2.33.1
+      - python-requests/2.31.0
     method: POST
-    uri: https://hotglue-testing-1.myshopify.com/admin/api/2026-07/graphql.json
+    uri: https://fake-shop.myshopify.com/admin/api/2026-07/graphql.json
   response:
     body:
-      string: '{"data": {"q1": {"id": "gid://shopify/Refund/974227767516", "order":
-        {"id": "gid://shopify/Order/7092373586140"}, "createdAt": "-Fallback-scrubbed-VbysvvlvhjGfqZHKKBpF",
-        "duties": [], "legacyResourceId": "-Fallback-scrubbed-RaBmpTLUJJIz", "note":
-        null, "totalRefundedSet": {"presentmentMoney": {"amount": "-Fallback-scrubbed-vYJ",
-        "currencyCode": "-Fallback-scrubbed-vQU"}, "shopMoney": {"amount": "-Fallback-scrubbed-vYJ",
-        "currencyCode": "-Fallback-scrubbed-vQU"}}, "updatedAt": "2026-07-07T15:31:59Z"}},
-        "extensions": {"cost": {"requestedQueryCost": 7428, "actualQueryCost": 7428,
-        "throttleStatus": {"maximumAvailable": -303.926889338547, "currentlyAvailable":
-        4316, "restoreRate": -751752370.180347}}}}'
+      string: '{"data": {"q1": {"id": "gid://shopify/Refund/858613809372", "order":
+        {"id": "gid://shopify/Order/4794812137692"}, "createdAt": "2019-03-21T21:41:07Z",
+        "duties": [], "legacyResourceId": "5564", "note": null, "totalRefundedSet":
+        {"presentmentMoney": {"amount": "-137816040318.789", "currencyCode": "-Fallback-scrubbed-Hfg"},
+        "shopMoney": {"amount": "-137816040318.789", "currencyCode": "-Fallback-scrubbed-Hfg"}},
+        "updatedAt": "2022-05-25T16:59:44Z"}, "q2": {"id": "gid://shopify/Refund/917181858012",
+        "order": {"id": "gid://shopify/Order/6048712032476"}, "createdAt": "1975-05-16T03:32:28Z",
+        "duties": [], "legacyResourceId": "1158", "note": null, "totalRefundedSet":
+        {"presentmentMoney": {"amount": "35313890116.2298", "currencyCode": "-Fallback-scrubbed-Hfg"},
+        "shopMoney": {"amount": "35313890116.2298", "currencyCode": "-Fallback-scrubbed-Hfg"}},
+        "updatedAt": "2024-11-14T01:22:39Z"}}, "extensions": {"cost": {"requestedQueryCost":
+        6, "actualQueryCost": 6, "throttleStatus": {"maximumAvailable": 2000.0, "currentlyAvailable":
+        1994, "restoreRate": 100.0}}}}'
     headers:
       Alt-Svc:
       - h3=":443"; ma=86400
-      CF-RAY:
-      - a1ea9f2a794b6222-GRU
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Jul 2026 13:41:11 GMT
-      Nel:
-      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
-      Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=lulCrRSbB%2FusKsCh2X5W8rcVivY6OoZFCCsQL7soUTB%2BmAKH9TUEOMPQSBQqEKeircV15W2HhTYFqUAL6YvCBGz2SW9QmdsH8cRI8vCOZ4vSf2QbuLLWo3brnwZ09b%2F1FQKqhBIu%2BA5wcpu6niPXS765wHRzjSvxjhD0igw%3D"}]}'
+      - Thu, 17 Apr 2025 20:39:45 GMT
+      Server:
+      - cloudflare
       Transfer-Encoding:
       - chunked
       cf-cache-status:
@@ -376,57 +652,23 @@ interactions:
       content-language:
       - en
       content-length:
-      - '523'
-      content-security-policy:
-      - 'default-src ''self'' data: blob: ''unsafe-inline'' ''unsafe-eval'' https://*
-        shopify-pos://*; block-all-mixed-content; child-src ''self'' https://* shopify-pos://*;
-        connect-src ''self'' wss://* https://*; frame-ancestors ''none''; img-src
-        ''self'' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net
-        https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/04ed4e1/card_fields.js
-        https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com
-        https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com
-        https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com
-        ''self'' ''unsafe-inline'' ''unsafe-eval''; upgrade-insecure-requests; report-uri
-        /csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=2e2989ff-8055-4f00-ba6f-e7af2348cd95-1784641271;
-        report-to shopify-csp'
+      - '1059'
       referrer-policy:
       - origin-when-cross-origin
-      reporting-endpoints:
-      - shopify-csp="/csp-report?source%5Baction%5D=query&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Fgraphql&source%5Bsection%5D=admin_api&source%5Buuid%5D=2e2989ff-8055-4f00-ba6f-e7af2348cd95-1784641271"
-      server:
-      - cloudflare
-      server-timing:
-      - processing;dur=58, verdict_flag_enabled;desc="count=14";dur=0.611, graphql;desc="admin/query/other",
-        _y;desc="3474115b-d5d4-4933-b2a6-330df5a30ee8", _s;desc="a7389b5b-6353-4458-adef-4b3eaad55323"
-      - ipv6
       strict-transport-security:
       - max-age=7889238
       vary:
-      - Accept-Encoding,Sec-Fetch-Site
+      - Accept-Encoding
       x-content-type-options:
       - nosniff
-      x-dc:
-      - gcp-us-east1,gcp-us-central1,gcp-us-central1
       x-download-options:
       - noopen
       x-frame-options:
       - DENY
       x-permitted-cross-domain-policies:
       - none
-      x-request-id:
-      - 2e2989ff-8055-4f00-ba6f-e7af2348cd95-1784641271
-      x-shopify-api-gql-engine:
-      - cardinal
       x-shopify-api-version:
-      - 2025-10
-      x-shopify-api-version-warning:
-      - https://shopify.dev/concepts/about-apis/versioning
-      x-stats-apiclientid:
-      - '347932033025'
-      x-stats-apipermissionid:
-      - '691266257116'
-      x-stats-userid:
-      - ''
+      - 2024-07
       x-xss-protection:
       - 1; mode=block
     status:

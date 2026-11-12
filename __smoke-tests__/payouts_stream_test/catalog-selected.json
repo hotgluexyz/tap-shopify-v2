@@ -1,0 +1,206 @@
+{
+  "streams": [
+    {
+      "tap_stream_id": "payouts",
+      "replication_key": "issuedAt",
+      "replication_method": "INCREMENTAL",
+      "key_properties": ["id", "issuedAt"],
+      "schema": {
+        "properties": {
+          "id": {
+            "type": ["string", "null"]
+          },
+          "issuedAt": {
+            "format": "date-time",
+            "type": ["string", "null"]
+          },
+          "legacyResourceId": {
+            "type": ["string", "null"]
+          },
+          "net": {
+            "properties": {
+              "amount": {
+                "type": ["string", "null"]
+              },
+              "currencyCode": {
+                "type": ["string", "null"]
+              }
+            },
+            "type": ["object", "null"]
+          },
+          "status": {
+            "type": ["string", "null"]
+          },
+          "summary": {
+            "properties": {
+              "adjustmentsFee": {
+                "properties": {
+                  "amount": {
+                    "type": ["string", "null"]
+                  },
+                  "currencyCode": {
+                    "type": ["string", "null"]
+                  }
+                },
+                "type": ["object", "null"]
+              },
+              "adjustmentsGross": {
+                "properties": {
+                  "amount": {
+                    "type": ["string", "null"]
+                  },
+                  "currencyCode": {
+                    "type": ["string", "null"]
+                  }
+                },
+                "type": ["object", "null"]
+              },
+              "chargesFee": {
+                "properties": {
+                  "amount": {
+                    "type": ["string", "null"]
+                  },
+                  "currencyCode": {
+                    "type": ["string", "null"]
+                  }
+                },
+                "type": ["object", "null"]
+              },
+              "chargesGross": {
+                "properties": {
+                  "amount": {
+                    "type": ["string", "null"]
+                  },
+                  "currencyCode": {
+                    "type": ["string", "null"]
+                  }
+                },
+                "type": ["object", "null"]
+              },
+              "reservedFundsFee": {
+                "properties": {
+                  "amount": {
+                    "type": ["string", "null"]
+                  },
+                  "currencyCode": {
+                    "type": ["string", "null"]
+                  }
+                },
+                "type": ["object", "null"]
+              },
+              "reservedFundsGross": {
+                "properties": {
+                  "amount": {
+                    "type": ["string", "null"]
+                  },
+                  "currencyCode": {
+                    "type": ["string", "null"]
+                  }
+                },
+                "type": ["object", "null"]
+              },
+              "retriedPayoutsFee": {
+                "properties": {
+                  "amount": {
+                    "type": ["string", "null"]
+                  },
+                  "currencyCode": {
+                    "type": ["string", "null"]
+                  }
+                },
+                "type": ["object", "null"]
+              },
+              "retriedPayoutsGross": {
+                "properties": {
+                  "amount": {
+                    "type": ["string", "null"]
+                  },
+                  "currencyCode": {
+                    "type": ["string", "null"]
+                  }
+                },
+                "type": ["object", "null"]
+              }
+            },
+            "type": ["object", "null"]
+          },
+          "transactionType": {
+            "type": ["string", "null"]
+          },
+          "shopifyPaymentsAccountId": {
+            "type": ["string", "null"]
+          }
+        },
+        "type": "object"
+      },
+      "stream": "payouts",
+      "metadata": [
+        {
+          "breadcrumb": ["properties", "id"],
+          "metadata": {
+            "inclusion": "automatic",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": ["properties", "issuedAt"],
+          "metadata": {
+            "inclusion": "automatic",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": ["properties", "legacyResourceId"],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": ["properties", "net"],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": ["properties", "status"],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": ["properties", "summary"],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": ["properties", "transactionType"],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": ["properties", "shopifyPaymentsAccountId"],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true,
+            "table-key-properties": ["id", "issuedAt"],
+            "valid-replication-keys": ["issuedAt"]
+          }
+        }
+      ]
+    }
+  ]
+}
