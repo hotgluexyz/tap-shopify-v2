@@ -1,0 +1,1785 @@
+interactions:
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String)
+      { shopifyPaymentsAccount { id payouts(first: $first, after: $after, query: $filter)
+      { edges { cursor node { id issuedAt legacyResourceId net { amount currencyCode
+      } status summary { adjustmentsFee { amount currencyCode } adjustmentsGross {
+      amount currencyCode } chargesFee { amount currencyCode } chargesGross { amount
+      currencyCode } reservedFundsFee { amount currencyCode } reservedFundsGross {
+      amount currencyCode } retriedPayoutsFee { amount currencyCode } retriedPayoutsGross
+      { amount currencyCode } } transactionType } }, pageInfo { hasNextPage } } }
+      } ", "variables": {"first": 100, "filter": "issued_at:>''2025-01-01T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '709'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.32.3
+    method: POST
+    uri: https://fake-shop.myshopify.com/admin/api/2026-07/graphql.json
+  response:
+    body:
+      string: '{"data": {"shopifyPaymentsAccount": {"id": "gid://shopify/ShopifyPaymentsAccount/999000459309356",
+        "payouts": {"edges": [{"cursor": "eyJsYXN0X2lkIjoxMjI2NzkyNjM1MzIsImxhc3RfdmFsdWUiOjE3MzU3NzYwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/122679263532", "issuedAt":
+        "2025-01-02T00:00:00Z", "legacyResourceId": "7393", "net": {"amount": "-6.3657888083689",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "1505871330.45003",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "3272072.4223511",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjI3MjUxNzE1MDAsImxhc3RfdmFsdWUiOjE3MzU4NjI0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/122725171500", "issuedAt":
+        "2025-01-03T00:00:00Z", "legacyResourceId": "4956", "net": {"amount": "-63247.3665993197",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "1444147198981.93",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-31.294178174122",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjI3ODk5MjEwNjgsImxhc3RfdmFsdWUiOjE3MzYxMjE2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/122789921068", "issuedAt":
+        "2025-01-06T00:00:00Z", "legacyResourceId": "4121", "net": {"amount": "3412229468451.38",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-718249473597.486",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "239783.307943956",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjI4MzMzMDU5MDAsImxhc3RfdmFsdWUiOjE3MzYyMDgwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/122833305900", "issuedAt":
+        "2025-01-07T00:00:00Z", "legacyResourceId": "2802", "net": {"amount": "5767310047987.78",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-4525310426.41776",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-26037912604.8463",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjI4ODY5NDcxMTYsImxhc3RfdmFsdWUiOjE3MzYyOTQ0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/122886947116", "issuedAt":
+        "2025-01-08T00:00:00Z", "legacyResourceId": "7514", "net": {"amount": "88305.716246672",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "9304800247253.72",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-7973176474459.5",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjI5NDI5MTQ4NjAsImxhc3RfdmFsdWUiOjE3MzYzODA4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/122942914860", "issuedAt":
+        "2025-01-09T00:00:00Z", "legacyResourceId": "7339", "net": {"amount": "418.859105111224",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-739199.26550426",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "298404252.189983",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjI5ODU0NDc3MjQsImxhc3RfdmFsdWUiOjE3MzY0NjcyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/122985447724", "issuedAt":
+        "2025-01-10T00:00:00Z", "legacyResourceId": "7043", "net": {"amount": "7652861024527.4",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "2873176.34402672",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "9896548.95787416",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjMwNDk1MDkxNjQsImxhc3RfdmFsdWUiOjE3MzY3MjY0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123049509164", "issuedAt":
+        "2025-01-13T00:00:00Z", "legacyResourceId": "223", "net": {"amount": "-315.476635742932",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-64674473690.1634",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-7655807451.54146",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjMwOTM3NDU5NjQsImxhc3RfdmFsdWUiOjE3MzY4MTI4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123093745964", "issuedAt":
+        "2025-01-14T00:00:00Z", "legacyResourceId": "1463", "net": {"amount": "20.6567688579792",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "346581788133.307",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "34565.8753384791",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjMxMzg3MzY0MjgsImxhc3RfdmFsdWUiOjE3MzY4OTkyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123138736428", "issuedAt":
+        "2025-01-15T00:00:00Z", "legacyResourceId": "6007", "net": {"amount": "2.99803166396586",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "32052564691.6302",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "17304486076.2096",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjMxOTQ1MDc1NjQsImxhc3RfdmFsdWUiOjE3MzY5ODU2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123194507564", "issuedAt":
+        "2025-01-16T00:00:00Z", "legacyResourceId": "8123", "net": {"amount": "-74.4828182131482",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-1831014200280.41",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "804.149530569603",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjMyMzY4MTEwNTIsImxhc3RfdmFsdWUiOjE3MzcwNzIwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123236811052", "issuedAt":
+        "2025-01-17T00:00:00Z", "legacyResourceId": "7524", "net": {"amount": "-199425.871645256",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-41705893622.668",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "49606.9635256878",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjMzMjMyNTMwMzYsImxhc3RfdmFsdWUiOjE3Mzc0MTc2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123323253036", "issuedAt":
+        "2025-01-21T00:00:00Z", "legacyResourceId": "6822", "net": {"amount": "-99529.8253914802",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "5.413350515853",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "0.22789784186616",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjMzNjYyMTE4ODQsImxhc3RfdmFsdWUiOjE3Mzc1MDQwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123366211884", "issuedAt":
+        "2025-01-22T00:00:00Z", "legacyResourceId": "7778", "net": {"amount": "-7135910545.2175",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-8309800298.1619",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "8632687621.3222",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM0MTkzMjg4MTIsImxhc3RfdmFsdWUiOjE3Mzc1OTA0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123419328812", "issuedAt":
+        "2025-01-23T00:00:00Z", "legacyResourceId": "376", "net": {"amount": "58556311643.3517",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-622372159.863898",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-978663358653.36",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM0NzY5MDIxODgsImxhc3RfdmFsdWUiOjE3Mzc2NzY4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123476902188", "issuedAt":
+        "2025-01-24T00:00:00Z", "legacyResourceId": "6971", "net": {"amount": "-36362126.973109",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "400895551.113901",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "70976532162837.7",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM1MzY5OTg3MDAsImxhc3RfdmFsdWUiOjE3Mzc5MzYwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123536998700", "issuedAt":
+        "2025-01-27T00:00:00Z", "legacyResourceId": "5192", "net": {"amount": "5.53219026546166",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-7932294600722.64",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "501851.636728172",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM1ODEzMDEwMzYsImxhc3RfdmFsdWUiOjE3MzgwMjI0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123581301036", "issuedAt":
+        "2025-01-28T00:00:00Z", "legacyResourceId": "4117", "net": {"amount": "-571748.69399512",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-8787800653543.78",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "55423930603708.5",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM2MzU4MjY5ODgsImxhc3RfdmFsdWUiOjE3MzgxMDg4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123635826988", "issuedAt":
+        "2025-01-29T00:00:00Z", "legacyResourceId": "4132", "net": {"amount": "2782.6562037156",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-2105294687296.5",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "22048928313.6375",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM2Nzk1Mzk1MDAsImxhc3RfdmFsdWUiOjE3MzgxOTUyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123679539500", "issuedAt":
+        "2025-01-30T00:00:00Z", "legacyResourceId": "847", "net": {"amount": "-5880775515010.93",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-38974.2513504334",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-526.73680084604",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM3Mjg0NjIxMjQsImxhc3RfdmFsdWUiOjE3MzgyODE2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123728462124", "issuedAt":
+        "2025-01-31T00:00:00Z", "legacyResourceId": "6390", "net": {"amount": "-319817.719735348",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "56174502.9581877",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-9958579408331.6",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM3OTE5MDA5NzIsImxhc3RfdmFsdWUiOjE3Mzg1NDA4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123791900972", "issuedAt":
+        "2025-02-03T00:00:00Z", "legacyResourceId": "6767", "net": {"amount": "3282260472.73308",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "851185528500.28",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "615101.274320502",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM4NDAyOTkzMDgsImxhc3RfdmFsdWUiOjE3Mzg2MjcyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123840299308", "issuedAt":
+        "2025-02-04T00:00:00Z", "legacyResourceId": "1183", "net": {"amount": "-775135.775729238",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-55751.8974009614",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "798381434273.35",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM4OTQ0NjQ4MTIsImxhc3RfdmFsdWUiOjE3Mzg3MTM2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123894464812", "issuedAt":
+        "2025-02-05T00:00:00Z", "legacyResourceId": "7324", "net": {"amount": "184.223706694192",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-3940300274.11952",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-216806.642669422",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM5MzMxMzEwNTIsImxhc3RfdmFsdWUiOjE3Mzg4MDAwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123933131052", "issuedAt":
+        "2025-02-06T00:00:00Z", "legacyResourceId": "4399", "net": {"amount": "-379.936258386923",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-9429992641103.94",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "22798.82530292",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjM5ODUxNjY2MzYsImxhc3RfdmFsdWUiOjE3Mzg4ODY0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/123985166636", "issuedAt":
+        "2025-02-07T00:00:00Z", "legacyResourceId": "7277", "net": {"amount": "-509997291.682296",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-10384431731446.3",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "5484801901.22025",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQwNTQ3MDAzMzIsImxhc3RfdmFsdWUiOjE3MzkxNDU2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124054700332", "issuedAt":
+        "2025-02-10T00:00:00Z", "legacyResourceId": "3943", "net": {"amount": "-279663331.599777",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "8872244730141.8",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-152470.180402632",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQwOTkzMzAzNDgsImxhc3RfdmFsdWUiOjE3MzkyMzIwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124099330348", "issuedAt":
+        "2025-02-11T00:00:00Z", "legacyResourceId": "8128", "net": {"amount": "38.8969762454003",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-840127178553.705",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-23364167361110.4",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQxNTIwNTQwNjAsImxhc3RfdmFsdWUiOjE3MzkzMTg0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124152054060", "issuedAt":
+        "2025-02-12T00:00:00Z", "legacyResourceId": "8267", "net": {"amount": "5200.30823083571",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "4851.65013552787",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-4853667713.74616",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQxOTk2NjU5NjQsImxhc3RfdmFsdWUiOjE3Mzk0MDQ4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124199665964", "issuedAt":
+        "2025-02-13T00:00:00Z", "legacyResourceId": "5577", "net": {"amount": "700519752.410913",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-74039.5973156138",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "364030521638.546",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQyNDIwNjc3NTYsImxhc3RfdmFsdWUiOjE3Mzk0OTEyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124242067756", "issuedAt":
+        "2025-02-14T00:00:00Z", "legacyResourceId": "2068", "net": {"amount": "-91853675217648.5",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "42849762668.138",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-567527.406664648",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQzMjgwNTA5ODgsImxhc3RfdmFsdWUiOjE3Mzk4MzY4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124328050988", "issuedAt":
+        "2025-02-18T00:00:00Z", "legacyResourceId": "1743", "net": {"amount": "-3352114814.8294",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-90.3720397891178",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-207989209165.79",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQzNzE4MjkwMzYsImxhc3RfdmFsdWUiOjE3Mzk5MjMyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124371829036", "issuedAt":
+        "2025-02-19T00:00:00Z", "legacyResourceId": "428", "net": {"amount": "8505164777270.74",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "132258446787.699",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-4286.81411785922",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-89.7795508304469",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ0Mjc4OTUwODQsImxhc3RfdmFsdWUiOjE3NDAwMDk2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124427895084", "issuedAt":
+        "2025-02-20T00:00:00Z", "legacyResourceId": "534", "net": {"amount": "47513775094.7544",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "8438801498643.73",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "219904184180.82",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ0ODM3NjQ1MjQsImxhc3RfdmFsdWUiOjE3NDAwOTYwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124483764524", "issuedAt":
+        "2025-02-21T00:00:00Z", "legacyResourceId": "8197", "net": {"amount": "10731405.8674265",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "296188.455943763",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-229969.434115402",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "9731366148472.97",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ1NTI2NzU2MjgsImxhc3RfdmFsdWUiOjE3NDAzNTUyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124552675628", "issuedAt":
+        "2025-02-24T00:00:00Z", "legacyResourceId": "5904", "net": {"amount": "-872486685.38952",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-119455529879.641", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-885539820.486436",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-880487183339.186",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-440.133778896736",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ1OTE4MzMzODgsImxhc3RfdmFsdWUiOjE3NDA0NDE2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124591833388", "issuedAt":
+        "2025-02-25T00:00:00Z", "legacyResourceId": "2112", "net": {"amount": "9693386136.23533",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "5327258799.72109",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "8273294.4630405",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ2NDA1OTIxNzIsImxhc3RfdmFsdWUiOjE3NDA1MjgwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124640592172", "issuedAt":
+        "2025-02-26T00:00:00Z", "legacyResourceId": "1611", "net": {"amount": "295311.623964163",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "260666068.74016",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "67.1305832550672",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-958169.776133988",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ2ODcxMjI3MzIsImxhc3RfdmFsdWUiOjE3NDA2MTQ0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124687122732", "issuedAt":
+        "2025-02-27T00:00:00Z", "legacyResourceId": "7545", "net": {"amount": "-8.2139874072729",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-8028884.57999156",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "6.77914284130161",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ3NDY3OTMyNjAsImxhc3RfdmFsdWUiOjE3NDA3MDA4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124746793260", "issuedAt":
+        "2025-02-28T00:00:00Z", "legacyResourceId": "3166", "net": {"amount": "69388390.60251",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-486.6650974124", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-87.5604086761727",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-61.8389083656465",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-99018.774536064",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ4MTczNDI3NjQsImxhc3RfdmFsdWUiOjE3NDA5NjAwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124817342764", "issuedAt":
+        "2025-03-03T00:00:00Z", "legacyResourceId": "1179", "net": {"amount": "-326.45178813305",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "22.522509181334", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-40.6061148093215",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "7487709297.50232",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-798.867005058141",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ4NTUwOTE1MDAsImxhc3RfdmFsdWUiOjE3NDEwNDY0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124855091500", "issuedAt":
+        "2025-03-04T00:00:00Z", "legacyResourceId": "3882", "net": {"amount": "-883635488342.57",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-486.6650974124", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-288915708135.49",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "82464191588.3783",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-0.63184068138771",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ5MTU0NTAxNTYsImxhc3RfdmFsdWUiOjE3NDExMzI4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124915450156", "issuedAt":
+        "2025-03-05T00:00:00Z", "legacyResourceId": "8464", "net": {"amount": "-45298122708.5875",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-40923.5783416265",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "6.57153855052964",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjQ5NTkzMjY1MDgsImxhc3RfdmFsdWUiOjE3NDEyMTkyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/124959326508", "issuedAt":
+        "2025-03-06T00:00:00Z", "legacyResourceId": "154", "net": {"amount": "-1189225.94745787",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "19.7459880062163",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-66.3932997067983",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjUwMTg4NjU5NjQsImxhc3RfdmFsdWUiOjE3NDEzMDU2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125018865964", "issuedAt":
+        "2025-03-07T00:00:00Z", "legacyResourceId": "656", "net": {"amount": "97.1555738008765",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-3143547579.92348",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "889937278.195353",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjUwODM0MTg5MjQsImxhc3RfdmFsdWUiOjE3NDE1NjQ4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125083418924", "issuedAt":
+        "2025-03-10T00:00:00Z", "legacyResourceId": "8598", "net": {"amount": "-6589827.73992961",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "374.418245682965",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "56140222.7621709",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjUxMjgwMTYxNzIsImxhc3RfdmFsdWUiOjE3NDE2NTEyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125128016172", "issuedAt":
+        "2025-03-11T00:00:00Z", "legacyResourceId": "9414", "net": {"amount": "37376.9399478144",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "206005.594863498",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-895.994693145118",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "86800188.3109296",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjUxNzM1NjM2OTIsImxhc3RfdmFsdWUiOjE3NDE3Mzc2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125173563692", "issuedAt":
+        "2025-03-12T00:00:00Z", "legacyResourceId": "9216", "net": {"amount": "44.6109442575437",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-83898001057090.3", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-8718.62873041821",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "73659942.6643752",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "67393.5864458545",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjUyMjI5Nzc4MzYsImxhc3RfdmFsdWUiOjE3NDE4MjQwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125222977836", "issuedAt":
+        "2025-03-13T00:00:00Z", "legacyResourceId": "5518", "net": {"amount": "-35264640.7073089",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "717.368348214848",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-59.8090408485964",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjUyNzIxOTUzNzIsImxhc3RfdmFsdWUiOjE3NDE5MTA0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125272195372", "issuedAt":
+        "2025-03-14T00:00:00Z", "legacyResourceId": "6070", "net": {"amount": "-85414837034.7587",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-5898056438.17376",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-6354.71692613054",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjUzNTYyMTI1MjQsImxhc3RfdmFsdWUiOjE3NDIxNjk2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125356212524", "issuedAt":
+        "2025-03-17T00:00:00Z", "legacyResourceId": "5042", "net": {"amount": "-3682.47506949548",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-9.75209266721362", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "4726180.4383946",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "61933.3366323769",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-6.97036275135047",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjUzOTA3NDk5OTYsImxhc3RfdmFsdWUiOjE3NDIyNTYwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125390749996", "issuedAt":
+        "2025-03-18T00:00:00Z", "legacyResourceId": "3164", "net": {"amount": "-204.837659690493",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "18628.1134558395",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "9487651940118.15",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU0NTQ3Nzg2NjgsImxhc3RfdmFsdWUiOjE3NDIzNDI0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125454778668", "issuedAt":
+        "2025-03-19T00:00:00Z", "legacyResourceId": "4662", "net": {"amount": "79414592386.8208",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-375054799290.754",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "40991030096541.0",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU1MDcwMTA4NjAsImxhc3RfdmFsdWUiOjE3NDI0Mjg4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125507010860", "issuedAt":
+        "2025-03-20T00:00:00Z", "legacyResourceId": "7450", "net": {"amount": "9890166921.99506",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-2047849304.14894",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-4963.5229637706",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-28818493575279.1",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU1NTIxMzIzOTYsImxhc3RfdmFsdWUiOjE3NDI1MTUyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125552132396", "issuedAt":
+        "2025-03-21T00:00:00Z", "legacyResourceId": "5134", "net": {"amount": "77532.270940086",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-6842.3646080996",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "999505.135641268",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU2MjQ5NzU2NjAsImxhc3RfdmFsdWUiOjE3NDI3NzQ0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125624975660", "issuedAt":
+        "2025-03-24T00:00:00Z", "legacyResourceId": "1549", "net": {"amount": "615068.776880901",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-323125119084.69", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "7721916992815.51",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "5400809702.36616",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "772.134356450605",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU2NzMxNDQ2MjAsImxhc3RfdmFsdWUiOjE3NDI4NjA4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125673144620", "issuedAt":
+        "2025-03-25T00:00:00Z", "legacyResourceId": "4796", "net": {"amount": "-3.17762348700072",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "606.14069334659",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "71245955.3425575",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU3MjQ3MjE0NTIsImxhc3RfdmFsdWUiOjE3NDI5NDcyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125724721452", "issuedAt":
+        "2025-03-26T00:00:00Z", "legacyResourceId": "4265", "net": {"amount": "581170.406573882",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "7.72046285518453",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-45970491905436.0",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU3Njc4MTEzNzIsImxhc3RfdmFsdWUiOjE3NDMwMzM2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125767811372", "issuedAt":
+        "2025-03-27T00:00:00Z", "legacyResourceId": "1415", "net": {"amount": "449501.99353448",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-119455529879.641", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "9121330.41349818",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "27066315857.4093",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "21.9205906454573",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU4MTY4MzIzMDAsImxhc3RfdmFsdWUiOjE3NDMxMjAwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125816832300", "issuedAt":
+        "2025-03-28T00:00:00Z", "legacyResourceId": "5552", "net": {"amount": "35.19329555375",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-41846719290.3538",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-2273557.68399724",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU5MDUyMDc1OTYsImxhc3RfdmFsdWUiOjE3NDMzNzkyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125905207596", "issuedAt":
+        "2025-03-31T00:00:00Z", "legacyResourceId": "8924", "net": {"amount": "61086.8196350471",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-96.6257180658141", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-34582.1226335327",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "63864504.806704",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-8580617418783.42",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjU5NDI4MjUyNjAsImxhc3RfdmFsdWUiOjE3NDM0NjU2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/125942825260", "issuedAt":
+        "2025-04-01T00:00:00Z", "legacyResourceId": "9920", "net": {"amount": "-30733.8552218774",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-92503993711.569",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "26769038520.6219",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjYwMDE4NzMxOTYsImxhc3RfdmFsdWUiOjE3NDM1NTIwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126001873196", "issuedAt":
+        "2025-04-02T00:00:00Z", "legacyResourceId": "3150", "net": {"amount": "-6255743379054.89",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-837808898724.99",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "4836.5286699405",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjYwNjIwNjgwMTIsImxhc3RfdmFsdWUiOjE3NDM2Mzg0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126062068012", "issuedAt":
+        "2025-04-03T00:00:00Z", "legacyResourceId": "3538", "net": {"amount": "-15.1555149447934",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-859.673241584336",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "351145071.374578",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjYxMDgwMDg3NDgsImxhc3RfdmFsdWUiOjE3NDM3MjQ4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126108008748", "issuedAt":
+        "2025-04-04T00:00:00Z", "legacyResourceId": "910", "net": {"amount": "544865928618.638",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-192485.8843325",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "4266679134698.4",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjYxOTA1NTEzNDAsImxhc3RfdmFsdWUiOjE3NDM5ODQwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126190551340", "issuedAt":
+        "2025-04-07T00:00:00Z", "legacyResourceId": "4850", "net": {"amount": "5908463855.67707",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-4352.10165582847",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "333362390.25515",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-6388583066035.98",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjYyMzMyODA4MTIsImxhc3RfdmFsdWUiOjE3NDQwNzA0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126233280812", "issuedAt":
+        "2025-04-08T00:00:00Z", "legacyResourceId": "9748", "net": {"amount": "-1299337.85065042",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "496041.58914542",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-53824949644685.2",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjYyODA3Mjg4NzYsImxhc3RfdmFsdWUiOjE3NDQxNTY4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126280728876", "issuedAt":
+        "2025-04-09T00:00:00Z", "legacyResourceId": "4670", "net": {"amount": "-2652.63488776735",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "1508183475.43287",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "5652449.6158069",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjYzMzcwMjQzMDAsImxhc3RfdmFsdWUiOjE3NDQyNDMyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126337024300", "issuedAt":
+        "2025-04-10T00:00:00Z", "legacyResourceId": "1211", "net": {"amount": "1760825645515.39",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "15414799.3617279",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-7019.3663423228",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "20044321.6006329",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjYzODEzOTIxNzIsImxhc3RfdmFsdWUiOjE3NDQzMjk2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126381392172", "issuedAt":
+        "2025-04-11T00:00:00Z", "legacyResourceId": "4820", "net": {"amount": "-607320546355.393",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-806621.317145081",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "73235745.1213868",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY0ODU0OTYxMDgsImxhc3RfdmFsdWUiOjE3NDQ1MTY4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126485496108", "issuedAt":
+        "2025-04-13T04:00:00Z", "legacyResourceId": "3809", "net": {"amount": "2015.806296574",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-8386918.53998069",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-981883287.54838",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY0NjIzNjE5MDAsImxhc3RfdmFsdWUiOjE3NDQ1ODg4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126462361900", "issuedAt":
+        "2025-04-14T00:00:00Z", "legacyResourceId": "7661", "net": {"amount": "35261421.8937359",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-1636623009.27432",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "99639.3596709488",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY1MzA5NzgwOTIsImxhc3RfdmFsdWUiOjE3NDQ2MDMyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126530978092", "issuedAt":
+        "2025-04-14T04:00:00Z", "legacyResourceId": "1442", "net": {"amount": "-88.8827071899047",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-811.701410986026",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-78487.6469607236",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY1MDY1NjU5MzIsImxhc3RfdmFsdWUiOjE3NDQ2NzUyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126506565932", "issuedAt":
+        "2025-04-15T00:00:00Z", "legacyResourceId": "3373", "net": {"amount": "25962703.10397",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-40332135204.7357",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-29662694265.7503",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY1ODQxOTMzMjQsImxhc3RfdmFsdWUiOjE3NDQ2ODk2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126584193324", "issuedAt":
+        "2025-04-15T04:00:00Z", "legacyResourceId": "3206", "net": {"amount": "-91.695944106225",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-119.573444323489",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-4.8456487229281",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY1NDg5MzQ5NTYsImxhc3RfdmFsdWUiOjE3NDQ3NjE2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126548934956", "issuedAt":
+        "2025-04-16T00:00:00Z", "legacyResourceId": "1712", "net": {"amount": "637374.367459074",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-4526680.5218563",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "64891639431.3246",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY2MzQ5NTA5NTYsImxhc3RfdmFsdWUiOjE3NDQ3NzYwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126634950956", "issuedAt":
+        "2025-04-16T04:00:00Z", "legacyResourceId": "6548", "net": {"amount": "99.1639902185035",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-30702019.9067085",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "8343.23618783971",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY2MTE1NTQ2MDQsImxhc3RfdmFsdWUiOjE3NDQ4NDgwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126611554604", "issuedAt":
+        "2025-04-17T00:00:00Z", "legacyResourceId": "6300", "net": {"amount": "-95.2174537969161",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-78835991.8401029",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-751377593279.878",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY2ODQ3MjU1NDgsImxhc3RfdmFsdWUiOjE3NDQ4NjI0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126684725548", "issuedAt":
+        "2025-04-17T04:00:00Z", "legacyResourceId": "8536", "net": {"amount": "32161.2438376697",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-8056936421.455",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "52548590.347167",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY2NjEwOTk4MjAsImxhc3RfdmFsdWUiOjE3NDQ5MzQ0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126661099820", "issuedAt":
+        "2025-04-18T00:00:00Z", "legacyResourceId": "6753", "net": {"amount": "-853.122279365164",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "856236.471920542",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-5.2074179386688",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY2OTcwNzkwODQsImxhc3RfdmFsdWUiOjE3NDQ5NDg4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126697079084", "issuedAt":
+        "2025-04-18T04:00:00Z", "legacyResourceId": "6147", "net": {"amount": "2653230.58333964",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "8981.41331572203",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-0.21047793016258",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY3MTM0OTU4NTIsImxhc3RfdmFsdWUiOjE3NDUwMzUyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126713495852", "issuedAt":
+        "2025-04-19T04:00:00Z", "legacyResourceId": "4117", "net": {"amount": "789362092440.923",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-2.84791674993832",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "51472673.9200773",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY3NDU0MTE4ODQsImxhc3RfdmFsdWUiOjE3NDUxMjE2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126745411884", "issuedAt":
+        "2025-04-20T04:00:00Z", "legacyResourceId": "8938", "net": {"amount": "-46.8261129952821",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "54765727.377412",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "5234929619477.76",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY3MjE1ODk1NDgsImxhc3RfdmFsdWUiOjE3NDUxOTM2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126721589548", "issuedAt":
+        "2025-04-21T00:00:00Z", "legacyResourceId": "1120", "net": {"amount": "-11029568.433667",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-9219.3574467504",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-14392263802247.8",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-98264613.5406259",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY3ODIxNDQ4MTIsImxhc3RfdmFsdWUiOjE3NDUyMDgwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126782144812", "issuedAt":
+        "2025-04-21T04:00:00Z", "legacyResourceId": "4849", "net": {"amount": "546424560.812185",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "71755.5575735751",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-556565086.209107",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY3NjI1NDk1NDgsImxhc3RfdmFsdWUiOjE3NDUyODAwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126762549548", "issuedAt":
+        "2025-04-22T00:00:00Z", "legacyResourceId": "9259", "net": {"amount": "9211.99766935352",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "9.15344700856779",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "94671.4974388813",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY4MzY2MDUyMjgsImxhc3RfdmFsdWUiOjE3NDUyOTQ0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126836605228", "issuedAt":
+        "2025-04-22T04:00:00Z", "legacyResourceId": "5673", "net": {"amount": "-22208707552.714",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "64092702.1838103",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "73432426.2459797",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY4MDc4MzQ5MjQsImxhc3RfdmFsdWUiOjE3NDUzNjY0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126807834924", "issuedAt":
+        "2025-04-23T00:00:00Z", "legacyResourceId": "2345", "net": {"amount": "5044.64683334255",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "168424053430.856",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "225.916816153958",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY4ODMxMDMwMjAsImxhc3RfdmFsdWUiOjE3NDUzODA4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126883103020", "issuedAt":
+        "2025-04-23T04:00:00Z", "legacyResourceId": "3856", "net": {"amount": "16586355445.1921",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-82859553936.2124",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-1.69077988456466",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY4NTk0MTE3NTYsImxhc3RfdmFsdWUiOjE3NDU0NTI4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126859411756", "issuedAt":
+        "2025-04-24T00:00:00Z", "legacyResourceId": "6017", "net": {"amount": "73.7337541358993",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-905.423848434098",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "61002.79590923",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-75.8053766274301",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY5MzM4Mjc4ODQsImxhc3RfdmFsdWUiOjE3NDU0NjcyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126933827884", "issuedAt":
+        "2025-04-24T04:00:00Z", "legacyResourceId": "7467", "net": {"amount": "-546615936.58963",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "56.8552304038551",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "3695237736697.43",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY5MTI2OTI1MjQsImxhc3RfdmFsdWUiOjE3NDU1MzkyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126912692524", "issuedAt":
+        "2025-04-25T00:00:00Z", "legacyResourceId": "64", "net": {"amount": "-5953544497.42824",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "7302399418825.7",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "20.3539699381991",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "25750594.1106391",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY5NTUzODkyMjgsImxhc3RfdmFsdWUiOjE3NDU1NTM2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126955389228", "issuedAt":
+        "2025-04-25T04:00:00Z", "legacyResourceId": "3802", "net": {"amount": "31871.3268588586",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-998461819574.104",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "521.266900317058",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY5NzAzOTY5NzIsImxhc3RfdmFsdWUiOjE3NDU2NDAwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126970396972", "issuedAt":
+        "2025-04-26T04:00:00Z", "legacyResourceId": "6397", "net": {"amount": "38645650631.9395",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "2692019.74353037",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-76604.4214748026",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcwMDQwNDk3MDgsImxhc3RfdmFsdWUiOjE3NDU3MjY0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127004049708", "issuedAt":
+        "2025-04-27T04:00:00Z", "legacyResourceId": "9243", "net": {"amount": "-8410735633028.22",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "206488618167.58",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-64.3426057137",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjY5Nzk4OTk2OTIsImxhc3RfdmFsdWUiOjE3NDU3OTg0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/126979899692", "issuedAt":
+        "2025-04-28T00:00:00Z", "legacyResourceId": "2870", "net": {"amount": "-11581284620.7122",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-897079.380932095",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-5336725564.64457",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcwNDgyNTM3NDAsImxhc3RfdmFsdWUiOjE3NDU4MTI4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127048253740", "issuedAt":
+        "2025-04-28T04:00:00Z", "legacyResourceId": "7667", "net": {"amount": "-978.810354777396",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "8981.41331572203",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "38971321376922.6",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcwMjM3MTA1MDgsImxhc3RfdmFsdWUiOjE3NDU4ODQ4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127023710508", "issuedAt":
+        "2025-04-29T00:00:00Z", "legacyResourceId": "3598", "net": {"amount": "3281.94867017885",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-96.449628981051",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-24671947191098.2",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcxMDA4MTM2MTIsImxhc3RfdmFsdWUiOjE3NDU4OTkyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127100813612", "issuedAt":
+        "2025-04-29T04:00:00Z", "legacyResourceId": "909", "net": {"amount": "285385998.696452",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-101.615525259782",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-68528785205.7",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcwNjk5MTMzODgsImxhc3RfdmFsdWUiOjE3NDU5NzEyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127069913388", "issuedAt":
+        "2025-04-30T00:00:00Z", "legacyResourceId": "8808", "net": {"amount": "1.61243299408846",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-2.74120518805227", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-5950.5428603705",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-4967362454910.11",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "40256362491.7108",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}], "pageInfo": {"hasNextPage":
+        true}}}}, "extensions": {"cost": {"requestedQueryCost": 21, "actualQueryCost":
+        21, "throttleStatus": {"maximumAvailable": 20000.0, "currentlyAvailable":
+        19979, "restoreRate": 1000.0}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 16 May 2025 16:09:51 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '114598'
+      referrer-policy:
+      - origin-when-cross-origin
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-shopify-api-version:
+      - 2024-07
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"query": "query tapShopify($first: Int, $after: String, $filter: String)
+      { shopifyPaymentsAccount { id payouts(first: $first, after: $after, query: $filter)
+      { edges { cursor node { id issuedAt legacyResourceId net { amount currencyCode
+      } status summary { adjustmentsFee { amount currencyCode } adjustmentsGross {
+      amount currencyCode } chargesFee { amount currencyCode } chargesGross { amount
+      currencyCode } reservedFundsFee { amount currencyCode } reservedFundsGross {
+      amount currencyCode } retriedPayoutsFee { amount currencyCode } retriedPayoutsGross
+      { amount currencyCode } } transactionType } }, pageInfo { hasNextPage } } }
+      } ", "variables": {"first": 100, "after": "eyJsYXN0X2lkIjoxMjcwNjk5MTMzODgsImxhc3RfdmFsdWUiOjE3NDU5NzEyMDAwMDB9",
+      "filter": "issued_at:>''2025-01-01T00:00:00''"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '790'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.32.3
+    method: POST
+    uri: https://fake-shop.myshopify.com/admin/api/2026-07/graphql.json
+  response:
+    body:
+      string: '{"data": {"shopifyPaymentsAccount": {"id": "gid://shopify/ShopifyPaymentsAccount/999000459309356",
+        "payouts": {"edges": [{"cursor": "eyJsYXN0X2lkIjoxMjcxMjE4NTA2NjgsImxhc3RfdmFsdWUiOjE3NDYwNTc2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127121850668", "issuedAt":
+        "2025-05-01T00:00:00Z", "legacyResourceId": "1913", "net": {"amount": "-11687066510.8465",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "0.81717210263867",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-716013473107.621",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcxOTk2MDkxMzIsImxhc3RfdmFsdWUiOjE3NDYwNzIwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127199609132", "issuedAt":
+        "2025-05-01T04:00:00Z", "legacyResourceId": "5735", "net": {"amount": "75754.9334517945",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "9827979.68853097",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-39.2357955161895",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcxNzQwODI4NjAsImxhc3RfdmFsdWUiOjE3NDYxNDQwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127174082860", "issuedAt":
+        "2025-05-02T00:00:00Z", "legacyResourceId": "7466", "net": {"amount": "-14089741377244.6",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "969602.727100228",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-5539718460653.11",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcyMjY1NDQ0MjgsImxhc3RfdmFsdWUiOjE3NDYxNTg0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127226544428", "issuedAt":
+        "2025-05-02T04:00:00Z", "legacyResourceId": "2207", "net": {"amount": "9683446.26115724",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "91117598346.822",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-4029946828292.9",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcyNDIwNDM2OTIsImxhc3RfdmFsdWUiOjE3NDYyNDQ4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127242043692", "issuedAt":
+        "2025-05-03T04:00:00Z", "legacyResourceId": "1418", "net": {"amount": "-8201830.4836817",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "525250520.214534",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "3443.79945834248",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcyNzUwNzM4MzYsImxhc3RfdmFsdWUiOjE3NDYzMzEyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127275073836", "issuedAt":
+        "2025-05-04T04:00:00Z", "legacyResourceId": "4616", "net": {"amount": "-942555.658532685",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-80373943.8992026",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "1647.69630407034",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcyNTQyMzMzODgsImxhc3RfdmFsdWUiOjE3NDY0MDMyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127254233388", "issuedAt":
+        "2025-05-05T00:00:00Z", "legacyResourceId": "3327", "net": {"amount": "-6117503122078.5",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "89.758263298179",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "93703758.769323",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-60166585776.7195",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjczMTkzNDM0MDQsImxhc3RfdmFsdWUiOjE3NDY0MTc2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127319343404", "issuedAt":
+        "2025-05-05T04:00:00Z", "legacyResourceId": "3537", "net": {"amount": "-5136051805476.32",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-247.252367171117",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-77.6879709368403",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjcyOTc3NDkyOTIsImxhc3RfdmFsdWUiOjE3NDY0ODk2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127297749292", "issuedAt":
+        "2025-05-06T00:00:00Z", "legacyResourceId": "3037", "net": {"amount": "3.1118421361347",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-899098.138321509",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-3819497118783.69",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjczNzU3MDQzNjQsImxhc3RfdmFsdWUiOjE3NDY1MDQwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127375704364", "issuedAt":
+        "2025-05-06T04:00:00Z", "legacyResourceId": "3954", "net": {"amount": "-58960997.52758",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "5636542.7543003",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-24307170676942.9",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjczNTA0NDAyMzYsImxhc3RfdmFsdWUiOjE3NDY1NzYwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127350440236", "issuedAt":
+        "2025-05-07T00:00:00Z", "legacyResourceId": "4184", "net": {"amount": "6826650776.9783",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "47038.486339893",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "8347623110391.9",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc0MjQ5MjE5MDAsImxhc3RfdmFsdWUiOjE3NDY1OTA0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127424921900", "issuedAt":
+        "2025-05-07T04:00:00Z", "legacyResourceId": "2353", "net": {"amount": "-217487071849.25",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "3516666.82397584",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "5549639085574.2",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc0MDUwNjQ0OTIsImxhc3RfdmFsdWUiOjE3NDY2NjI0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127405064492", "issuedAt":
+        "2025-05-08T00:00:00Z", "legacyResourceId": "5745", "net": {"amount": "-22592065.9303198",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "272.86527236527",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-203429.256018914",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc0NzU3NDUwNjgsImxhc3RfdmFsdWUiOjE3NDY2NzY4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127475745068", "issuedAt":
+        "2025-05-08T04:00:00Z", "legacyResourceId": "8590", "net": {"amount": "50848459113.4471",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "10.5784607136977",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-18.1335570211098",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc0NDkyMzU3NTYsImxhc3RfdmFsdWUiOjE3NDY3NDg4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127449235756", "issuedAt":
+        "2025-05-09T00:00:00Z", "legacyResourceId": "2504", "net": {"amount": "36741712401142.1",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-119455529879.641", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "90474440197.186",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-44189321.8045723",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "551557998.519099",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc1MDEyMzg1NzIsImxhc3RfdmFsdWUiOjE3NDY3NjMyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127501238572", "issuedAt":
+        "2025-05-09T04:00:00Z", "legacyResourceId": "6943", "net": {"amount": "0.2732250093889",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-7518256.89770296",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-0.61271718597955",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc1NTEzMDgwNzYsImxhc3RfdmFsdWUiOjE3NDY5MzYwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127551308076", "issuedAt":
+        "2025-05-11T04:00:00Z", "legacyResourceId": "5677", "net": {"amount": "26991474340229.6",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "695029.490550786",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "85853550354930.6",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc1MjgyMDY2MzYsImxhc3RfdmFsdWUiOjE3NDcwMDgwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127528206636", "issuedAt":
+        "2025-05-12T00:00:00Z", "legacyResourceId": "7665", "net": {"amount": "88547047.5000946",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "-9658103.1653465", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "4639774826.12265",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-6.54677012891626",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-3871.29408836556",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc1OTYzOTY4NDQsImxhc3RfdmFsdWUiOjE3NDcwMjI0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127596396844", "issuedAt":
+        "2025-05-12T04:00:00Z", "legacyResourceId": "3440", "net": {"amount": "-9525588.66219125",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "430376040104.826",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-33291055.977342",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc1NjcxNjc3ODgsImxhc3RfdmFsdWUiOjE3NDcwOTQ0MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127567167788", "issuedAt":
+        "2025-05-13T00:00:00Z", "legacyResourceId": "272", "net": {"amount": "564.308122932432",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "54007.7380499519", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "-403499742.873151",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-878317658.2472",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-5156719292.55791",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc2MTgyMjAzMzIsImxhc3RfdmFsdWUiOjE3NDcxODA4MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127618220332", "issuedAt":
+        "2025-05-14T00:00:00Z", "legacyResourceId": "6927", "net": {"amount": "62674242388410.3",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "74589.4162438599",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-742744.374688915",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc2OTkxNTcyOTIsImxhc3RfdmFsdWUiOjE3NDcxOTUyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127699157292", "issuedAt":
+        "2025-05-14T04:00:00Z", "legacyResourceId": "3998", "net": {"amount": "44795656058.7706",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "1095313.34575431",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "4.88027718807214",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc2NzAyNTU5MTYsImxhc3RfdmFsdWUiOjE3NDcyNjcyMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127670255916", "issuedAt":
+        "2025-05-15T00:00:00Z", "legacyResourceId": "7321", "net": {"amount": "568.701239092888",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-740801.537439114",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "45396514.493355",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc3NDgzNzQ4MjgsImxhc3RfdmFsdWUiOjE3NDcyODE2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127748374828", "issuedAt":
+        "2025-05-15T04:00:00Z", "legacyResourceId": "3758", "net": {"amount": "46755.8635599841",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-965979.863125277",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-6443886.9500607",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc3MjAzOTA5NTYsImxhc3RfdmFsdWUiOjE3NDczNTM2MDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127720390956", "issuedAt":
+        "2025-05-16T00:00:00Z", "legacyResourceId": "9661", "net": {"amount": "-8615824892089.12",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "25021741458.5427",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "2537469.28542454",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}, {"cursor": "eyJsYXN0X2lkIjoxMjc3NzQ3MjAzMDAsImxhc3RfdmFsdWUiOjE3NDczNjgwMDAwMDB9",
+        "node": {"id": "gid://shopify/ShopifyPaymentsPayout/127774720300", "issuedAt":
+        "2025-05-16T04:00:00Z", "legacyResourceId": "6048", "net": {"amount": "525250520.214534",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "status": "-Fallback-scrubbed-yIHk",
+        "summary": {"adjustmentsFee": {"amount": "73.2307980116661", "currencyCode":
+        "-Fallback-scrubbed-yhi"}, "adjustmentsGross": {"amount": "73.2307980116661",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesFee": {"amount": "-882.129030599493",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "chargesGross": {"amount": "-79308198099.7605",
+        "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsFee": {"amount":
+        "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}, "reservedFundsGross":
+        {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsFee": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"},
+        "retriedPayoutsGross": {"amount": "73.2307980116661", "currencyCode": "-Fallback-scrubbed-yhi"}},
+        "transactionType": "-Fallback-scrubbed-IBNVWOG"}}], "pageInfo": {"hasNextPage":
+        false}}}}, "extensions": {"cost": {"requestedQueryCost": 21, "actualQueryCost":
+        15, "throttleStatus": {"maximumAvailable": 20000.0, "currentlyAvailable":
+        19985, "restoreRate": 1000.0}}}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 16 May 2025 16:09:52 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-language:
+      - en
+      content-length:
+      - '30044'
+      referrer-policy:
+      - origin-when-cross-origin
+      strict-transport-security:
+      - max-age=7889238
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-shopify-api-version:
+      - 2024-07
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
