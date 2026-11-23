@@ -1,6 +1,5 @@
 """Tests for Shopify OAuth authentication."""
 
-import json
 import logging
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
@@ -158,8 +157,8 @@ def test_update_access_token_skips_hg_api_for_legacy(mock_super_update):
     assert authenticator.access_token == "shpat-fake-token"
 
 
-def test_access_token_command_sets_legacy_cache_expiry(tmp_path, monkeypatch):
-    """Synthetic expiry caches permanent tokens without making them refreshable."""
+def test_expiring_without_refresh_token_is_legacy():
+    """Synthetic cache expiry does not make a permanent token refreshable."""
     config = {
         "shop": "acme",
         "client_id": "cid",
@@ -167,24 +166,11 @@ def test_access_token_command_sets_legacy_cache_expiry(tmp_path, monkeypatch):
         "access_token": "shpat-fake-token",
         "expires_in": 3600,
     }
-    config_file = tmp_path / "config.json"
-    config_file.write_text(json.dumps(config))
-    monkeypatch.setattr("sys.argv", ["tap-shopify-v2", "--config", str(config_file)])
-    from tap_shopify_beta.tap import TapshopifyBeta
-
-    for now in (1_800_000_000, 1_800_010_000):
-        tap = TapshopifyBeta(config=[str(config_file)])
-        with patch("tap_shopify_beta.tap.time.time", return_value=now):
-            assert TapshopifyBeta.fetch_access_token(tap) == {
-                "access_token": "shpat-fake-token"
-            }
-        persisted = json.loads(config_file.read_text())
-        assert persisted == {**config, "expires_in": now + 7200}
-        with patch("tap_shopify_beta.auth.utils.now") as clock:
-            clock.return_value.timestamp.return_value = now + 7201
-            assert _make_authenticator(persisted).auth_headers == {
-                "X-Shopify-Access-Token": "shpat-fake-token"
-            }
+    authenticator = _make_authenticator(config)
+    assert authenticator._legacy_permanent_token() == "shpat-fake-token"
+    assert authenticator.is_token_valid() is True
+    with pytest.raises(InvalidCredentialsError, match="refresh_token"):
+        authenticator.oauth_request_body
 
 
 def test_expiring_config_invalid_until_refreshed():

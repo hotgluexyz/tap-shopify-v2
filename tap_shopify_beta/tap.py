@@ -126,15 +126,6 @@ class TapshopifyBeta(Tap):
     ).to_dict()
 
     @classmethod
-    def update_access_token(cls, authenticator, auth_endpoint, tap):
-        if tap.config.get("access_token") and not has_refresh_token(tap.config):
-            tap._config["expires_in"] = int(time.time()) + 7200
-            with open(tap.config_file, "w") as config_file:
-                json.dump(tap._config, config_file, indent=4)
-            return
-        super().update_access_token(authenticator, auth_endpoint, tap)
-
-    @classmethod
     def access_token_support(cls, connector: Optional[Any] = None):
         """Authenticator and token URL for the ``--access-token`` CLI.
 
@@ -147,6 +138,10 @@ class TapshopifyBeta(Tap):
             auth_endpoint = "https://{shop}.myshopify.com/admin/oauth/access_token"
         else:
             auth_endpoint = shopify_oauth_token_url(connector.config)
+            if connector.config_file and connector.config.get("access_token") and not has_refresh_token(connector.config):
+                connector._config["expires_in"] = int(time.time()) + 7200
+                with open(connector.config_file, "w") as config_file:
+                    json.dump(connector._config, config_file, indent=4)
         return (ShopifyOAuthAuthenticator, auth_endpoint)
 
     def discover_streams(self) -> List[Stream]:
