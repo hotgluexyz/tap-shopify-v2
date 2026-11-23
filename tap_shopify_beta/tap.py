@@ -7,7 +7,7 @@ from typing import Any, List, Optional
 from hotglue_singer_sdk import Stream, Tap
 from hotglue_singer_sdk import typing as th
 
-from tap_shopify_beta.auth import ShopifyOAuthAuthenticator, has_refresh_token, shopify_oauth_token_url
+from tap_shopify_beta.auth import ShopifyOAuthAuthenticator, has_refresh_token, plain_config_value, shopify_oauth_token_url
 from tap_shopify_beta.streams import (
     CollectionsStream,
     CustomersStream,
@@ -141,7 +141,7 @@ class TapshopifyBeta(Tap):
             if connector.config_file and connector.config.get("access_token") and not has_refresh_token(connector.config):
                 connector._config["expires_in"] = int(time.time()) + 7200
                 with open(connector.config_file, "w") as config_file:
-                    json.dump(connector._config, config_file, indent=4)
+                    json.dump({key: plain_config_value(value) for key, value in connector._config.items()}, config_file, indent=4)
         return (ShopifyOAuthAuthenticator, auth_endpoint)
 
     def discover_streams(self) -> List[Stream]:
