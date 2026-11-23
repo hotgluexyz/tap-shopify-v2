@@ -81,12 +81,12 @@ class ShopifyOAuthAuthenticator(OAuthAuthenticator):
             _LEGACY_REFRESH_SKIP_LOGGED = True
 
     def _legacy_permanent_token(self) -> str | None:
-        """Permanent offline token: access_token present, no refresh_token, no expires_in."""
+        """Permanent offline token: access_token present, no refresh_token."""
         cfg = self._tap_config()
         access_token = plain_config_value(cfg.get("access_token"))
         if not access_token:
             return None
-        if has_refresh_token(cfg) or plain_config_value(cfg.get("expires_in")) is not None:
+        if has_refresh_token(cfg):
             return None
         return str(access_token)
 
